@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Anton } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -10,6 +10,13 @@ const inter = Inter({
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const anton = Anton({
+  weight: "400",
+  variable: "--font-anton",
   subsets: ["latin"],
   display: "swap",
 });
@@ -88,7 +95,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
-      className={`${inter.variable} ${jetbrainsMono.variable} dark`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${anton.variable} dark`}
       suppressHydrationWarning
     >
       <head>

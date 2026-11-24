@@ -2,14 +2,17 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Terminal, Copy, Check, ArrowRight, Sparkles, Coffee, Heart, Zap } from "lucide-react";
 import { profileData } from "@/shared/data/profile";
+import { ComicBurst, ComicBurstItem } from "./ComicBurst";
 
-const slowSpring = {
-  duration: 1.1,
-  ease: [0.22, 1, 0.36, 1] as const,
+// Spider-Verse "Animating on Twos" Stepped Spring Physics
+const steppedSpring = {
+  type: "spring" as const,
+  stiffness: 500,
+  damping: 24,
 };
 
 const studioMoods = [
@@ -24,6 +27,28 @@ export function VibeHeroSection() {
   const [copied, setCopied] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [moodIdx, setMoodIdx] = useState(0);
+  const [bursts, setBursts] = useState<ComicBurstItem[]>([]);
+
+  // Scroll-Linked Parallax Physics
+  const { scrollY } = useScroll();
+  const bgParallaxY = useTransform(scrollY, [0, 800], [0, 140]);
+  const floatParallaxY = useTransform(scrollY, [0, 800], [0, -90]);
+
+  const triggerBurst = (text: string, e?: React.MouseEvent, color = "#FDE047") => {
+    const id = Date.now() + Math.random();
+    const newBurst: ComicBurstItem = {
+      id,
+      text,
+      x: e ? e.clientX : typeof window !== "undefined" ? window.innerWidth * 0.5 : 500,
+      y: e ? e.clientY : typeof window !== "undefined" ? window.innerHeight * 0.4 : 300,
+      color,
+      rotate: Math.floor(Math.random() * 18) - 9,
+    };
+    setBursts((prev) => [...prev, newBurst]);
+    setTimeout(() => {
+      setBursts((prev) => prev.filter((b) => b.id !== id));
+    }, 950);
+  };
 
   const fireConfetti = (e?: React.MouseEvent) => {
     try {
@@ -44,6 +69,7 @@ export function VibeHeroSection() {
     navigator.clipboard.writeText("npx venu-k");
     setCopied(true);
     fireConfetti(e);
+    triggerBurst("*COPIED!*", e, "#C6FF00");
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -52,21 +78,32 @@ export function VibeHeroSection() {
       id="hero"
       className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden scroll-mt-36"
     >
-      {/* Spider-Verse Halftone Print Texture Overlay */}
-      <div className="absolute inset-0 spider-halftone-subtle opacity-30 pointer-events-none -z-10" />
+      {/* Onomatopoeia Comic Burst Layer */}
+      <ComicBurst bursts={bursts} />
+
+      {/* Spider-Verse Parallax Halftone Print & Crosshatch Layers */}
+      <motion.div
+        style={{ y: bgParallaxY }}
+        className="absolute inset-0 spider-halftone opacity-35 pointer-events-none -z-10"
+      />
+      <div className="absolute top-20 right-0 w-80 h-80 spider-crosshatch opacity-30 pointer-events-none -z-10" />
 
       {/* High-Contrast Ambient Accent Blooms */}
-      <div className="absolute top-12 left-8 w-72 h-72 rounded-full bg-[#C6FF00]/20 blur-3xl pointer-events-none -z-10 animate-pulse" />
-      <div className="absolute top-36 right-10 w-80 h-80 rounded-full bg-[#FF4D00]/15 blur-3xl pointer-events-none -z-10" />
-      <div className="absolute bottom-10 left-1/3 w-96 h-96 rounded-full bg-[#2563EB]/15 blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-12 left-8 w-72 h-72 rounded-full bg-[#C6FF00]/25 blur-3xl pointer-events-none -z-10 animate-pulse" />
+      <div className="absolute top-36 right-10 w-80 h-80 rounded-full bg-[#FF4D00]/20 blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-10 left-1/3 w-96 h-96 rounded-full bg-[#00F0FF]/20 blur-3xl pointer-events-none -z-10" />
 
-      {/* Floating Streetwear Icons Drifting in Slow Motion */}
+      {/* Floating Streetwear Icons Drifting with Stepped Parallax */}
       <motion.button
         type="button"
-        onClick={(e) => fireConfetti(e)}
-        animate={{ y: [0, -14, 0], rotate: [-8, 8, -8] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-24 left-[8%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden sm:block"
+        style={{ y: floatParallaxY }}
+        onClick={(e) => {
+          fireConfetti(e);
+          triggerBurst("*POW!*", e, "#00F0FF");
+        }}
+        whileHover={{ scale: 1.25, rotate: 12 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute top-24 left-[8%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden sm:block z-10"
         title="Click for vibes!"
       >
         🚀
@@ -74,10 +111,14 @@ export function VibeHeroSection() {
 
       <motion.button
         type="button"
-        onClick={(e) => fireConfetti(e)}
-        animate={{ y: [0, 16, 0], rotate: [6, -6, 6] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute top-32 right-[12%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden sm:block"
+        style={{ y: floatParallaxY }}
+        onClick={(e) => {
+          fireConfetti(e);
+          triggerBurst("*ZAP!*", e, "#FF0055");
+        }}
+        whileHover={{ scale: 1.25, rotate: -12 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute top-32 right-[12%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden sm:block z-10"
         title="Click for vibes!"
       >
         ⚡
@@ -85,10 +126,13 @@ export function VibeHeroSection() {
 
       <motion.button
         type="button"
-        onClick={(e) => fireConfetti(e)}
-        animate={{ y: [0, -12, 0], x: [0, 8, 0], rotate: [-5, 5, -5] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute bottom-16 left-[5%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden md:block"
+        onClick={(e) => {
+          fireConfetti(e);
+          triggerBurst("*DOCKER!*", e, "#00F0FF");
+        }}
+        whileHover={{ scale: 1.25, rotate: 10 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute bottom-16 left-[5%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden md:block z-10"
         title="Click for vibes!"
       >
         🐳
@@ -96,10 +140,13 @@ export function VibeHeroSection() {
 
       <motion.button
         type="button"
-        onClick={(e) => fireConfetti(e)}
-        animate={{ y: [0, -18, 0], rotate: [10, -10, 10] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        className="absolute bottom-28 right-[6%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden md:block"
+        onClick={(e) => {
+          fireConfetti(e);
+          triggerBurst("*BUILD!*", e, "#FDE047");
+        }}
+        whileHover={{ scale: 1.25, rotate: -10 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute bottom-28 right-[6%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden md:block z-10"
         title="Click for vibes!"
       >
         🛠️
@@ -110,16 +157,19 @@ export function VibeHeroSection() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={slowSpring}
-          className="flex flex-wrap items-center gap-3 pb-8 mb-8 border-b-2 border-[#0A0A0A]/10"
+          transition={steppedSpring}
+          className="flex flex-wrap items-center gap-3 pb-8 mb-8 border-b-[2.5px] border-[#0A0A0A]/20"
         >
           <motion.button
             type="button"
-            onClick={(e) => fireConfetti(e)}
+            onClick={(e) => {
+              fireConfetti(e);
+              triggerBurst("*STUDIO!*", e, "#C6FF00");
+            }}
             animate={{ y: [0, -4, 0], rotate: [-2, 1, -2] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#0A0A0A] animate-spin" />
             // STUDIO MODE ⚡
@@ -127,49 +177,61 @@ export function VibeHeroSection() {
 
           <motion.button
             type="button"
-            onClick={(e) => fireConfetti(e)}
+            onClick={(e) => {
+              fireConfetti(e);
+              triggerBurst("*ARCHITECT!*", e, "#FFFFFF");
+            }}
             animate={{ y: [0, 4, 0], rotate: [2, -1, 2] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] text-[#0A0A0A] text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             BACKEND ARCHITECT 🏗️
           </motion.button>
 
           <motion.button
             type="button"
-            onClick={(e) => fireConfetti(e)}
+            onClick={(e) => {
+              fireConfetti(e);
+              triggerBurst("*K8S FLEET!*", e, "#00F0FF");
+            }}
             animate={{ y: [0, -3, 0], rotate: [-1, 2, -1] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#2563EB] text-white text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#2563EB] text-white text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             PYTHON • REDIS • K8S ⚡
           </motion.button>
 
           <motion.button
             type="button"
-            onClick={(e) => fireConfetti(e)}
+            onClick={(e) => {
+              fireConfetti(e);
+              triggerBurst("*99.98% SLA!*", e, "#FDE047");
+            }}
             animate={{ y: [0, 3, 0], rotate: [1, -2, 1] }}
             transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FDE047] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FDE047] text-[#0A0A0A] text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             NO CAP 99.98% SLA 🧢❌
           </motion.button>
 
           <motion.button
             type="button"
-            onClick={(e) => fireConfetti(e)}
+            onClick={(e) => {
+              fireConfetti(e);
+              triggerBurst("*BUILT WITH TEAM!*", e, "#FF0055");
+            }}
             animate={{ y: [0, -4, 0], rotate: [-2, 2, -2] }}
             transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF4D00] text-white text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF4D00] text-white text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             BUILT WITH TEAM 🤝
           </motion.button>
 
-          <span className="ml-auto text-xs font-mono text-zinc-700 font-bold">
+          <span className="ml-auto text-xs font-mono text-zinc-800 font-bold">
             Tirupati, AP · India
           </span>
         </motion.div>
@@ -181,23 +243,23 @@ export function VibeHeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ ...slowSpring, delay: 0.1 }}
+              transition={{ ...steppedSpring, delay: 0.1 }}
               className="space-y-3"
             >
-              <div className="inline-block px-3 py-1 rounded-md bg-[#C6FF00] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] text-xs font-mono font-black uppercase text-[#0A0A0A]">
+              <div className="inline-block px-3 py-1 rounded-md bg-[#C6FF00] border-[2.5px] border-[#0A0A0A] shadow-[2.5px_2.5px_0px_#0A0A0A] text-xs font-mono font-black uppercase text-[#0A0A0A]">
                 Backend Developer — Python, DevOps &amp; AI
               </div>
 
-              <h1 className="text-6xl sm:text-8xl lg:text-9xl font-black tracking-tight text-[#0A0A0A] uppercase leading-[0.88]">
-                VENU <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] via-[#FF4D00] to-[#C6FF00]">K</span>
+              <h1 className="font-comic text-7xl sm:text-9xl lg:text-[10rem] font-black tracking-tight text-[#09090B] uppercase leading-[0.82] rotate-[-1.5deg] spider-rgb-headline select-none">
+                VENU <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] via-[#FF0055] to-[#C6FF00]">K</span>
               </h1>
             </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ ...slowSpring, delay: 0.2 }}
-              className="text-lg sm:text-xl text-zinc-800 font-medium leading-relaxed max-w-2xl"
+              transition={{ ...steppedSpring, delay: 0.2 }}
+              className="text-lg sm:text-xl text-zinc-900 font-bold leading-relaxed max-w-2xl bg-white/80 p-3 rounded-2xl border-2 border-[#09090B] shadow-[3px_3px_0px_#09090B]"
             >
               Hey there! I build high-throughput Python backends, untangle async event pipelines, and deploy
               resilient Kubernetes &amp; GCP cloud infrastructure alongside engineering teams. Fast shipping,
@@ -208,14 +270,15 @@ export function VibeHeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ ...slowSpring, delay: 0.25 }}
+              transition={{ ...steppedSpring, delay: 0.25 }}
               onClick={(e) => {
                 setMoodIdx((prev) => (prev + 1) % studioMoods.length);
                 fireConfetti(e);
+                triggerBurst("*STATUS SYNC!*", e, "#00F0FF");
               }}
-              whileHover={{ scale: 1.02, rotate: -0.5, transition: { type: "spring", stiffness: 350, damping: 18 } }}
+              whileHover={{ scale: 1.02, rotate: -0.5, transition: { type: "spring", stiffness: 450, damping: 20 } }}
               whileTap={{ scale: 0.97 }}
-              className="p-3.5 sm:p-4 rounded-2xl border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-spring-btn cursor-pointer flex flex-wrap items-center justify-between gap-3 transition-all select-none"
+              className="p-3.5 sm:p-4 rounded-2xl border-[3px] border-[#09090B] shadow-[5px_5px_0px_#09090B] spider-spring-btn cursor-pointer flex flex-wrap items-center justify-between gap-3 transition-all select-none"
               style={{
                 backgroundColor: studioMoods[moodIdx].color,
                 color: studioMoods[moodIdx].text,
@@ -225,15 +288,15 @@ export function VibeHeroSection() {
               <div className="flex items-center gap-3">
                 <span className="text-xl sm:text-2xl">{studioMoods[moodIdx].icon}</span>
                 <div>
-                  <div className="font-mono text-xs sm:text-sm font-black tracking-tight spider-text-hover">
-                    STUDIO STATUS: {studioMoods[moodIdx].status}
+                  <div className="font-comic text-base sm:text-lg font-black tracking-wider spider-text-hover">
+                    STATUS // {studioMoods[moodIdx].status}
                   </div>
                   <div className="text-xs font-mono font-bold opacity-90">
                     // {studioMoods[moodIdx].note}
                   </div>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border-2 border-[#0A0A0A] font-mono text-[10px] font-black text-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border-2 border-[#09090B] font-mono text-[10px] font-black text-[#09090B] shadow-[2.5px_2.5px_0px_#09090B] spider-rgb-hover">
                 <span>CYCLE STATUS 🎲</span>
               </div>
             </motion.div>
@@ -242,12 +305,12 @@ export function VibeHeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ ...slowSpring, delay: 0.3 }}
+              transition={{ ...steppedSpring, delay: 0.3 }}
               className="flex flex-wrap items-center gap-4 pt-2"
             >
               <button
                 onClick={copyCommand}
-                className="inline-flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#FFF] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover font-mono text-xs font-black transition-all cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#FFF] text-[#0A0A0A] border-[2.5px] border-[#0A0A0A] shadow-[3.5px_3.5px_0px_#0A0A0A] spider-rgb-hover font-mono text-xs font-black transition-all cursor-pointer"
                 title="Copy terminal command"
               >
                 <Terminal className="w-4 h-4 text-emerald-600" />
@@ -266,7 +329,8 @@ export function VibeHeroSection() {
 
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#FF4D00] text-white font-black text-xs border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
+                onClick={(e) => triggerBurst("*DEPLOYED!*", e, "#FF0055")}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#FF4D00] text-white font-black text-xs border-[2.5px] border-[#0A0A0A] shadow-[3.5px_3.5px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
               >
                 <span>Explore Shipped Systems</span>
                 <ArrowRight className="w-4 h-4" />
@@ -274,7 +338,8 @@ export function VibeHeroSection() {
 
               <a
                 href="#contact"
-                className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-xs border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
+                onClick={(e) => triggerBurst("*PING!*", e, "#FDE047")}
+                className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-xs border-[2.5px] border-[#0A0A0A] shadow-[3.5px_3.5px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
               >
                 <span>Let&apos;s Chat</span>
                 <Coffee className="w-3.5 h-3.5" />
@@ -287,18 +352,21 @@ export function VibeHeroSection() {
             <motion.div
               initial={{ opacity: 0, scale: 0.9, rotate: 3 }}
               animate={{ opacity: 1, scale: 1, rotate: 1.5 }}
-              transition={{ ...slowSpring, delay: 0.25 }}
-              whileHover={{ rotate: -1, scale: 1.03, transition: { type: "spring", stiffness: 300, damping: 15 } }}
+              transition={{ ...steppedSpring, delay: 0.25 }}
+              whileHover={{ rotate: -1.5, scale: 1.04, transition: { type: "spring", stiffness: 400, damping: 20 } }}
               whileTap={{ scale: 0.97 }}
-              onClick={(e) => fireConfetti(e)}
-              className="relative p-4 pb-5 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] max-w-[320px] w-full cursor-pointer select-none overflow-hidden"
+              onClick={(e) => {
+                fireConfetti(e);
+                triggerBurst("*STUDIO PASS!*", e, "#C6FF00");
+              }}
+              className="relative p-4 pb-5 rounded-3xl bg-white border-[3px] border-[#09090B] shadow-[10px_10px_0px_#09090B] max-w-[320px] w-full cursor-pointer select-none overflow-hidden"
               title="Click Studio Pass for vibes!"
             >
-              {/* Spider-Verse Halftone Texture inside Studio Pass */}
-              <div className="absolute inset-0 spider-halftone-subtle opacity-25 pointer-events-none rounded-3xl" />
+              {/* Spider-Verse Ben-Day Halftone Texture inside Studio Pass */}
+              <div className="absolute inset-0 spider-halftone opacity-35 pointer-events-none rounded-3xl" />
 
               {/* Top Studio Lanyard Clip Pill */}
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded bg-[#0A0A0A] text-[#C6FF00] font-mono text-[10px] font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#C6FF00] spider-text-hover spider-rgb-hover rotate-[-1deg] z-20 whitespace-nowrap">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded bg-[#09090B] text-[#C6FF00] font-mono text-[10px] font-black border-2 border-[#09090B] shadow-[2px_2px_0px_#00F0FF] spider-text-hover spider-rgb-hover rotate-[-1deg] z-20 whitespace-nowrap">
                 STUDIO PASS // PROD-ENV ⚡
               </div>
 
@@ -365,7 +433,7 @@ export function VibeHeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ ...slowSpring, delay: 0.4 }}
+          transition={{ ...steppedSpring, delay: 0.4 }}
           className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4"
         >
           <motion.div

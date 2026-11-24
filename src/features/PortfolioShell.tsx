@@ -27,14 +27,15 @@ export function PortfolioShell() {
       {/* Floating Navbar (with Theme Toggle) */}
       <Navbar />
 
-      {/* Dual Layout: Gen-Z Vibe Coding (Light) vs. Engineering Console (Dark) with smooth cross-fade */}
+      {/* Dual Layout: Spider-Verse Comic & Kinetic Print (Light) vs. Engineering Console (Dark) with 250ms dimensional glitch */}
       <AnimatePresence mode="wait">
         <motion.div
           key={theme}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.28, ease: "easeInOut" }}
+          transition={{ duration: 0.25 }}
+          className="animate-spider-glitch"
         >
           {theme === "light" ? (
             <VibeLayout />

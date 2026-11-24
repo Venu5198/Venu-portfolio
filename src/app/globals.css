@@ -133,66 +133,161 @@ body {
 }
 
 /* =========================================================================
-   SPIDER-VERSE PRINT & MOTION ACCENT UTILITIES
-   Halftone dot patterns, chromatic RGB offset hover, crisp spring physics
+   SPIDER-VERSE NEO-BRUTALIST COMIC & KINETIC PRINT UTILITIES
+   Bold Ben-Day dots, cross-hatching, chromatic RGB split, dimensional glitch
    ========================================================================= */
 
-/* Subtle halftone dot patterns */
+.font-comic {
+  font-family: var(--font-anton), Impact, -apple-system, sans-serif;
+  letter-spacing: 0.04em;
+}
+
+/* High-contrast comic Ben-Day dot matrices */
 .spider-halftone {
-  background-image: radial-gradient(rgba(10, 10, 10, 0.14) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(#09090b 24%, transparent 26%);
   background-size: 8px 8px;
 }
 
 .spider-halftone-subtle {
-  background-image: radial-gradient(rgba(10, 10, 10, 0.08) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(rgba(9, 9, 11, 0.22) 20%, transparent 22%);
   background-size: 10px 10px;
 }
 
 .spider-halftone-dense {
-  background-image: radial-gradient(rgba(10, 10, 10, 0.2) 1.4px, transparent 1.4px);
+  background-image: radial-gradient(#09090b 32%, transparent 34%);
   background-size: 6px 6px;
 }
 
-/* Spider-Verse chromatic RGB offset misprint hover */
+.spider-halftone-cyan {
+  background-image: radial-gradient(#00f0ff 28%, transparent 30%);
+  background-size: 8px 8px;
+}
+
+.spider-halftone-magenta {
+  background-image: radial-gradient(#ff0055 28%, transparent 30%);
+  background-size: 8px 8px;
+}
+
+/* Comic cross-hatching ink pattern */
+.spider-crosshatch {
+  background-image: 
+    repeating-linear-gradient(45deg, rgba(9, 9, 11, 0.15) 0px, rgba(9, 9, 11, 0.15) 1.5px, transparent 1.5px, transparent 7px),
+    repeating-linear-gradient(-45deg, rgba(9, 9, 11, 0.15) 0px, rgba(9, 9, 11, 0.15) 1.5px, transparent 1.5px, transparent 7px);
+}
+
+/* Chromatic Aberration RGB Split (Dual Cyan #00F0FF / Crimson-Magenta #FF0055) */
+.spider-rgb-headline {
+  text-shadow: -4px 0px 0px #00f0ff, 4px 0px 0px #ff0055;
+}
+
+.spider-rgb-headline-sm {
+  text-shadow: -2.5px 0px 0px #00f0ff, 2.5px 0px 0px #ff0055;
+}
+
 .spider-rgb-hover {
-  transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.16s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.12s steps(4, end), box-shadow 0.12s steps(4, end);
 }
 
 .spider-rgb-hover:hover {
-  transform: translate(-2px, -2px);
+  transform: translate(-3px, -3px);
   box-shadow: 
-    3px 3px 0px #0a0a0a,
-    5px 5px 0px rgba(37, 99, 235, 0.85),
-    -2px -1.5px 0px rgba(255, 77, 0, 0.85) !important;
+    -3px 0px 0px #00f0ff,
+    3px 0px 0px #ff0055,
+    6px 6px 0px #09090b !important;
 }
 
 .spider-rgb-hover:active {
-  transform: translate(1px, 1px) scale(0.98);
-  box-shadow: 1.5px 1.5px 0px #0a0a0a !important;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #09090b !important;
 }
 
-/* Spider-Verse chromatic text shadow hover */
 .spider-text-hover {
-  transition: text-shadow 0.15s ease, transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: text-shadow 0.12s steps(3, end), transform 0.12s steps(3, end);
 }
 
 .spider-text-hover:hover {
-  text-shadow: 1.5px 0px 0px rgba(255, 77, 0, 0.85), -1.5px 0px 0px rgba(37, 99, 235, 0.85);
+  text-shadow: -2.5px 0px 0px #00f0ff, 2.5px 0px 0px #ff0055;
 }
 
-/* Crisp spring interactive button */
+/* "Animating on Twos" Stepped Button Micro-Interaction */
 .spider-spring-btn {
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.14s steps(5, end), box-shadow 0.14s steps(5, end);
 }
 
 .spider-spring-btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0px #0a0a0a;
+  transform: translate(-3px, -3px) rotate(-0.75deg);
+  box-shadow: 
+    -2px 0px 0px #00f0ff,
+    2px 0px 0px #ff0055,
+    6px 6px 0px #09090b;
 }
 
 .spider-spring-btn:active {
-  transform: translate(1px, 1px) scale(0.97);
-  box-shadow: 2px 2px 0px #0a0a0a;
+  transform: translate(2px, 2px) scale(0.97);
+  box-shadow: 2px 2px 0px #09090b;
+}
+
+/* Dimensional Glitch Transition Keyframes (250ms) */
+@keyframes spider-dimensional-glitch {
+  0% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0);
+    filter: drop-shadow(-4px 0 #00f0ff) drop-shadow(4px 0 #ff0055);
+  }
+  20% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translate(-5px, 2px);
+  }
+  40% {
+    clip-path: inset(50% 0 15% 0);
+    transform: translate(5px, -3px);
+    filter: drop-shadow(4px 0 #00f0ff) drop-shadow(-4px 0 #ff0055);
+  }
+  60% {
+    clip-path: inset(70% 0 5% 0);
+    transform: translate(-3px, 1px);
+  }
+  80% {
+    clip-path: inset(10% 0 75% 0);
+    transform: translate(3px, -2px);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0);
+    filter: none;
+  }
+}
+
+.animate-spider-glitch {
+  animation: spider-dimensional-glitch 0.25s steps(6, end) forwards;
+}
+
+/* Comic Onomatopoeia Burst Keyframes */
+@keyframes comic-pop-burst {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-15deg);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.2) rotate(6deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1) rotate(-4deg);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.05) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-15px) rotate(8deg);
+  }
+}
+
+.animate-comic-burst {
+  animation: comic-pop-burst 0.85s steps(6, end) forwards;
 }
 
 /* Dark containers adapt to crisp white with tactile borders */

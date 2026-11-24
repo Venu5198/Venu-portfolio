@@ -12,9 +12,10 @@ interface VibeProjectsSectionProps {
   onSelectProject: (p: Project) => void;
 }
 
-const slowSpring = {
-  duration: 1.1,
-  ease: [0.22, 1, 0.36, 1] as const,
+const steppedSpring = {
+  type: "spring" as const,
+  stiffness: 500,
+  damping: 24,
 };
 
 export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProps) {
@@ -62,7 +63,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
             <Sparkles className="w-3.5 h-3.5 text-[#0A0A0A] animate-spin" />
             FLAGSHIP CODE &amp; ARCHITECTURE
           </div>
-          <h2 className="text-4xl sm:text-6xl font-black text-[#0A0A0A] tracking-tight leading-[0.95]">
+          <h2 className="font-comic text-5xl sm:text-7xl font-black text-[#0A0A0A] tracking-tight leading-[0.92] uppercase rotate-[-0.5deg]">
             Shipped Systems &amp; Team Contributions
           </h2>
           <p className="text-zinc-800 max-w-2xl text-base sm:text-lg font-medium">
@@ -71,22 +72,23 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
           </p>
         </div>
 
-        {/* Project 01: SyncRivo (Studio Card Style) */}
+        {/* Project 01: SyncRivo (Spider-Verse Comic Card Style) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={slowSpring}
-          whileHover={{ rotate: -0.75, scale: 1.01, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-          className="mb-16 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] overflow-hidden"
+          transition={steppedSpring}
+          whileHover={{ rotate: -0.75, scale: 1.01, transition: { type: "spring", stiffness: 450, damping: 20 } }}
+          className="relative mb-16 rounded-3xl bg-white border-[3px] border-[#0A0A0A] shadow-[10px_10px_0px_#0A0A0A] overflow-hidden"
         >
-          {/* Header Ribbon: Acid Volt with Pitch-Black / Volt Badge */}
-          <div className="px-6 py-4 bg-[#C6FF00] border-b-2 border-[#0A0A0A] flex flex-wrap items-center justify-between gap-3 font-mono text-xs font-black text-[#0A0A0A]">
-            <span className="flex items-center gap-2">
+          {/* Header Ribbon: Acid Volt with Ben-Day Halftone Accent */}
+          <div className="relative px-6 py-4 bg-[#C6FF00] border-b-[2.5px] border-[#0A0A0A] flex flex-wrap items-center justify-between gap-3 font-mono text-xs font-black text-[#0A0A0A] overflow-hidden">
+            <div className="absolute inset-0 spider-halftone opacity-15 pointer-events-none" />
+            <span className="relative flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#0A0A0A] animate-ping" />
               // 01 · 5-PLATFORM MESSAGING BRIDGE · SYNCRIVO.AI
             </span>
-            <div className="flex items-center gap-2">
+            <div className="relative flex items-center gap-2">
               {/* High-Contrast Pitch-Black with Acid Volt Text Badge */}
               <span className="px-3.5 py-1 rounded-full bg-[#0A0A0A] text-[#C6FF00] text-[11px] font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_rgba(0,0,0,0.25)] spider-text-hover spider-rgb-hover">
                 ZERO-DOWNTIME DEPLOYS ⚡
@@ -105,34 +107,34 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
                   <div className="inline-block px-3 py-1 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]">
                     {syncrivo.role}
                   </div>
-                  <h3 className="text-3xl sm:text-5xl font-black text-[#0A0A0A] tracking-tight">
+                  <h3 className="font-comic text-4xl sm:text-6xl font-black text-[#0A0A0A] tracking-tight uppercase spider-rgb-headline-sm">
                     {syncrivo.title}
                   </h3>
                 </div>
 
-                <p className="text-base sm:text-lg text-zinc-800 font-medium leading-relaxed">
+                <p className="text-base sm:text-lg text-zinc-900 font-bold leading-relaxed">
                   {syncrivo.tagline}
                 </p>
 
-                {/* Narrative Pills Grid */}
+                {/* Narrative Pills Grid with Clean White Background for 100% Readability */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                  <div className="p-4 rounded-2xl bg-[#F4F4F0] border-2 border-[#0A0A0A] space-y-1">
+                  <div className="p-4 rounded-2xl bg-white border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] space-y-1">
                     <div className="font-mono text-xs font-black text-[#0A0A0A] flex items-center gap-2">
                       <Server className="w-3.5 h-3.5 text-[#2563EB]" />
                       FASTAPI ASYNC INGRESS &lt; 10MS
                     </div>
-                    <div className="text-xs text-zinc-800 leading-relaxed font-medium">
+                    <div className="text-xs text-zinc-800 leading-relaxed font-bold">
                       High-throughput webhook ingestion acknowledging platform webhooks under 10ms,
                       with Redis sliding-window deduplication and echo-loop guards.
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#F4F4F0] border-2 border-[#0A0A0A] space-y-1">
+                  <div className="p-4 rounded-2xl bg-white border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] space-y-1">
                     <div className="font-mono text-xs font-black text-[#0A0A0A] flex items-center gap-2">
                       <Layers className="w-3.5 h-3.5 text-[#FF4D00]" />
                       NATIVE SENDER ATTRIBUTION
                     </div>
-                    <div className="text-xs text-zinc-800 leading-relaxed font-medium">
+                    <div className="text-xs text-zinc-800 leading-relaxed font-bold">
                       Bidirectional schema translation preserving mrkdwn, Teams HTML, Zoom formatting,
                       and native user attribution via delegated OAuth scopes.
                     </div>
@@ -213,22 +215,23 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
           </div>
         </motion.div>
 
-        {/* Project 02: OCNORA (Studio Card Style) */}
+        {/* Project 02: OCNORA (Spider-Verse Comic Card Style) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={slowSpring}
-          whileHover={{ rotate: 0.75, scale: 1.01, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-          className="mb-16 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] overflow-hidden"
+          transition={steppedSpring}
+          whileHover={{ rotate: 0.75, scale: 1.01, transition: { type: "spring", stiffness: 450, damping: 20 } }}
+          className="relative mb-16 rounded-3xl bg-white border-[3px] border-[#0A0A0A] shadow-[10px_10px_0px_#0A0A0A] overflow-hidden"
         >
           {/* Header Ribbon: Electric Cobalt / Pitch-Black with Volt Badge */}
-          <div className="px-6 py-4 bg-[#2563EB] text-white border-b-2 border-[#0A0A0A] flex flex-wrap items-center justify-between gap-3 font-mono text-xs font-black">
-            <span className="flex items-center gap-2 text-white">
+          <div className="relative px-6 py-4 bg-[#2563EB] text-white border-b-[2.5px] border-[#0A0A0A] flex flex-wrap items-center justify-between gap-3 font-mono text-xs font-black overflow-hidden">
+            <div className="absolute inset-0 spider-halftone opacity-20 pointer-events-none" />
+            <span className="relative flex items-center gap-2 text-white">
               <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping" />
               // 02 · AI WORKFLOW AUTOMATION ENGINE · OCNORA.AI
             </span>
-            <div className="flex items-center gap-2">
+            <div className="relative flex items-center gap-2">
               <span className="px-3.5 py-1 rounded-full bg-[#0A0A0A] text-[#C6FF00] text-[11px] font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_rgba(0,0,0,0.25)] spider-text-hover spider-rgb-hover">
                 MAIN CHARACTER MICROSERVICES ⚡
               </span>
@@ -246,23 +249,23 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
                   <div className="inline-block px-3 py-1 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]">
                     {ocnora.role}
                   </div>
-                  <h3 className="text-3xl sm:text-5xl font-black text-[#0A0A0A] tracking-tight">
+                  <h3 className="font-comic text-4xl sm:text-6xl font-black text-[#0A0A0A] tracking-tight uppercase spider-rgb-headline-sm">
                     {ocnora.title}
                   </h3>
                 </div>
 
-                <p className="text-base sm:text-lg text-zinc-800 font-medium leading-relaxed">
+                <p className="text-base sm:text-lg text-zinc-900 font-bold leading-relaxed">
                   {ocnora.tagline}
                 </p>
 
-                {/* Narrative Pills Grid */}
+                {/* Narrative Pills Grid with Clean White Background for 100% Readability */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                  <div className="p-4 rounded-2xl bg-[#F4F4F0] border-2 border-[#0A0A0A] space-y-1">
+                  <div className="p-4 rounded-2xl bg-white border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] space-y-1">
                     <div className="font-mono text-xs font-black text-[#0A0A0A] flex items-center gap-2">
                       <Server className="w-3.5 h-3.5 text-[#2563EB]" />
                       DAG ENGINE &amp; 1,000+ APPS
                     </div>
-                    <div className="text-xs text-zinc-800 leading-relaxed font-medium">
+                    <div className="text-xs text-zinc-800 leading-relaxed font-bold">
                       Custom stateful execution DAG supporting event triggers, condition branches,
                       suspend/resume cycles, and checkpoints across 1,000+ app connectors.
                     </div>

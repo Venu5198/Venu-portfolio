@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Sparkles, ArrowRight, Play, Pause, Zap, Shield, Key, Layers, Send } from "lucide-react";
+import { ComicBurst, ComicBurstItem } from "./ComicBurst";
 
 type ArchitectureMode = "syncrivo" | "ocnora";
 
@@ -155,6 +156,49 @@ export function VibeArchitectureSection() {
   const [mode, setMode] = useState<ArchitectureMode>("syncrivo");
   const [activeStage, setActiveStage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isGlitching, setIsGlitching] = useState(false);
+  const [bursts, setBursts] = useState<ComicBurstItem[]>([]);
+
+  const stageBursts = {
+    syncrivo: [
+      "*INGRESS <10MS!*",
+      "*ECHO DROPPED!*",
+      "*AUTH LOCKED!*",
+      "*AST PARSED!*",
+      "*DLQ DISPATCH!*",
+    ],
+    ocnora: [
+      "*1,000+ APPS!*",
+      "*BUDGET GUARD!*",
+      "*DAG RUNTIME!*",
+      "*OTEL LOGGED!*",
+      "*PR SUBMITTED!*",
+    ],
+  };
+
+  const triggerBurst = (text: string, e?: React.MouseEvent, color = "#FDE047") => {
+    const id = Date.now() + Math.random();
+    const newBurst: ComicBurstItem = {
+      id,
+      text,
+      x: e ? e.clientX : typeof window !== "undefined" ? window.innerWidth * 0.5 : 500,
+      y: e ? e.clientY : typeof window !== "undefined" ? window.innerHeight * 0.45 : 350,
+      color,
+      rotate: Math.floor(Math.random() * 18) - 9,
+    };
+    setBursts((prev) => [...prev, newBurst]);
+    setTimeout(() => {
+      setBursts((prev) => prev.filter((b) => b.id !== id));
+    }, 950);
+  };
+
+  const switchMode = (newMode: ArchitectureMode, e?: React.MouseEvent) => {
+    setMode(newMode);
+    setActiveStage(0);
+    setIsGlitching(true);
+    triggerBurst(newMode === "syncrivo" ? "*BRIDGE SYNC!*" : "*DAG ENGINE!*", e, newMode === "syncrivo" ? "#C6FF00" : "#00F0FF");
+    setTimeout(() => setIsGlitching(false), 260);
+  };
 
   const fireConfetti = (e?: React.MouseEvent) => {
     try {
@@ -164,7 +208,7 @@ export function VibeArchitectureSection() {
         origin: e
           ? { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
           : { y: 0.6 },
-        colors: ["#bef264", "#fda4af", "#d8b4fe", "#bae6fd", "#fde047"],
+        colors: ["#C6FF00", "#FF4D00", "#2563EB", "#00F0FF", "#FDE047"],
       });
     } catch {}
   };
@@ -183,19 +227,22 @@ export function VibeArchitectureSection() {
   return (
     <section
       id="architecture"
-      className="py-24 relative scroll-mt-36 pt-12"
+      className="py-24 relative scroll-mt-48 pt-28"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
+      {/* Onomatopoeia Comic Burst Layer */}
+      <ComicBurst bursts={bursts} />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header with Mode Toggles */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-6 border-b-2 border-[#0A0A0A]/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-6 border-b-[2.5px] border-[#0A0A0A]/20">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]">
               <Sparkles className="w-3.5 h-3.5" />
               INTERACTIVE PIPELINE TOPOLOGY
             </div>
-            <h2 className="text-4xl sm:text-6xl font-black text-[#0A0A0A] tracking-tight leading-[0.95]">
+            <h2 className="font-comic text-5xl sm:text-7xl font-black text-[#0A0A0A] tracking-tight leading-[0.92] uppercase rotate-[-0.5deg]">
               Distributed Event Architecture
             </h2>
             <p className="text-zinc-800 max-w-xl text-base sm:text-lg font-medium">
@@ -207,27 +254,21 @@ export function VibeArchitectureSection() {
           {/* Mode Switcher Sticker Pills */}
           <div className="flex items-center gap-3">
             <button
-              onClick={() => {
-                setMode("syncrivo");
-                setActiveStage(0);
-              }}
-              className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-2 border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
+              onClick={(e) => switchMode("syncrivo", e)}
+              className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-[2.5px] border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
                 mode === "syncrivo"
-                  ? "bg-[#C6FF00] text-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] translate-x-[-1px] translate-y-[-1px]"
-                  : "bg-white text-zinc-700 hover:text-black shadow-[1.5px_1.5px_0px_#0A0A0A]"
+                  ? "bg-[#C6FF00] text-[#0A0A0A] shadow-[3.5px_3.5px_0px_#0A0A0A] translate-x-[-1px] translate-y-[-1px]"
+                  : "bg-white text-zinc-700 hover:text-black shadow-[2px_2px_0px_#0A0A0A]"
               }`}
             >
               SyncRivo Bridge ⚡
             </button>
             <button
-              onClick={() => {
-                setMode("ocnora");
-                setActiveStage(0);
-              }}
-              className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-2 border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
+              onClick={(e) => switchMode("ocnora", e)}
+              className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-[2.5px] border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
                 mode === "ocnora"
-                  ? "bg-[#2563EB] text-white shadow-[3px_3px_0px_#0A0A0A] translate-x-[-1px] translate-y-[-1px]"
-                  : "bg-white text-zinc-700 hover:text-black shadow-[1.5px_1.5px_0px_#0A0A0A]"
+                  ? "bg-[#2563EB] text-white shadow-[3.5px_3.5px_0px_#0A0A0A] translate-x-[-1px] translate-y-[-1px]"
+                  : "bg-white text-zinc-700 hover:text-black shadow-[2px_2px_0px_#0A0A0A]"
               }`}
             >
               OCNORA Engine 🤖
@@ -235,13 +276,15 @@ export function VibeArchitectureSection() {
           </div>
         </div>
 
-        {/* Interactive Architecture Packet Simulator Track */}
+        {/* Interactive Architecture Packet Simulator Track with 250ms Dimensional Glitch */}
         <motion.div
           key={`${mode}-${activeStage}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="mb-8 p-4 sm:p-5 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[5px_5px_0px_#0A0A0A] flex flex-wrap items-center justify-between gap-4"
+          transition={{ duration: 0.2, ease: (t: number) => Math.floor(t * 4) / 4 }}
+          className={`mb-8 p-4 sm:p-5 rounded-3xl bg-white border-[2.5px] border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] flex flex-wrap items-center justify-between gap-4 ${
+            isGlitching ? "animate-spider-glitch" : ""
+          }`}
         >
           <div className="flex items-center gap-3">
             <span className="flex h-3 w-3 relative">
@@ -254,8 +297,8 @@ export function VibeArchitectureSection() {
                 key={`badge-${mode}-${activeStage}`}
                 initial={{ scale: 0.85, x: -6 }}
                 animate={{ scale: 1, x: 0 }}
-                transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                className="px-3 py-1 rounded-full text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]"
+                transition={{ type: "spring", stiffness: 450, damping: 18 }}
+                className="px-3 py-1 rounded-full text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-text-hover"
                 style={{
                   backgroundColor: stages[activeStage].color,
                   color: stages[activeStage].color === "#2563EB" || stages[activeStage].color === "#FF4D00" ? "#FFFFFF" : "#0A0A0A",
@@ -271,7 +314,7 @@ export function VibeArchitectureSection() {
           </div>
         </motion.div>
 
-        {/* 5-Stage Interactive Pipeline Stepper with Crisp Spring Physics */}
+        {/* 5-Stage Interactive Pipeline Stepper with Crisp Stepped Physics */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-10">
           {stages.map((stg, idx) => {
             const isSelected = activeStage === idx;
@@ -279,17 +322,18 @@ export function VibeArchitectureSection() {
             return (
               <motion.button
                 key={idx}
-                whileHover={{ scale: 1.04, y: -2, transition: { type: "spring", stiffness: 400, damping: 15 } }}
-                whileTap={{ scale: 0.96, y: 1 }}
+                whileHover={{ scale: 1.05, y: -3, transition: { type: "spring", stiffness: 500, damping: 20 } }}
+                whileTap={{ scale: 0.95, y: 1 }}
                 onClick={(e) => {
                   setActiveStage(idx);
                   setIsPaused(true);
                   fireConfetti(e);
+                  triggerBurst(stageBursts[mode][idx], e, stg.color === "#FFFFFF" ? "#00F0FF" : stg.color);
                 }}
-                className={`p-4 rounded-2xl text-left border-2 border-[#0A0A0A] spider-spring-btn transition-all cursor-pointer flex flex-col justify-between ${
+                className={`p-4 rounded-2xl text-left border-[2.5px] border-[#0A0A0A] spider-spring-btn transition-all cursor-pointer flex flex-col justify-between ${
                   isSelected
-                    ? "shadow-[5px_5px_0px_#0A0A0A] translate-x-[-2px] translate-y-[-2px]"
-                    : "bg-white hover:bg-zinc-50 shadow-[2px_2px_0px_#0A0A0A] hover:shadow-[4px_4px_0px_#0A0A0A]"
+                    ? "shadow-[6px_6px_0px_#0A0A0A] translate-x-[-2px] translate-y-[-2px]"
+                    : "bg-white hover:bg-zinc-50 shadow-[2.5px_2.5px_0px_#0A0A0A] hover:shadow-[5px_5px_0px_#0A0A0A]"
                 }`}
                 style={{
                   backgroundColor: isSelected ? stg.color : "#FFFFFF",
@@ -298,7 +342,7 @@ export function VibeArchitectureSection() {
               >
                 <div className="flex items-center justify-between pb-3">
                   <span className={`font-mono text-xs font-black ${isDarkBg ? "text-white" : "text-[#0A0A0A]"}`}>STAGE {stg.step}</span>
-                  {isSelected && <span className={`w-2 h-2 rounded-full ${isDarkBg ? "bg-white" : "bg-[#0A0A0A]"} animate-ping`} />}
+                  {isSelected && <span className={`w-2.5 h-2.5 rounded-full ${isDarkBg ? "bg-white" : "bg-[#0A0A0A]"} animate-ping`} />}
                 </div>
                 <div className={`text-xs font-black leading-snug line-clamp-2 ${isDarkBg ? "text-white" : "text-[#0A0A0A]"}`}>
                   {stg.label}
@@ -308,25 +352,27 @@ export function VibeArchitectureSection() {
           })}
         </div>
 
-        {/* Selected Stage Callout Notebook */}
+        {/* Selected Stage Callout Notebook with Halftone Print Watermark */}
         <AnimatePresence mode="wait">
           <motion.div
             key={`${mode}-${activeStage}`}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.4 }}
-            className="relative p-8 sm:p-10 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] space-y-6 overflow-hidden"
+            transition={{ duration: 0.25, ease: (t: number) => Math.floor(t * 5) / 5 }}
+            className={`relative p-8 sm:p-10 rounded-3xl bg-white border-[3px] border-[#0A0A0A] shadow-[10px_10px_0px_#0A0A0A] space-y-6 overflow-hidden ${
+              isGlitching ? "animate-spider-glitch" : ""
+            }`}
           >
-            {/* Subtle Halftone Print Accent Watermark in Stage Corner */}
-            <div className="absolute top-0 right-0 w-44 h-44 spider-halftone opacity-15 pointer-events-none rounded-tr-3xl" />
+            {/* High-Contrast Ben-Day Halftone Watermark in Stage Corner */}
+            <div className="absolute top-0 right-0 w-52 h-52 spider-halftone opacity-25 pointer-events-none rounded-tr-3xl" />
 
             <div className="relative flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#0A0A0A]/10 pb-4">
               <div className="space-y-1">
                 <div className="inline-block px-3 py-1 rounded-full bg-[#C6FF00] text-[#0A0A0A] font-mono text-[11px] font-black border-2 border-[#0A0A0A] spider-text-hover">
                   {stages[activeStage].tag}
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-[#0A0A0A]">
+                <h3 className="font-comic text-2xl sm:text-4xl font-black text-[#0A0A0A] uppercase tracking-wide">
                   Stage {stages[activeStage].step}: {stages[activeStage].label}
                 </h3>
               </div>
@@ -340,7 +386,7 @@ export function VibeArchitectureSection() {
                 <p className="text-base sm:text-lg text-zinc-800 font-medium leading-relaxed">
                   {stages[activeStage].detail}
                 </p>
-                <div className="p-4 rounded-2xl bg-[#F4F4F0] border-2 border-[#0A0A0A] space-y-1">
+                <div className="p-4 rounded-2xl bg-[#F4F4F0] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] space-y-1">
                   <div className="font-mono text-xs font-black text-[#0A0A0A] uppercase">
                     ARCHITECTURAL TRADE-OFF / IMPACT
                   </div>
@@ -350,7 +396,7 @@ export function VibeArchitectureSection() {
                 </div>
               </div>
 
-              <div className="lg:col-span-4 p-5 rounded-2xl bg-[#F4F4F0] border-2 border-[#0A0A0A] space-y-3">
+              <div className="lg:col-span-4 p-5 rounded-2xl bg-[#F4F4F0] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] space-y-3">
                 <div className="font-mono text-xs font-black text-[#0A0A0A] uppercase">
                   ACTIVE COMPONENTS
                 </div>
