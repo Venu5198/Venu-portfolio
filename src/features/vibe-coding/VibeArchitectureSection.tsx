@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Sparkles, ArrowRight, Play, Pause, Zap, Shield, Key, Layers, Send } from "lucide-react";
 import { ComicBurst, ComicBurstItem } from "./ComicBurst";
+import { PipelineRunner } from "@/features/pipeline-runner/PipelineRunner";
 
 type ArchitectureMode = "syncrivo" | "ocnora";
 
@@ -414,6 +415,11 @@ export function VibeArchitectureSection() {
             </div>
           </motion.div>
         </AnimatePresence>
+
+        {/* Client-Side Interactive CI/CD Pipeline Runner Widget */}
+        <div className="mt-16">
+          <PipelineRunner />
+        </div>
       </div>
     </section>
   );

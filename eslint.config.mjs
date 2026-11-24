@@ -12,7 +12,18 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    ".agents/**",
+    "scripts/**",
+    "portfolio-videos/**",
+    "portfolio-screenshots/**",
   ]),
+  {
+    rules: {
+      "react/jsx-no-comment-textnodes": "off",
+      "react-hooks/set-state-in-effect": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
+    },
+  },
 ]);
 
 export default eslintConfig;

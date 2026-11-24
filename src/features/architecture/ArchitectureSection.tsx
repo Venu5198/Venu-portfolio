@@ -1,20 +1,14 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Cpu,
-  Layers,
-  ArrowRight,
   ShieldCheck,
-  Zap,
-  Activity,
-  Server,
-  Sparkles,
   Play,
   Pause,
 } from "lucide-react";
-import { TelemetryBadge } from "@/shared/components/TelemetryBadge";
+import { PipelineRunner } from "@/features/pipeline-runner/PipelineRunner";
 
 const transitionEase = [0.22, 1, 0.36, 1] as const;
 
@@ -458,6 +452,11 @@ export function ArchitectureSection() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Client-Side Interactive CI/CD Pipeline Runner */}
+        <div className="mt-16">
+          <PipelineRunner />
         </div>
       </div>
     </section>
