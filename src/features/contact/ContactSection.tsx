@@ -175,9 +175,9 @@ export function ContactSection() {
               <Magnetic strength={18}>
                 <a
                   href={`mailto:${profileData.contact.email}?subject=Backend%20Developer%20Opportunity%20-%20Venu%20K`}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cyan-400 text-black font-bold text-sm hover:bg-cyan-300 transition-all shadow-[0_0_35px_rgba(6,182,212,0.45)]"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cyan-400 text-black font-bold text-sm hover:bg-cyan-300 transition-all shadow-[0_0_35px_rgba(6,182,212,0.45)] cursor-pointer"
                 >
-                  <span>Initiate Transmission</span>
+                  <span>Get In Touch Directly</span>
                   <Send className="w-4 h-4" />
                 </a>
               </Magnetic>
@@ -195,8 +195,12 @@ export function ContactSection() {
 {`{
   "engineer": "${profileData.name}",
   "role": "Backend Developer",
+  "specialization": "Python, DevOps & AI",
   "location": "${profileData.location}",
-  "platforms_built": ["SyncRivo.ai", "OCNORA.ai"],
+  "key_contributions": [
+    "SyncRivo.ai (Backend & Event Bridge)",
+    "OCNORA.ai (AI Workflow & Runtime)"
+  ],
   "certifications": [
     "AWS DevOps Professional",
     "Kubernetes CKA",

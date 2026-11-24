@@ -27,7 +27,7 @@ export function PortfolioShell() {
       {/* Floating Navbar (with Theme Toggle) */}
       <Navbar />
 
-      {/* Dual Layout: Spider-Verse Comic & Kinetic Print (Light) vs. Engineering Console (Dark) with 250ms dimensional glitch */}
+      {/* Dual Layout: Spider-Verse Comic & Kinetic Print (Light) vs. Systems Engineering Dossier (Dark) */}
       <AnimatePresence mode="wait">
         <motion.div
           key={theme}
@@ -35,12 +35,12 @@ export function PortfolioShell() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="animate-spider-glitch"
+          className={theme === "light" ? "animate-spider-glitch" : ""}
         >
           {theme === "light" ? (
             <VibeLayout />
           ) : (
-            <div className="relative">
+            <div className="relative bg-[#09090B] text-[#F4F4F5]">
               <GridBackground />
               <HeroSection />
               <ProjectsSection />

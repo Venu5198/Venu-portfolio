@@ -169,16 +169,16 @@ export function ArchitectureSection() {
         {/* Section Header with Mode Toggles */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-hairline">
           <div className="space-y-4">
-            <div className="font-mono text-xs text-emerald-400 uppercase tracking-[0.25em] font-semibold flex items-center gap-2">
+            <div className="font-mono text-xs text-cyan-400 uppercase tracking-[0.25em] font-semibold flex items-center gap-2">
               <Cpu className="w-3.5 h-3.5" />
-              Connected Pipeline Flow
+              Systems Architecture &amp; Topologies
             </div>
             <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9]">
-              Systems Architecture
+              Distributed Event Architecture
             </h2>
             <p className="text-zinc-400 max-w-xl text-base font-light leading-relaxed">
-              Cinematic animated pipeline showing end-to-end data transmission. Cycles
-              automatically or click any stage to pause and inspect.
+              End-to-end event transmission, stateful graph orchestration, and production safeguards.
+              Select SyncRivo Bridge or OCNORA Engine to inspect pipeline stages and engineering trade-offs.
             </p>
           </div>
 
@@ -190,7 +190,7 @@ export function ArchitectureSection() {
                   setActiveMode("syncrivo");
                   setSelectedNodeId("sync-dedup");
                 }}
-                className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 ${
+                className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 cursor-pointer ${
                   activeMode === "syncrivo"
                     ? "bg-cyan-400 text-black shadow-[0_0_25px_rgba(6,182,212,0.45)]"
                     : "text-zinc-400 hover:text-white"
@@ -203,7 +203,7 @@ export function ArchitectureSection() {
                   setActiveMode("ocnora");
                   setSelectedNodeId("ocn-validate");
                 }}
-                className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 ${
+                className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 cursor-pointer ${
                   activeMode === "ocnora"
                     ? "bg-amber-400 text-black shadow-[0_0_25px_rgba(245,158,11,0.45)]"
                     : "text-zinc-400 hover:text-white"
@@ -216,7 +216,7 @@ export function ArchitectureSection() {
             {/* Play/Pause indicator button */}
             <button
               onClick={() => setIsPaused(!isPaused)}
-              className="p-2.5 rounded-full bg-white/[0.03] border border-hairline text-zinc-400 hover:text-white transition-colors"
+              className="p-2.5 rounded-full bg-white/[0.03] border border-hairline text-zinc-400 hover:text-white transition-colors cursor-pointer"
               title={isPaused ? "Resume auto-cycling" : "Pause auto-cycling"}
             >
               {isPaused ? <Play className="w-3.5 h-3.5 text-emerald-400" /> : <Pause className="w-3.5 h-3.5" />}
@@ -367,6 +367,98 @@ export function ArchitectureSection() {
             </div>
           </motion.div>
         </AnimatePresence>
+
+        {/* Engineering Decisions & Operational Trade-Offs Matrix */}
+        <div className="mt-16 space-y-6">
+          <div className="flex items-center justify-between border-b border-hairline pb-4">
+            <div className="font-mono text-xs text-cyan-400 uppercase tracking-widest font-semibold flex items-center gap-2">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              ARCHITECTURAL DECISIONS &amp; OPERATIONAL SAFEGUARDS
+            </div>
+            <span className="font-mono text-xs text-zinc-500">
+              {activeMode === "syncrivo" ? "5-PLATFORM BRIDGE" : "AI DAG RUNTIME"}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {(activeMode === "syncrivo"
+              ? [
+                  {
+                    decision: "Asynchronous Ingress Decoupling",
+                    category: "High-Throughput Ingestion",
+                    tradeoff: "Decoupled Redis Pub/Sub buffer vs. direct synchronous API dispatch.",
+                    safeguard: "Immediate <10ms HTTP 200 response to meet Slack/Teams 3s timeout SLA; isolates downstream platform rate-limit stalls.",
+                  },
+                  {
+                    decision: "Cryptographic Loop & Echo Prevention",
+                    category: "Event Processing",
+                    tradeoff: "Sliding-window Redis SETNX locks with SHA-256 payload fingerprints vs. localized in-memory cache.",
+                    safeguard: "Guarantees multi-pod cross-cluster consistency; 0% reflection across bridges with < 1KB per message memory footprint.",
+                  },
+                  {
+                    decision: "Universal AST Intermediate Schema",
+                    category: "Payload Translation",
+                    tradeoff: "Intermediate AST translation schema vs. direct N×N point-to-point platform mappers.",
+                    safeguard: "Scales at O(N) complexity for adding new platforms; preserves formatting fidelity, edits, and file cards.",
+                  },
+                  {
+                    decision: "Artifact Registry Auth Wheel & DLQ",
+                    category: "Identity & Reliability",
+                    tradeoff: "Centralized private Python wheel and jittered backoff vs. replicated auth code.",
+                    safeguard: "Enforces uniform token lifecycles, true sender profile attribution, and Dead Letter Queue alert routing.",
+                  },
+                ]
+              : [
+                  {
+                    decision: "Topological Stateful DAG Runtime",
+                    category: "Workflow Engine",
+                    tradeoff: "Dependency-aware DAG sorting with MongoDB checkpointing vs. sequential script execution.",
+                    safeguard: "Enforces step-level checkpoint persistence; enables resilient suspend/resume across long-running async steps and human approvals.",
+                  },
+                  {
+                    decision: "Dynamic Model Router & Budget Circuit Breaker",
+                    category: "AI Governance",
+                    tradeoff: "Pre-flight token and USD ledger checks on each LLM call vs. asynchronous post-billing alerts.",
+                    safeguard: "Enforces hard tenant-level financial caps, completely preventing runaway cost spikes during autonomous recursive agent loops.",
+                  },
+                  {
+                    decision: "Isolated Ephemeral Git Worktree Sandboxes",
+                    category: "Software Delivery",
+                    tradeoff: "Container sandboxes with isolated Git worktrees vs. shared workspace directories.",
+                    safeguard: "Complete workspace isolation for concurrent coding agents; eliminates working directory contamination and dirty git states.",
+                  },
+                  {
+                    decision: "Strict CI/CD Quality Gates & Defect Eradication",
+                    category: "Platform Reliability",
+                    tradeoff: "Multi-stage pipeline checks (lint, TypeScript, pytest, Playwright E2E) vs. rapid unverified deployments.",
+                    safeguard: "Cleared 120 backlogged defects to zero; eliminated file descriptor exhaustion, container disk leaks, and proxy timeouts.",
+                  },
+                ]
+            ).map((item, idx) => (
+              <div
+                key={idx}
+                className="p-5 rounded-2xl bg-white/[0.02] border border-hairline space-y-2 hover:border-white/20 transition-colors"
+              >
+                <div className="flex items-center justify-between font-mono text-[11px]">
+                  <span className="text-cyan-400 font-bold uppercase">{item.decision}</span>
+                  <span className="text-zinc-500 uppercase">{item.category}</span>
+                </div>
+                <div className="text-xs text-zinc-300 font-light leading-relaxed">
+                  <span className="text-zinc-500 font-mono text-[10px] uppercase font-bold block mb-0.5">
+                    TRADE-OFF EVALUATED:
+                  </span>
+                  {item.tradeoff}
+                </div>
+                <div className="text-xs text-emerald-400/90 font-light leading-relaxed pt-1 border-t border-hairline">
+                  <span className="text-emerald-500 font-mono text-[10px] uppercase font-bold block mb-0.5">
+                    OPERATIONAL SAFEGUARD DEPLOYED:
+                  </span>
+                  {item.safeguard}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

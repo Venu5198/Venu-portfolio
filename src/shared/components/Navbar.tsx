@@ -119,7 +119,7 @@ export function Navbar() {
                 ? "bg-[#C6FF00] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover"
                 : "bg-white/[0.06] text-zinc-300 border border-white/10 hover:text-white hover:bg-white/10"
             }`}
-            title={isLight ? "Switch to Dark Console mode" : "Switch to Streetwear Studio mode"}
+            title={isLight ? "Switch to Systems Engineering Dossier (Dark)" : "Switch to Comic & Studio Mode (Light)"}
             aria-label="Toggle theme"
           >
             {isLight ? (
@@ -130,7 +130,7 @@ export function Navbar() {
             ) : (
               <>
                 <Moon className="w-3.5 h-3.5 text-cyan-400" />
-                <span>CONSOLE</span>
+                <span>DOSSIER</span>
               </>
             )}
           </button>
@@ -140,10 +140,10 @@ export function Navbar() {
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-black text-xs transition-all ${
               isLight
                 ? "bg-[#FF4D00] text-white border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover"
-                : "bg-cyan-500 text-black hover:bg-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.35)]"
+                : "bg-cyan-500 text-black hover:bg-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.35)] font-semibold"
             }`}
           >
-            <span>Let&apos;s Build</span>
+            <span>{isLight ? "Let's Build" : "Contact"}</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
         </div>

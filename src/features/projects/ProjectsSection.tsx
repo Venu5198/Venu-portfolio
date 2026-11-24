@@ -36,14 +36,14 @@ export function ProjectsSection() {
         <div className="space-y-4 mb-20 pb-8 border-b border-hairline">
           <div className="font-mono text-xs text-cyan-400 uppercase tracking-[0.25em] font-semibold flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            Flagship Engineering Deliveries
+            Flagship Systems &amp; Engineering Dossier
           </div>
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9]">
             Production Systems &amp; Core Contributions
           </h2>
           <p className="text-zinc-400 max-w-2xl text-base sm:text-lg font-light leading-relaxed">
-            Core backend microservices and distributed platform contributions engineered for enterprise
-            scale. Click either flagship system to inspect full architecture blueprints.
+            Core backend microservices, distributed event bridges, and cloud-native infrastructure
+            contributions engineered for enterprise reliability and zero-downtime operations.
           </p>
         </div>
 
@@ -52,7 +52,7 @@ export function ProjectsSection() {
           <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
             <span className="text-cyan-400 font-bold uppercase tracking-widest flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              // 01 · 5-PLATFORM MESSAGING BRIDGE · SYNCRIVO.AI
+              // DOSSIER 01 · 5-PLATFORM MESSAGING BRIDGE · SYNCRIVO.AI
             </span>
             <div className="flex items-center gap-3">
               <span className="text-zinc-500">SYNC LATENCY: &lt; 95MS</span>
@@ -76,42 +76,53 @@ export function ProjectsSection() {
                 {syncrivo.tagline}
               </p>
 
-              {/* Narrative Pillars with Hairlines */}
-              <div className="space-y-4 pt-2">
-                <div className="p-5 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
+              {/* Engineering Trade-Offs & Operational Safeguards */}
+              <div className="space-y-3.5 pt-2">
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
                   <div className="font-mono text-xs text-cyan-400 font-bold flex items-center gap-2">
                     <Server className="w-3.5 h-3.5" />
-                    DISTRIBUTED AUTH &amp; SHARED LIBRARY
+                    ASYNCHRONOUS INGRESS &amp; DECOUPLING
                   </div>
                   <div className="text-xs text-zinc-400 font-light leading-relaxed">
-                    Designed a multi-service architecture with a versioned shared auth library
-                    published to Google Artifact Registry. FastAPI backends on MongoDB with Redis
-                    cluster for sub-millisecond deduplication and echo/loop guards.
+                    FastAPI webhook receivers verify HMAC-SHA256 signatures and enqueue raw events into Redis
+                    Pub/Sub within &lt;10ms, returning HTTP 200 immediately to safeguard against upstream platform
+                    timeout constraints (e.g. Slack 3-second limit).
                   </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
                   <div className="font-mono text-xs text-emerald-400 font-bold flex items-center gap-2">
                     <Activity className="w-3.5 h-3.5" />
-                    NATIVE IDENTITY ATTRIBUTION ACROSS 5 PLATFORMS
+                    DISTRIBUTED DEDUPLICATION &amp; LOOP GUARDS
                   </div>
                   <div className="text-xs text-zinc-400 font-light leading-relaxed">
-                    Real-time sync of edits, deletes, threads, attachments, and file cards across
-                    Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex with native
-                    sender avatars and interactive in-chat <code className="text-zinc-200">.search</code> and{" "}
-                    <code className="text-zinc-200">.support</code> modal dialogs.
+                    Sliding-window Redis distributed locks (<code className="text-zinc-200">SETNX</code>) and
+                    cryptographic SHA-256 payload fingerprints prevent infinite feedback loops across cross-linked
+                    channels, achieving 0% duplicate message delivery.
                   </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
                   <div className="font-mono text-xs text-purple-400 font-bold flex items-center gap-2">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    VERIFIED MARKETPLACES &amp; HIPAA READINESS
+                    <Layers className="w-3.5 h-3.5" />
+                    UNIVERSAL AST PAYLOAD NORMALIZATION
                   </div>
                   <div className="text-xs text-zinc-400 font-light leading-relaxed">
-                    Official verified apps on Microsoft AppSource, Google Workspace Marketplace,
-                    Zoom App Marketplace, and Webex App Hub. HttpOnly sessions, CSRF guards, RBAC,
-                    and led HIPAA readiness with BAA negotiations and SOC 2 prep.
+                    Intermediate Abstract Syntax Tree (AST) schema translating bidirectional messages between Markdown,
+                    Slack mrkdwn, Teams HTML, Zoom styling, and Webex blocks while preserving thread hierarchies and
+                    file-card attachments.
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
+                  <div className="font-mono text-xs text-amber-400 font-bold flex items-center gap-2">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    SHARED AUTH WHEEL &amp; EGRESS DLQ RETRIES
+                  </div>
+                  <div className="text-xs text-zinc-400 font-light leading-relaxed">
+                    Private Python auth module published to Google Artifact Registry managing multi-tenant OAuth
+                    lifecycles (Teams delegated tokens, Slack <code className="text-zinc-200">chat:write.customize</code>),
+                    governed by exponential backoff with jitter and Dead Letter Queue (DLQ) alerts.
                   </div>
                 </div>
               </div>
@@ -120,7 +131,7 @@ export function ProjectsSection() {
               <div className="flex flex-wrap items-center gap-4 pt-4">
                 <button
                   onClick={() => setSelectedProject(syncrivo)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cyan-400 text-black font-bold text-xs hover:bg-cyan-300 transition-all shadow-[0_0_25px_rgba(6,182,212,0.4)]"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cyan-400 text-black font-bold text-xs hover:bg-cyan-300 transition-all shadow-[0_0_25px_rgba(6,182,212,0.4)] cursor-pointer"
                 >
                   <span>Inspect Blueprint &amp; Specs</span>
                   <ArrowRight className="w-4 h-4" />
@@ -191,11 +202,11 @@ export function ProjectsSection() {
           <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
             <span className="text-amber-400 font-bold uppercase tracking-widest flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-              // 02 · AI WORKFLOW AUTOMATION PLATFORM · OCNORA.AI
+              // DOSSIER 02 · AI WORKFLOW AUTOMATION PLATFORM · OCNORA.AI
             </span>
             <div className="flex items-center gap-3">
               <span className="text-zinc-500">1,000+ PROVIDERS</span>
-              <TelemetryBadge status="alert" label="COMPETING WITH N8N" />
+              <TelemetryBadge status="online" label="AUTONOMOUS RUNTIME" />
             </div>
           </div>
 
@@ -215,42 +226,50 @@ export function ProjectsSection() {
                 {ocnora.tagline}
               </p>
 
-              {/* Engine Highlights */}
-              <div className="space-y-4 pt-2">
-                <div className="p-5 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
+              {/* Engineering Trade-Offs & Operational Safeguards */}
+              <div className="space-y-3.5 pt-2">
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
                   <div className="font-mono text-xs text-amber-400 font-bold flex items-center gap-2">
                     <Server className="w-3.5 h-3.5" />
-                    STATE MACHINE &amp; 1,000+ APP PROVIDERS
+                    TOPOLOGICAL STATEFUL DAG RUNTIME
                   </div>
                   <div className="text-xs text-zinc-400 font-light leading-relaxed">
-                    Custom stateful workflow engine supporting arbitrary triggers, dry runs,
-                    execution order, suspend/resume of long-running batch steps, and complete run
-                    history across 1,000+ cataloged providers (GCP, AWS, Salesforce, Notion,
-                    Workspace).
+                    Custom stateful execution graph engine supporting topological sorting, conditional branches,
+                    and step-level state checkpointing in MongoDB for resilient pause/resume of long-running workflows
+                    without data loss.
                   </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
                   <div className="font-mono text-xs text-cyan-400 font-bold flex items-center gap-2">
                     <Bot className="w-3.5 h-3.5" />
-                    BUILD WITH AI &amp; COST GOVERNANCE
+                    DYNAMIC LLM ROUTER &amp; BUDGET CIRCUIT BREAKER
                   </div>
                   <div className="text-xs text-zinc-400 font-light leading-relaxed">
-                    Turns natural language intent into working graphs with prompt enhancement.
-                    Auto-discovers LLMs with per-node selection, hard budget alerts, and per-call
-                    usage ledgers.
+                    Pre-flight model router balancing context complexity across Gemini, Claude, and GPT with hard
+                    tenant-level USD and token spend ceilings, preventing runaway cloud billing during recursive tasks.
                   </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
                   <div className="font-mono text-xs text-emerald-400 font-bold flex items-center gap-2">
                     <Layers className="w-3.5 h-3.5" />
                     AUTONOMOUS GIT WORKTREE CODE RUNNER
                   </div>
                   <div className="text-xs text-zinc-400 font-light leading-relaxed">
-                    Autonomous AI agents implement queued product backlog tasks in isolated git
-                    worktrees, run test suites, and open verified GitHub PRs with leases and
-                    retries. Self-hosted via Docker Compose/Helm or Cloud Run/GKE.
+                    Confined autonomous AI coding agents to non-root Docker sandboxes with isolated Git worktrees,
+                    leasing branches, executing test suites, and generating verified GitHub PRs without repo pollution.
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline space-y-1.5">
+                  <div className="font-mono text-xs text-purple-400 font-bold flex items-center gap-2">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    CI/CD GATES &amp; BACKLOG DEFECT ELIMINATION
+                  </div>
+                  <div className="text-xs text-zinc-400 font-light leading-relaxed">
+                    Established strict multi-stage verification gates (lint, TypeScript, pytest, Playwright E2E)
+                    clearing a 120-defect legacy backlog to zero while eliminating file descriptor and proxy timeout leaks.
                   </div>
                 </div>
               </div>
@@ -259,7 +278,7 @@ export function ProjectsSection() {
               <div className="flex flex-wrap items-center gap-4 pt-4">
                 <button
                   onClick={() => setSelectedProject(ocnora)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-400 text-black font-bold text-xs hover:bg-amber-300 transition-all shadow-[0_0_25px_rgba(245,158,11,0.4)]"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-400 text-black font-bold text-xs hover:bg-amber-300 transition-all shadow-[0_0_25px_rgba(245,158,11,0.4)] cursor-pointer"
                 >
                   <span>Inspect Engine Specifications</span>
                   <ArrowRight className="w-4 h-4" />

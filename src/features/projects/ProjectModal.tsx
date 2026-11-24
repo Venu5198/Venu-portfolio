@@ -85,7 +85,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           className={`relative w-full max-w-4xl max-h-[92vh] rounded-3xl overflow-hidden flex flex-col z-10 transition-colors ${
             isLight
               ? "bg-[#F4F4F0] border-2 border-[#0A0A0A] shadow-[10px_10px_0px_#0A0A0A] text-[#0A0A0A]"
-              : "bg-[#0c0c11] border border-white/[0.14] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.95)] text-white"
+              : "bg-[#09090B] border border-white/[0.08] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.95)] text-white"
           }`}
         >
           {/* Header Bar */}

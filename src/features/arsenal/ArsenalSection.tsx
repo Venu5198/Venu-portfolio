@@ -40,15 +40,15 @@ export function ArsenalSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="space-y-4 mb-16 pb-8 border-b border-hairline">
-          <div className="font-mono text-xs text-amber-400 uppercase tracking-[0.25em] font-semibold flex items-center gap-2">
+          <div className="font-mono text-xs text-cyan-400 uppercase tracking-[0.25em] font-semibold flex items-center gap-2">
             <Terminal className="w-3.5 h-3.5" />
-            Core Competencies &amp; Tooling
+            Backend &amp; Infrastructure Capabilities
           </div>
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9]">
-            Engineering Arsenal
+            Technical Arsenal
           </h2>
           <p className="text-zinc-400 max-w-2xl text-base sm:text-lg font-light leading-relaxed">
-            Battle-tested technologies leveraged across multi-tenant distributed systems,
+            Battle-tested technologies leveraged across multi-tenant distributed backends,
             low-latency event bridges, and cloud-native Kubernetes clusters.
           </p>
         </div>
@@ -58,7 +58,7 @@ export function ArsenalSection() {
           <div className="flex flex-wrap items-center gap-2 p-1 rounded-full bg-white/[0.03] border border-hairline">
             <button
               onClick={() => setSelectedDomain("all")}
-              className={`px-4 py-2 rounded-full text-xs font-mono font-bold transition-all ${
+              className={`px-4 py-2 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
                 selectedDomain === "all"
                   ? "bg-white text-black shadow-md"
                   : "text-zinc-400 hover:text-white"

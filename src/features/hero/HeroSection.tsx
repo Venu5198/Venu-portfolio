@@ -47,7 +47,7 @@ export function HeroSection() {
           <div className="flex flex-wrap items-center gap-4">
             <TelemetryBadge
               status="online"
-              label="OPERATIONAL"
+              label="SYSTEM: OPERATIONAL"
               subLabel="99.98% SLA"
             />
             <div className="flex items-center gap-1.5 text-zinc-400">
@@ -57,9 +57,9 @@ export function HeroSection() {
           </div>
 
           <div className="hidden md:flex items-center gap-3 text-zinc-500 font-mono text-xs">
-            <span>BACKEND DEVELOPER</span>
+            <span className="text-zinc-400 font-semibold">SYSTEMS ENGINEERING DOSSIER</span>
             <span className="text-zinc-700">/</span>
-            <span>PYTHON · DEVOPS · KUBERNETES · AI</span>
+            <span>PYTHON · FASTAPI · KUBERNETES · GCP · AI</span>
           </div>
         </motion.div>
 
@@ -94,11 +94,46 @@ export function HeroSection() {
               {profileData.heroBio}
             </motion.p>
 
+            {/* Scannable Engineering Core Competencies Strip */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, delay: 0.35, ease: transitionEase }}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 max-w-2xl"
+            >
+              <div className="p-3.5 rounded-xl bg-white/[0.02] border border-hairline space-y-1">
+                <div className="font-mono text-[10px] text-cyan-400 font-bold uppercase tracking-wider">
+                  EVENT INGESTION &amp; SYNC
+                </div>
+                <div className="text-xs text-zinc-400 font-light leading-snug">
+                  Sub-95ms bridge transit across 5 platforms with zero echo duplication.
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-white/[0.02] border border-hairline space-y-1">
+                <div className="font-mono text-[10px] text-emerald-400 font-bold uppercase tracking-wider">
+                  CLOUD PLATFORM &amp; FINOPS
+                </div>
+                <div className="text-xs text-zinc-400 font-light leading-snug">
+                  20–25% monthly GCP spend cut across 20+ Kubernetes &amp; Cloud Run services.
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-white/[0.02] border border-hairline space-y-1">
+                <div className="font-mono text-[10px] text-amber-400 font-bold uppercase tracking-wider">
+                  AI WORKFLOW RUNTIMES
+                </div>
+                <div className="text-xs text-zinc-400 font-light leading-snug">
+                  Autonomous Git worktree coding runners with LLM budget circuit breakers.
+                </div>
+              </div>
+            </motion.div>
+
             {/* Interactive Terminal Snippet & CTAs (Clean, Unboxed) */}
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, delay: 0.4, ease: transitionEase }}
+              transition={{ duration: 1.1, delay: 0.45, ease: transitionEase }}
               className="flex flex-wrap items-center gap-4 pt-2"
             >
               {/* Terminal CLI Snippet */}
@@ -108,7 +143,7 @@ export function HeroSection() {
                 <span className="text-cyan-300 font-bold">{command}</span>
                 <button
                   onClick={handleCopy}
-                  className="ml-2 pl-3 border-l border-white/10 text-zinc-500 hover:text-white transition-colors flex items-center gap-1"
+                  className="ml-2 pl-3 border-l border-white/10 text-zinc-500 hover:text-white transition-colors flex items-center gap-1 cursor-pointer"
                   title="Copy command"
                 >
                   {copied ? (
@@ -133,13 +168,24 @@ export function HeroSection() {
                 <ArrowUpRight className="w-3 h-3 text-zinc-500" />
               </a>
 
+              {/* Direct LinkedIn Profile Link */}
+              <a
+                href="https://www.linkedin.com/in/venu-k-2a4460383"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white/[0.03] border border-hairline text-zinc-300 hover:text-white hover:border-white/20 text-xs font-mono transition-all duration-300"
+              >
+                <span>linkedin.com/in/venu-k</span>
+                <ArrowUpRight className="w-3 h-3 text-zinc-500" />
+              </a>
+
               {/* Primary Action Button */}
               <Magnetic strength={16}>
                 <a
                   href="#projects"
                   className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-cyan-400 text-black font-bold text-xs hover:bg-cyan-300 transition-all duration-300 shadow-[0_0_30px_rgba(6,182,212,0.45)]"
                 >
-                  <span>Explore Flagship Work</span>
+                  <span>Explore Systems Dossier</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </Magnetic>
