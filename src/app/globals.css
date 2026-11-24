@@ -376,7 +376,8 @@ body {
 @media (pointer: fine) {
   [data-theme="light"] body,
   [data-theme="light"] a,
-  [data-theme="light"] button {
+  [data-theme="light"] button,
+  [data-theme="light"] [role="button"] {
     cursor: none !important;
   }
   [data-theme="light"] input,
@@ -384,4 +385,11 @@ body {
   [data-theme="light"] select {
     cursor: text !important;
   }
+}
+
+/* Ensure Studio custom cursor layers never intercept clicks or text selection */
+[data-cursor-layer],
+[data-cursor-layer] * {
+  pointer-events: none !important;
+  user-select: none !important;
 }
