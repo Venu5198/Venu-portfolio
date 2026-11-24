@@ -34,7 +34,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden scroll-mt-32"
+      className="relative pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden scroll-mt-28"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Overhead Metadata Hairline Bar */}
@@ -56,10 +56,10 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-3 text-zinc-500">
-            <span>FOUNDING ENGINEER</span>
+          <div className="hidden md:flex items-center gap-3 text-zinc-500 font-mono text-xs">
+            <span>BACKEND DEVELOPER</span>
             <span className="text-zinc-700">/</span>
-            <span>PYTHON · CLOUD · GITOPS · AI</span>
+            <span>PYTHON · DEVOPS · KUBERNETES · AI</span>
           </div>
         </motion.div>
 
@@ -75,7 +75,7 @@ export function HeroSection() {
             >
               <div className="font-mono text-xs uppercase tracking-[0.28em] text-cyan-400 font-bold flex items-center gap-2">
                 <span className="w-8 h-px bg-cyan-400" />
-                Founding Engineer &amp; Systems Architect
+                Backend Developer — Python, DevOps &amp; AI
               </div>
 
               {/* Commanding Display Name */}
@@ -191,7 +191,7 @@ export function HeroSection() {
                         VENU K
                       </div>
                       <div className="font-mono text-xs text-zinc-400 mt-1">
-                        Founding Engineer
+                        Backend Developer
                       </div>
                     </div>
                     <div className="font-mono text-[10px] text-cyan-400/80 bg-cyan-950/40 border border-cyan-500/20 px-2.5 py-1 rounded-full">

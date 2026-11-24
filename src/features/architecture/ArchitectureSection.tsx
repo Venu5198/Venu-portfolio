@@ -161,7 +161,7 @@ export function ArchitectureSection() {
   return (
     <section
       id="architecture"
-      className="py-28 relative scroll-mt-32"
+      className="py-28 relative scroll-mt-28"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

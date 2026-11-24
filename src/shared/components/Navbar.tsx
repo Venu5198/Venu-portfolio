@@ -1,19 +1,38 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Terminal, Shield, Cpu, Briefcase, Award, Mail, ArrowUpRight } from "lucide-react";
+import { Terminal, Shield, Cpu, Briefcase, Award, ArrowUpRight, Moon, Sparkles } from "lucide-react";
 import { TelemetryBadge } from "./TelemetryBadge";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
     };
     window.addEventListener("scroll", handleScroll);
+
+    // Read stored theme preference or default to dark console
+    const savedTheme = localStorage.getItem("portfolio-theme") as "dark" | "light" | null;
+    const activeTheme = savedTheme || "dark";
+    setTheme(activeTheme);
+    document.documentElement.setAttribute("data-theme", activeTheme);
+    document.documentElement.classList.toggle("dark", activeTheme === "dark");
+    document.documentElement.classList.toggle("light", activeTheme === "light");
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    document.documentElement.classList.toggle("dark", nextTheme === "dark");
+    document.documentElement.classList.toggle("light", nextTheme === "light");
+    localStorage.setItem("portfolio-theme", nextTheme);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 pointer-events-none">
@@ -34,7 +53,7 @@ export function Navbar() {
               VENU.K
               <span className="text-[10px] text-cyan-400 font-normal">v2.5</span>
             </span>
-            <span className="text-[10px] font-mono text-zinc-500">FOUNDING_ENG</span>
+            <span className="text-[10px] font-mono text-zinc-500">BACKEND_DEV</span>
           </div>
         </a>
 
@@ -70,13 +89,38 @@ export function Navbar() {
           </a>
         </div>
 
-        {/* Live Status & CTA */}
-        <div className="flex items-center gap-3">
+        {/* Theme Switcher, Live Status & CTA */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          {/* Dual-Theme Switcher Toggle */}
+          <button
+            onClick={toggleTheme}
+            className={`px-3 py-1.5 rounded-full text-[11px] font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+              theme === "light"
+                ? "bg-[#bef264] text-black border-2 border-black shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                : "bg-white/[0.06] text-zinc-300 border border-white/10 hover:text-white hover:bg-white/10"
+            }`}
+            title={theme === "light" ? "Switch to Dark Console mode" : "Switch to Gen-Z Vibe Coding mode"}
+            aria-label="Toggle theme"
+          >
+            {theme === "light" ? (
+              <>
+                <Sparkles className="w-3.5 h-3.5 text-black" />
+                <span className="hidden xs:inline">VIBE MODE</span>
+              </>
+            ) : (
+              <>
+                <Moon className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="hidden xs:inline">CONSOLE</span>
+              </>
+            )}
+          </button>
+
           <TelemetryBadge
             status="online"
             label="SYS: HEALTHY"
-            className="hidden sm:inline-flex text-[11px] py-0.5 px-2.5"
+            className="hidden lg:inline-flex text-[11px] py-0.5 px-2.5"
           />
+
           <a
             href="#contact"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-cyan-500 text-black font-semibold text-xs hover:bg-cyan-400 transition-colors shadow-[0_0_20px_rgba(6,182,212,0.35)]"

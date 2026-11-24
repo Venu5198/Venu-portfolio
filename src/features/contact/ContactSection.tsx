@@ -48,7 +48,7 @@ export function ContactSection() {
   };
 
   return (
-    <footer id="contact" className="py-28 relative border-t border-hairline scroll-mt-32">
+    <footer id="contact" className="py-28 relative border-t border-hairline scroll-mt-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Engineering Philosophy Banner (Open, Typographic Layout) */}
         <div className="mb-20 pb-16 border-b border-hairline space-y-6">
@@ -78,15 +78,14 @@ export function ContactSection() {
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 font-mono text-xs text-emerald-400 uppercase tracking-widest font-semibold">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                Available For Founding Roles &amp; Architectural Engagements
+                Available For Backend Developer &amp; DevOps Roles
               </div>
               <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9]">
                 Let&apos;s Build Resilient Systems
               </h2>
               <p className="text-zinc-400 text-base sm:text-lg font-light leading-relaxed">
-                Looking for a Founding Engineer who can take your platform from 0 to 1,
-                architect multi-tenant real-time bridges, scale Kubernetes workloads, or deploy
-                autonomous AI agent fleets.
+                Looking for a Backend Developer who can architect high-throughput microservices,
+                optimize Redis event pipelines, scale Kubernetes workloads, or deploy autonomous AI agent fleets.
               </p>
             </div>
 
@@ -175,7 +174,7 @@ export function ContactSection() {
             <div className="pt-2">
               <Magnetic strength={18}>
                 <a
-                  href={`mailto:${profileData.contact.email}?subject=Founding%20Engineer%20Opportunity%20-%20Venu%20K`}
+                  href={`mailto:${profileData.contact.email}?subject=Backend%20Developer%20Opportunity%20-%20Venu%20K`}
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cyan-400 text-black font-bold text-sm hover:bg-cyan-300 transition-all shadow-[0_0_35px_rgba(6,182,212,0.45)]"
                 >
                   <span>Initiate Transmission</span>
@@ -195,7 +194,7 @@ export function ContactSection() {
               <pre className="text-zinc-300 text-xs leading-relaxed overflow-x-auto">
 {`{
   "engineer": "${profileData.name}",
-  "role": "Founding Engineer",
+  "role": "Backend Developer",
   "location": "${profileData.location}",
   "platforms_built": ["SyncRivo.ai", "OCNORA.ai"],
   "certifications": [
@@ -203,7 +202,7 @@ export function ContactSection() {
     "Kubernetes CKA",
     "Terraform Associate"
   ],
-  "open_to": "Founding Roles & Lead Architect"
+  "open_to": "Backend Developer & DevOps Roles"
 }`}
               </pre>
             </div>
@@ -249,7 +248,7 @@ export function ContactSection() {
         {/* Footer Bottom Bar */}
         <div className="mt-20 pt-8 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-zinc-500">
           <div>
-            © 2026 Venu K. Founding Engineer &amp; Systems Architect.
+            © 2026 Venu K. Backend Developer — Python, DevOps &amp; AI.
           </div>
           <div className="flex items-center gap-4">
             <span className="text-emerald-400 font-semibold">● ALL SYSTEMS OPERATIONAL</span>

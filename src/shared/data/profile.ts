@@ -2,13 +2,13 @@ import { Profile } from "../types/profile";
 
 export const profileData: Profile = {
   name: "Venu K",
-  headline: "Founding Engineer — Full Stack, DevOps & AI (Python)",
+  headline: "Backend Developer — Python, DevOps & AI",
   location: "Tirupati, Andhra Pradesh, India",
   experienceYears: "3.6+ Years",
   heroBio:
-    "Founding engineer who single-handedly designed, built, and operates two live enterprise platforms from first commit to production: SyncRivo, a real-time messaging bridge syncing Slack, Teams, Google Chat, Zoom, and Webex, and OCNORA, an AI workflow automation platform competing with n8n—owning system architecture, Python/FastAPI backends, React/Next.js frontends, Google Cloud/GKE infrastructure, CI/CD, AI agents, and HIPAA/SOC 2 security.",
+    "Backend Developer specializing in Python, distributed event systems, DevOps, and AI workflow automation. Key contributor across engineering teams at SyncRivo (real-time messaging bridge syncing Slack, Microsoft Teams, Google Chat, Zoom, and Webex) and OCNORA (AI workflow automation platform)—building high-throughput FastAPI microservices, Redis event queues, Kubernetes/GCP infrastructure, CI/CD pipelines, and autonomous agent runners.",
   extendedBio:
-    "Specialized in architecting cloud-native distributed systems, real-time cross-platform event bridges, and autonomous AI workflow engines. Proven record maintaining 99.9%+ availability across 20+ production microservices while cutting cloud infrastructure costs by 20–25%.",
+    "Experienced in developing cloud-native distributed backends, real-time cross-platform event bridges, and autonomous AI workflow engines alongside cross-functional engineering teams. Proven record maintaining 99.9%+ availability across 20+ production microservices while cutting cloud infrastructure costs by 20–25%.",
   philosophy: {
     quote: "Building reliable systems, automating everything worth automating.",
     points: [

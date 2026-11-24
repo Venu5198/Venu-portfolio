@@ -30,7 +30,7 @@ export function ProjectsSection() {
   const gitops = projectsData.find((p) => p.id === "gitops-platform-fleet")!;
 
   return (
-    <section id="projects" className="py-28 relative scroll-mt-32">
+    <section id="projects" className="py-28 relative scroll-mt-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="space-y-4 mb-20 pb-8 border-b border-hairline">
@@ -39,11 +39,11 @@ export function ProjectsSection() {
             Flagship Engineering Deliveries
           </div>
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9]">
-            Production Systems Built Solo
+            Production Systems &amp; Core Contributions
           </h2>
           <p className="text-zinc-400 max-w-2xl text-base sm:text-lg font-light leading-relaxed">
-            Single-handedly designed, coded, and operated from line zero to active enterprise
-            production. Click either flagship system to inspect full architecture blueprints.
+            Core backend microservices and distributed platform contributions engineered for enterprise
+            scale. Click either flagship system to inspect full architecture blueprints.
           </p>
         </div>
 

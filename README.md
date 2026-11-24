@@ -1,4 +1,4 @@
-# Venu K — Founding Engineer & Systems Architect Portfolio
+# Venu K — Backend Developer (Python, DevOps & AI) Portfolio
 
 > Production-grade, interactive personal portfolio website engineered with Next.js (App Router), TypeScript, Tailwind CSS, Framer Motion, and Lucide Icons.
 
@@ -13,7 +13,7 @@
 
 ## 📌 Overview
 
-This repository houses the source code for the personal engineering portfolio of **Venu K**, a Founding Engineer and Systems Architect specializing in Python, Full Stack, DevOps, and Autonomous AI Systems. 
+This repository houses the source code for the personal engineering portfolio of **Venu K**, a Backend Developer specializing in Python, DevOps, and Autonomous AI Systems. 
 
 Built with an Awwwards-inspired aesthetic and strict systems-engineering principles, the site showcases high-throughput distributed systems including the **SyncRivo** multi-platform webhook bridge (Slack, Teams, Google Chat, Zoom Team Chat, Webex) and the **OCNORA** autonomous agent orchestration engine. It features interactive 5-stage systems architecture flows, an instant-search competency arsenal, verified cloud/DevOps credentials, and cinematic motion design.
 
@@ -209,4 +209,4 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more informa
 
 ---
 
-**Crafted by [Venu K](https://github.com/Venu5198)** · Founding Engineer & Systems Architect
+**Crafted by [Venu K](https://github.com/Venu5198)** · Backend Developer (Python, DevOps & AI)

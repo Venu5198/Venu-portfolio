@@ -7,23 +7,23 @@ export const projectsData: Project[] = [
     title: "SyncRivo",
     tagline:
       "Enterprise real-time messaging bridge syncing Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex.",
-    role: "Founding Engineer & Sole Developer (Full Stack, DevOps & AI)",
+    role: "Backend Developer (Python, DevOps & Real-Time Sync)",
     category: "Flagship SaaS",
     liveUrl: "https://syncrivo.ai/en/",
     summary:
-      "Built and run alone from first commit to production: multi-service distributed architecture syncing messages, threads, attachments, edits, deletes, and reactions across 5 enterprise platforms with zero loop duplication.",
+      "Contributed as Backend Developer to the multi-service distributed architecture syncing messages, threads, attachments, edits, deletes, and reactions across 5 enterprise platforms with zero loop duplication.",
     overview:
-      "Designed and deployed a high-throughput, low-latency messaging bridge serving enterprise cross-organization collaboration across Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex. Solved complex distributed messaging challenges including asynchronous race conditions, bidirectional @mention translations, file chunk proxies, and strict enterprise compliance.",
+      "Collaborated within the engineering team to build and operate high-throughput, low-latency backend microservices bridging cross-organization communication across Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex. Focused on distributed messaging challenges including asynchronous event queuing, Redis deduplication, bidirectional schema normalization, and zero-downtime Cloud Run operations.",
     highlights: [
       "Interoperability across 5 platforms: Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex.",
       "Official verified listings on Microsoft AppSource, Google Workspace Marketplace, Zoom App Marketplace, and Webex App Hub.",
-      "Multi-service architecture (shared auth library, auth/dashboard service, chat service, React 19 frontend), each with dedicated CI/CD pipelines.",
+      "Engineered multi-service architecture (shared auth library, auth/dashboard service, chat service, React 19 frontend), each with dedicated CI/CD pipelines.",
       "FastAPI backends on MongoDB with Redis cluster for sub-millisecond deduplication, caching, and distributed locks.",
       "Real-time sync of edits, deletes, threads, attachments, and file cards across all 5 platforms with native sender attribution.",
       "Native sender attribution via Teams delegated tokens, Slack chat:write.customize, Google domain-wide delegation, Zoom OAuth, and Webex OAuth.",
       "Comprehensive loop/echo protection algorithms preventing cascading message reflection across interconnected channels.",
       "In-chat interactive .search and .support commands with native modal dialogs in Slack and Teams.",
-      "Enterprise security: HttpOnly sessions, CSRF guards, RBAC, rate-limiting, and led HIPAA readiness with BAA negotiations and SOC 2 prep.",
+      "Enterprise security: HttpOnly sessions, CSRF guards, RBAC, rate-limiting, and supported HIPAA readiness and SOC 2 security compliance.",
       "Zero-downtime Cloud Run operations with proactive cold-start mitigation, cost audits, and automated rollback guards.",
     ],
     engineeringBreakdown: {
@@ -42,7 +42,7 @@ export const projectsData: Project[] = [
           "Official verified app listings published on Microsoft AppSource, Google Workspace Marketplace, Zoom App Marketplace, and Webex App Hub.",
           "Bidirectional real-time sync of messages, threads, attachments, edits, deletes, and emoji reactions across all 5 networks.",
           "Interactive in-chat .search and .support commands with native modal dialogs inside Slack and Microsoft Teams.",
-          "Single-handedly built, deployed, and operated across 4 distinct microservices with independent CI/CD pipelines.",
+          "Contributed to backend microservices with dedicated CI/CD pipelines alongside team contributors.",
         ],
       },
       coreDecisions: [
@@ -99,7 +99,7 @@ export const projectsData: Project[] = [
           {
             title: "Shared Auth Library (Artifact Registry)",
             detail:
-              "Published shared authentication and token validation modules as private Python wheels in Google Artifact Registry to ensure zero auth divergence.",
+              "Published shared authentication and token validation modules as private Python wheels in Google Artifact Registry to ensure zero auth divergence across microservices.",
           },
         ],
         securityCompliance: [
@@ -122,7 +122,7 @@ export const projectsData: Project[] = [
         domain: "Enterprise Identity & Auth",
         title: "Versioned Artifact Registry Library",
         description:
-          "Custom multi-tenant auth module published as a private Python package to Google Artifact Registry, standardizing token lifecycle, Zoom/Teams/Slack OAuth, and permission validation.",
+          "Multi-tenant auth module published as a private Python package to Google Artifact Registry, standardizing token lifecycle, Zoom/Teams/Slack OAuth, and permission validation.",
         badges: ["OAuth 2.0", "Artifact Registry", "JWT", "RBAC", "HIPAA"],
       },
       {
@@ -136,7 +136,7 @@ export const projectsData: Project[] = [
         domain: "Frontend & Operations",
         title: "React 19 Operations Hub",
         description:
-          "Modern administrative portal featuring interactive channel mappings, audit logs, team invites, and connection health telemetry.",
+          "Administrative portal featuring interactive channel mappings, audit logs, team invites, and connection health telemetry.",
         badges: ["React 19", "Vite", "Tailwind CSS", "shadcn/ui", "TanStack"],
       },
     ],
@@ -172,20 +172,20 @@ export const projectsData: Project[] = [
     title: "OCNORA",
     tagline:
       "AI workflow automation platform coordinating AI agents, 1,000+ app integrations, and software delivery.",
-    role: "Founding Engineer & Sole Developer (AI Workflow Automation Platform)",
+    role: "Backend Developer (AI Workflow Automation & Infrastructure)",
     category: "AI Platform",
     liveUrl: "https://ocnora.ai/",
     summary:
-      "Engineered an autonomous workflow platform from scratch: custom state-machine execution engine connecting 1,000+ providers, natural-language workflow synthesis with AI cost governance, and an autonomous Git worktree code runner.",
+      "Contributed backend and platform engineering to the autonomous workflow automation engine: state-machine execution DAG, 1,000+ app connectors, LLM routing with budget circuit breakers, and autonomous Git worktree test runners.",
     overview:
-      "Built alone to challenge existing workflow builders like n8n. Architected an enterprise-grade execution graph supporting arbitrary triggers, nested step execution, dry runs, suspend/resume of long-running workflows, and an AI agent fleet that implements product backlog tasks in isolated git worktrees.",
+      "Engineered core backend services and workflow runtime components alongside the product team. Developed stateful graph execution modules, custom step dispatchers, AI cost governance guardrails, and automated Git worktree CI/CD runners supporting long-running asynchronous execution graphs.",
     highlights: [
       "Custom stateful workflow execution engine connecting 1,000+ cataloged app and cloud providers (GCP, AWS, Salesforce, Notion, Workspace, HTTP).",
-      "Built 'Build with AI' module: translates natural language requirements into fully connected workflow graphs with automatic parameter filling and prompt enhancements.",
+      "Collaborated on 'Build with AI' module: translates natural language requirements into fully connected workflow graphs with automatic parameter filling.",
       "AI model catalog with auto-discovery and per-node LLM routing (Gemini, Claude, GPT), with tenant-level USD and token budgets.",
       "Autonomous Development Runner: AI coding agents that pick up queued backlog tasks in isolated git worktrees, execute verification suites, and open GitHub PRs.",
       "Visual node-graph builder canvas, Ops Center, and live execution diff viewer built with Next.js and Tailwind CSS.",
-      "Took a 120-defect legacy test backlog to zero through comprehensive verification gates (lint, types, unit, component, Playwright E2E).",
+      "Cleared a 120-defect legacy test backlog to zero through comprehensive verification gates (lint, types, unit, component, Playwright E2E).",
       "Enterprise security: envelope-encrypted secrets (Cloud KMS / AWS KMS), tenant isolation in data layer, OIDC / SAML 2.0 SSO, and JIT provisioning.",
       "Self-hosted deployment via Docker Compose or Helm, plus managed cloud deployments on Cloud Run and GKE.",
     ],
@@ -335,7 +335,7 @@ export const projectsData: Project[] = [
     title: "GCP FinOps & Resource Optimization Engine",
     tagline:
       "Automated cloud-cost optimization engine eliminating underutilized resources and optimizing container cold starts.",
-    role: "DevOps & Cloud Architect",
+    role: "DevOps & Cloud Engineer",
     category: "Cloud & DevOps",
     summary:
       "Engineered automated cloud optimization workflows analyzing telemetry, container compute profiles, and storage lifecycles to reduce monthly cloud expenditure by 20–25%.",

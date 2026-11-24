@@ -16,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const viewport: Viewport = {
   themeColor: "#09090B",
-  colorScheme: "dark",
+  colorScheme: "dark light",
   width: "device-width",
   initialScale: 1,
 };
@@ -24,15 +24,15 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://venu-portfolio.vercel.app"),
   title: {
-    default: "Venu K — Founding Engineer (Full Stack, DevOps & AI)",
+    default: "Venu K — Backend Developer (Python, DevOps & AI)",
     template: "%s | Venu K",
   },
   description:
-    "Founding Engineer & Systems Architect specializing in Python, Full Stack, Cloud/DevOps, and Autonomous AI Fleets. Sole creator of SyncRivo (5-platform enterprise messaging bridge) and OCNORA (AI workflow automation platform).",
+    "Backend Developer & Systems Engineer specializing in Python, DevOps, and Autonomous AI Fleets. Core contributor to SyncRivo (5-platform enterprise messaging bridge) and OCNORA (AI workflow automation platform).",
   keywords: [
     "Venu K",
-    "Founding Engineer",
-    "Systems Architect",
+    "Backend Developer",
+    "Python Developer",
     "DevOps Engineer",
     "FastAPI",
     "Python",
@@ -49,11 +49,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Venu K", url: "https://github.com/Venu5198" }],
   creator: "Venu K",
   openGraph: {
-    title: "Venu K — Founding Engineer (Full Stack, DevOps & AI)",
+    title: "Venu K — Backend Developer (Python, DevOps & AI)",
     description:
-      "Cross-platform messaging bridge & AI workflow automation architecture. 3.6+ years operating 20+ microservices with 99.98% production SLA.",
+      "Backend Developer specializing in Python, distributed event systems, DevOps, and AI workflow automation. Core contributor to SyncRivo and OCNORA.",
     url: "https://venu-portfolio.vercel.app",
-    siteName: "Venu K — Systems Architect Portfolio",
+    siteName: "Venu K — Backend Developer Portfolio",
     locale: "en_US",
     type: "website",
     images: [
@@ -61,15 +61,15 @@ export const metadata: Metadata = {
         url: "/images/venu-profile.jpg",
         width: 800,
         height: 800,
-        alt: "Venu K — Founding Engineer Portrait",
+        alt: "Venu K — Backend Developer Portrait",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Venu K — Founding Engineer (Full Stack, DevOps & AI)",
+    title: "Venu K — Backend Developer (Python, DevOps & AI)",
     description:
-      "Founding Engineer & Systems Architect specializing in Python, Full Stack, Cloud/DevOps, and Autonomous AI Fleets. Sole creator of SyncRivo and OCNORA.",
+      "Backend Developer & Systems Engineer specializing in Python, DevOps, and Autonomous AI Fleets.",
     creator: "@Venu5198",
     images: ["/images/venu-profile.jpg"],
   },
@@ -87,9 +87,32 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-theme="dark"
       className={`${inter.variable} ${jetbrainsMono.variable} dark`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen bg-[#09090B] text-[#F4F4F5] antialiased font-sans selection:bg-cyan-500/30 selection:text-white">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('portfolio-theme') || 'dark';
+                  document.documentElement.setAttribute('data-theme', theme);
+                  if (theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                  } else {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased font-sans selection:bg-cyan-500/30 selection:text-white">
         {children}
       </body>
     </html>

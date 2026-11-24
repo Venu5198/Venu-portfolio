@@ -21,7 +21,7 @@ export function CertificationsSection() {
   const award = awardsData[0];
 
   return (
-    <section id="certifications" className="py-28 relative scroll-mt-32">
+    <section id="certifications" className="py-28 relative scroll-mt-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="space-y-4 mb-16 pb-8 border-b border-hairline">
