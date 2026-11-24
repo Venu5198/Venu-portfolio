@@ -162,7 +162,7 @@ export function VibeHeroSection() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={steppedSpring}
-          className="flex flex-wrap items-center gap-3 pb-8 mb-8 border-b-[2.5px] border-[#0A0A0A]/20"
+          className="flex flex-wrap items-center gap-2 sm:gap-3 pb-6 sm:pb-8 mb-6 sm:mb-8 border-b-[2.5px] border-[#0A0A0A]/20"
         >
           <motion.button
             type="button"
@@ -173,7 +173,7 @@ export function VibeHeroSection() {
             animate={{ y: [0, -4, 0], rotate: [-2, 1, -2] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-[11px] sm:text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[2.5px_2.5px_0px_#0A0A0A] sm:shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#0A0A0A] animate-spin" />
             // STUDIO MODE ⚡
@@ -188,7 +188,7 @@ export function VibeHeroSection() {
             animate={{ y: [0, 4, 0], rotate: [2, -1, 2] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] text-[#0A0A0A] text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#FFFFFF] text-[#0A0A0A] text-[11px] sm:text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[2.5px_2.5px_0px_#0A0A0A] sm:shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             BACKEND ARCHITECT 🏗️
           </motion.button>
@@ -202,7 +202,7 @@ export function VibeHeroSection() {
             animate={{ y: [0, -3, 0], rotate: [-1, 2, -1] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#2563EB] text-white text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#2563EB] text-white text-[11px] sm:text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[2.5px_2.5px_0px_#0A0A0A] sm:shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             PYTHON • REDIS • K8S ⚡
           </motion.button>
@@ -216,7 +216,7 @@ export function VibeHeroSection() {
             animate={{ y: [0, 3, 0], rotate: [1, -2, 1] }}
             transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FDE047] text-[#0A0A0A] text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#FDE047] text-[#0A0A0A] text-[11px] sm:text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[2.5px_2.5px_0px_#0A0A0A] sm:shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             NO CAP 99.98% SLA 🧢❌
           </motion.button>
@@ -230,12 +230,12 @@ export function VibeHeroSection() {
             animate={{ y: [0, -4, 0], rotate: [-2, 2, -2] }}
             transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF4D00] text-white text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#FF4D00] text-white text-[11px] sm:text-xs font-mono font-black border-[2.5px] border-[#0A0A0A] shadow-[2.5px_2.5px_0px_#0A0A0A] sm:shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             BUILT WITH TEAM 🤝
           </motion.button>
 
-          <span className="ml-auto text-xs font-mono text-zinc-800 font-bold">
+          <span className="text-[11px] sm:text-xs font-mono text-zinc-800 font-bold sm:ml-auto w-full sm:w-auto text-left sm:text-right pt-1 sm:pt-0">
             Tirupati, AP · India
           </span>
         </motion.div>
@@ -375,7 +375,7 @@ export function VibeHeroSection() {
               </div>
 
               {/* Pass Header Row */}
-              <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#0A0A0A]/15 font-mono text-[11px] font-bold text-zinc-800">
+              <div className="flex items-center justify-between pb-2 mb-2 pt-2.5 border-b border-[#0A0A0A]/15 font-mono text-[11px] font-bold text-zinc-800">
                 <span>ID: VENU-K // 0x2A</span>
                 <span className="px-2 py-0.5 rounded-full bg-[#C6FF00] text-[#0A0A0A] border border-[#0A0A0A] text-[10px] font-black">
                   STATUS: IN PROD ⚡
@@ -402,10 +402,10 @@ export function VibeHeroSection() {
                 )}
 
                 {/* Technical HUD Crosshair Overlay */}
-                <div className="absolute top-2 left-2 font-mono text-[9px] font-black text-white/90 bg-[#0A0A0A]/60 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                <div className="absolute top-2 left-2 font-mono text-[9px] font-black text-white/90 bg-[#0A0A0A]/70 px-1.5 py-0.5 rounded backdrop-blur-sm z-10">
                   + 13.6288° N
                 </div>
-                <div className="absolute bottom-2 right-2 font-mono text-[9px] font-black text-white/90 bg-[#0A0A0A]/60 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                <div className="absolute bottom-2 right-2 font-mono text-[9px] font-black text-white/90 bg-[#0A0A0A]/70 px-1.5 py-0.5 rounded backdrop-blur-sm z-10">
                   79.4192° E +
                 </div>
               </div>

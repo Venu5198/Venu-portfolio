@@ -38,7 +38,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
   };
 
   return (
-    <section id="projects" className="py-24 relative scroll-mt-36 pt-16">
+    <section id="projects" className="py-24 relative scroll-mt-36 sm:scroll-mt-44 pt-16">
       {/* Kinetic Marquee Ticker Tape Ribbon */}
       <VibeMarquee
         items={[

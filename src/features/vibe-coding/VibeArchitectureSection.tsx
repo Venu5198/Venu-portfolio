@@ -228,7 +228,7 @@ export function VibeArchitectureSection() {
   return (
     <section
       id="architecture"
-      className="py-24 relative scroll-mt-48 pt-28"
+      className="py-24 relative scroll-mt-36 sm:scroll-mt-44 pt-28"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

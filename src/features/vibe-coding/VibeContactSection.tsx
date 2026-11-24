@@ -62,7 +62,7 @@ export function VibeContactSection() {
   };
 
   return (
-    <footer id="contact" className="py-24 relative border-t-2 border-[#0A0A0A]/10 scroll-mt-36 pt-16">
+    <footer id="contact" className="py-24 relative border-t-2 border-[#0A0A0A]/10 scroll-mt-36 sm:scroll-mt-44 pt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Streetwear Spec Banner: Engineering Philosophy */}
         <motion.div
@@ -109,17 +109,22 @@ export function VibeContactSection() {
               </p>
             </div>
 
-            {/* Direct Channel Cards */}
+            {/* Direct Channel Cards - High-Contrast Quad Spread */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Direct Email Card with Feedback */}
               <motion.div
-                whileHover={{ scale: 1.03, rotate: -0.75, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+                whileHover={{ scale: 1.02, rotate: -0.5, transition: { type: "spring", stiffness: 350, damping: 20 } }}
                 className="p-4 rounded-2xl bg-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] flex items-center justify-between gap-3"
               >
                 <div className="min-w-0">
-                  <div className="text-[10px] font-mono text-zinc-600 font-black uppercase">DIRECT EMAIL</div>
+                  <div className="text-[10px] font-mono text-zinc-600 font-black uppercase flex items-center gap-1.5">
+                    <Mail className="w-3 h-3 text-[#FF4D00]" />
+                    <span>DIRECT EMAIL</span>
+                  </div>
                   <a
                     href={`mailto:${profileData.contact.email}`}
                     className="text-xs font-mono font-black text-[#0A0A0A] hover:text-[#2563EB] transition-colors truncate block"
+                    title={profileData.contact.email}
                   >
                     {profileData.contact.email}
                   </a>
@@ -132,12 +137,76 @@ export function VibeContactSection() {
                 </button>
               </motion.div>
 
+              {/* Prominent GitHub Card */}
               <motion.div
-                whileHover={{ scale: 1.03, rotate: 0.75, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+                whileHover={{ scale: 1.02, rotate: 0.5, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+                className="p-4 rounded-2xl bg-[#0A0A0A] text-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#C6FF00] flex items-center justify-between gap-3"
+              >
+                <div className="min-w-0">
+                  <div className="text-[10px] font-mono text-[#C6FF00] font-black uppercase flex items-center gap-1.5">
+                    <GitHubIcon className="w-3 h-3 text-[#C6FF00]" />
+                    <span>GITHUB // CODE & REPOS</span>
+                  </div>
+                  <a
+                    href={profileData.contact.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-mono font-black text-white hover:text-[#C6FF00] transition-colors truncate block"
+                  >
+                    github.com/Venu5198
+                  </a>
+                </div>
+                <a
+                  href={profileData.contact.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#C6FF00] bg-[#C6FF00] text-[#0A0A0A] shadow-[2px_2px_0px_#FFFFFF] spider-rgb-hover transition-all cursor-pointer shrink-0 flex items-center gap-1"
+                >
+                  <span>Open</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              </motion.div>
+
+              {/* Prominent LinkedIn Card */}
+              <motion.div
+                whileHover={{ scale: 1.02, rotate: -0.5, transition: { type: "spring", stiffness: 350, damping: 20 } }}
                 className="p-4 rounded-2xl bg-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] flex items-center justify-between gap-3"
               >
                 <div className="min-w-0">
-                  <div className="text-[10px] font-mono text-zinc-600 font-black uppercase">PHONE</div>
+                  <div className="text-[10px] font-mono text-zinc-600 font-black uppercase flex items-center gap-1.5">
+                    <LinkedInIcon className="w-3 h-3 text-[#2563EB]" />
+                    <span>LINKEDIN // NETWORK</span>
+                  </div>
+                  <a
+                    href={profileData.contact.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-mono font-black text-[#0A0A0A] hover:text-[#2563EB] transition-colors truncate block"
+                  >
+                    linkedin.com/in/venu-k-2a4460383
+                  </a>
+                </div>
+                <a
+                  href={profileData.contact.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#2563EB] text-white shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer shrink-0 flex items-center gap-1"
+                >
+                  <span>Connect</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              </motion.div>
+
+              {/* Direct Phone Card with Feedback */}
+              <motion.div
+                whileHover={{ scale: 1.02, rotate: 0.5, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+                className="p-4 rounded-2xl bg-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] flex items-center justify-between gap-3"
+              >
+                <div className="min-w-0">
+                  <div className="text-[10px] font-mono text-zinc-600 font-black uppercase flex items-center gap-1.5">
+                    <Phone className="w-3 h-3 text-[#FF4D00]" />
+                    <span>PHONE // SIGNAL</span>
+                  </div>
                   <a
                     href={`tel:${profileData.contact.phone}`}
                     className="text-xs font-mono font-black text-[#0A0A0A] hover:text-[#2563EB] transition-colors truncate block"
@@ -154,14 +223,25 @@ export function VibeContactSection() {
               </motion.div>
             </div>
 
-            {/* Main Transmission Button */}
-            <div className="pt-2">
+            {/* Main Action Buttons */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <a
                 href={`mailto:${profileData.contact.email}?subject=Backend%20Developer%20Opportunity%20-%20Venu%20K`}
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-sm border-2 border-[#0A0A0A] shadow-[5px_5px_0px_#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-sm border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer"
               >
                 <span>Say Hello / Initiate Transmission 🚀</span>
                 <Send className="w-4 h-4" />
+              </a>
+
+              <a
+                href={profileData.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#0A0A0A] text-white font-black text-sm border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#C6FF00] spider-spring-btn spider-rgb-hover transition-all cursor-pointer"
+              >
+                <GitHubIcon className="w-4 h-4 text-[#C6FF00]" />
+                <span>GitHub @Venu5198</span>
+                <ArrowUpRight className="w-4 h-4 text-[#C6FF00]" />
               </a>
             </div>
           </div>

@@ -82,7 +82,7 @@ export function ContactSection() {
   };
 
   return (
-    <footer id="contact" className="py-28 relative border-t border-hairline scroll-mt-28">
+    <footer id="contact" className="py-28 relative border-t border-hairline scroll-mt-36 sm:scroll-mt-44">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Engineering Philosophy Banner (Open, Typographic Layout) */}
         <div className="mb-20 pb-16 border-b border-hairline space-y-6">

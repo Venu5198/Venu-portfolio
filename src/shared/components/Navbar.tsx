@@ -30,9 +30,9 @@ export function Navbar() {
         }`}
       >
         {/* Brand / Logo */}
-        <a href="#hero" className="flex items-center gap-2 group text-sm font-semibold tracking-tight">
+        <a href="#hero" className="flex items-center gap-2 group text-sm font-semibold tracking-tight shrink-0">
           <div
-            className={`w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105 ${
+            className={`w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105 shrink-0 ${
               isLight
                 ? "bg-[#C6FF00] border-2 border-[#0A0A0A] text-[#0A0A0A] shadow-[1.5px_1.5px_0px_#0A0A0A]"
                 : "bg-white/[0.05] border border-white/10 text-cyan-400 group-hover:border-cyan-500/50"
@@ -40,7 +40,7 @@ export function Navbar() {
           >
             <Terminal className="w-4 h-4" />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col min-w-0">
             <span
               className={`font-mono text-xs font-bold flex items-center gap-1.5 ${
                 isLight ? "text-[#0A0A0A]" : "text-zinc-100"
@@ -48,7 +48,7 @@ export function Navbar() {
             >
               VENU.K
               <span
-                className={`text-[10px] font-mono font-bold ${
+                className={`text-[10px] font-mono font-bold hidden sm:inline ${
                   isLight ? "text-[#FF4D00] spider-text-hover" : "text-cyan-400"
                 }`}
               >
@@ -56,7 +56,7 @@ export function Navbar() {
               </span>
             </span>
             <span
-              className={`text-[10px] font-mono ${
+              className={`text-[10px] font-mono leading-none ${
                 isLight ? "text-zinc-800 font-bold" : "text-zinc-500"
               }`}
             >

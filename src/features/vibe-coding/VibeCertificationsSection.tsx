@@ -23,7 +23,7 @@ export function VibeCertificationsSection() {
   };
 
   return (
-    <section id="certifications" className="py-24 relative scroll-mt-36 pt-12">
+    <section id="certifications" className="py-24 relative scroll-mt-36 sm:scroll-mt-44 pt-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="space-y-3 mb-12 pb-6 border-b-2 border-[#0A0A0A]/10">
