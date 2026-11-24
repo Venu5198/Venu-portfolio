@@ -66,7 +66,11 @@ export function VibeHeroSection() {
   };
 
   const copyCommand = (e: React.MouseEvent) => {
-    navigator.clipboard.writeText("npx venu-k");
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText("npx venu-k").catch(() => {});
+      }
+    } catch {}
     setCopied(true);
     fireConfetti(e);
     triggerBurst("*COPIED!*", e, "#C6FF00");

@@ -15,7 +15,7 @@ export function VibeLayout() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <div className="relative min-h-screen bg-[#F4F4F0] text-[#0A0A0A] selection:bg-[#C6FF00] selection:text-[#0A0A0A]">
+    <div className="relative min-h-screen w-full max-w-full overflow-x-clip bg-[#F4F4F0] text-[#0A0A0A] selection:bg-[#C6FF00] selection:text-[#0A0A0A]">
       {/* Vibe Hero Section */}
       <VibeHeroSection />
 

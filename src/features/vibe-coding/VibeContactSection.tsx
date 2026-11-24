@@ -40,14 +40,22 @@ export function VibeContactSection() {
   };
 
   const copyEmail = (e?: React.MouseEvent) => {
-    navigator.clipboard.writeText(profileData.contact.email);
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(profileData.contact.email).catch(() => {});
+      }
+    } catch {}
     setCopiedEmail(true);
     fireConfetti(e);
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
   const copyPhone = (e?: React.MouseEvent) => {
-    navigator.clipboard.writeText(profileData.contact.phone);
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(profileData.contact.phone).catch(() => {});
+      }
+    } catch {}
     setCopiedPhone(true);
     fireConfetti(e);
     setTimeout(() => setCopiedPhone(false), 2000);

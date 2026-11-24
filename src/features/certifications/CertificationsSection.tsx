@@ -24,9 +24,26 @@ export function CertificationsSection() {
   const award = awardsData[0];
 
   const handleCopy = (id: string, text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            setCopiedId(id);
+            setTimeout(() => setCopiedId(null), 2000);
+          })
+          .catch(() => {
+            setCopiedId(id);
+            setTimeout(() => setCopiedId(null), 2000);
+          });
+      } else {
+        setCopiedId(id);
+        setTimeout(() => setCopiedId(null), 2000);
+      }
+    } catch {
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    }
   };
 
   return (
