@@ -59,9 +59,12 @@ export function VibeContactSection() {
         {/* Streetwear Spec Banner: Engineering Philosophy */}
         <motion.div
           whileHover={{ scale: 1.01, rotate: 0, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-          className="mb-16 p-8 rounded-3xl bg-[#FDE047] border-2 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] rotate-[-0.8deg] space-y-4"
+          className="relative mb-16 p-8 rounded-3xl bg-[#FDE047] border-2 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] rotate-[-0.8deg] space-y-4 overflow-hidden"
         >
-          <div className="flex items-center gap-2 font-mono text-xs font-black uppercase text-[#0A0A0A]">
+          {/* Subtle Spider-Verse Halftone Pattern */}
+          <div className="absolute top-0 right-0 w-36 h-36 spider-halftone opacity-15 pointer-events-none rounded-tr-3xl" />
+
+          <div className="relative flex items-center gap-2 font-mono text-xs font-black uppercase text-[#0A0A0A]">
             <Sparkles className="w-3.5 h-3.5 text-[#0A0A0A] animate-spin" />
             ENGINEERING PHILOSOPHY // PROD DIRECTIVES
           </div>
@@ -115,7 +118,7 @@ export function VibeContactSection() {
                 </div>
                 <button
                   onClick={copyEmail}
-                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#C6FF00] text-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all cursor-pointer shrink-0"
+                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#C6FF00] text-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer shrink-0"
                 >
                   {copiedEmail ? "Copied! ✨" : "Copy"}
                 </button>
@@ -136,7 +139,7 @@ export function VibeContactSection() {
                 </div>
                 <button
                   onClick={copyPhone}
-                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#FF4D00] text-white shadow-[2px_2px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all cursor-pointer shrink-0"
+                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#FF4D00] text-white shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer shrink-0"
                 >
                   {copiedPhone ? "Copied! ✨" : "Copy"}
                 </button>
@@ -147,7 +150,7 @@ export function VibeContactSection() {
             <div className="pt-2">
               <a
                 href={`mailto:${profileData.contact.email}?subject=Backend%20Developer%20Opportunity%20-%20Venu%20K`}
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-sm border-2 border-[#0A0A0A] shadow-[5px_5px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[7px_7px_0px_#0A0A0A] transition-all cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-sm border-2 border-[#0A0A0A] shadow-[5px_5px_0px_#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer"
               >
                 <span>Say Hello / Initiate Transmission 🚀</span>
                 <Send className="w-4 h-4" />

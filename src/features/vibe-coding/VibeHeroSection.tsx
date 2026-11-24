@@ -52,6 +52,9 @@ export function VibeHeroSection() {
       id="hero"
       className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden scroll-mt-36"
     >
+      {/* Spider-Verse Halftone Print Texture Overlay */}
+      <div className="absolute inset-0 spider-halftone-subtle opacity-30 pointer-events-none -z-10" />
+
       {/* High-Contrast Ambient Accent Blooms */}
       <div className="absolute top-12 left-8 w-72 h-72 rounded-full bg-[#C6FF00]/20 blur-3xl pointer-events-none -z-10 animate-pulse" />
       <div className="absolute top-36 right-10 w-80 h-80 rounded-full bg-[#FF4D00]/15 blur-3xl pointer-events-none -z-10" />
@@ -116,7 +119,7 @@ export function VibeHeroSection() {
             animate={{ y: [0, -4, 0], rotate: [-2, 1, -2] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#0A0A0A] animate-spin" />
             // STUDIO MODE ⚡
@@ -128,7 +131,7 @@ export function VibeHeroSection() {
             animate={{ y: [0, 4, 0], rotate: [2, -1, 2] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             BACKEND ARCHITECT 🏗️
           </motion.button>
@@ -139,7 +142,7 @@ export function VibeHeroSection() {
             animate={{ y: [0, -3, 0], rotate: [-1, 2, -1] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#2563EB] text-white text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#2563EB] text-white text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             PYTHON • REDIS • K8S ⚡
           </motion.button>
@@ -150,7 +153,7 @@ export function VibeHeroSection() {
             animate={{ y: [0, 3, 0], rotate: [1, -2, 1] }}
             transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FDE047] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FDE047] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             NO CAP 99.98% SLA 🧢❌
           </motion.button>
@@ -161,7 +164,7 @@ export function VibeHeroSection() {
             animate={{ y: [0, -4, 0], rotate: [-2, 2, -2] }}
             transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF4D00] text-white text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF4D00] text-white text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover cursor-pointer"
           >
             BUILT WITH TEAM 🤝
           </motion.button>
@@ -212,7 +215,7 @@ export function VibeHeroSection() {
               }}
               whileHover={{ scale: 1.02, rotate: -0.5, transition: { type: "spring", stiffness: 350, damping: 18 } }}
               whileTap={{ scale: 0.97 }}
-              className="p-3.5 sm:p-4 rounded-2xl border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] cursor-pointer flex flex-wrap items-center justify-between gap-3 transition-all select-none"
+              className="p-3.5 sm:p-4 rounded-2xl border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-spring-btn cursor-pointer flex flex-wrap items-center justify-between gap-3 transition-all select-none"
               style={{
                 backgroundColor: studioMoods[moodIdx].color,
                 color: studioMoods[moodIdx].text,
@@ -222,7 +225,7 @@ export function VibeHeroSection() {
               <div className="flex items-center gap-3">
                 <span className="text-xl sm:text-2xl">{studioMoods[moodIdx].icon}</span>
                 <div>
-                  <div className="font-mono text-xs sm:text-sm font-black tracking-tight">
+                  <div className="font-mono text-xs sm:text-sm font-black tracking-tight spider-text-hover">
                     STUDIO STATUS: {studioMoods[moodIdx].status}
                   </div>
                   <div className="text-xs font-mono font-bold opacity-90">
@@ -230,7 +233,7 @@ export function VibeHeroSection() {
                   </div>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border-2 border-[#0A0A0A] font-mono text-[10px] font-black text-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border-2 border-[#0A0A0A] font-mono text-[10px] font-black text-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover">
                 <span>CYCLE STATUS 🎲</span>
               </div>
             </motion.div>
@@ -244,7 +247,7 @@ export function VibeHeroSection() {
             >
               <button
                 onClick={copyCommand}
-                className="inline-flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#FFF] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_#0A0A0A] font-mono text-xs font-black transition-all cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#FFF] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover font-mono text-xs font-black transition-all cursor-pointer"
                 title="Copy terminal command"
               >
                 <Terminal className="w-4 h-4 text-emerald-600" />
@@ -263,7 +266,7 @@ export function VibeHeroSection() {
 
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#FF4D00] text-white font-black text-xs border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_#0A0A0A] transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#FF4D00] text-white font-black text-xs border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
               >
                 <span>Explore Shipped Systems</span>
                 <ArrowRight className="w-4 h-4" />
@@ -271,7 +274,7 @@ export function VibeHeroSection() {
 
               <a
                 href="#contact"
-                className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-xs border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_#0A0A0A] transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-xs border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
               >
                 <span>Let&apos;s Chat</span>
                 <Coffee className="w-3.5 h-3.5" />
@@ -288,11 +291,14 @@ export function VibeHeroSection() {
               whileHover={{ rotate: -1, scale: 1.03, transition: { type: "spring", stiffness: 300, damping: 15 } }}
               whileTap={{ scale: 0.97 }}
               onClick={(e) => fireConfetti(e)}
-              className="relative p-4 pb-5 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] max-w-[320px] w-full cursor-pointer select-none"
+              className="relative p-4 pb-5 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] max-w-[320px] w-full cursor-pointer select-none overflow-hidden"
               title="Click Studio Pass for vibes!"
             >
+              {/* Spider-Verse Halftone Texture inside Studio Pass */}
+              <div className="absolute inset-0 spider-halftone-subtle opacity-25 pointer-events-none rounded-3xl" />
+
               {/* Top Studio Lanyard Clip Pill */}
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded bg-[#0A0A0A] text-[#C6FF00] font-mono text-[10px] font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#C6FF00] rotate-[-1deg] z-20 whitespace-nowrap">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded bg-[#0A0A0A] text-[#C6FF00] font-mono text-[10px] font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#C6FF00] spider-text-hover spider-rgb-hover rotate-[-1deg] z-20 whitespace-nowrap">
                 STUDIO PASS // PROD-ENV ⚡
               </div>
 
@@ -366,7 +372,7 @@ export function VibeHeroSection() {
             onClick={(e) => fireConfetti(e)}
             whileHover={{ scale: 1.05, rotate: -1.5 }}
             whileTap={{ scale: 0.96 }}
-            className="p-5 rounded-2xl bg-[#C6FF00] border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] space-y-1 transition-all cursor-pointer select-none"
+            className="p-5 rounded-2xl bg-[#C6FF00] border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-rgb-hover space-y-1 transition-all cursor-pointer select-none"
           >
             <div className="font-mono text-[11px] uppercase font-black text-[#0A0A0A]">PRODUCTION SLA</div>
             <div className="text-2xl sm:text-3xl font-black text-[#0A0A0A] tracking-tight">99.98%</div>
@@ -377,7 +383,7 @@ export function VibeHeroSection() {
             onClick={(e) => fireConfetti(e)}
             whileHover={{ scale: 1.05, rotate: 1.5 }}
             whileTap={{ scale: 0.96 }}
-            className="p-5 rounded-2xl bg-[#FFFFFF] border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] space-y-1 transition-all cursor-pointer select-none"
+            className="p-5 rounded-2xl bg-[#FFFFFF] border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-rgb-hover space-y-1 transition-all cursor-pointer select-none"
           >
             <div className="font-mono text-[11px] uppercase font-black text-[#FF4D00]">CLOUD FINOPS</div>
             <div className="text-2xl sm:text-3xl font-black text-[#0A0A0A] tracking-tight">20–25%</div>
@@ -388,7 +394,7 @@ export function VibeHeroSection() {
             onClick={(e) => fireConfetti(e)}
             whileHover={{ scale: 1.05, rotate: -1.5 }}
             whileTap={{ scale: 0.96 }}
-            className="p-5 rounded-2xl bg-[#2563EB] text-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] space-y-1 transition-all cursor-pointer select-none"
+            className="p-5 rounded-2xl bg-[#2563EB] text-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-rgb-hover space-y-1 transition-all cursor-pointer select-none"
           >
             <div className="font-mono text-[11px] uppercase font-black text-[#C6FF00]">CONTAINER FLEET</div>
             <div className="text-2xl sm:text-3xl font-black text-white tracking-tight">20+ Services</div>
@@ -399,7 +405,7 @@ export function VibeHeroSection() {
             onClick={(e) => fireConfetti(e)}
             whileHover={{ scale: 1.05, rotate: 1.5 }}
             whileTap={{ scale: 0.96 }}
-            className="p-5 rounded-2xl bg-[#FDE047] border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] space-y-1 transition-all cursor-pointer select-none"
+            className="p-5 rounded-2xl bg-[#FDE047] border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-rgb-hover space-y-1 transition-all cursor-pointer select-none"
           >
             <div className="font-mono text-[11px] uppercase font-black text-[#0A0A0A]">INCIDENT MTTR</div>
             <div className="text-2xl sm:text-3xl font-black text-[#0A0A0A] tracking-tight">35% Faster</div>

@@ -49,7 +49,7 @@ export function Navbar() {
               VENU.K
               <span
                 className={`text-[10px] font-mono font-bold ${
-                  isLight ? "text-[#FF4D00]" : "text-cyan-400"
+                  isLight ? "text-[#FF4D00] spider-text-hover" : "text-cyan-400"
                 }`}
               >
                 {isLight ? "STUDIO ⚡" : "v2.5"}
@@ -116,7 +116,7 @@ export function Navbar() {
             onClick={toggleTheme}
             className={`px-3 py-1.5 rounded-full text-[11px] font-mono font-black flex items-center gap-1.5 transition-all cursor-pointer ${
               isLight
-                ? "bg-[#C6FF00] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                ? "bg-[#C6FF00] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover"
                 : "bg-white/[0.06] text-zinc-300 border border-white/10 hover:text-white hover:bg-white/10"
             }`}
             title={isLight ? "Switch to Dark Console mode" : "Switch to Streetwear Studio mode"}
@@ -139,7 +139,7 @@ export function Navbar() {
             href="#contact"
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-black text-xs transition-all ${
               isLight
-                ? "bg-[#FF4D00] text-white border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                ? "bg-[#FF4D00] text-white border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover"
                 : "bg-cyan-500 text-black hover:bg-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.35)]"
             }`}
           >

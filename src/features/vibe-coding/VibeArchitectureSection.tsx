@@ -211,7 +211,7 @@ export function VibeArchitectureSection() {
                 setMode("syncrivo");
                 setActiveStage(0);
               }}
-              className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-2 border-[#0A0A0A] transition-all cursor-pointer ${
+              className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-2 border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
                 mode === "syncrivo"
                   ? "bg-[#C6FF00] text-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] translate-x-[-1px] translate-y-[-1px]"
                   : "bg-white text-zinc-700 hover:text-black shadow-[1.5px_1.5px_0px_#0A0A0A]"
@@ -224,7 +224,7 @@ export function VibeArchitectureSection() {
                 setMode("ocnora");
                 setActiveStage(0);
               }}
-              className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-2 border-[#0A0A0A] transition-all cursor-pointer ${
+              className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-2 border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
                 mode === "ocnora"
                   ? "bg-[#2563EB] text-white shadow-[3px_3px_0px_#0A0A0A] translate-x-[-1px] translate-y-[-1px]"
                   : "bg-white text-zinc-700 hover:text-black shadow-[1.5px_1.5px_0px_#0A0A0A]"
@@ -271,7 +271,7 @@ export function VibeArchitectureSection() {
           </div>
         </motion.div>
 
-        {/* 5-Stage Interactive Pipeline Stepper */}
+        {/* 5-Stage Interactive Pipeline Stepper with Crisp Spring Physics */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-10">
           {stages.map((stg, idx) => {
             const isSelected = activeStage === idx;
@@ -279,17 +279,17 @@ export function VibeArchitectureSection() {
             return (
               <motion.button
                 key={idx}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.04, y: -2, transition: { type: "spring", stiffness: 400, damping: 15 } }}
+                whileTap={{ scale: 0.96, y: 1 }}
                 onClick={(e) => {
                   setActiveStage(idx);
                   setIsPaused(true);
                   fireConfetti(e);
                 }}
-                className={`p-4 rounded-2xl text-left border-2 border-[#0A0A0A] transition-all cursor-pointer flex flex-col justify-between ${
+                className={`p-4 rounded-2xl text-left border-2 border-[#0A0A0A] spider-spring-btn transition-all cursor-pointer flex flex-col justify-between ${
                   isSelected
                     ? "shadow-[5px_5px_0px_#0A0A0A] translate-x-[-2px] translate-y-[-2px]"
-                    : "bg-white hover:bg-zinc-50 shadow-[2px_2px_0px_#0A0A0A]"
+                    : "bg-white hover:bg-zinc-50 shadow-[2px_2px_0px_#0A0A0A] hover:shadow-[4px_4px_0px_#0A0A0A]"
                 }`}
                 style={{
                   backgroundColor: isSelected ? stg.color : "#FFFFFF",
@@ -316,11 +316,14 @@ export function VibeArchitectureSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.4 }}
-            className="p-8 sm:p-10 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] space-y-6"
+            className="relative p-8 sm:p-10 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] space-y-6 overflow-hidden"
           >
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#0A0A0A]/10 pb-4">
+            {/* Subtle Halftone Print Accent Watermark in Stage Corner */}
+            <div className="absolute top-0 right-0 w-44 h-44 spider-halftone opacity-15 pointer-events-none rounded-tr-3xl" />
+
+            <div className="relative flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#0A0A0A]/10 pb-4">
               <div className="space-y-1">
-                <div className="inline-block px-3 py-1 rounded-full bg-[#C6FF00] text-[#0A0A0A] font-mono text-[11px] font-black border-2 border-[#0A0A0A]">
+                <div className="inline-block px-3 py-1 rounded-full bg-[#C6FF00] text-[#0A0A0A] font-mono text-[11px] font-black border-2 border-[#0A0A0A] spider-text-hover">
                   {stages[activeStage].tag}
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-black text-[#0A0A0A]">

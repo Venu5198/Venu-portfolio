@@ -88,7 +88,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
             </span>
             <div className="flex items-center gap-2">
               {/* High-Contrast Pitch-Black with Acid Volt Text Badge */}
-              <span className="px-3.5 py-1 rounded-full bg-[#0A0A0A] text-[#C6FF00] text-[11px] font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_rgba(0,0,0,0.25)]">
+              <span className="px-3.5 py-1 rounded-full bg-[#0A0A0A] text-[#C6FF00] text-[11px] font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_rgba(0,0,0,0.25)] spider-text-hover spider-rgb-hover">
                 ZERO-DOWNTIME DEPLOYS ⚡
               </span>
               <span className="px-3 py-1 rounded-full bg-white text-[#0A0A0A] border-2 border-[#0A0A0A] text-[11px] font-mono font-black shadow-[2px_2px_0px_#0A0A0A]">
@@ -164,7 +164,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
                 <div className="flex flex-wrap items-center gap-4 pt-4">
                   <button
                     onClick={() => onSelectProject(syncrivo)}
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#0A0A0A] text-[#C6FF00] font-black text-xs border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[6px_6px_0px_#0A0A0A] transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#0A0A0A] text-[#C6FF00] font-black text-xs border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
                   >
                     <span>Inspect Architecture Blueprints &amp; Specs 🔍</span>
                     <ArrowRight className="w-4 h-4 text-[#C6FF00]" />
@@ -175,7 +175,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
                       href={syncrivo.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-white border-2 border-[#0A0A0A] text-[#0A0A0A] font-mono text-xs font-black shadow-[2px_2px_0px_#0A0A0A] hover:bg-[#C6FF00] transition-all"
+                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-white border-2 border-[#0A0A0A] text-[#0A0A0A] font-mono text-xs font-black shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all"
                     >
                       <span>syncrivo.ai</span>
                       <ExternalLink className="w-3.5 h-3.5 text-zinc-700" />
@@ -229,7 +229,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
               // 02 · AI WORKFLOW AUTOMATION ENGINE · OCNORA.AI
             </span>
             <div className="flex items-center gap-2">
-              <span className="px-3.5 py-1 rounded-full bg-[#0A0A0A] text-[#C6FF00] text-[11px] font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_rgba(0,0,0,0.25)]">
+              <span className="px-3.5 py-1 rounded-full bg-[#0A0A0A] text-[#C6FF00] text-[11px] font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_rgba(0,0,0,0.25)] spider-text-hover spider-rgb-hover">
                 MAIN CHARACTER MICROSERVICES ⚡
               </span>
               <span className="px-3 py-1 rounded-full bg-white text-[#0A0A0A] border-2 border-[#0A0A0A] text-[11px] font-mono font-black shadow-[2px_2px_0px_#0A0A0A]">
@@ -303,7 +303,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
                 <div className="flex flex-wrap items-center gap-4 pt-4">
                   <button
                     onClick={() => onSelectProject(ocnora)}
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#0A0A0A] text-[#C6FF00] font-black text-xs border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[6px_6px_0px_#0A0A0A] transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#0A0A0A] text-[#C6FF00] font-black text-xs border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
                   >
                     <span>Inspect Engine Specifications 🔍</span>
                     <ArrowRight className="w-4 h-4 text-[#C6FF00]" />
@@ -314,7 +314,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
                       href={ocnora.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-white border-2 border-[#0A0A0A] text-[#0A0A0A] font-mono text-xs font-black shadow-[2px_2px_0px_#0A0A0A] hover:bg-[#C6FF00] transition-all"
+                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-white border-2 border-[#0A0A0A] text-[#0A0A0A] font-mono text-xs font-black shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all"
                     >
                       <span>ocnora.ai</span>
                       <ExternalLink className="w-3.5 h-3.5 text-zinc-700" />

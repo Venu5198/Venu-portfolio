@@ -45,14 +45,17 @@ export function VibeCertificationsSection() {
             onClick={(e) => fireConfetti(e)}
             whileHover={{ scale: 1.015, rotate: -0.5, transition: { type: "spring", stiffness: 350, damping: 20 } }}
             whileTap={{ scale: 0.98 }}
-            className="mb-12 p-8 rounded-3xl bg-[#C6FF00] border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] space-y-4 cursor-pointer select-none"
+            className="relative mb-12 p-8 rounded-3xl bg-[#C6FF00] border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] space-y-4 cursor-pointer select-none overflow-hidden"
             title="Click trophy for vibes!"
           >
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0A0A0A] text-[#C6FF00] text-xs font-mono font-black border border-[#0A0A0A]">
+            {/* Subtle Spider-Verse Halftone Watermark */}
+            <div className="absolute top-0 right-0 w-48 h-48 spider-halftone opacity-20 pointer-events-none rounded-tr-3xl" />
+
+            <div className="relative flex flex-wrap items-center justify-between gap-3">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0A0A0A] text-[#C6FF00] text-xs font-mono font-black border border-[#0A0A0A] spider-text-hover spider-rgb-hover">
                 🏆 {award.issuer} · {award.date}
               </span>
-              <span className="px-3 py-1 rounded-full bg-white text-[#0A0A0A] font-mono text-xs font-black border border-[#0A0A0A] shadow-[1.5px_1.5px_0px_#0A0A0A]">
+              <span className="px-3 py-1 rounded-full bg-white text-[#0A0A0A] font-mono text-xs font-black border border-[#0A0A0A] shadow-[1.5px_1.5px_0px_#0A0A0A] spider-rgb-hover">
                 99.98% PRODUCTION SLA ✨
               </span>
             </div>

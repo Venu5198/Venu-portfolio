@@ -115,7 +115,7 @@ export function VibeArsenalSection() {
                       onClick={(e) => fireConfetti(e)}
                       whileHover={{ scale: 1.08, rotate: ((idx % 3) - 1) * 2 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`px-4 py-2.5 rounded-2xl border-2 border-[#0A0A0A] font-mono text-xs font-black shadow-[3px_3px_0px_#0A0A0A] hover:shadow-[5px_5px_0px_#0A0A0A] transition-all cursor-pointer flex items-center gap-2 select-none ${
+                      className={`px-4 py-2.5 rounded-2xl border-2 border-[#0A0A0A] font-mono text-xs font-black shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer flex items-center gap-2 select-none ${
                         isDarkBg ? "text-white" : "text-[#0A0A0A]"
                       }`}
                       style={{ backgroundColor: color }}
