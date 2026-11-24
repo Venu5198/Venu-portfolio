@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useEffect, useState, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function StudioCursor() {
+  const [mounted, setMounted] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -81,6 +83,7 @@ export function StudioCursor() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    setMounted(true);
 
     // Support desktop mouse/trackpad even on hybrid Windows touchscreen devices
     const isPureMobile =
@@ -166,14 +169,14 @@ export function StudioCursor() {
     };
   }, [mouseX, mouseY, ringX, ringY, updateTargetState]);
 
-  if (!enabled || !isVisible) return null;
+  if (!mounted || !enabled || typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <div
       data-cursor-layer="true"
       className="fixed inset-0 z-[9999] pointer-events-none select-none overflow-hidden"
       style={{
-        opacity: isOverInput ? 0 : 1,
+        opacity: isVisible && !isOverInput ? 1 : 0,
         transition: "opacity 0.15s ease",
       }}
     >
@@ -229,6 +232,7 @@ export function StudioCursor() {
           />
         )}
       </motion.div>
-    </div>
+    </div>,
+    document.body
   );
 }
