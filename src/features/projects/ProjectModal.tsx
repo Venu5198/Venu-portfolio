@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Project } from "@/shared/types/project";
 import { TelemetryBadge } from "@/shared/components/TelemetryBadge";
+import { useTheme } from "@/shared/context/ThemeContext";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -28,6 +29,8 @@ type TabType = "context" | "architecture" | "reliability" | "stack";
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [activeTab, setActiveTab] = useState<TabType>("context");
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   // Prevent scroll jump and lock background scroll smoothly
   useEffect(() => {
@@ -79,12 +82,26 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: "spring", duration: 0.45, bounce: 0.12 }}
-          className="relative w-full max-w-4xl max-h-[92vh] bg-[#0c0c11] border border-white/[0.14] rounded-3xl shadow-[0_25px_70px_-15px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col z-10"
+          className={`relative w-full max-w-4xl max-h-[92vh] rounded-3xl overflow-hidden flex flex-col z-10 transition-colors ${
+            isLight
+              ? "bg-[#FAF8F5] border-2 border-black shadow-[10px_10px_0px_#000] text-black"
+              : "bg-[#0c0c11] border border-white/[0.14] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.95)] text-white"
+          }`}
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.08] bg-[#111117]/95 backdrop-blur-md">
+          <div
+            className={`flex items-center justify-between px-6 py-4 border-b ${
+              isLight
+                ? "bg-[#fde047] border-black text-black"
+                : "border-white/[0.08] bg-[#111117]/95 backdrop-blur-md"
+            }`}
+          >
             <div className="flex items-center gap-3">
-              <span className="font-mono text-xs text-cyan-400 font-semibold uppercase tracking-wider">
+              <span
+                className={`font-mono text-xs font-bold uppercase tracking-wider ${
+                  isLight ? "text-black" : "text-cyan-400 font-semibold"
+                }`}
+              >
                 [{project.category}]
               </span>
               <TelemetryBadge
@@ -95,7 +112,11 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/[0.08] transition-colors"
+              className={`p-1.5 rounded-full transition-colors cursor-pointer ${
+                isLight
+                  ? "text-black hover:bg-black/10 border-2 border-black bg-white shadow-[1.5px_1.5px_0px_#000]"
+                  : "text-zinc-400 hover:text-white hover:bg-white/[0.08]"
+              }`}
               aria-label="Close modal (Esc)"
               title="Close (Esc)"
             >
@@ -108,7 +129,11 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             {/* Title & Live Link */}
             <div className="space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-4">
-                <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+                <h2
+                  className={`text-2xl sm:text-4xl font-black tracking-tight ${
+                    isLight ? "text-black" : "text-white"
+                  }`}
+                >
                   {project.title}
                 </h2>
                 {project.liveUrl && (
@@ -116,18 +141,32 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 font-mono text-xs font-semibold transition-all shadow-[0_0_20px_rgba(6,182,212,0.15)]"
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-mono text-xs font-bold transition-all ${
+                      isLight
+                        ? "bg-[#bef264] text-black border-2 border-black shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                        : "bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.15)]"
+                    }`}
                   >
                     <span>Visit Live Platform</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 )}
               </div>
-              <p className="text-zinc-300 text-sm sm:text-base font-light leading-relaxed">
+              <p
+                className={`text-sm sm:text-base leading-relaxed ${
+                  isLight ? "text-zinc-700 font-normal" : "text-zinc-300 font-light"
+                }`}
+              >
                 {project.tagline}
               </p>
-              <div className="inline-block px-3 py-1 rounded-md bg-white/[0.04] border border-white/[0.08] font-mono text-xs text-zinc-300">
-                Role: <span className="text-emerald-400 font-semibold">{project.role}</span>
+              <div
+                className={`inline-block px-3 py-1 rounded-md font-mono text-xs ${
+                  isLight
+                    ? "bg-[#d8b4fe] text-black border-2 border-black shadow-[2px_2px_0px_#000] font-bold"
+                    : "bg-white/[0.04] border border-white/[0.08] text-zinc-300"
+                }`}
+              >
+                Role: <span className={isLight ? "text-black font-black" : "text-emerald-400 font-semibold"}>{project.role}</span>
               </div>
             </div>
 
@@ -136,12 +175,24 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               {(breakdown?.contextScale.metrics ?? project.metrics).map((m, idx) => (
                 <div
                   key={idx}
-                  className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]"
+                  className={`p-3.5 rounded-2xl ${
+                    isLight
+                      ? "bg-white border-2 border-black shadow-[3px_3px_0px_#000]"
+                      : "bg-white/[0.02] border border-white/[0.06] rounded-xl"
+                  }`}
                 >
-                  <div className="text-[10px] font-mono uppercase text-zinc-500 tracking-wider">
+                  <div
+                    className={`text-[10px] font-mono uppercase tracking-wider ${
+                      isLight ? "text-zinc-600 font-bold" : "text-zinc-500"
+                    }`}
+                  >
                     {m.label}
                   </div>
-                  <div className="text-sm sm:text-base font-mono font-bold text-white mt-1">
+                  <div
+                    className={`text-sm sm:text-base font-mono mt-1 ${
+                      isLight ? "text-black font-black" : "text-white font-bold"
+                    }`}
+                  >
                     {m.value}
                   </div>
                 </div>
@@ -149,49 +200,69 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
 
             {/* Structured Engineering Tabs */}
-            <div className="flex flex-wrap items-center gap-2 border-b border-white/[0.08] pb-1 font-mono text-xs">
+            <div
+              className={`flex flex-wrap items-center gap-2 border-b pb-1 font-mono text-xs ${
+                isLight ? "border-black/20" : "border-white/[0.08]"
+              }`}
+            >
               <button
                 onClick={() => setActiveTab("context")}
-                className={`px-3.5 py-2 rounded-lg transition-colors flex items-center gap-2 ${
+                className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "context"
-                    ? "bg-white/[0.08] text-white border-b-2 border-cyan-400 font-semibold"
+                    ? isLight
+                      ? "bg-[#bef264] text-black border-2 border-black shadow-[2px_2px_0px_#000] font-black"
+                      : "bg-white/[0.08] text-white border-b-2 border-cyan-400 font-semibold"
+                    : isLight
+                    ? "text-zinc-700 hover:text-black hover:bg-zinc-200/60 font-semibold"
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                <Activity className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-cyan-400"}`} />
                 Context &amp; Scale
               </button>
               <button
                 onClick={() => setActiveTab("architecture")}
-                className={`px-3.5 py-2 rounded-lg transition-colors flex items-center gap-2 ${
+                className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "architecture"
-                    ? "bg-white/[0.08] text-white border-b-2 border-emerald-400 font-semibold"
+                    ? isLight
+                      ? "bg-[#d8b4fe] text-black border-2 border-black shadow-[2px_2px_0px_#000] font-black"
+                      : "bg-white/[0.08] text-white border-b-2 border-emerald-400 font-semibold"
+                    : isLight
+                    ? "text-zinc-700 hover:text-black hover:bg-zinc-200/60 font-semibold"
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Layers className="w-3.5 h-3.5 text-emerald-400" />
+                <Layers className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-emerald-400"}`} />
                 Core Architecture Decisions
               </button>
               <button
                 onClick={() => setActiveTab("reliability")}
-                className={`px-3.5 py-2 rounded-lg transition-colors flex items-center gap-2 ${
+                className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "reliability"
-                    ? "bg-white/[0.08] text-white border-b-2 border-purple-400 font-semibold"
+                    ? isLight
+                      ? "bg-[#fda4af] text-black border-2 border-black shadow-[2px_2px_0px_#000] font-black"
+                      : "bg-white/[0.08] text-white border-b-2 border-purple-400 font-semibold"
+                    : isLight
+                    ? "text-zinc-700 hover:text-black hover:bg-zinc-200/60 font-semibold"
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Shield className="w-3.5 h-3.5 text-purple-400" />
+                <Shield className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-purple-400"}`} />
                 Reliability &amp; Security
               </button>
               <button
                 onClick={() => setActiveTab("stack")}
-                className={`px-3.5 py-2 rounded-lg transition-colors flex items-center gap-2 ${
+                className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "stack"
-                    ? "bg-white/[0.08] text-white border-b-2 border-amber-400 font-semibold"
+                    ? isLight
+                      ? "bg-[#fde047] text-black border-2 border-black shadow-[2px_2px_0px_#000] font-black"
+                      : "bg-white/[0.08] text-white border-b-2 border-amber-400 font-semibold"
+                    : isLight
+                    ? "text-zinc-700 hover:text-black hover:bg-zinc-200/60 font-semibold"
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Cpu className="w-3.5 h-3.5 text-amber-400" />
+                <Cpu className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-amber-400"}`} />
                 Tech Stack
               </button>
             </div>
@@ -201,27 +272,57 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               <div className="space-y-6">
                 {breakdown ? (
                   <>
-                    <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-2">
-                      <div className="font-mono text-[11px] text-cyan-400 uppercase tracking-widest font-semibold">
+                    <div
+                      className={`p-4 rounded-2xl space-y-2 ${
+                        isLight
+                          ? "bg-white border-2 border-black shadow-[3px_3px_0px_#000]"
+                          : "bg-white/[0.02] border border-white/[0.06]"
+                      }`}
+                    >
+                      <div
+                        className={`font-mono text-[11px] uppercase tracking-widest font-bold ${
+                          isLight ? "text-purple-700" : "text-cyan-400"
+                        }`}
+                      >
                         // Problem &amp; Operational Challenge
                       </div>
-                      <p className="text-sm text-zinc-300 leading-relaxed font-light">
+                      <p
+                        className={`text-sm leading-relaxed ${
+                          isLight ? "text-zinc-800 font-normal" : "text-zinc-300 font-light"
+                        }`}
+                      >
                         {breakdown.contextScale.problem}
                       </p>
                     </div>
 
                     <div className="space-y-3">
-                      <div className="font-mono text-xs text-zinc-400 uppercase tracking-wider font-semibold">
+                      <div
+                        className={`font-mono text-xs uppercase tracking-wider font-bold ${
+                          isLight ? "text-black" : "text-zinc-400"
+                        }`}
+                      >
                         Platform Scope &amp; Verified Enterprise Footprint
                       </div>
                       <div className="space-y-2.5">
                         {breakdown.contextScale.scopePoints.map((pt, i) => (
                           <div
                             key={i}
-                            className="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.04]"
+                            className={`flex items-start gap-3 p-3.5 rounded-xl ${
+                              isLight
+                                ? "bg-white border-2 border-black shadow-[2px_2px_0px_#000]"
+                                : "bg-white/[0.02] border border-white/[0.04]"
+                            }`}
                           >
-                            <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                            <span className="text-sm text-zinc-300 leading-relaxed font-light">
+                            <CheckCircle2
+                              className={`w-4 h-4 shrink-0 mt-0.5 ${
+                                isLight ? "text-emerald-700" : "text-cyan-400"
+                              }`}
+                            />
+                            <span
+                              className={`text-sm leading-relaxed ${
+                                isLight ? "text-zinc-800 font-medium" : "text-zinc-300 font-light"
+                              }`}
+                            >
                               {pt}
                             </span>
                           </div>
@@ -231,17 +332,35 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   </>
                 ) : (
                   <div className="space-y-4">
-                    <p className="text-sm text-zinc-300 leading-relaxed font-light">
+                    <p
+                      className={`text-sm leading-relaxed ${
+                        isLight ? "text-zinc-800 font-normal" : "text-zinc-300 font-light"
+                      }`}
+                    >
                       {project.overview}
                     </p>
                     <div className="space-y-2 pt-2">
                       {project.highlights.map((h, i) => (
                         <div
                           key={i}
-                          className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]"
+                          className={`flex items-start gap-3 p-3 rounded-xl ${
+                            isLight
+                              ? "bg-white border-2 border-black shadow-[2px_2px_0px_#000]"
+                              : "bg-white/[0.02] border border-white/[0.04]"
+                          }`}
                         >
-                          <Zap className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                          <span className="text-sm text-zinc-300 leading-relaxed">{h}</span>
+                          <Zap
+                            className={`w-4 h-4 shrink-0 mt-0.5 ${
+                              isLight ? "text-purple-700" : "text-cyan-400"
+                            }`}
+                          />
+                          <span
+                            className={`text-sm leading-relaxed ${
+                              isLight ? "text-zinc-800 font-medium" : "text-zinc-300"
+                            }`}
+                          >
+                            {h}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -258,34 +377,62 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     {breakdown.coreDecisions.map((dec, i) => (
                       <div
                         key={i}
-                        className="p-4 rounded-2xl bg-white/[0.025] border border-white/[0.07] space-y-3 flex flex-col justify-between"
+                        className={`p-4 rounded-2xl space-y-3 flex flex-col justify-between ${
+                          isLight
+                            ? "bg-white border-2 border-black shadow-[4px_4px_0px_#000]"
+                            : "bg-white/[0.025] border border-white/[0.07]"
+                        }`}
                       >
                         <div className="space-y-2">
                           <div className="flex items-center justify-between gap-2">
-                            <span className="font-mono text-[10px] text-emerald-400 uppercase tracking-wider font-semibold">
+                            <span
+                              className={`font-mono text-[10px] uppercase tracking-wider font-black ${
+                                isLight ? "text-emerald-800" : "text-emerald-400"
+                              }`}
+                            >
                               {dec.category}
                             </span>
                           </div>
-                          <h4 className="text-sm font-bold text-white tracking-tight">
+                          <h4
+                            className={`text-sm font-bold tracking-tight ${
+                              isLight ? "text-black" : "text-white"
+                            }`}
+                          >
                             {dec.title}
                           </h4>
                           <div className="space-y-1.5 pt-1">
-                            <p className="text-xs text-zinc-300 leading-relaxed font-light">
-                              <strong className="text-zinc-100 font-medium">Decision: </strong>
+                            <p
+                              className={`text-xs leading-relaxed ${
+                                isLight ? "text-zinc-700 font-normal" : "text-zinc-300 font-light"
+                              }`}
+                            >
+                              <strong className={isLight ? "text-black font-bold" : "text-zinc-100 font-medium"}>Decision: </strong>
                               {dec.decision}
                             </p>
-                            <p className="text-xs text-zinc-400 leading-relaxed font-light">
-                              <strong className="text-zinc-300 font-medium">Trade-off / Impact: </strong>
+                            <p
+                              className={`text-xs leading-relaxed ${
+                                isLight ? "text-zinc-600 font-normal" : "text-zinc-400 font-light"
+                              }`}
+                            >
+                              <strong className={isLight ? "text-zinc-900 font-bold" : "text-zinc-300 font-medium"}>Trade-off / Impact: </strong>
                               {dec.tradeoff}
                             </p>
                           </div>
                         </div>
 
-                        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.04]">
+                        <div
+                          className={`flex flex-wrap gap-1.5 pt-2 border-t ${
+                            isLight ? "border-black/10" : "border-white/[0.04]"
+                          }`}
+                        >
                           {dec.badges.map((b, bIdx) => (
                             <span
                               key={bIdx}
-                              className="px-2 py-0.5 rounded bg-white/[0.04] text-[10px] font-mono text-zinc-300 border border-white/[0.04]"
+                              className={`px-2 py-0.5 rounded text-[10px] font-mono ${
+                                isLight
+                                  ? "bg-[#d8b4fe] text-black border border-black font-bold"
+                                  : "bg-white/[0.04] text-zinc-300 border border-white/[0.04]"
+                              }`}
                             >
                               {b}
                             </span>
@@ -299,20 +446,42 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     {project.architecture.map((arch, i) => (
                       <div
                         key={i}
-                        className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] space-y-2"
+                        className={`p-4 rounded-2xl space-y-2 ${
+                          isLight
+                            ? "bg-white border-2 border-black shadow-[3px_3px_0px_#000]"
+                            : "bg-white/[0.03] border border-white/[0.06]"
+                        }`}
                       >
-                        <div className="font-mono text-[11px] text-cyan-400 uppercase tracking-wider">
+                        <div
+                          className={`font-mono text-[11px] uppercase tracking-wider font-bold ${
+                            isLight ? "text-purple-700" : "text-cyan-400"
+                          }`}
+                        >
                           {arch.domain}
                         </div>
-                        <div className="font-semibold text-white text-sm">{arch.title}</div>
-                        <p className="text-xs text-zinc-400 leading-relaxed">
+                        <div
+                          className={`font-bold text-sm ${
+                            isLight ? "text-black" : "text-white"
+                          }`}
+                        >
+                          {arch.title}
+                        </div>
+                        <p
+                          className={`text-xs leading-relaxed ${
+                            isLight ? "text-zinc-700 font-normal" : "text-zinc-400"
+                          }`}
+                        >
                           {arch.description}
                         </p>
                         <div className="flex flex-wrap gap-1.5 pt-1">
                           {arch.badges.map((b, bIdx) => (
                             <span
                               key={bIdx}
-                              className="px-2 py-0.5 rounded bg-white/[0.04] text-[10px] font-mono text-zinc-300"
+                              className={`px-2 py-0.5 rounded text-[10px] font-mono ${
+                                isLight
+                                  ? "bg-[#bef264] text-black border border-black font-bold"
+                                  : "bg-white/[0.04] text-zinc-300"
+                              }`}
                             >
                               {b}
                             </span>
@@ -331,36 +500,78 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 {breakdown ? (
                   <>
                     {/* SLA Banner */}
-                    <div className="p-4 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-between flex-wrap gap-3">
+                    <div
+                      className={`p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3 ${
+                        isLight
+                          ? "bg-[#bef264] border-2 border-black shadow-[4px_4px_0px_#000] text-black"
+                          : "bg-purple-500/10 border border-purple-500/20"
+                      }`}
+                    >
                       <div className="flex items-center gap-3">
-                        <ShieldCheck className="w-5 h-5 text-purple-400" />
+                        <ShieldCheck
+                          className={`w-5 h-5 ${
+                            isLight ? "text-black" : "text-purple-400"
+                          }`}
+                        />
                         <div>
-                          <div className="font-mono text-[10px] uppercase text-purple-300 tracking-wider">
+                          <div
+                            className={`font-mono text-[10px] uppercase tracking-wider ${
+                              isLight ? "text-zinc-800 font-black" : "text-purple-300"
+                            }`}
+                          >
                             Measured Production Reliability
                           </div>
-                          <div className="text-sm font-mono font-bold text-white">
+                          <div
+                            className={`text-sm font-mono font-bold ${
+                              isLight ? "text-black font-black" : "text-white"
+                            }`}
+                          >
                             {breakdown.reliabilitySecurity.uptimeSla}
                           </div>
                         </div>
                       </div>
-                      <span className="font-mono text-xs text-emerald-400 font-semibold px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20">
+                      <span
+                        className={`font-mono text-xs font-bold px-2.5 py-1 rounded-full ${
+                          isLight
+                            ? "bg-white text-black border border-black shadow-[1.5px_1.5px_0px_#000]"
+                            : "text-emerald-400 font-semibold bg-emerald-500/10 border border-emerald-500/20"
+                        }`}
+                      >
                         ● Zero Unhandled Outages
                       </span>
                     </div>
 
                     {/* Resilience Mechanisms */}
                     <div className="space-y-3">
-                      <div className="font-mono text-xs text-zinc-400 uppercase tracking-wider font-semibold">
+                      <div
+                        className={`font-mono text-xs uppercase tracking-wider font-bold ${
+                          isLight ? "text-black" : "text-zinc-400 font-semibold"
+                        }`}
+                      >
                         Resilience &amp; Failover Patterns
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                         {breakdown.reliabilitySecurity.resilienceMechanisms.map((mech, i) => (
                           <div
                             key={i}
-                            className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1.5"
+                            className={`p-3.5 rounded-2xl space-y-1.5 ${
+                              isLight
+                                ? "bg-white border-2 border-black shadow-[3px_3px_0px_#000]"
+                                : "bg-white/[0.02] border border-white/[0.06] rounded-xl"
+                            }`}
                           >
-                            <div className="text-xs font-bold text-white">{mech.title}</div>
-                            <p className="text-xs text-zinc-400 leading-relaxed font-light">
+                            <div
+                              className={`text-xs font-bold ${
+                                isLight ? "text-black" : "text-white"
+                              }`}
+                            >
+                              {mech.title}
+                            </div>
+                            <p
+                              className={`text-xs leading-relaxed ${
+                                isLight ? "text-zinc-700 font-normal" : "text-zinc-400 font-light"
+                              }`}
+                            >
                               {mech.detail}
                             </p>
                           </div>
@@ -370,17 +581,33 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
                     {/* Security & Compliance Checklist */}
                     <div className="space-y-3">
-                      <div className="font-mono text-xs text-zinc-400 uppercase tracking-wider font-semibold">
+                      <div
+                        className={`font-mono text-xs uppercase tracking-wider font-bold ${
+                          isLight ? "text-black" : "text-zinc-400 font-semibold"
+                        }`}
+                      >
                         Security Controls &amp; Compliance Readiness
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         {breakdown.reliabilitySecurity.securityCompliance.map((sec, i) => (
                           <div
                             key={i}
-                            className="flex items-start gap-2.5 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]"
+                            className={`flex items-start gap-2.5 p-3 rounded-xl ${
+                              isLight
+                                ? "bg-white border-2 border-black shadow-[2px_2px_0px_#000]"
+                                : "bg-white/[0.02] border border-white/[0.04]"
+                            }`}
                           >
-                            <Lock className="w-3.5 h-3.5 text-purple-400 shrink-0 mt-0.5" />
-                            <span className="text-xs text-zinc-300 leading-relaxed font-light">
+                            <Lock
+                              className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${
+                                isLight ? "text-purple-700" : "text-purple-400"
+                              }`}
+                            />
+                            <span
+                              className={`text-xs leading-relaxed ${
+                                isLight ? "text-zinc-800 font-medium" : "text-zinc-300 font-light"
+                              }`}
+                            >
                               {sec}
                             </span>
                           </div>
@@ -389,7 +616,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     </div>
                   </>
                 ) : (
-                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] text-sm text-zinc-400 font-light">
+                  <div
+                    className={`p-4 rounded-2xl text-sm ${
+                      isLight
+                        ? "bg-white border-2 border-black text-zinc-800"
+                        : "bg-white/[0.02] border border-white/[0.06] text-zinc-400 font-light"
+                    }`}
+                  >
                     Sustains continuous production uptime via declarative health probes, automated
                     container restarts, and strict role-based access control.
                   </div>
@@ -400,14 +633,22 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             {/* Tab 4: Tech Stack */}
             {activeTab === "stack" && (
               <div className="space-y-4">
-                <div className="font-mono text-xs text-zinc-400 uppercase tracking-wider font-semibold">
+                <div
+                  className={`font-mono text-xs uppercase tracking-wider font-bold ${
+                    isLight ? "text-black" : "text-zinc-400 font-semibold"
+                  }`}
+                >
                   Technologies, Runtimes &amp; Infrastructure
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {project.stack.map((item, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-zinc-200"
+                      className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold ${
+                        isLight
+                          ? "bg-[#fde047] text-black border-2 border-black shadow-[2px_2px_0px_#000]"
+                          : "bg-white/[0.04] border border-white/[0.08] text-zinc-200"
+                      }`}
                     >
                       {item}
                     </span>

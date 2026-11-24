@@ -52,7 +52,7 @@ export function Navbar() {
                   isLight ? "text-pink-600 font-semibold" : "text-cyan-400"
                 }`}
               >
-                {isLight ? "vibe" : "v2.5"}
+                {isLight ? "chaos ⚡" : "v2.5"}
               </span>
             </span>
             <span

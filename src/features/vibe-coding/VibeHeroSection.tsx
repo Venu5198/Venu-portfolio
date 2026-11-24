@@ -12,9 +12,19 @@ const slowSpring = {
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
+const chaosMoods = [
+  { status: "99.98% PROD UPTIME", note: "no cap, zero unhandled outages sustained", color: "#bef264", icon: "🟢" },
+  { status: "REDIS LOCKS HOLDING STRONG", note: "sliding window loop guard dropping echoes", color: "#fde047", icon: "🛡️" },
+  { status: "PR APPROVED, DON'T TOUCH IT", note: "it runs on my machine and in staging", color: "#d8b4fe", icon: "🚀" },
+  { status: "0 SLEEP, PURE CAFFEINE", note: "let him cook the event microservices", color: "#fda4af", icon: "☕" },
+  { status: "ALL PODS HEALTHY (MIRACULOUSLY)", note: "kubernetes fleet at absolute peace", color: "#bae6fd", icon: "🐳" },
+  { status: "CHAOS LEVEL: MAXIMUM OVERDRIVE", note: "main character backend engineering energy", color: "#bef264", icon: "⚡" },
+];
+
 export function VibeHeroSection() {
   const [copied, setCopied] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [moodIdx, setMoodIdx] = useState(0);
 
   const fireConfetti = (e?: React.MouseEvent) => {
     try {
@@ -41,7 +51,7 @@ export function VibeHeroSection() {
   return (
     <section
       id="hero"
-      className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden scroll-mt-28"
+      className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden scroll-mt-36"
     >
       {/* Soft Ambient Floating Pastel Gradient Blobs */}
       <div className="absolute top-12 left-8 w-72 h-72 rounded-full bg-[#ECFCCB]/60 blur-3xl pointer-events-none -z-10 animate-pulse" />
@@ -192,6 +202,37 @@ export function VibeHeroSection() {
               zero-panic deployments, and reliable systems that just work.
             </motion.p>
 
+            {/* Interactive Chaos Meter / Live Status Mood Toggle */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...slowSpring, delay: 0.25 }}
+              onClick={(e) => {
+                setMoodIdx((prev) => (prev + 1) % chaosMoods.length);
+                fireConfetti(e);
+              }}
+              whileHover={{ scale: 1.02, rotate: -0.5, transition: { type: "spring", stiffness: 350, damping: 18 } }}
+              whileTap={{ scale: 0.97 }}
+              className="p-3.5 sm:p-4 rounded-2xl border-2 border-black shadow-[4px_4px_0px_#000] cursor-pointer flex flex-wrap items-center justify-between gap-3 transition-all select-none"
+              style={{ backgroundColor: chaosMoods[moodIdx].color }}
+              title="Click to cycle Chaos Meter status!"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl sm:text-2xl">{chaosMoods[moodIdx].icon}</span>
+                <div>
+                  <div className="font-mono text-xs sm:text-sm font-black text-black tracking-tight">
+                    CHAOS METER: {chaosMoods[moodIdx].status}
+                  </div>
+                  <div className="text-xs text-zinc-900 font-medium">
+                    // {chaosMoods[moodIdx].note}
+                  </div>
+                </div>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border-2 border-black font-mono text-[10px] font-black text-black shadow-[2px_2px_0px_#000]">
+                <span>CYCLE MOOD 🎲</span>
+              </div>
+            </motion.div>
+
             {/* Action Bar: Terminal Sticker & Let's Build CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -242,8 +283,11 @@ export function VibeHeroSection() {
               initial={{ opacity: 0, scale: 0.9, rotate: 5 }}
               animate={{ opacity: 1, scale: 1, rotate: 2 }}
               transition={{ ...slowSpring, delay: 0.25 }}
-              whileHover={{ rotate: 0, scale: 1.02 }}
-              className="relative p-4 pb-12 rounded-3xl bg-white border-2 border-black shadow-[8px_8px_0px_#000] max-w-[310px] w-full"
+              whileHover={{ rotate: -1.5, scale: 1.04, transition: { type: "spring", stiffness: 300, damping: 15 } }}
+              whileTap={{ scale: 0.97 }}
+              onClick={(e) => fireConfetti(e)}
+              className="relative p-4 pb-12 rounded-3xl bg-white border-2 border-black shadow-[8px_8px_0px_#000] max-w-[310px] w-full cursor-pointer select-none"
+              title="Click photo for vibes!"
             >
               {/* Yellow Washi-Tape Sticker */}
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded bg-[#fde047] text-black font-mono text-[10px] font-black border-2 border-black shadow-[2px_2px_0px_#000] rotate-[-2deg] z-20">

@@ -134,6 +134,23 @@ const ocnoraStages: Stage[] = [
   },
 ];
 
+const packetWittyNotes = {
+  syncrivo: [
+    "FastAPI Ingress: HMAC verified under 10ms! Enqueued to Redis Pub/Sub, HTTP 200 acknowledged. Zero timeouts! ⚡",
+    "Redis Loop Guard: Cryptographic event fingerprint checked across sliding window. Dropped echo loop, zero cascade! 🛡️",
+    "Auth & Token Resolver: Delegated OAuth tokens retrieved via internal Artifact Registry library. Sender identity locked in! 🔑",
+    "AST Parser Engine: Slack mrkdwn, Teams HTML, code blocks, and attachments normalized without schema corruption! 🔄",
+    "Downstream Dispatch: Delivered to destination platform with native user avatar and exponential backoff recovery! 🚀",
+  ],
+  ocnora: [
+    "Trigger Ingress: Webhook alert caught from GitHub and Slack. Mapped into DAG state execution graph! 🔌",
+    "Budget Guard: Dynamic multi-model token ceiling verified. $10,000 runaway LLM loops permanently blocked! 🛑",
+    "Stateful DAG Engine: PostgreSQL checkpoint committed. Async task graph nodes resumed across 1,000+ connectors! 🧠",
+    "Audit & OpenTelemetry: Trace spans logged, prompt token ledger verified, step execution record immutable! 📊",
+    "Git Worktree Runner: Isolated branch cloned, automated tests passed, PR autonomously submitted to GitHub! 🌲",
+  ],
+};
+
 export function VibeArchitectureSection() {
   const [mode, setMode] = useState<ArchitectureMode>("syncrivo");
   const [activeStage, setActiveStage] = useState(0);
@@ -217,6 +234,39 @@ export function VibeArchitectureSection() {
             </button>
           </div>
         </div>
+
+        {/* Interactive Architecture Packet Simulator Track */}
+        <motion.div
+          key={`${mode}-${activeStage}`}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="mb-8 p-4 sm:p-5 rounded-3xl bg-white border-2 border-black shadow-[5px_5px_0px_#000] flex flex-wrap items-center justify-between gap-4"
+        >
+          <div className="flex items-center gap-3">
+            <span className="flex h-3 w-3 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+            </span>
+            <div className="font-mono text-xs font-bold text-black flex flex-wrap items-center gap-2">
+              <span className="text-zinc-500 uppercase tracking-wider">PACKET HOPPER:</span>
+              <motion.span
+                key={`badge-${mode}-${activeStage}`}
+                initial={{ scale: 0.85, x: -6 }}
+                animate={{ scale: 1, x: 0 }}
+                transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                className="px-3 py-1 rounded-full text-xs font-mono font-black border-2 border-black shadow-[2px_2px_0px_#000]"
+                style={{ backgroundColor: stages[activeStage].color }}
+              >
+                Stage 0{activeStage + 1} Payload: {stages[activeStage].tag}
+              </motion.span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 font-mono text-xs text-zinc-900 font-semibold bg-[#FAF8F5] px-3.5 py-2 rounded-2xl border-2 border-black shadow-[2px_2px_0px_#000] max-w-xl">
+            <span>💬</span>
+            <span className="leading-snug">{packetWittyNotes[mode][activeStage]}</span>
+          </div>
+        </motion.div>
 
         {/* 5-Stage Interactive Pipeline Stepper */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-10">

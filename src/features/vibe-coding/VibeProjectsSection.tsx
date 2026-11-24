@@ -77,7 +77,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={slowSpring}
-          whileHover={{ rotate: -0.5, scale: 1.005 }}
+          whileHover={{ rotate: -0.75, scale: 1.01, transition: { type: "spring", stiffness: 350, damping: 20 } }}
           className="mb-16 rounded-3xl bg-white border-2 border-black shadow-[8px_8px_0px_#000] overflow-hidden"
         >
           {/* Pastel Header Ribbon */}
@@ -209,7 +209,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={slowSpring}
-          whileHover={{ rotate: 0.5, scale: 1.005 }}
+          whileHover={{ rotate: 0.75, scale: 1.01, transition: { type: "spring", stiffness: 350, damping: 20 } }}
           className="mb-16 rounded-3xl bg-white border-2 border-black shadow-[8px_8px_0px_#000] overflow-hidden"
         >
           {/* Pastel Header Ribbon */}
@@ -326,33 +326,43 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
 
         {/* Secondary Systems: Studio Index Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div
-            onClick={() => onSelectProject(finops)}
-            className="p-8 rounded-3xl bg-white border-2 border-black shadow-[6px_6px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all cursor-pointer space-y-3"
+          <motion.div
+            onClick={(e) => {
+              onSelectProject(finops);
+              fireConfetti(e);
+            }}
+            whileHover={{ scale: 1.025, rotate: -0.75, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+            whileTap={{ scale: 0.98 }}
+            className="p-8 rounded-3xl bg-white border-2 border-black shadow-[6px_6px_0px_#000] transition-all cursor-pointer space-y-3"
           >
-            <div className="inline-block px-3 py-1 rounded-full bg-[#fde047] text-black font-mono text-xs font-bold border-2 border-black">
-              CLOUD OPTIMIZATION
+            <div className="inline-block px-3 py-1 rounded-full bg-[#fde047] text-black font-mono text-xs font-bold border-2 border-black shadow-[2px_2px_0px_#000]">
+              CLOUD OPTIMIZATION 💰
             </div>
             <h4 className="text-2xl font-black text-black">{finops.title}</h4>
             <p className="text-sm text-zinc-600 leading-relaxed">{finops.summary}</p>
             <div className="font-mono text-xs font-bold text-emerald-700">
               ✓ 20–25% Monthly Spend Reduced Within 60 Days
             </div>
-          </div>
+          </motion.div>
 
-          <div
-            onClick={() => onSelectProject(gitops)}
-            className="p-8 rounded-3xl bg-white border-2 border-black shadow-[6px_6px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all cursor-pointer space-y-3"
+          <motion.div
+            onClick={(e) => {
+              onSelectProject(gitops);
+              fireConfetti(e);
+            }}
+            whileHover={{ scale: 1.025, rotate: 0.75, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+            whileTap={{ scale: 0.98 }}
+            className="p-8 rounded-3xl bg-white border-2 border-black shadow-[6px_6px_0px_#000] transition-all cursor-pointer space-y-3"
           >
-            <div className="inline-block px-3 py-1 rounded-full bg-[#e9d5ff] text-black font-mono text-xs font-bold border-2 border-black">
-              KUBERNETES GITOPS FLEET
+            <div className="inline-block px-3 py-1 rounded-full bg-[#e9d5ff] text-black font-mono text-xs font-bold border-2 border-black shadow-[2px_2px_0px_#000]">
+              KUBERNETES GITOPS FLEET 🐳
             </div>
             <h4 className="text-2xl font-black text-black">{gitops.title}</h4>
             <p className="text-sm text-zinc-600 leading-relaxed">{gitops.summary}</p>
             <div className="font-mono text-xs font-bold text-purple-700">
               ✓ 20+ Production Services · 35% Faster Incident MTTR
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

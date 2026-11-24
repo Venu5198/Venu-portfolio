@@ -1,11 +1,26 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
+import confetti from "canvas-confetti";
 import { Award, Shield, CheckCircle2, ExternalLink, Sparkles } from "lucide-react";
 import { certificationsData, awardsData } from "@/shared/data/certifications";
 
 export function VibeCertificationsSection() {
   const award = awardsData[0];
+
+  const fireConfetti = (e?: React.MouseEvent) => {
+    try {
+      confetti({
+        particleCount: 35,
+        spread: 55,
+        origin: e
+          ? { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
+          : { y: 0.6 },
+        colors: ["#bef264", "#fda4af", "#d8b4fe", "#bae6fd", "#fde047"],
+      });
+    } catch {}
+  };
 
   return (
     <section id="certifications" className="py-24 relative scroll-mt-36 pt-12">
@@ -26,13 +41,19 @@ export function VibeCertificationsSection() {
 
         {/* Award Trophy Plaque (Gen-Z Style) */}
         {award && (
-          <div className="mb-12 p-8 rounded-3xl bg-[#fde047] border-2 border-black shadow-[8px_8px_0px_#000] space-y-4">
+          <motion.div
+            onClick={(e) => fireConfetti(e)}
+            whileHover={{ scale: 1.015, rotate: -0.5, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+            whileTap={{ scale: 0.98 }}
+            className="mb-12 p-8 rounded-3xl bg-[#fde047] border-2 border-black shadow-[8px_8px_0px_#000] space-y-4 cursor-pointer select-none"
+            title="Click trophy for vibes!"
+          >
             <div className="flex flex-wrap items-center justify-between gap-3">
               <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black text-white text-xs font-mono font-bold">
                 🏆 {award.issuer} · {award.date}
               </span>
-              <span className="px-3 py-1 rounded-full bg-white text-black font-mono text-xs font-black border border-black">
-                99.98% PRODUCTION SLA
+              <span className="px-3 py-1 rounded-full bg-white text-black font-mono text-xs font-black border border-black shadow-[1.5px_1.5px_0px_#000]">
+                99.98% PRODUCTION SLA ✨
               </span>
             </div>
 
@@ -47,7 +68,7 @@ export function VibeCertificationsSection() {
               <span>★ Recognition:</span>
               <span className="underline">{award.impact}</span>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* Credential Stamps Grid */}
@@ -55,9 +76,12 @@ export function VibeCertificationsSection() {
           {certificationsData.map((c, i) => {
             const cardBg = i === 0 ? "#bae6fd" : i === 1 ? "#bef264" : "#fda4af";
             return (
-              <div
+              <motion.div
                 key={c.id}
-                className="p-6 rounded-3xl border-2 border-black shadow-[6px_6px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all flex flex-col justify-between space-y-4"
+                onClick={(e) => fireConfetti(e)}
+                whileHover={{ scale: 1.03, rotate: i % 2 === 0 ? -1 : 1, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+                whileTap={{ scale: 0.97 }}
+                className="p-6 rounded-3xl border-2 border-black shadow-[6px_6px_0px_#000] transition-all flex flex-col justify-between space-y-4 cursor-pointer select-none"
                 style={{ backgroundColor: cardBg }}
               >
                 <div className="space-y-3">
@@ -88,7 +112,7 @@ export function VibeCertificationsSection() {
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

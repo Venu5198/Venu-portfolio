@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Mail, Phone, Copy, Check, Send, ArrowUpRight, Coffee, Heart, Sparkles } from "lucide-react";
 import { profileData } from "@/shared/data/profile";
@@ -56,9 +57,12 @@ export function VibeContactSection() {
     <footer id="contact" className="py-24 relative border-t-2 border-black/10 scroll-mt-36 pt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Yellow Sticky Note: Engineering Philosophy */}
-        <div className="mb-16 p-8 rounded-3xl bg-[#fef08a] border-2 border-black shadow-[6px_6px_0px_#000] rotate-[-0.8deg] space-y-4">
+        <motion.div
+          whileHover={{ scale: 1.01, rotate: 0, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+          className="mb-16 p-8 rounded-3xl bg-[#fef08a] border-2 border-black shadow-[6px_6px_0px_#000] rotate-[-0.8deg] space-y-4"
+        >
           <div className="flex items-center gap-2 font-mono text-xs font-black uppercase text-black">
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 text-black animate-spin" />
             ENGINEERING PHILOSOPHY · IN THE NOTEBOOK
           </div>
           <blockquote className="text-2xl sm:text-3xl font-black text-black leading-snug">
@@ -68,13 +72,14 @@ export function VibeContactSection() {
             {profileData.philosophy.points.map((pt, i) => (
               <span
                 key={i}
-                className="px-3 py-1 rounded-full bg-white border border-black font-mono text-xs font-bold text-black"
+                onClick={(e) => fireConfetti(e)}
+                className="px-3 py-1 rounded-full bg-white border border-black font-mono text-xs font-bold text-black shadow-[1.5px_1.5px_0px_#000] cursor-pointer hover:bg-black hover:text-white transition-colors"
               >
                 ✓ {pt}
               </span>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Contact Spread: Chat Invite & Channels */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
@@ -95,7 +100,10 @@ export function VibeContactSection() {
 
             {/* Direct Channel Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-2xl bg-white border-2 border-black shadow-[4px_4px_0px_#000] flex items-center justify-between gap-3">
+              <motion.div
+                whileHover={{ scale: 1.03, rotate: -0.75, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+                className="p-4 rounded-2xl bg-white border-2 border-black shadow-[4px_4px_0px_#000] flex items-center justify-between gap-3"
+              >
                 <div className="min-w-0">
                   <div className="text-[10px] font-mono text-zinc-500 font-bold uppercase">DIRECT EMAIL</div>
                   <a
@@ -111,9 +119,12 @@ export function VibeContactSection() {
                 >
                   {copiedEmail ? "Copied! ✨" : "Copy"}
                 </button>
-              </div>
+              </motion.div>
 
-              <div className="p-4 rounded-2xl bg-white border-2 border-black shadow-[4px_4px_0px_#000] flex items-center justify-between gap-3">
+              <motion.div
+                whileHover={{ scale: 1.03, rotate: 0.75, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+                className="p-4 rounded-2xl bg-white border-2 border-black shadow-[4px_4px_0px_#000] flex items-center justify-between gap-3"
+              >
                 <div className="min-w-0">
                   <div className="text-[10px] font-mono text-zinc-500 font-bold uppercase">PHONE</div>
                   <a
@@ -129,7 +140,7 @@ export function VibeContactSection() {
                 >
                   {copiedPhone ? "Copied! ✨" : "Copy"}
                 </button>
-              </div>
+              </motion.div>
             </div>
 
             {/* Main Transmission Button */}
