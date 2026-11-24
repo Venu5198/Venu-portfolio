@@ -62,12 +62,12 @@ export function VibeContactSection() {
   };
 
   return (
-    <footer id="contact" className="py-24 relative border-t-2 border-[#0A0A0A]/10 scroll-mt-36 sm:scroll-mt-44 pt-16">
+    <footer className="py-24 relative border-t-2 border-[#0A0A0A]/10 pt-16 pb-80 sm:pb-96">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Streetwear Spec Banner: Engineering Philosophy */}
         <motion.div
           whileHover={{ scale: 1.01, rotate: 0, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-          className="relative mb-16 p-8 rounded-3xl bg-[#FDE047] border-2 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] rotate-[-0.8deg] space-y-4 overflow-hidden"
+          className="relative mb-20 p-8 rounded-3xl bg-[#FDE047] border-2 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] rotate-[-0.8deg] space-y-4 overflow-hidden"
         >
           {/* Subtle Spider-Verse Halftone Pattern */}
           <div className="absolute top-0 right-0 w-36 h-36 spider-halftone opacity-15 pointer-events-none rounded-tr-3xl" />
@@ -93,7 +93,7 @@ export function VibeContactSection() {
         </motion.div>
 
         {/* Contact Spread: Chat Invite & Channels */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div id="contact" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start scroll-mt-36 sm:scroll-mt-44 pt-4">
           {/* Left Column: Direct Action */}
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
@@ -140,18 +140,18 @@ export function VibeContactSection() {
               {/* Prominent GitHub Card */}
               <motion.div
                 whileHover={{ scale: 1.02, rotate: 0.5, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-                className="p-4 rounded-2xl bg-[#0A0A0A] text-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#C6FF00] flex items-center justify-between gap-3"
+                className="p-4 rounded-2xl bg-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] flex items-center justify-between gap-3"
               >
                 <div className="min-w-0">
-                  <div className="text-[10px] font-mono text-[#C6FF00] font-black uppercase flex items-center gap-1.5">
-                    <GitHubIcon className="w-3 h-3 text-[#C6FF00]" />
-                    <span>GITHUB // CODE & REPOS</span>
+                  <div className="text-[10px] font-mono text-zinc-600 font-black uppercase flex items-center gap-1.5">
+                    <GitHubIcon className="w-3.5 h-3.5 text-[#0A0A0A]" />
+                    <span>GITHUB // CODE &amp; REPOS</span>
                   </div>
                   <a
                     href={profileData.contact.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-mono font-black text-white hover:text-[#C6FF00] transition-colors truncate block"
+                    className="text-xs font-mono font-black text-[#0A0A0A] hover:text-[#2563EB] transition-colors truncate block"
                   >
                     github.com/Venu5198
                   </a>
@@ -160,7 +160,7 @@ export function VibeContactSection() {
                   href={profileData.contact.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#C6FF00] bg-[#C6FF00] text-[#0A0A0A] shadow-[2px_2px_0px_#FFFFFF] spider-rgb-hover transition-all cursor-pointer shrink-0 flex items-center gap-1"
+                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#0A0A0A] text-[#C6FF00] shadow-[2px_2px_0px_#0A0A0A] hover:bg-[#C6FF00] hover:text-[#0A0A0A] spider-rgb-hover transition-all cursor-pointer shrink-0 flex items-center gap-1"
                 >
                   <span>Open</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -174,7 +174,7 @@ export function VibeContactSection() {
               >
                 <div className="min-w-0">
                   <div className="text-[10px] font-mono text-zinc-600 font-black uppercase flex items-center gap-1.5">
-                    <LinkedInIcon className="w-3 h-3 text-[#2563EB]" />
+                    <LinkedInIcon className="w-3.5 h-3.5 text-[#2563EB]" />
                     <span>LINKEDIN // NETWORK</span>
                   </div>
                   <a
@@ -190,7 +190,7 @@ export function VibeContactSection() {
                   href={profileData.contact.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#2563EB] text-white shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer shrink-0 flex items-center gap-1"
+                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#2563EB] text-white shadow-[2px_2px_0px_#0A0A0A] hover:bg-[#1d4ed8] spider-rgb-hover transition-all cursor-pointer shrink-0 flex items-center gap-1"
                 >
                   <span>Connect</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -204,7 +204,7 @@ export function VibeContactSection() {
               >
                 <div className="min-w-0">
                   <div className="text-[10px] font-mono text-zinc-600 font-black uppercase flex items-center gap-1.5">
-                    <Phone className="w-3 h-3 text-[#FF4D00]" />
+                    <Phone className="w-3.5 h-3.5 text-[#FF4D00]" />
                     <span>PHONE // SIGNAL</span>
                   </div>
                   <a
@@ -216,7 +216,7 @@ export function VibeContactSection() {
                 </div>
                 <button
                   onClick={copyPhone}
-                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#FF4D00] text-white shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer shrink-0"
+                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#FF4D00] text-white shadow-[2px_2px_0px_#0A0A0A] hover:bg-[#ea580c] spider-rgb-hover transition-all cursor-pointer shrink-0"
                 >
                   {copiedPhone ? "Copied! ✨" : "Copy"}
                 </button>
@@ -227,7 +227,7 @@ export function VibeContactSection() {
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <a
                 href={`mailto:${profileData.contact.email}?subject=Backend%20Developer%20Opportunity%20-%20Venu%20K`}
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-sm border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-sm border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] hover:bg-[#b5f500] spider-spring-btn spider-rgb-hover transition-all cursor-pointer"
               >
                 <span>Say Hello / Initiate Transmission 🚀</span>
                 <Send className="w-4 h-4" />
@@ -237,11 +237,11 @@ export function VibeContactSection() {
                 href={profileData.contact.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#0A0A0A] text-white font-black text-sm border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#C6FF00] spider-spring-btn spider-rgb-hover transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#0A0A0A] text-[#C6FF00] font-black text-sm border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] hover:bg-[#C6FF00] hover:text-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer"
               >
-                <GitHubIcon className="w-4 h-4 text-[#C6FF00]" />
-                <span>GitHub @Venu5198</span>
-                <ArrowUpRight className="w-4 h-4 text-[#C6FF00]" />
+                <GitHubIcon className="w-4 h-4 text-inherit" />
+                <span className="text-inherit">GitHub @Venu5198</span>
+                <ArrowUpRight className="w-4 h-4 text-inherit" />
               </a>
             </div>
           </div>
@@ -276,32 +276,32 @@ export function VibeContactSection() {
                 href={profileData.contact.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 rounded-2xl bg-[#0A0A0A] text-white border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#C6FF00] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-black"
+                className="flex-1 py-3 px-4 rounded-2xl bg-[#0A0A0A] text-[#C6FF00] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:bg-[#C6FF00] hover:text-[#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-black"
               >
-                <GitHubIcon className="w-4 h-4" />
-                <span>GitHub</span>
-                <ArrowUpRight className="w-3 h-3" />
+                <GitHubIcon className="w-4 h-4 text-inherit" />
+                <span className="text-inherit">GitHub</span>
+                <ArrowUpRight className="w-3 h-3 text-inherit" />
               </a>
 
               <a
                 href={profileData.contact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 rounded-2xl bg-[#2563EB] text-white border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-black"
+                className="flex-1 py-3 px-4 rounded-2xl bg-[#2563EB] text-white border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:bg-[#1d4ed8] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-black"
               >
-                <LinkedInIcon className="w-4 h-4" />
-                <span>LinkedIn</span>
-                <ArrowUpRight className="w-3 h-3" />
+                <LinkedInIcon className="w-4 h-4 text-inherit" />
+                <span className="text-inherit">LinkedIn</span>
+                <ArrowUpRight className="w-3 h-3 text-inherit" />
               </a>
 
               <a
                 href={profileData.contact.credly}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 rounded-2xl bg-[#FDE047] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-black"
+                className="flex-1 py-3 px-4 rounded-2xl bg-[#FDE047] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:bg-[#facc15] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-black"
               >
-                <span>Credly</span>
-                <ArrowUpRight className="w-3 h-3" />
+                <span className="text-inherit">Credly</span>
+                <ArrowUpRight className="w-3 h-3 text-inherit" />
               </a>
             </div>
           </div>

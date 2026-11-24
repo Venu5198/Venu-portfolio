@@ -6,20 +6,49 @@ import { useTheme } from "@/shared/context/ThemeContext";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
+    let lastScrollY = typeof window !== "undefined" ? window.scrollY : 0;
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          setScrolled(currentScrollY > 30);
+
+          // Always visible near top of page
+          if (currentScrollY < 60) {
+            setVisible(true);
+          } else if (currentScrollY > lastScrollY && currentScrollY - lastScrollY > 8) {
+            // Scrolling down -> gently hide floating navbar to prevent any content overlap
+            setVisible(false);
+          } else if (lastScrollY - currentScrollY > 8) {
+            // Scrolling up -> immediately reveal navbar
+            setVisible(true);
+          }
+
+          lastScrollY = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const isLight = theme === "light";
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 pointer-events-none">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 pointer-events-none transition-all duration-300 ${
+        visible ? "translate-y-0 opacity-100" : "-translate-y-20 opacity-0"
+      }`}
+    >
       <nav
         className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl px-4 py-2.5 rounded-full transition-all duration-300 ${
           isLight

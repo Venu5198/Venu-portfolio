@@ -290,41 +290,6 @@ body {
   animation: comic-pop-burst 0.85s steps(6, end) forwards;
 }
 
-/* Dark containers adapt to crisp white with tactile borders */
-[data-theme="light"] .bg-\[\#09090B\],
-[data-theme="light"] .bg-\[\#09090b\],
-[data-theme="light"] .bg-\[\#0c0c11\],
-[data-theme="light"] .bg-\[\#0d0d12\],
-[data-theme="light"] .bg-\[\#101016\],
-[data-theme="light"] .bg-\[\#111117\],
-[data-theme="light"] .bg-\[\#121218\],
-[data-theme="light"] .bg-\[\#181824\] {
-  background-color: #ffffff !important;
-}
-
-/* High typographic contrast in Light mode */
-[data-theme="light"] .text-white,
-[data-theme="light"] .text-zinc-100 {
-  color: #18181b !important;
-}
-
-[data-theme="light"] .text-zinc-200,
-[data-theme="light"] .text-zinc-300 {
-  color: #27272a !important;
-}
-
-[data-theme="light"] .text-zinc-400 {
-  color: #52525b !important;
-}
-
-[data-theme="light"] .text-zinc-500 {
-  color: #71717a !important;
-}
-
-[data-theme="light"] .text-zinc-600 {
-  color: #a1a1aa !important;
-}
-
 /* Hairlines and dark borders in Light mode */
 [data-theme="light"] .border-hairline {
   border-color: rgba(24, 24, 27, 0.14) !important;

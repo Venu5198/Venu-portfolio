@@ -82,7 +82,7 @@ export function ContactSection() {
   };
 
   return (
-    <footer id="contact" className="py-28 relative border-t border-hairline scroll-mt-36 sm:scroll-mt-44">
+    <footer className="py-28 relative border-t border-hairline pb-80 sm:pb-96">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Engineering Philosophy Banner (Open, Typographic Layout) */}
         <div className="mb-20 pb-16 border-b border-hairline space-y-6">
@@ -106,7 +106,7 @@ export function ContactSection() {
         </div>
 
         {/* Contact Transmission Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div id="contact" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start scroll-mt-36 sm:scroll-mt-44">
           {/* Left: Call to Action & Direct Channels */}
           <div className="lg:col-span-7 space-y-8">
             <div className="space-y-4">
