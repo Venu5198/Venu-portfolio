@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+import confetti from "canvas-confetti";
 import { Search, Sparkles } from "lucide-react";
 import { skillDomainsData } from "@/shared/data/skills";
 import { SkillDomain, SkillItem } from "@/shared/types/skill";
@@ -10,6 +12,19 @@ const pastelColors = ["#bef264", "#fda4af", "#d8b4fe", "#bae6fd", "#fde047"];
 export function VibeArsenalSection() {
   const [query, setQuery] = useState("");
   const [selectedDomain, setSelectedDomain] = useState<string>("all");
+
+  const fireConfetti = (e?: React.MouseEvent) => {
+    try {
+      confetti({
+        particleCount: 35,
+        spread: 55,
+        origin: e
+          ? { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
+          : { y: 0.6 },
+        colors: ["#bef264", "#fda4af", "#d8b4fe", "#bae6fd", "#fde047"],
+      });
+    } catch {}
+  };
 
   const domainOptions = ["all", ...skillDomainsData.map((d: SkillDomain) => d.id)];
 
@@ -27,7 +42,7 @@ export function VibeArsenalSection() {
     .filter((domain) => domain.matchingSkills.length > 0);
 
   return (
-    <section id="arsenal" className="py-24 relative scroll-mt-28">
+    <section id="arsenal" className="py-24 relative scroll-mt-36 pt-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="space-y-3 mb-12 pb-6 border-b-2 border-black/10">
@@ -94,9 +109,12 @@ export function VibeArsenalSection() {
                 {group.matchingSkills.map((sk: SkillItem, idx: number) => {
                   const color = pastelColors[(groupIdx + idx) % pastelColors.length];
                   return (
-                    <div
+                    <motion.div
                       key={sk.name}
-                      className="px-4 py-2.5 rounded-2xl border-2 border-black text-black font-mono text-xs font-bold shadow-[3px_3px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#000] transition-all cursor-default flex items-center gap-2"
+                      onClick={(e) => fireConfetti(e)}
+                      whileHover={{ scale: 1.08, rotate: ((idx % 3) - 1) * 2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-4 py-2.5 rounded-2xl border-2 border-black text-black font-mono text-xs font-bold shadow-[3px_3px_0px_#000] hover:shadow-[5px_5px_0px_#000] transition-all cursor-pointer flex items-center gap-2 select-none"
                       style={{ backgroundColor: color }}
                     >
                       <span>{sk.name}</span>
@@ -105,7 +123,7 @@ export function VibeArsenalSection() {
                           {sk.tag}
                         </span>
                       )}
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>

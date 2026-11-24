@@ -119,13 +119,13 @@ export function Navbar() {
                 ? "bg-[#bef264] text-black border-2 border-black shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px]"
                 : "bg-white/[0.06] text-zinc-300 border border-white/10 hover:text-white hover:bg-white/10"
             }`}
-            title={isLight ? "Switch to Dark Console mode" : "Switch to Gen-Z Vibe Coding mode"}
+            title={isLight ? "Switch to Dark Console mode" : "Switch to Gen-Z Chaos mode"}
             aria-label="Toggle theme"
           >
             {isLight ? (
               <>
-                <Sparkles className="w-3.5 h-3.5 text-black" />
-                <span>VIBE MODE</span>
+                <Sparkles className="w-3.5 h-3.5 text-black animate-spin" />
+                <span>CHAOS MODE ⚡</span>
               </>
             ) : (
               <>

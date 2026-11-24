@@ -2,9 +2,11 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import confetti from "canvas-confetti";
 import { ExternalLink, ArrowRight, Server, Bot, Layers, Sparkles, CheckCircle2 } from "lucide-react";
 import { projectsData } from "@/shared/data/projects";
 import { Project } from "@/shared/types/project";
+import { VibeMarquee } from "./VibeMarquee";
 
 interface VibeProjectsSectionProps {
   onSelectProject: (p: Project) => void;
@@ -21,13 +23,43 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
   const finops = projectsData.find((p) => p.id === "gcp-cost-finops")!;
   const gitops = projectsData.find((p) => p.id === "gitops-platform-fleet")!;
 
+  const fireConfetti = (e?: React.MouseEvent) => {
+    try {
+      confetti({
+        particleCount: 40,
+        spread: 60,
+        origin: e
+          ? { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
+          : { y: 0.6 },
+        colors: ["#bef264", "#fda4af", "#d8b4fe", "#bae6fd", "#fde047"],
+      });
+    } catch {}
+  };
+
   return (
-    <section id="projects" className="py-24 relative scroll-mt-28">
+    <section id="projects" className="py-24 relative scroll-mt-36 pt-12">
+      {/* Kinetic Marquee Ticker Tape Ribbon */}
+      <VibeMarquee
+        items={[
+          "ZERO-DRAMA DEPLOYS 💅",
+          "MAIN CHARACTER MICROSERVICES 💅",
+          "NO CAP 99.98% SLA 🧢❌",
+          "LET HIM COOK 🍳",
+          "5 PLATFORMS SYNCED ⚡",
+          "1,000+ APP CONNECTORS 🔌",
+          "120 BUGS → 0 CLEARED 🎯",
+          "DELULU-FREE INFRA 🧘",
+        ]}
+        rotate="-rotate-1"
+        direction="left"
+        color="#bef264"
+      />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header with Playful Badge */}
         <div className="space-y-3 mb-16 pb-6 border-b-2 border-black/10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fde047] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000]">
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 text-black animate-spin" />
             FLAGSHIP CODE &amp; ARCHITECTURE
           </div>
           <h2 className="text-4xl sm:text-6xl font-black text-black tracking-tight leading-[0.95]">
@@ -45,6 +77,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={slowSpring}
+          whileHover={{ rotate: -0.5, scale: 1.005 }}
           className="mb-16 rounded-3xl bg-white border-2 border-black shadow-[8px_8px_0px_#000] overflow-hidden"
         >
           {/* Pastel Header Ribbon */}
@@ -53,9 +86,14 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
               <span className="w-2.5 h-2.5 rounded-full bg-black animate-ping" />
               // 01 · 5-PLATFORM MESSAGING BRIDGE · SYNCRIVO.AI
             </span>
-            <span className="px-3 py-1 rounded-full bg-white border-2 border-black text-[11px] shadow-[2px_2px_0px_#000]">
-              LATENCY: &lt; 95MS · 99.98% SLA
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-1 rounded-full bg-black text-white text-[11px] font-bold">
+                zero-drama deploys 💅
+              </span>
+              <span className="px-3 py-1 rounded-full bg-white border-2 border-black text-[11px] shadow-[2px_2px_0px_#000]">
+                LATENCY: &lt; 95MS · 99.98% SLA
+              </span>
+            </div>
           </div>
 
           <div className="p-6 sm:p-10 space-y-8">
@@ -171,6 +209,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={slowSpring}
+          whileHover={{ rotate: 0.5, scale: 1.005 }}
           className="mb-16 rounded-3xl bg-white border-2 border-black shadow-[8px_8px_0px_#000] overflow-hidden"
         >
           {/* Pastel Header Ribbon */}
@@ -179,9 +218,14 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
               <span className="w-2.5 h-2.5 rounded-full bg-black animate-ping" />
               // 02 · AI WORKFLOW AUTOMATION ENGINE · OCNORA.AI
             </span>
-            <span className="px-3 py-1 rounded-full bg-white border-2 border-black text-[11px] shadow-[2px_2px_0px_#000]">
-              1,000+ APP PROVIDERS · AUTONOMOUS PRs
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-1 rounded-full bg-black text-white text-[11px] font-bold">
+                main character microservices 💅
+              </span>
+              <span className="px-3 py-1 rounded-full bg-white border-2 border-black text-[11px] shadow-[2px_2px_0px_#000]">
+                1,000+ APP PROVIDERS · AUTONOMOUS PRs
+              </span>
+            </div>
           </div>
 
           <div className="p-6 sm:p-10 space-y-8">

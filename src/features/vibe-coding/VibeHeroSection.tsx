@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Terminal, Copy, Check, ArrowRight, Sparkles, Coffee, Heart } from "lucide-react";
+import confetti from "canvas-confetti";
+import { Terminal, Copy, Check, ArrowRight, Sparkles, Coffee, Heart, Zap } from "lucide-react";
 import { profileData } from "@/shared/data/profile";
 
 const slowSpring = {
@@ -15,9 +16,25 @@ export function VibeHeroSection() {
   const [copied, setCopied] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  const copyCommand = () => {
+  const fireConfetti = (e?: React.MouseEvent) => {
+    try {
+      confetti({
+        particleCount: 45,
+        spread: 65,
+        origin: e
+          ? { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
+          : { y: 0.6 },
+        colors: ["#bef264", "#fda4af", "#d8b4fe", "#bae6fd", "#fde047"],
+      });
+    } catch {
+      // fallback safe
+    }
+  };
+
+  const copyCommand = (e: React.MouseEvent) => {
     navigator.clipboard.writeText("npx venu-k");
     setCopied(true);
+    fireConfetti(e);
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -31,6 +48,51 @@ export function VibeHeroSection() {
       <div className="absolute top-36 right-10 w-80 h-80 rounded-full bg-[#FFF1F2]/70 blur-3xl pointer-events-none -z-10" />
       <div className="absolute bottom-10 left-1/3 w-96 h-96 rounded-full bg-[#EDE9FE]/50 blur-3xl pointer-events-none -z-10" />
 
+      {/* Floating Emojis Drifting in Slow Motion */}
+      <motion.button
+        type="button"
+        onClick={(e) => fireConfetti(e)}
+        animate={{ y: [0, -14, 0], rotate: [-8, 8, -8] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-24 left-[8%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden sm:block"
+        title="Click for vibes!"
+      >
+        🚀
+      </motion.button>
+
+      <motion.button
+        type="button"
+        onClick={(e) => fireConfetti(e)}
+        animate={{ y: [0, 16, 0], rotate: [6, -6, 6] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute top-32 right-[12%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden sm:block"
+        title="Click for vibes!"
+      >
+        ⚡
+      </motion.button>
+
+      <motion.button
+        type="button"
+        onClick={(e) => fireConfetti(e)}
+        animate={{ y: [0, -12, 0], x: [0, 8, 0], rotate: [-5, 5, -5] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute bottom-16 left-[5%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden md:block"
+        title="Click for vibes!"
+      >
+        🐳
+      </motion.button>
+
+      <motion.button
+        type="button"
+        onClick={(e) => fireConfetti(e)}
+        animate={{ y: [0, -18, 0], rotate: [10, -10, 10] }}
+        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        className="absolute bottom-28 right-[6%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden md:block"
+        title="Click for vibes!"
+      >
+        💅
+      </motion.button>
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Playful Quirky Sticker Cluster Banner */}
         <motion.div
@@ -39,19 +101,62 @@ export function VibeHeroSection() {
           transition={slowSpring}
           className="flex flex-wrap items-center gap-3 pb-8 mb-8 border-b-2 border-black/10"
         >
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#bef264] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] -rotate-2 hover:rotate-0 transition-transform">
-            <Sparkles className="w-3.5 h-3.5" />
-            // vibe-coding ☕
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#d8b4fe] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] rotate-2 hover:rotate-0 transition-transform">
-            backend &amp; ai 🚀
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fda4af] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] -rotate-1 hover:rotate-0 transition-transform">
-            shipped with team 🤝
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fde047] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] rotate-1 hover:rotate-0 transition-transform">
-            no-drama infra 🧘
-          </span>
+          <motion.button
+            type="button"
+            onClick={(e) => fireConfetti(e)}
+            animate={{ y: [0, -4, 0], rotate: [-2, 1, -2] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#bef264] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] cursor-pointer"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-black animate-spin" />
+            // CHAOS MODE ⚡
+          </motion.button>
+
+          <motion.button
+            type="button"
+            onClick={(e) => fireConfetti(e)}
+            animate={{ y: [0, 4, 0], rotate: [2, -1, 2] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fde047] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] cursor-pointer"
+          >
+            delulu-free infra 🧘
+          </motion.button>
+
+          <motion.button
+            type="button"
+            onClick={(e) => fireConfetti(e)}
+            animate={{ y: [0, -3, 0], rotate: [-1, 2, -1] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#d8b4fe] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] cursor-pointer"
+          >
+            chronically online backend 🌐
+          </motion.button>
+
+          <motion.button
+            type="button"
+            onClick={(e) => fireConfetti(e)}
+            animate={{ y: [0, 3, 0], rotate: [1, -2, 1] }}
+            transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#bae6fd] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] cursor-pointer"
+          >
+            no cap 99.98% SLA 🧢❌
+          </motion.button>
+
+          <motion.button
+            type="button"
+            onClick={(e) => fireConfetti(e)}
+            animate={{ y: [0, -4, 0], rotate: [-2, 2, -2] }}
+            transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fda4af] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] cursor-pointer"
+          >
+            let him cook (in prod) 🍳
+          </motion.button>
+
           <span className="ml-auto text-xs font-mono text-zinc-500 font-medium">
             Tirupati, AP · India
           </span>
@@ -185,29 +290,49 @@ export function VibeHeroSection() {
           transition={{ ...slowSpring, delay: 0.4 }}
           className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4"
         >
-          <div className="p-5 rounded-2xl bg-[#d9f99d] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform">
+          <motion.div
+            onClick={(e) => fireConfetti(e)}
+            whileHover={{ scale: 1.05, rotate: -1.5 }}
+            whileTap={{ scale: 0.96 }}
+            className="p-5 rounded-2xl bg-[#d9f99d] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 transition-all cursor-pointer"
+          >
             <div className="font-mono text-[11px] uppercase font-bold text-zinc-800">PRODUCTION SLA</div>
             <div className="text-2xl sm:text-3xl font-black text-black tracking-tight">99.98%</div>
-            <div className="text-xs text-zinc-800 font-medium">Uptime Across Microservices</div>
-          </div>
+            <div className="text-xs text-zinc-800 font-medium">Uptime Across Microservices ✨</div>
+          </motion.div>
 
-          <div className="p-5 rounded-2xl bg-[#fecdd3] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform">
+          <motion.div
+            onClick={(e) => fireConfetti(e)}
+            whileHover={{ scale: 1.05, rotate: 1.5 }}
+            whileTap={{ scale: 0.96 }}
+            className="p-5 rounded-2xl bg-[#fecdd3] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 transition-all cursor-pointer"
+          >
             <div className="font-mono text-[11px] uppercase font-bold text-zinc-800">CLOUD FINOPS</div>
             <div className="text-2xl sm:text-3xl font-black text-black tracking-tight">20–25%</div>
-            <div className="text-xs text-zinc-800 font-medium">Monthly Spend Reduced</div>
-          </div>
+            <div className="text-xs text-zinc-800 font-medium">Monthly Spend Reduced 💰</div>
+          </motion.div>
 
-          <div className="p-5 rounded-2xl bg-[#bae6fd] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform">
+          <motion.div
+            onClick={(e) => fireConfetti(e)}
+            whileHover={{ scale: 1.05, rotate: -1.5 }}
+            whileTap={{ scale: 0.96 }}
+            className="p-5 rounded-2xl bg-[#bae6fd] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 transition-all cursor-pointer"
+          >
             <div className="font-mono text-[11px] uppercase font-bold text-zinc-800">CONTAINER FLEET</div>
             <div className="text-2xl sm:text-3xl font-black text-black tracking-tight">20+ Services</div>
-            <div className="text-xs text-zinc-800 font-medium">Kubernetes &amp; Cloud Run</div>
-          </div>
+            <div className="text-xs text-zinc-800 font-medium">Kubernetes &amp; Cloud Run 🐳</div>
+          </motion.div>
 
-          <div className="p-5 rounded-2xl bg-[#e9d5ff] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform">
+          <motion.div
+            onClick={(e) => fireConfetti(e)}
+            whileHover={{ scale: 1.05, rotate: 1.5 }}
+            whileTap={{ scale: 0.96 }}
+            className="p-5 rounded-2xl bg-[#e9d5ff] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 transition-all cursor-pointer"
+          >
             <div className="font-mono text-[11px] uppercase font-bold text-zinc-800">INCIDENT MTTR</div>
             <div className="text-2xl sm:text-3xl font-black text-black tracking-tight">35% Faster</div>
-            <div className="text-xs text-zinc-800 font-medium">Prometheus &amp; Argo Alerts</div>
-          </div>
+            <div className="text-xs text-zinc-800 font-medium">Prometheus &amp; Argo Alerts ⚡</div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

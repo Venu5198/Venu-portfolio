@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import confetti from "canvas-confetti";
 import { Mail, Phone, Copy, Check, Send, ArrowUpRight, Coffee, Heart, Sparkles } from "lucide-react";
 import { profileData } from "@/shared/data/profile";
 
@@ -24,20 +25,35 @@ export function VibeContactSection() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
 
-  const copyEmail = () => {
+  const fireConfetti = (e?: React.MouseEvent) => {
+    try {
+      confetti({
+        particleCount: 45,
+        spread: 60,
+        origin: e
+          ? { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
+          : { y: 0.6 },
+        colors: ["#bef264", "#fda4af", "#d8b4fe", "#bae6fd", "#fde047"],
+      });
+    } catch {}
+  };
+
+  const copyEmail = (e?: React.MouseEvent) => {
     navigator.clipboard.writeText(profileData.contact.email);
     setCopiedEmail(true);
+    fireConfetti(e);
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
-  const copyPhone = () => {
+  const copyPhone = (e?: React.MouseEvent) => {
     navigator.clipboard.writeText(profileData.contact.phone);
     setCopiedPhone(true);
+    fireConfetti(e);
     setTimeout(() => setCopiedPhone(false), 2000);
   };
 
   return (
-    <footer id="contact" className="py-24 relative border-t-2 border-black/10 scroll-mt-28">
+    <footer id="contact" className="py-24 relative border-t-2 border-black/10 scroll-mt-36 pt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Yellow Sticky Note: Engineering Philosophy */}
         <div className="mb-16 p-8 rounded-3xl bg-[#fef08a] border-2 border-black shadow-[6px_6px_0px_#000] rotate-[-0.8deg] space-y-4">

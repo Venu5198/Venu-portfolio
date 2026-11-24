@@ -7,6 +7,7 @@ import { VibeArchitectureSection } from "./VibeArchitectureSection";
 import { VibeArsenalSection } from "./VibeArsenalSection";
 import { VibeCertificationsSection } from "./VibeCertificationsSection";
 import { VibeContactSection } from "./VibeContactSection";
+import { VibeMarquee } from "./VibeMarquee";
 import { ProjectModal } from "@/features/projects/ProjectModal";
 import { Project } from "@/shared/types/project";
 
@@ -23,6 +24,23 @@ export function VibeLayout() {
 
       {/* Vibe Systems Architecture Pipeline */}
       <VibeArchitectureSection />
+
+      {/* Kinetic Marquee Ticker 02 */}
+      <VibeMarquee
+        items={[
+          "BATTLE-TESTED TOOLING 🛠️",
+          "KUBERNETES & DOCKER FLEET 🐳",
+          "PROMETHEUS & GRAFANA 📊",
+          "AWS CERTIFIED DEVOPS PRO 🏆",
+          "CKA KUBERNETES ADMIN ☸️",
+          "TERRAFORM INFRA AS CODE 🏗️",
+          "FASTAPI + ASYNCIO ⚡",
+          "ATE AND LEFT NO CRUMBS 🍽️",
+        ]}
+        rotate="rotate-1"
+        direction="right"
+        color="#fde047"
+      />
 
       {/* Vibe Sticker Arsenal */}
       <VibeArsenalSection />

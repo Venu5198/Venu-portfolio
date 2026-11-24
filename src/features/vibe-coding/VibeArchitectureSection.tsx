@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
 import { Sparkles, ArrowRight, Play, Pause, Zap, Shield, Key, Layers, Send } from "lucide-react";
 
 type ArchitectureMode = "syncrivo" | "ocnora";
@@ -138,6 +139,19 @@ export function VibeArchitectureSection() {
   const [activeStage, setActiveStage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  const fireConfetti = (e?: React.MouseEvent) => {
+    try {
+      confetti({
+        particleCount: 35,
+        spread: 60,
+        origin: e
+          ? { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
+          : { y: 0.6 },
+        colors: ["#bef264", "#fda4af", "#d8b4fe", "#bae6fd", "#fde047"],
+      });
+    } catch {}
+  };
+
   const stages = mode === "syncrivo" ? syncrivoStages : ocnoraStages;
 
   // Auto-cycle through stages
@@ -152,7 +166,7 @@ export function VibeArchitectureSection() {
   return (
     <section
       id="architecture"
-      className="py-24 relative scroll-mt-28"
+      className="py-24 relative scroll-mt-36 pt-12"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -209,11 +223,14 @@ export function VibeArchitectureSection() {
           {stages.map((stg, idx) => {
             const isSelected = activeStage === idx;
             return (
-              <button
+              <motion.button
                 key={idx}
-                onClick={() => {
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={(e) => {
                   setActiveStage(idx);
                   setIsPaused(true);
+                  fireConfetti(e);
                 }}
                 className={`p-4 rounded-2xl text-left border-2 border-black transition-all cursor-pointer flex flex-col justify-between ${
                   isSelected
@@ -229,7 +246,7 @@ export function VibeArchitectureSection() {
                 <div className="text-xs font-black text-black leading-snug line-clamp-2">
                   {stg.label}
                 </div>
-              </button>
+              </motion.button>
             );
           })}
         </div>
