@@ -124,6 +124,7 @@ export function VibeCertificationsSection() {
                     href={c.credlyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    data-cursor="VERIFY ↗"
                     className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border-2 border-[#0A0A0A] text-xs font-mono font-black transition-colors ${
                       isDark
                         ? "bg-white text-[#0A0A0A] hover:bg-[#C6FF00]"

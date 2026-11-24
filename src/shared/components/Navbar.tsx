@@ -59,7 +59,11 @@ export function Navbar() {
         }`}
       >
         {/* Brand / Logo */}
-        <a href="#hero" className="flex items-center gap-2 group text-sm font-semibold tracking-tight shrink-0">
+        <a
+          href="#hero"
+          {...(isLight ? { "data-cursor": "TOP ⚡" } : {})}
+          className="flex items-center gap-2 group text-sm font-semibold tracking-tight shrink-0"
+        >
           <div
             className={`w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105 shrink-0 ${
               isLight
@@ -143,6 +147,7 @@ export function Navbar() {
           {/* Dual-Theme Switcher Toggle */}
           <button
             onClick={toggleTheme}
+            {...(isLight ? { "data-cursor": "THEME" } : {})}
             className={`px-3 py-1.5 rounded-full text-[11px] font-mono font-black flex items-center gap-1.5 transition-all cursor-pointer ${
               isLight
                 ? "bg-[#C6FF00] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover"
@@ -166,6 +171,7 @@ export function Navbar() {
 
           <a
             href="#contact"
+            {...(isLight ? { "data-cursor": "BUILD 🚀" } : {})}
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-black text-xs transition-all ${
               isLight
                 ? "bg-[#FF4D00] text-white border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover"

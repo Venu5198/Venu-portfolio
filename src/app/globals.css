@@ -55,6 +55,7 @@ html.light {
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  scroll-padding-top: 7rem; /* Generous clearance for floating navbar across all viewports */
 }
 
 html[data-theme="light"],
@@ -369,4 +370,18 @@ body {
 /* Terminal spec block in Light mode */
 [data-theme="light"] pre {
   color: #18181b !important;
+}
+
+/* Studio Mode Custom Cursor: hide system cursor on desktop for interactive elements */
+@media (pointer: fine) {
+  [data-theme="light"] body,
+  [data-theme="light"] a,
+  [data-theme="light"] button {
+    cursor: none !important;
+  }
+  [data-theme="light"] input,
+  [data-theme="light"] textarea,
+  [data-theme="light"] select {
+    cursor: text !important;
+  }
 }

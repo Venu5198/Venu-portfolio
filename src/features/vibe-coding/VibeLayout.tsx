@@ -8,6 +8,7 @@ import { VibeArsenalSection } from "./VibeArsenalSection";
 import { VibeCertificationsSection } from "./VibeCertificationsSection";
 import { VibeContactSection } from "./VibeContactSection";
 import { VibeMarquee } from "./VibeMarquee";
+import { StudioCursor } from "./StudioCursor";
 import { ProjectModal } from "@/features/projects/ProjectModal";
 import { Project } from "@/shared/types/project";
 
@@ -16,6 +17,9 @@ export function VibeLayout() {
 
   return (
     <div className="relative min-h-screen w-full max-w-full overflow-x-clip bg-[#F4F4F0] text-[#0A0A0A] selection:bg-[#C6FF00] selection:text-[#0A0A0A]">
+      {/* Studio / Comic Custom Mouse Cursor (Desktop Light Mode Only) */}
+      <StudioCursor />
+
       {/* Vibe Hero Section */}
       <VibeHeroSection />
 

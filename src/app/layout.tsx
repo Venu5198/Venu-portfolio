@@ -29,7 +29,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://venu-portfolio.vercel.app"),
+  metadataBase: new URL("https://venu-k.vercel.app"),
   title: {
     default: "Venu K — Backend Developer (Python, DevOps & AI)",
     template: "%s | Venu K",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     title: "Venu K — Backend Developer (Python, DevOps & AI)",
     description:
       "Backend Developer specializing in Python, distributed event systems, DevOps, and AI workflow automation. Core contributor to SyncRivo and OCNORA.",
-    url: "https://venu-portfolio.vercel.app",
+    url: "https://venu-k.vercel.app",
     siteName: "Venu K — Backend Developer Portfolio",
     locale: "en_US",
     type: "website",

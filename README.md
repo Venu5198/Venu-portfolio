@@ -18,7 +18,7 @@ This repository houses the source code for the personal engineering portfolio of
 Built with an Awwwards-inspired aesthetic and strict systems-engineering principles, the site showcases high-throughput distributed systems including the **SyncRivo** multi-platform webhook bridge (Slack, Teams, Google Chat, Zoom Team Chat, Webex) and the **OCNORA** autonomous agent orchestration engine. It features interactive 5-stage systems architecture flows, an instant-search competency arsenal, verified cloud/DevOps credentials, and cinematic motion design.
 
 ### 🔗 Quick Links
-- **Live Deployment**: [https://venu-portfolio.vercel.app](https://venu-portfolio.vercel.app) *(or custom domain)*
+- **Live Deployment**: [https://venu-k.vercel.app](https://venu-k.vercel.app) *(or custom domain)*
 - **GitHub**: [@Venu5198](https://github.com/Venu5198)
 - **LinkedIn**: [Venu K](https://www.linkedin.com/in/venu-k-2a4460383)
 - **Direct Contact**: [venukrishnaya@gmail.com](mailto:venukrishnaya@gmail.com)

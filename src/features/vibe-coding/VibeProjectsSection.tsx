@@ -166,6 +166,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
                 <div className="flex flex-wrap items-center gap-4 pt-4">
                   <button
                     onClick={() => onSelectProject(syncrivo)}
+                    data-cursor="INSPECT"
                     className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#0A0A0A] text-[#C6FF00] font-black text-xs border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
                   >
                     <span>Inspect Architecture Blueprints &amp; Specs 🔍</span>
@@ -177,7 +178,8 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
                       href={syncrivo.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-white border-2 border-[#0A0A0A] text-[#0A0A0A] font-mono text-xs font-black shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all"
+                      data-cursor="LIVE ↗"
+                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-white border-2 border-[#0A0A0A] text-[#0A0A0A] font-mono text-xs font-black shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
                     >
                       <span>syncrivo.ai</span>
                       <ExternalLink className="w-3.5 h-3.5 text-zinc-700" />
@@ -306,6 +308,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
                 <div className="flex flex-wrap items-center gap-4 pt-4">
                   <button
                     onClick={() => onSelectProject(ocnora)}
+                    data-cursor="INSPECT"
                     className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#0A0A0A] text-[#C6FF00] font-black text-xs border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
                   >
                     <span>Inspect Engine Specifications 🔍</span>
@@ -317,7 +320,8 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
                       href={ocnora.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-white border-2 border-[#0A0A0A] text-[#0A0A0A] font-mono text-xs font-black shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all"
+                      data-cursor="LIVE ↗"
+                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-white border-2 border-[#0A0A0A] text-[#0A0A0A] font-mono text-xs font-black shadow-[2px_2px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
                     >
                       <span>ocnora.ai</span>
                       <ExternalLink className="w-3.5 h-3.5 text-zinc-700" />
@@ -351,6 +355,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
               onSelectProject(finops);
               fireConfetti(e);
             }}
+            data-cursor="INSPECT"
             whileHover={{ scale: 1.025, rotate: -0.75, transition: { type: "spring", stiffness: 350, damping: 20 } }}
             whileTap={{ scale: 0.98 }}
             className="p-8 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] transition-all cursor-pointer space-y-3"
@@ -370,6 +375,7 @@ export function VibeProjectsSection({ onSelectProject }: VibeProjectsSectionProp
               onSelectProject(gitops);
               fireConfetti(e);
             }}
+            data-cursor="INSPECT"
             whileHover={{ scale: 1.025, rotate: 0.75, transition: { type: "spring", stiffness: 350, damping: 20 } }}
             whileTap={{ scale: 0.98 }}
             className="p-8 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] transition-all cursor-pointer space-y-3"

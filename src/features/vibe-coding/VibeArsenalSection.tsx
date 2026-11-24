@@ -83,6 +83,7 @@ export function VibeArsenalSection() {
                 <button
                   key={opt}
                   onClick={() => setSelectedDomain(opt)}
+                  data-cursor="FILTER"
                   className={`px-3.5 py-1.5 rounded-full font-mono text-xs font-black border-2 border-[#0A0A0A] transition-all cursor-pointer ${
                     isSelected
                       ? "bg-[#0A0A0A] text-[#C6FF00] shadow-[2px_2px_0px_#C6FF00] translate-x-[-1px] translate-y-[-1px]"
@@ -113,6 +114,7 @@ export function VibeArsenalSection() {
                     <motion.div
                       key={sk.name}
                       onClick={(e) => fireConfetti(e)}
+                      data-cursor="SKILL ⚡"
                       whileHover={{ scale: 1.08, rotate: ((idx % 3) - 1) * 2 }}
                       whileTap={{ scale: 0.95 }}
                       className={`px-4 py-2.5 rounded-2xl border-2 border-[#0A0A0A] font-mono text-xs font-black shadow-[3px_3px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer flex items-center gap-2 select-none ${

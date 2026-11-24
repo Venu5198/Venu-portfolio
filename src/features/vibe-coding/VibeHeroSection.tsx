@@ -25,6 +25,7 @@ const studioMoods = [
 
 export function VibeHeroSection() {
   const [copied, setCopied] = useState(false);
+  const [imageSrc, setImageSrc] = useState("/images/venu-studio.jpg");
   const [imageError, setImageError] = useState(false);
   const [moodIdx, setMoodIdx] = useState(0);
   const [bursts, setBursts] = useState<ComicBurstItem[]>([]);
@@ -275,6 +276,7 @@ export function VibeHeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...steppedSpring, delay: 0.25 }}
+              data-cursor="SYNC!"
               onClick={(e) => {
                 setMoodIdx((prev) => (prev + 1) % studioMoods.length);
                 fireConfetti(e);
@@ -314,6 +316,7 @@ export function VibeHeroSection() {
             >
               <button
                 onClick={copyCommand}
+                data-cursor="COPY"
                 className="inline-flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#FFF] text-[#0A0A0A] border-[2.5px] border-[#0A0A0A] shadow-[3.5px_3.5px_0px_#0A0A0A] spider-rgb-hover font-mono text-xs font-black transition-all cursor-pointer"
                 title="Copy terminal command"
               >
@@ -333,6 +336,7 @@ export function VibeHeroSection() {
 
               <a
                 href="#projects"
+                data-cursor="EXPLORE"
                 onClick={(e) => triggerBurst("*DEPLOYED!*", e, "#FF0055")}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#FF4D00] text-white font-black text-xs border-[2.5px] border-[#0A0A0A] shadow-[3.5px_3.5px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
               >
@@ -342,6 +346,7 @@ export function VibeHeroSection() {
 
               <a
                 href="#contact"
+                data-cursor="SAY HELLO"
                 onClick={(e) => triggerBurst("*PING!*", e, "#FDE047")}
                 className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-xs border-[2.5px] border-[#0A0A0A] shadow-[3.5px_3.5px_0px_#0A0A0A] spider-rgb-hover transition-all cursor-pointer"
               >
@@ -359,6 +364,7 @@ export function VibeHeroSection() {
               transition={{ ...steppedSpring, delay: 0.25 }}
               whileHover={{ rotate: -1.5, scale: 1.04, transition: { type: "spring", stiffness: 400, damping: 20 } }}
               whileTap={{ scale: 0.97 }}
+              data-cursor="PASS ⚡"
               onClick={(e) => {
                 fireConfetti(e);
                 triggerBurst("*STUDIO PASS!*", e, "#C6FF00");
@@ -386,12 +392,18 @@ export function VibeHeroSection() {
               <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden border-2 border-[#0A0A0A] bg-zinc-100">
                 {!imageError ? (
                   <Image
-                    src={profileData.photoUrl}
+                    src={imageSrc}
                     alt={profileData.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 300px"
                     className="object-cover"
-                    onError={() => setImageError(true)}
+                    onError={() => {
+                      if (imageSrc !== profileData.photoUrl) {
+                        setImageSrc(profileData.photoUrl);
+                      } else {
+                        setImageError(true);
+                      }
+                    }}
                   />
                 ) : (
                   <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center space-y-2 bg-[#FDE047]">

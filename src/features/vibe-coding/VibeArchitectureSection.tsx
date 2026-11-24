@@ -256,6 +256,7 @@ export function VibeArchitectureSection() {
           <div className="flex items-center gap-3">
             <button
               onClick={(e) => switchMode("syncrivo", e)}
+              data-cursor="SWITCH ⚡"
               className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-[2.5px] border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
                 mode === "syncrivo"
                   ? "bg-[#C6FF00] text-[#0A0A0A] shadow-[3.5px_3.5px_0px_#0A0A0A] translate-x-[-1px] translate-y-[-1px]"
@@ -266,6 +267,7 @@ export function VibeArchitectureSection() {
             </button>
             <button
               onClick={(e) => switchMode("ocnora", e)}
+              data-cursor="SWITCH ⚡"
               className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-[2.5px] border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
                 mode === "ocnora"
                   ? "bg-[#2563EB] text-white shadow-[3.5px_3.5px_0px_#0A0A0A] translate-x-[-1px] translate-y-[-1px]"
@@ -323,6 +325,7 @@ export function VibeArchitectureSection() {
             return (
               <motion.button
                 key={idx}
+                data-cursor={`STAGE 0${stg.step}`}
                 whileHover={{ scale: 1.05, y: -3, transition: { type: "spring", stiffness: 500, damping: 20 } }}
                 whileTap={{ scale: 0.95, y: 1 }}
                 onClick={(e) => {
