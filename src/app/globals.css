@@ -372,18 +372,23 @@ body {
   color: #18181b !important;
 }
 
-/* Studio Mode Custom Cursor: hide system cursor on desktop for interactive elements */
-@media (pointer: fine) {
-  [data-theme="light"] body,
-  [data-theme="light"] a,
-  [data-theme="light"] button,
-  [data-theme="light"] [role="button"] {
+/* Studio Mode Custom Cursor: hide system cursor when custom cursor is active in Light Mode */
+[data-theme="light"].has-custom-cursor,
+[data-theme="light"].has-custom-cursor * {
+  cursor: none !important;
+}
+
+[data-theme="light"].has-custom-cursor input,
+[data-theme="light"].has-custom-cursor textarea,
+[data-theme="light"].has-custom-cursor select,
+[data-theme="light"].has-custom-cursor [contenteditable="true"] {
+  cursor: text !important;
+}
+
+/* Fallback for fine pointer desktop devices */
+@media (pointer: fine), (any-pointer: fine) {
+  [data-theme="light"].has-custom-cursor body {
     cursor: none !important;
-  }
-  [data-theme="light"] input,
-  [data-theme="light"] textarea,
-  [data-theme="light"] select {
-    cursor: text !important;
   }
 }
 

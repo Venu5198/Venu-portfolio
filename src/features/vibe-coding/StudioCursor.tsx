@@ -15,12 +15,12 @@ export function StudioCursor() {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Ultra-snappy spring physics for outer ring: high stiffness, low mass = zero lag
-  const springConfig = { stiffness: 800, damping: 38, mass: 0.12 };
+  // Snappy spring physics for outer ring: responsive follow with organic kinetic spring
+  const springConfig = { stiffness: 650, damping: 32, mass: 0.18 };
   const ringX = useSpring(mouseX, springConfig);
   const ringY = useSpring(mouseY, springConfig);
 
-  // Persistent reference to the last known pointer position for scroll updates
+  const isFirstMove = useRef(true);
   const lastPosRef = useRef({ x: -100, y: -100 });
 
   // Target evaluation helper
@@ -42,41 +42,73 @@ export function StudioCursor() {
       return;
     }
 
-    // 2. Custom action text detection
+    // 2. Explicit custom action text detection via data-cursor
     const cursorTarget = target.closest("[data-cursor]") as HTMLElement | null;
     if (cursorTarget) {
+      const explicitText = cursorTarget.getAttribute("data-cursor");
+      if (explicitText) {
+        setIsHovering(true);
+        setCursorText(explicitText);
+        return;
+      }
+    }
+
+    // 3. Links default to "OPEN ↗"
+    if (target.closest("a")) {
       setIsHovering(true);
-      setCursorText(cursorTarget.getAttribute("data-cursor") || "CLICK ⚡");
+      setCursorText("OPEN ↗");
       return;
     }
 
-    // 3. Standard clickable targets
-    const isClickable = !!target.closest("a, button, [role='button'], summary");
-    if (isClickable) {
+    // 4. Buttons default to "CLICK ⚡"
+    if (target.closest("button, [role='button'], summary")) {
       setIsHovering(true);
-      setCursorText("");
+      setCursorText("CLICK ⚡");
       return;
     }
 
-    // Default resting state
+    // 5. Interactive clickable cards / pills with .cursor-pointer default to "VIEW ⚡"
+    if (target.closest(".cursor-pointer")) {
+      setIsHovering(true);
+      setCursorText("VIEW ⚡");
+      return;
+    }
+
+    // Default resting state: classic Spider-Verse ring + ink crosshair dot
     setIsHovering(false);
     setCursorText("");
   }, []);
 
   useEffect(() => {
-    // Only activate on desktop devices with a fine pointer (mouse/trackpad)
     if (typeof window === "undefined") return;
-    const mediaQuery = window.matchMedia("(pointer: fine)");
-    if (!mediaQuery.matches) return;
+
+    // Support desktop mouse/trackpad even on hybrid Windows touchscreen devices
+    const isPureMobile =
+      window.matchMedia("(pointer: coarse)").matches &&
+      !window.matchMedia("(any-pointer: fine)").matches &&
+      window.innerWidth < 768;
+
+    if (isPureMobile) return;
 
     setEnabled(true);
+    document.documentElement.classList.add("has-custom-cursor");
 
     const handlePointerMove = (e: PointerEvent | MouseEvent) => {
       const { clientX, clientY } = e;
-      mouseX.set(clientX);
-      mouseY.set(clientY);
-      lastPosRef.current = { x: clientX, y: clientY };
 
+      // On first move, jump spring directly to avoid trailing from (-100, -100)
+      if (isFirstMove.current) {
+        mouseX.set(clientX);
+        mouseY.set(clientY);
+        ringX.jump(clientX);
+        ringY.jump(clientY);
+        isFirstMove.current = false;
+      } else {
+        mouseX.set(clientX);
+        mouseY.set(clientY);
+      }
+
+      lastPosRef.current = { x: clientX, y: clientY };
       setIsVisible(true);
 
       const target = (e.target as Element | null) || document.elementFromPoint(clientX, clientY);
@@ -86,13 +118,11 @@ export function StudioCursor() {
     const handlePointerDown = () => setIsClicked(true);
     const handlePointerUp = (e: PointerEvent | MouseEvent) => {
       setIsClicked(false);
-      // Re-evaluate target on pointerup in case modal opened or DOM changed
       const target = document.elementFromPoint(e.clientX, e.clientY);
       updateTargetState(target);
     };
 
     const handleScroll = () => {
-      // Keep hover states in sync while scrolling without needing mousemove
       if (lastPosRef.current.x >= 0 && lastPosRef.current.y >= 0) {
         const target = document.elementFromPoint(lastPosRef.current.x, lastPosRef.current.y);
         updateTargetState(target);
@@ -100,7 +130,6 @@ export function StudioCursor() {
     };
 
     const handleMouseLeave = (e: MouseEvent) => {
-      // Only hide if the cursor actually exited the browser viewport window
       if (
         e.clientY <= 0 ||
         e.clientX <= 0 ||
@@ -117,7 +146,6 @@ export function StudioCursor() {
       setIsVisible(true);
     };
 
-    // Global listeners on window and document
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
     window.addEventListener("mousemove", handlePointerMove, { passive: true });
     window.addEventListener("pointerdown", handlePointerDown, { passive: true });
@@ -127,6 +155,7 @@ export function StudioCursor() {
     document.documentElement.addEventListener("mouseenter", handleMouseEnter);
 
     return () => {
+      document.documentElement.classList.remove("has-custom-cursor");
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("mousemove", handlePointerMove);
       window.removeEventListener("pointerdown", handlePointerDown);
@@ -135,7 +164,7 @@ export function StudioCursor() {
       document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
       document.documentElement.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [mouseX, mouseY, updateTargetState]);
+  }, [mouseX, mouseY, ringX, ringY, updateTargetState]);
 
   if (!enabled || !isVisible) return null;
 
@@ -156,7 +185,7 @@ export function StudioCursor() {
           translateX: "-50%",
           translateY: "-50%",
         }}
-        className="fixed w-2 h-2 rounded-full bg-[#0A0A0A] pointer-events-none select-none"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#0A0A0A] pointer-events-none select-none"
       />
 
       {/* 2. Spring-Lagged Outer Ring / Comic Action Pill with Chromatic Aberration */}
@@ -171,7 +200,7 @@ export function StudioCursor() {
           scale: isClicked ? 0.82 : isHovering ? 1.05 : 1,
         }}
         transition={{ type: "spring", stiffness: 600, damping: 30 }}
-        className="fixed pointer-events-none select-none flex items-center justify-center"
+        className="fixed top-0 left-0 pointer-events-none select-none flex items-center justify-center"
       >
         {isHovering && cursorText ? (
           /* Comic Action Pill */

@@ -112,7 +112,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
             <button
               onClick={onClose}
-              {...(isLight ? { "data-cursor": "CLOSE ✕" } : {})}
+              data-cursor="CLOSE ✕"
               className={`p-1.5 rounded-full transition-colors cursor-pointer ${
                 isLight
                   ? "text-[#0A0A0A] hover:bg-black/10 border-2 border-[#0A0A0A] bg-white shadow-[1.5px_1.5px_0px_#0A0A0A]"
@@ -142,7 +142,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    {...(isLight ? { "data-cursor": "OPEN ↗" } : {})}
+                    data-cursor="OPEN ↗"
                     className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-mono text-xs font-black transition-all ${
                       isLight
                         ? "bg-[#C6FF00] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px]"
@@ -209,7 +209,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             >
               <button
                 onClick={() => setActiveTab("context")}
-                {...(isLight ? { "data-cursor": "TAB" } : {})}
+                data-cursor="TAB"
                 className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "context"
                     ? isLight
@@ -225,7 +225,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               </button>
               <button
                 onClick={() => setActiveTab("architecture")}
-                {...(isLight ? { "data-cursor": "TAB" } : {})}
+                data-cursor="TAB"
                 className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "architecture"
                     ? isLight
@@ -241,7 +241,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               </button>
               <button
                 onClick={() => setActiveTab("reliability")}
-                {...(isLight ? { "data-cursor": "TAB" } : {})}
+                data-cursor="TAB"
                 className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "reliability"
                     ? isLight
@@ -257,7 +257,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               </button>
               <button
                 onClick={() => setActiveTab("stack")}
-                {...(isLight ? { "data-cursor": "TAB" } : {})}
+                data-cursor="TAB"
                 className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "stack"
                     ? isLight

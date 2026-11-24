@@ -62,7 +62,7 @@ export function VibeContactSection() {
   };
 
   return (
-    <footer className="relative border-t-2 border-[#0A0A0A]/10 pt-20 pb-48 sm:pb-64">
+    <footer className="relative border-t-2 border-[#0A0A0A]/10 pt-20 pb-72 sm:pb-96">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Streetwear Spec Banner: Engineering Philosophy */}
         <motion.div
@@ -93,7 +93,7 @@ export function VibeContactSection() {
         </motion.div>
 
         {/* Contact Spread: Chat Invite & Channels */}
-        <div id="contact" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start scroll-mt-44 sm:scroll-mt-52 pt-10 sm:pt-14">
+        <div id="contact" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start scroll-mt-48 sm:scroll-mt-60 pt-20 sm:pt-28">
           {/* Left Column: Direct Action */}
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
