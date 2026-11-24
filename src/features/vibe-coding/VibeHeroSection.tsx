@@ -12,13 +12,12 @@ const slowSpring = {
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
-const chaosMoods = [
-  { status: "99.98% PROD UPTIME", note: "no cap, zero unhandled outages sustained", color: "#bef264", icon: "🟢" },
-  { status: "REDIS LOCKS HOLDING STRONG", note: "sliding window loop guard dropping echoes", color: "#fde047", icon: "🛡️" },
-  { status: "PR APPROVED, DON'T TOUCH IT", note: "it runs on my machine and in staging", color: "#d8b4fe", icon: "🚀" },
-  { status: "0 SLEEP, PURE CAFFEINE", note: "let him cook the event microservices", color: "#fda4af", icon: "☕" },
-  { status: "ALL PODS HEALTHY (MIRACULOUSLY)", note: "kubernetes fleet at absolute peace", color: "#bae6fd", icon: "🐳" },
-  { status: "CHAOS LEVEL: MAXIMUM OVERDRIVE", note: "main character backend engineering energy", color: "#bef264", icon: "⚡" },
+const studioMoods = [
+  { status: "99.98% PROD UPTIME", note: "zero unhandled outages across distributed services", color: "#C6FF00", text: "#0A0A0A", icon: "⚡" },
+  { status: "REDIS SLIDING LOCKS", note: "cryptographic loop guard dropping echo cascades", color: "#FFFFFF", text: "#0A0A0A", icon: "🛡️" },
+  { status: "GITOPS PIPELINE STABLE", note: "ArgoCD & Kubernetes fleet synced to main", color: "#2563EB", text: "#FFFFFF", icon: "🚀" },
+  { status: "ASYNC EVENT INGRESS OK", note: "FastAPI microservices processing webhooks < 10ms", color: "#FF4D00", text: "#FFFFFF", icon: "🔥" },
+  { status: "ZERO DRIFT K8S CLUSTER", note: "all container pods passing health probes", color: "#FDE047", text: "#0A0A0A", icon: "🐳" },
 ];
 
 export function VibeHeroSection() {
@@ -34,7 +33,7 @@ export function VibeHeroSection() {
         origin: e
           ? { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
           : { y: 0.6 },
-        colors: ["#bef264", "#fda4af", "#d8b4fe", "#bae6fd", "#fde047"],
+        colors: ["#C6FF00", "#FF4D00", "#2563EB", "#FDE047", "#0A0A0A"],
       });
     } catch {
       // fallback safe
@@ -53,12 +52,12 @@ export function VibeHeroSection() {
       id="hero"
       className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden scroll-mt-36"
     >
-      {/* Soft Ambient Floating Pastel Gradient Blobs */}
-      <div className="absolute top-12 left-8 w-72 h-72 rounded-full bg-[#ECFCCB]/60 blur-3xl pointer-events-none -z-10 animate-pulse" />
-      <div className="absolute top-36 right-10 w-80 h-80 rounded-full bg-[#FFF1F2]/70 blur-3xl pointer-events-none -z-10" />
-      <div className="absolute bottom-10 left-1/3 w-96 h-96 rounded-full bg-[#EDE9FE]/50 blur-3xl pointer-events-none -z-10" />
+      {/* High-Contrast Ambient Accent Blooms */}
+      <div className="absolute top-12 left-8 w-72 h-72 rounded-full bg-[#C6FF00]/20 blur-3xl pointer-events-none -z-10 animate-pulse" />
+      <div className="absolute top-36 right-10 w-80 h-80 rounded-full bg-[#FF4D00]/15 blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-10 left-1/3 w-96 h-96 rounded-full bg-[#2563EB]/15 blur-3xl pointer-events-none -z-10" />
 
-      {/* Floating Emojis Drifting in Slow Motion */}
+      {/* Floating Streetwear Icons Drifting in Slow Motion */}
       <motion.button
         type="button"
         onClick={(e) => fireConfetti(e)}
@@ -100,16 +99,16 @@ export function VibeHeroSection() {
         className="absolute bottom-28 right-[6%] text-3xl select-none cursor-pointer filter drop-shadow hover:scale-125 transition-transform hidden md:block"
         title="Click for vibes!"
       >
-        💅
+        🛠️
       </motion.button>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Playful Quirky Sticker Cluster Banner */}
+        {/* Streetwear Builder Sticker Cluster Banner */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={slowSpring}
-          className="flex flex-wrap items-center gap-3 pb-8 mb-8 border-b-2 border-black/10"
+          className="flex flex-wrap items-center gap-3 pb-8 mb-8 border-b-2 border-[#0A0A0A]/10"
         >
           <motion.button
             type="button"
@@ -117,10 +116,10 @@ export function VibeHeroSection() {
             animate={{ y: [0, -4, 0], rotate: [-2, 1, -2] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#bef264] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-black animate-spin" />
-            // CHAOS MODE ⚡
+            <Sparkles className="w-3.5 h-3.5 text-[#0A0A0A] animate-spin" />
+            // STUDIO MODE ⚡
           </motion.button>
 
           <motion.button
@@ -129,9 +128,9 @@ export function VibeHeroSection() {
             animate={{ y: [0, 4, 0], rotate: [2, -1, 2] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fde047] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] cursor-pointer"
           >
-            delulu-free infra 🧘
+            BACKEND ARCHITECT 🏗️
           </motion.button>
 
           <motion.button
@@ -140,9 +139,9 @@ export function VibeHeroSection() {
             animate={{ y: [0, -3, 0], rotate: [-1, 2, -1] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#d8b4fe] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#2563EB] text-white text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] cursor-pointer"
           >
-            chronically online backend 🌐
+            PYTHON • REDIS • K8S ⚡
           </motion.button>
 
           <motion.button
@@ -151,9 +150,9 @@ export function VibeHeroSection() {
             animate={{ y: [0, 3, 0], rotate: [1, -2, 1] }}
             transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#bae6fd] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FDE047] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] cursor-pointer"
           >
-            no cap 99.98% SLA 🧢❌
+            NO CAP 99.98% SLA 🧢❌
           </motion.button>
 
           <motion.button
@@ -162,12 +161,12 @@ export function VibeHeroSection() {
             animate={{ y: [0, -4, 0], rotate: [-2, 2, -2] }}
             transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fda4af] text-black text-xs font-mono font-bold border-2 border-black shadow-[2px_2px_0px_#000] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF4D00] text-white text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] cursor-pointer"
           >
-            let him cook (in prod) 🍳
+            BUILT WITH TEAM 🤝
           </motion.button>
 
-          <span className="ml-auto text-xs font-mono text-zinc-500 font-medium">
+          <span className="ml-auto text-xs font-mono text-zinc-700 font-bold">
             Tirupati, AP · India
           </span>
         </motion.div>
@@ -182,12 +181,12 @@ export function VibeHeroSection() {
               transition={{ ...slowSpring, delay: 0.1 }}
               className="space-y-3"
             >
-              <div className="inline-block px-3 py-1 rounded-md bg-[#bef264] border-2 border-black shadow-[2px_2px_0px_#000] text-xs font-mono font-black uppercase text-black">
+              <div className="inline-block px-3 py-1 rounded-md bg-[#C6FF00] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] text-xs font-mono font-black uppercase text-[#0A0A0A]">
                 Backend Developer — Python, DevOps &amp; AI
               </div>
 
-              <h1 className="text-6xl sm:text-8xl lg:text-9xl font-black tracking-tight text-black uppercase leading-[0.88]">
-                VENU <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500">K</span>
+              <h1 className="text-6xl sm:text-8xl lg:text-9xl font-black tracking-tight text-[#0A0A0A] uppercase leading-[0.88]">
+                VENU <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] via-[#FF4D00] to-[#C6FF00]">K</span>
               </h1>
             </motion.div>
 
@@ -195,41 +194,44 @@ export function VibeHeroSection() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...slowSpring, delay: 0.2 }}
-              className="text-lg sm:text-xl text-zinc-700 font-normal leading-relaxed max-w-2xl"
+              className="text-lg sm:text-xl text-zinc-800 font-medium leading-relaxed max-w-2xl"
             >
               Hey there! I build high-throughput Python backends, untangle async event pipelines, and deploy
               resilient Kubernetes &amp; GCP cloud infrastructure alongside engineering teams. Fast shipping,
               zero-panic deployments, and reliable systems that just work.
             </motion.p>
 
-            {/* Interactive Chaos Meter / Live Status Mood Toggle */}
+            {/* Interactive Studio Moods / Live Status Cycler */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...slowSpring, delay: 0.25 }}
               onClick={(e) => {
-                setMoodIdx((prev) => (prev + 1) % chaosMoods.length);
+                setMoodIdx((prev) => (prev + 1) % studioMoods.length);
                 fireConfetti(e);
               }}
               whileHover={{ scale: 1.02, rotate: -0.5, transition: { type: "spring", stiffness: 350, damping: 18 } }}
               whileTap={{ scale: 0.97 }}
-              className="p-3.5 sm:p-4 rounded-2xl border-2 border-black shadow-[4px_4px_0px_#000] cursor-pointer flex flex-wrap items-center justify-between gap-3 transition-all select-none"
-              style={{ backgroundColor: chaosMoods[moodIdx].color }}
-              title="Click to cycle Chaos Meter status!"
+              className="p-3.5 sm:p-4 rounded-2xl border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] cursor-pointer flex flex-wrap items-center justify-between gap-3 transition-all select-none"
+              style={{
+                backgroundColor: studioMoods[moodIdx].color,
+                color: studioMoods[moodIdx].text,
+              }}
+              title="Click to cycle Studio status!"
             >
               <div className="flex items-center gap-3">
-                <span className="text-xl sm:text-2xl">{chaosMoods[moodIdx].icon}</span>
+                <span className="text-xl sm:text-2xl">{studioMoods[moodIdx].icon}</span>
                 <div>
-                  <div className="font-mono text-xs sm:text-sm font-black text-black tracking-tight">
-                    CHAOS METER: {chaosMoods[moodIdx].status}
+                  <div className="font-mono text-xs sm:text-sm font-black tracking-tight">
+                    STUDIO STATUS: {studioMoods[moodIdx].status}
                   </div>
-                  <div className="text-xs text-zinc-900 font-medium">
-                    // {chaosMoods[moodIdx].note}
+                  <div className="text-xs font-mono font-bold opacity-90">
+                    // {studioMoods[moodIdx].note}
                   </div>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border-2 border-black font-mono text-[10px] font-black text-black shadow-[2px_2px_0px_#000]">
-                <span>CYCLE MOOD 🎲</span>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border-2 border-[#0A0A0A] font-mono text-[10px] font-black text-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]">
+                <span>CYCLE STATUS 🎲</span>
               </div>
             </motion.div>
 
@@ -242,18 +244,18 @@ export function VibeHeroSection() {
             >
               <button
                 onClick={copyCommand}
-                className="inline-flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#FFF] text-black border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_#000] font-mono text-xs font-bold transition-all cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#FFF] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_#0A0A0A] font-mono text-xs font-black transition-all cursor-pointer"
                 title="Copy terminal command"
               >
                 <Terminal className="w-4 h-4 text-emerald-600" />
                 <span>npx venu-k</span>
                 <span className="text-zinc-400">|</span>
                 {copied ? (
-                  <span className="text-emerald-600 flex items-center gap-1 font-bold">
+                  <span className="text-emerald-600 flex items-center gap-1 font-black">
                     <Check className="w-3.5 h-3.5" /> Copied!
                   </span>
                 ) : (
-                  <span className="text-zinc-500 hover:text-black flex items-center gap-1">
+                  <span className="text-zinc-600 hover:text-black flex items-center gap-1 font-bold">
                     <Copy className="w-3.5 h-3.5" /> click to copy
                   </span>
                 )}
@@ -261,7 +263,7 @@ export function VibeHeroSection() {
 
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#fda4af] text-black font-bold text-xs border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_#000] transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#FF4D00] text-white font-black text-xs border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_#0A0A0A] transition-all cursor-pointer"
               >
                 <span>Explore Shipped Systems</span>
                 <ArrowRight className="w-4 h-4" />
@@ -269,7 +271,7 @@ export function VibeHeroSection() {
 
               <a
                 href="#contact"
-                className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-[#d8b4fe] text-black font-bold text-xs border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_#000] transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-5 py-3 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-xs border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_#0A0A0A] transition-all cursor-pointer"
               >
                 <span>Let&apos;s Chat</span>
                 <Coffee className="w-3.5 h-3.5" />
@@ -277,25 +279,33 @@ export function VibeHeroSection() {
             </motion.div>
           </div>
 
-          {/* Right Column: Studio Polaroid / Sticker Headshot */}
+          {/* Right Column: Technical Studio Pass Card */}
           <div className="lg:col-span-4 flex justify-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotate: 5 }}
-              animate={{ opacity: 1, scale: 1, rotate: 2 }}
+              initial={{ opacity: 0, scale: 0.9, rotate: 3 }}
+              animate={{ opacity: 1, scale: 1, rotate: 1.5 }}
               transition={{ ...slowSpring, delay: 0.25 }}
-              whileHover={{ rotate: -1.5, scale: 1.04, transition: { type: "spring", stiffness: 300, damping: 15 } }}
+              whileHover={{ rotate: -1, scale: 1.03, transition: { type: "spring", stiffness: 300, damping: 15 } }}
               whileTap={{ scale: 0.97 }}
               onClick={(e) => fireConfetti(e)}
-              className="relative p-4 pb-12 rounded-3xl bg-white border-2 border-black shadow-[8px_8px_0px_#000] max-w-[310px] w-full cursor-pointer select-none"
-              title="Click photo for vibes!"
+              className="relative p-4 pb-5 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[8px_8px_0px_#0A0A0A] max-w-[320px] w-full cursor-pointer select-none"
+              title="Click Studio Pass for vibes!"
             >
-              {/* Yellow Washi-Tape Sticker */}
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded bg-[#fde047] text-black font-mono text-[10px] font-black border-2 border-black shadow-[2px_2px_0px_#000] rotate-[-2deg] z-20">
-                📌 IN THE ZONE
+              {/* Top Studio Lanyard Clip Pill */}
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded bg-[#0A0A0A] text-[#C6FF00] font-mono text-[10px] font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#C6FF00] rotate-[-1deg] z-20 whitespace-nowrap">
+                STUDIO PASS // PROD-ENV ⚡
               </div>
 
-              {/* Photo Area */}
-              <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden border-2 border-black bg-zinc-100">
+              {/* Pass Header Row */}
+              <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#0A0A0A]/15 font-mono text-[11px] font-bold text-zinc-800">
+                <span>ID: VENU-K // 0x2A</span>
+                <span className="px-2 py-0.5 rounded-full bg-[#C6FF00] text-[#0A0A0A] border border-[#0A0A0A] text-[10px] font-black">
+                  STATUS: IN PROD ⚡
+                </span>
+              </div>
+
+              {/* Photo Area with Technical Frame */}
+              <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden border-2 border-[#0A0A0A] bg-zinc-100">
                 {!imageError ? (
                   <Image
                     src={profileData.photoUrl}
@@ -306,22 +316,40 @@ export function VibeHeroSection() {
                     onError={() => setImageError(true)}
                   />
                 ) : (
-                  <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center space-y-2 bg-[#fef08a]">
-                    <Terminal className="w-8 h-8 text-black" />
-                    <div className="font-mono text-sm font-black text-black uppercase">VENU K</div>
-                    <div className="font-mono text-xs text-zinc-700">Backend Developer</div>
+                  <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center space-y-2 bg-[#FDE047]">
+                    <Terminal className="w-8 h-8 text-[#0A0A0A]" />
+                    <div className="font-mono text-sm font-black text-[#0A0A0A] uppercase">VENU K</div>
+                    <div className="font-mono text-xs text-zinc-800 font-bold">Backend Developer</div>
                   </div>
                 )}
+
+                {/* Technical HUD Crosshair Overlay */}
+                <div className="absolute top-2 left-2 font-mono text-[9px] font-black text-white/90 bg-[#0A0A0A]/60 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                  + 13.6288° N
+                </div>
+                <div className="absolute bottom-2 right-2 font-mono text-[9px] font-black text-white/90 bg-[#0A0A0A]/60 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                  79.4192° E +
+                </div>
               </div>
 
-              {/* Polaroid Bottom Note */}
-              <div className="mt-3 px-1 flex items-center justify-between font-mono text-[11px] text-zinc-700">
-                <span className="font-bold flex items-center gap-1 text-black">
-                  <Heart className="w-3.5 h-3.5 text-pink-500 fill-pink-500" /> Venu K
-                </span>
-                <span className="px-2 py-0.5 rounded-full bg-[#bef264] border border-black font-bold text-[10px]">
-                  3.6+ YRS PROD
-                </span>
+              {/* Technical Matrix Strip & Spec Strip */}
+              <div className="mt-3.5 space-y-2">
+                <div className="flex items-center justify-between font-mono text-[11px] text-[#0A0A0A]">
+                  <span className="font-black uppercase tracking-tight">VENU K // BACKEND DEV</span>
+                  <span className="px-2 py-0.5 rounded bg-[#0A0A0A] text-[#C6FF00] font-black text-[10px]">
+                    3.6+ YRS PROD
+                  </span>
+                </div>
+
+                {/* Technical Barcode Line Representation */}
+                <div className="pt-1 border-t border-[#0A0A0A]/10 flex items-center justify-between font-mono text-[10px] text-zinc-600 font-bold">
+                  <div className="flex gap-1 h-3 items-end">
+                    {[3, 8, 2, 6, 12, 4, 9, 3, 7, 2, 10, 5, 8, 3, 11, 4, 7].map((h, idx) => (
+                      <span key={idx} className="w-[2px] bg-[#0A0A0A]" style={{ height: `${h}px` }} />
+                    ))}
+                  </div>
+                  <span className="tracking-widest">SYS_PROD_OK</span>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -338,44 +366,44 @@ export function VibeHeroSection() {
             onClick={(e) => fireConfetti(e)}
             whileHover={{ scale: 1.05, rotate: -1.5 }}
             whileTap={{ scale: 0.96 }}
-            className="p-5 rounded-2xl bg-[#d9f99d] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 transition-all cursor-pointer"
+            className="p-5 rounded-2xl bg-[#C6FF00] border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] space-y-1 transition-all cursor-pointer select-none"
           >
-            <div className="font-mono text-[11px] uppercase font-bold text-zinc-800">PRODUCTION SLA</div>
-            <div className="text-2xl sm:text-3xl font-black text-black tracking-tight">99.98%</div>
-            <div className="text-xs text-zinc-800 font-medium">Uptime Across Microservices ✨</div>
+            <div className="font-mono text-[11px] uppercase font-black text-[#0A0A0A]">PRODUCTION SLA</div>
+            <div className="text-2xl sm:text-3xl font-black text-[#0A0A0A] tracking-tight">99.98%</div>
+            <div className="text-xs text-zinc-900 font-bold">Uptime Across Microservices ✨</div>
           </motion.div>
 
           <motion.div
             onClick={(e) => fireConfetti(e)}
             whileHover={{ scale: 1.05, rotate: 1.5 }}
             whileTap={{ scale: 0.96 }}
-            className="p-5 rounded-2xl bg-[#fecdd3] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 transition-all cursor-pointer"
+            className="p-5 rounded-2xl bg-[#FFFFFF] border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] space-y-1 transition-all cursor-pointer select-none"
           >
-            <div className="font-mono text-[11px] uppercase font-bold text-zinc-800">CLOUD FINOPS</div>
-            <div className="text-2xl sm:text-3xl font-black text-black tracking-tight">20–25%</div>
-            <div className="text-xs text-zinc-800 font-medium">Monthly Spend Reduced 💰</div>
+            <div className="font-mono text-[11px] uppercase font-black text-[#FF4D00]">CLOUD FINOPS</div>
+            <div className="text-2xl sm:text-3xl font-black text-[#0A0A0A] tracking-tight">20–25%</div>
+            <div className="text-xs text-zinc-800 font-bold">Monthly Spend Reduced 💰</div>
           </motion.div>
 
           <motion.div
             onClick={(e) => fireConfetti(e)}
             whileHover={{ scale: 1.05, rotate: -1.5 }}
             whileTap={{ scale: 0.96 }}
-            className="p-5 rounded-2xl bg-[#bae6fd] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 transition-all cursor-pointer"
+            className="p-5 rounded-2xl bg-[#2563EB] text-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] space-y-1 transition-all cursor-pointer select-none"
           >
-            <div className="font-mono text-[11px] uppercase font-bold text-zinc-800">CONTAINER FLEET</div>
-            <div className="text-2xl sm:text-3xl font-black text-black tracking-tight">20+ Services</div>
-            <div className="text-xs text-zinc-800 font-medium">Kubernetes &amp; Cloud Run 🐳</div>
+            <div className="font-mono text-[11px] uppercase font-black text-[#C6FF00]">CONTAINER FLEET</div>
+            <div className="text-2xl sm:text-3xl font-black text-white tracking-tight">20+ Services</div>
+            <div className="text-xs text-white/90 font-bold">Kubernetes &amp; Cloud Run 🐳</div>
           </motion.div>
 
           <motion.div
             onClick={(e) => fireConfetti(e)}
             whileHover={{ scale: 1.05, rotate: 1.5 }}
             whileTap={{ scale: 0.96 }}
-            className="p-5 rounded-2xl bg-[#e9d5ff] border-2 border-black shadow-[4px_4px_0px_#000] space-y-1 transition-all cursor-pointer"
+            className="p-5 rounded-2xl bg-[#FDE047] border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] space-y-1 transition-all cursor-pointer select-none"
           >
-            <div className="font-mono text-[11px] uppercase font-bold text-zinc-800">INCIDENT MTTR</div>
-            <div className="text-2xl sm:text-3xl font-black text-black tracking-tight">35% Faster</div>
-            <div className="text-xs text-zinc-800 font-medium">Prometheus &amp; Argo Alerts ⚡</div>
+            <div className="font-mono text-[11px] uppercase font-black text-[#0A0A0A]">INCIDENT MTTR</div>
+            <div className="text-2xl sm:text-3xl font-black text-[#0A0A0A] tracking-tight">35% Faster</div>
+            <div className="text-xs text-zinc-900 font-bold">Prometheus &amp; Argo Alerts ⚡</div>
           </motion.div>
         </motion.div>
       </div>

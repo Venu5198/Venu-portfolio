@@ -54,18 +54,18 @@ export function VibeContactSection() {
   };
 
   return (
-    <footer id="contact" className="py-24 relative border-t-2 border-black/10 scroll-mt-36 pt-16">
+    <footer id="contact" className="py-24 relative border-t-2 border-[#0A0A0A]/10 scroll-mt-36 pt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Yellow Sticky Note: Engineering Philosophy */}
+        {/* Streetwear Spec Banner: Engineering Philosophy */}
         <motion.div
           whileHover={{ scale: 1.01, rotate: 0, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-          className="mb-16 p-8 rounded-3xl bg-[#fef08a] border-2 border-black shadow-[6px_6px_0px_#000] rotate-[-0.8deg] space-y-4"
+          className="mb-16 p-8 rounded-3xl bg-[#FDE047] border-2 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] rotate-[-0.8deg] space-y-4"
         >
-          <div className="flex items-center gap-2 font-mono text-xs font-black uppercase text-black">
-            <Sparkles className="w-3.5 h-3.5 text-black animate-spin" />
-            ENGINEERING PHILOSOPHY · IN THE NOTEBOOK
+          <div className="flex items-center gap-2 font-mono text-xs font-black uppercase text-[#0A0A0A]">
+            <Sparkles className="w-3.5 h-3.5 text-[#0A0A0A] animate-spin" />
+            ENGINEERING PHILOSOPHY // PROD DIRECTIVES
           </div>
-          <blockquote className="text-2xl sm:text-3xl font-black text-black leading-snug">
+          <blockquote className="text-2xl sm:text-3xl font-black text-[#0A0A0A] leading-snug">
             &ldquo;{profileData.philosophy.quote}&rdquo;
           </blockquote>
           <div className="flex flex-wrap gap-2 pt-2">
@@ -73,7 +73,7 @@ export function VibeContactSection() {
               <span
                 key={i}
                 onClick={(e) => fireConfetti(e)}
-                className="px-3 py-1 rounded-full bg-white border border-black font-mono text-xs font-bold text-black shadow-[1.5px_1.5px_0px_#000] cursor-pointer hover:bg-black hover:text-white transition-colors"
+                className="px-3 py-1 rounded-full bg-white border-2 border-[#0A0A0A] font-mono text-xs font-black text-[#0A0A0A] shadow-[1.5px_1.5px_0px_#0A0A0A] cursor-pointer hover:bg-[#0A0A0A] hover:text-[#C6FF00] transition-colors"
               >
                 ✓ {pt}
               </span>
@@ -86,13 +86,13 @@ export function VibeContactSection() {
           {/* Left Column: Direct Action */}
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <div className="inline-block px-3 py-1 rounded-full bg-[#bef264] text-black text-xs font-mono font-black border-2 border-black">
+              <div className="inline-block px-3 py-1 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A]">
                 OPEN FOR OPPORTUNITIES
               </div>
-              <h2 className="text-4xl sm:text-6xl font-black text-black tracking-tight leading-[0.95]">
+              <h2 className="text-4xl sm:text-6xl font-black text-[#0A0A0A] tracking-tight leading-[0.95]">
                 Let&apos;s Build Resilient Systems Together
               </h2>
-              <p className="text-zinc-700 text-base sm:text-lg font-normal leading-relaxed">
+              <p className="text-zinc-800 text-base sm:text-lg font-medium leading-relaxed">
                 Looking for a Backend Developer who can architect high-throughput microservices, optimize
                 Redis event pipelines, and deploy autonomous AI agents with zero drama? Let&apos;s talk!
               </p>
@@ -102,20 +102,20 @@ export function VibeContactSection() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <motion.div
                 whileHover={{ scale: 1.03, rotate: -0.75, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-                className="p-4 rounded-2xl bg-white border-2 border-black shadow-[4px_4px_0px_#000] flex items-center justify-between gap-3"
+                className="p-4 rounded-2xl bg-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] flex items-center justify-between gap-3"
               >
                 <div className="min-w-0">
-                  <div className="text-[10px] font-mono text-zinc-500 font-bold uppercase">DIRECT EMAIL</div>
+                  <div className="text-[10px] font-mono text-zinc-600 font-black uppercase">DIRECT EMAIL</div>
                   <a
                     href={`mailto:${profileData.contact.email}`}
-                    className="text-xs font-mono font-bold text-black hover:text-pink-600 transition-colors truncate block"
+                    className="text-xs font-mono font-black text-[#0A0A0A] hover:text-[#2563EB] transition-colors truncate block"
                   >
                     {profileData.contact.email}
                   </a>
                 </div>
                 <button
                   onClick={copyEmail}
-                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-bold border-2 border-black bg-[#bef264] text-black shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all cursor-pointer shrink-0"
+                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#C6FF00] text-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all cursor-pointer shrink-0"
                 >
                   {copiedEmail ? "Copied! ✨" : "Copy"}
                 </button>
@@ -123,20 +123,20 @@ export function VibeContactSection() {
 
               <motion.div
                 whileHover={{ scale: 1.03, rotate: 0.75, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-                className="p-4 rounded-2xl bg-white border-2 border-black shadow-[4px_4px_0px_#000] flex items-center justify-between gap-3"
+                className="p-4 rounded-2xl bg-white border-2 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] flex items-center justify-between gap-3"
               >
                 <div className="min-w-0">
-                  <div className="text-[10px] font-mono text-zinc-500 font-bold uppercase">PHONE</div>
+                  <div className="text-[10px] font-mono text-zinc-600 font-black uppercase">PHONE</div>
                   <a
                     href={`tel:${profileData.contact.phone}`}
-                    className="text-xs font-mono font-bold text-black hover:text-pink-600 transition-colors truncate block"
+                    className="text-xs font-mono font-black text-[#0A0A0A] hover:text-[#2563EB] transition-colors truncate block"
                   >
                     {profileData.contact.phone}
                   </a>
                 </div>
                 <button
                   onClick={copyPhone}
-                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-bold border-2 border-black bg-[#fda4af] text-black shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all cursor-pointer shrink-0"
+                  className="px-3 py-1.5 rounded-xl font-mono text-xs font-black border-2 border-[#0A0A0A] bg-[#FF4D00] text-white shadow-[2px_2px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all cursor-pointer shrink-0"
                 >
                   {copiedPhone ? "Copied! ✨" : "Copy"}
                 </button>
@@ -147,7 +147,7 @@ export function VibeContactSection() {
             <div className="pt-2">
               <a
                 href={`mailto:${profileData.contact.email}?subject=Backend%20Developer%20Opportunity%20-%20Venu%20K`}
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-[#bef264] text-black font-black text-sm border-2 border-black shadow-[5px_5px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[7px_7px_0px_#000] transition-all cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-[#C6FF00] text-[#0A0A0A] font-black text-sm border-2 border-[#0A0A0A] shadow-[5px_5px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[7px_7px_0px_#0A0A0A] transition-all cursor-pointer"
               >
                 <span>Say Hello / Initiate Transmission 🚀</span>
                 <Send className="w-4 h-4" />
@@ -157,17 +157,17 @@ export function VibeContactSection() {
 
           {/* Right Column: Mini Notebook Spec & Social Stamps */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-6 rounded-3xl bg-white border-2 border-black shadow-[6px_6px_0px_#000] font-mono text-xs space-y-3">
-              <div className="flex items-center justify-between pb-3 border-b-2 border-black/10 font-bold">
-                <span className="flex items-center gap-2">
-                  <Coffee className="w-4 h-4 text-amber-600" />
+            <div className="p-6 rounded-3xl bg-white border-2 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] font-mono text-xs space-y-3">
+              <div className="flex items-center justify-between pb-3 border-b-2 border-[#0A0A0A]/10 font-bold">
+                <span className="flex items-center gap-2 font-black text-[#0A0A0A]">
+                  <Coffee className="w-4 h-4 text-[#FF4D00]" />
                   IDENTITY_SPEC.json
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-[#bef264] border border-black text-[10px]">
+                <span className="px-2 py-0.5 rounded-full bg-[#C6FF00] text-[#0A0A0A] border border-[#0A0A0A] text-[10px] font-black">
                   ● ACTIVE
                 </span>
               </div>
-              <pre className="text-zinc-800 text-xs leading-relaxed overflow-x-auto font-medium">
+              <pre className="text-zinc-900 text-xs leading-relaxed overflow-x-auto font-bold">
 {`{
   "engineer": "${profileData.name}",
   "role": "Backend Developer",
@@ -185,7 +185,7 @@ export function VibeContactSection() {
                 href={profileData.contact.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 rounded-2xl bg-[#bae6fd] border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-bold text-black"
+                className="flex-1 py-3 px-4 rounded-2xl bg-[#0A0A0A] text-white border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#C6FF00] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-black"
               >
                 <GitHubIcon className="w-4 h-4" />
                 <span>GitHub</span>
@@ -196,7 +196,7 @@ export function VibeContactSection() {
                 href={profileData.contact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 rounded-2xl bg-[#d8b4fe] border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-bold text-black"
+                className="flex-1 py-3 px-4 rounded-2xl bg-[#2563EB] text-white border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-black"
               >
                 <LinkedInIcon className="w-4 h-4" />
                 <span>LinkedIn</span>
@@ -207,7 +207,7 @@ export function VibeContactSection() {
                 href={profileData.contact.credly}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 rounded-2xl bg-[#fde047] border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-bold text-black"
+                className="flex-1 py-3 px-4 rounded-2xl bg-[#FDE047] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2 text-xs font-mono font-black"
               >
                 <span>Credly</span>
                 <ArrowUpRight className="w-3 h-3" />
@@ -217,13 +217,13 @@ export function VibeContactSection() {
         </div>
 
         {/* Footer Bottom Strip */}
-        <div className="mt-16 pt-8 border-t-2 border-black/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs font-semibold text-zinc-600">
+        <div className="mt-16 pt-8 border-t-2 border-[#0A0A0A]/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs font-bold text-zinc-700">
           <div className="flex items-center gap-2">
             <span>© 2026 Venu K.</span>
-            <span className="text-black font-bold">Backend Developer — Python, DevOps &amp; AI.</span>
+            <span className="text-[#0A0A0A] font-black">Backend Developer — Python, DevOps &amp; AI.</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="px-2.5 py-1 rounded-full bg-[#bef264] text-black border border-black font-bold text-[10px]">
+            <span className="px-2.5 py-1 rounded-full bg-[#C6FF00] text-[#0A0A0A] border border-[#0A0A0A] font-black text-[10px]">
               ● ALL SYSTEMS NOMINAL
             </span>
             <span>Tirupati, AP · India ☕</span>

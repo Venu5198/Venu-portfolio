@@ -20,7 +20,7 @@ export function PortfolioShell() {
     <main
       className={`relative min-h-screen transition-colors duration-300 ${
         theme === "light"
-          ? "bg-[#FAF8F5] text-[#18181B]"
+          ? "bg-[#F4F4F0] text-[#0A0A0A]"
           : "bg-[#09090B] text-[#F4F4F5] selection:bg-cyan-500/30 selection:text-white"
       }`}
     >

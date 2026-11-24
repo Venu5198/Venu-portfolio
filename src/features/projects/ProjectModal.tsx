@@ -84,7 +84,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           transition={{ type: "spring", duration: 0.45, bounce: 0.12 }}
           className={`relative w-full max-w-4xl max-h-[92vh] rounded-3xl overflow-hidden flex flex-col z-10 transition-colors ${
             isLight
-              ? "bg-[#FAF8F5] border-2 border-black shadow-[10px_10px_0px_#000] text-black"
+              ? "bg-[#F4F4F0] border-2 border-[#0A0A0A] shadow-[10px_10px_0px_#0A0A0A] text-[#0A0A0A]"
               : "bg-[#0c0c11] border border-white/[0.14] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.95)] text-white"
           }`}
         >
@@ -92,14 +92,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           <div
             className={`flex items-center justify-between px-6 py-4 border-b ${
               isLight
-                ? "bg-[#fde047] border-black text-black"
+                ? "bg-[#FDE047] border-[#0A0A0A] text-[#0A0A0A]"
                 : "border-white/[0.08] bg-[#111117]/95 backdrop-blur-md"
             }`}
           >
             <div className="flex items-center gap-3">
               <span
-                className={`font-mono text-xs font-bold uppercase tracking-wider ${
-                  isLight ? "text-black" : "text-cyan-400 font-semibold"
+                className={`font-mono text-xs font-black uppercase tracking-wider ${
+                  isLight ? "text-[#0A0A0A]" : "text-cyan-400 font-semibold"
                 }`}
               >
                 [{project.category}]
@@ -114,7 +114,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               onClick={onClose}
               className={`p-1.5 rounded-full transition-colors cursor-pointer ${
                 isLight
-                  ? "text-black hover:bg-black/10 border-2 border-black bg-white shadow-[1.5px_1.5px_0px_#000]"
+                  ? "text-[#0A0A0A] hover:bg-black/10 border-2 border-[#0A0A0A] bg-white shadow-[1.5px_1.5px_0px_#0A0A0A]"
                   : "text-zinc-400 hover:text-white hover:bg-white/[0.08]"
               }`}
               aria-label="Close modal (Esc)"
@@ -131,7 +131,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <h2
                   className={`text-2xl sm:text-4xl font-black tracking-tight ${
-                    isLight ? "text-black" : "text-white"
+                    isLight ? "text-[#0A0A0A]" : "text-white"
                   }`}
                 >
                   {project.title}
@@ -141,9 +141,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-mono text-xs font-bold transition-all ${
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-mono text-xs font-black transition-all ${
                       isLight
-                        ? "bg-[#bef264] text-black border-2 border-black shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                        ? "bg-[#C6FF00] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px]"
                         : "bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.15)]"
                     }`}
                   >
@@ -154,7 +154,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
               <p
                 className={`text-sm sm:text-base leading-relaxed ${
-                  isLight ? "text-zinc-700 font-normal" : "text-zinc-300 font-light"
+                  isLight ? "text-zinc-800 font-medium" : "text-zinc-300 font-light"
                 }`}
               >
                 {project.tagline}
@@ -162,11 +162,11 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               <div
                 className={`inline-block px-3 py-1 rounded-md font-mono text-xs ${
                   isLight
-                    ? "bg-[#d8b4fe] text-black border-2 border-black shadow-[2px_2px_0px_#000] font-bold"
+                    ? "bg-[#C6FF00] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] font-black"
                     : "bg-white/[0.04] border border-white/[0.08] text-zinc-300"
                 }`}
               >
-                Role: <span className={isLight ? "text-black font-black" : "text-emerald-400 font-semibold"}>{project.role}</span>
+                Role: <span className={isLight ? "text-[#0A0A0A] font-black" : "text-emerald-400 font-semibold"}>{project.role}</span>
               </div>
             </div>
 
@@ -177,20 +177,20 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   key={idx}
                   className={`p-3.5 rounded-2xl ${
                     isLight
-                      ? "bg-white border-2 border-black shadow-[3px_3px_0px_#000]"
+                      ? "bg-white border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A]"
                       : "bg-white/[0.02] border border-white/[0.06] rounded-xl"
                   }`}
                 >
                   <div
                     className={`text-[10px] font-mono uppercase tracking-wider ${
-                      isLight ? "text-zinc-600 font-bold" : "text-zinc-500"
+                      isLight ? "text-zinc-700 font-black" : "text-zinc-500"
                     }`}
                   >
                     {m.label}
                   </div>
                   <div
                     className={`text-sm sm:text-base font-mono mt-1 ${
-                      isLight ? "text-black font-black" : "text-white font-bold"
+                      isLight ? "text-[#0A0A0A] font-black" : "text-white font-bold"
                     }`}
                   >
                     {m.value}
@@ -202,7 +202,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             {/* Structured Engineering Tabs */}
             <div
               className={`flex flex-wrap items-center gap-2 border-b pb-1 font-mono text-xs ${
-                isLight ? "border-black/20" : "border-white/[0.08]"
+                isLight ? "border-[#0A0A0A]/20" : "border-white/[0.08]"
               }`}
             >
               <button
@@ -210,14 +210,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "context"
                     ? isLight
-                      ? "bg-[#bef264] text-black border-2 border-black shadow-[2px_2px_0px_#000] font-black"
+                      ? "bg-[#C6FF00] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] font-black"
                       : "bg-white/[0.08] text-white border-b-2 border-cyan-400 font-semibold"
                     : isLight
-                    ? "text-zinc-700 hover:text-black hover:bg-zinc-200/60 font-semibold"
+                    ? "text-zinc-800 hover:text-black hover:bg-zinc-200/60 font-bold"
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Activity className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-cyan-400"}`} />
+                <Activity className={`w-3.5 h-3.5 ${isLight ? "text-[#0A0A0A]" : "text-cyan-400"}`} />
                 Context &amp; Scale
               </button>
               <button
@@ -225,14 +225,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "architecture"
                     ? isLight
-                      ? "bg-[#d8b4fe] text-black border-2 border-black shadow-[2px_2px_0px_#000] font-black"
+                      ? "bg-[#2563EB] text-white border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] font-black"
                       : "bg-white/[0.08] text-white border-b-2 border-emerald-400 font-semibold"
                     : isLight
-                    ? "text-zinc-700 hover:text-black hover:bg-zinc-200/60 font-semibold"
+                    ? "text-zinc-800 hover:text-black hover:bg-zinc-200/60 font-bold"
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Layers className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-emerald-400"}`} />
+                <Layers className={`w-3.5 h-3.5 ${isLight ? "text-white" : "text-emerald-400"}`} />
                 Core Architecture Decisions
               </button>
               <button
@@ -240,14 +240,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "reliability"
                     ? isLight
-                      ? "bg-[#fda4af] text-black border-2 border-black shadow-[2px_2px_0px_#000] font-black"
+                      ? "bg-[#FF4D00] text-white border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] font-black"
                       : "bg-white/[0.08] text-white border-b-2 border-purple-400 font-semibold"
                     : isLight
-                    ? "text-zinc-700 hover:text-black hover:bg-zinc-200/60 font-semibold"
+                    ? "text-zinc-800 hover:text-black hover:bg-zinc-200/60 font-bold"
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Shield className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-purple-400"}`} />
+                <Shield className={`w-3.5 h-3.5 ${isLight ? "text-white" : "text-purple-400"}`} />
                 Reliability &amp; Security
               </button>
               <button
@@ -255,14 +255,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
                   activeTab === "stack"
                     ? isLight
-                      ? "bg-[#fde047] text-black border-2 border-black shadow-[2px_2px_0px_#000] font-black"
+                      ? "bg-[#FDE047] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] font-black"
                       : "bg-white/[0.08] text-white border-b-2 border-amber-400 font-semibold"
                     : isLight
-                    ? "text-zinc-700 hover:text-black hover:bg-zinc-200/60 font-semibold"
+                    ? "text-zinc-800 hover:text-black hover:bg-zinc-200/60 font-bold"
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Cpu className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-amber-400"}`} />
+                <Cpu className={`w-3.5 h-3.5 ${isLight ? "text-[#0A0A0A]" : "text-amber-400"}`} />
                 Tech Stack
               </button>
             </div>

@@ -19,24 +19,24 @@ html.dark {
 
 [data-theme="light"],
 html.light {
-  --background: #faf8f5;
-  --foreground: #18181b;
-  --foreground-muted: #52525b;
-  --muted: #71717a;
-  --hairline: rgba(24, 24, 27, 0.14);
-  --hairline-hover: rgba(24, 24, 27, 0.28);
+  --background: #f4f4f0;
+  --foreground: #0a0a0a;
+  --foreground-muted: #27272a;
+  --muted: #52525b;
+  --hairline: rgba(10, 10, 10, 0.16);
+  --hairline-hover: rgba(10, 10, 10, 0.32);
 
-  /* Gen-Z Vibe Coding Vibrant Accent Tokens */
-  --telemetry-cyan: #0284c7;
-  --telemetry-emerald: #059669;
-  --telemetry-amber: #d97706;
-  --telemetry-purple: #7c3aed;
+  /* Streetwear Studio Vibrant Accent Tokens */
+  --telemetry-cyan: #2563eb;
+  --telemetry-emerald: #16a34a;
+  --telemetry-amber: #ff4d00;
+  --telemetry-purple: #2563eb;
 
-  /* Gen-Z Sticker Palette */
-  --vibe-lime: #bef264;
-  --vibe-coral: #fda4af;
-  --vibe-cobalt: #93c5fd;
-  --vibe-violet: #d8b4fe;
+  /* Streetwear Tech Studio Palette */
+  --vibe-lime: #c6ff00;
+  --vibe-coral: #ff4d00;
+  --vibe-cobalt: #2563eb;
+  --vibe-violet: #2563eb;
   --vibe-yellow: #fde047;
 }
 
@@ -76,8 +76,8 @@ body {
 }
 
 [data-theme="light"] ::selection {
-  background: #bef264;
-  color: #18181b;
+  background: #c6ff00;
+  color: #0a0a0a;
 }
 
 /* Subtle Architectural Grid Pattern */

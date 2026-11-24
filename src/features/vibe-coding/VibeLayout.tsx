@@ -15,7 +15,7 @@ export function VibeLayout() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <div className="relative min-h-screen bg-[#FAF8F5] text-[#18181B] selection:bg-[#bef264] selection:text-black">
+    <div className="relative min-h-screen bg-[#F4F4F0] text-[#0A0A0A] selection:bg-[#C6FF00] selection:text-[#0A0A0A]">
       {/* Vibe Hero Section */}
       <VibeHeroSection />
 
@@ -35,11 +35,11 @@ export function VibeLayout() {
           "CKA KUBERNETES ADMIN ☸️",
           "TERRAFORM INFRA AS CODE 🏗️",
           "FASTAPI + ASYNCIO ⚡",
-          "ATE AND LEFT NO CRUMBS 🍽️",
+          "BUILT WITH TEAM 🤝",
         ]}
         rotate="rotate-1"
         direction="right"
-        color="#fde047"
+        color="#FF4D00"
       />
 
       {/* Vibe Sticker Arsenal */}

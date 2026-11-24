@@ -34,7 +34,7 @@ export function Navbar() {
           <div
             className={`w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105 ${
               isLight
-                ? "bg-[#bef264] border-2 border-black text-black shadow-[1.5px_1.5px_0px_#000]"
+                ? "bg-[#C6FF00] border-2 border-[#0A0A0A] text-[#0A0A0A] shadow-[1.5px_1.5px_0px_#0A0A0A]"
                 : "bg-white/[0.05] border border-white/10 text-cyan-400 group-hover:border-cyan-500/50"
             }`}
           >
@@ -43,21 +43,21 @@ export function Navbar() {
           <div className="flex flex-col">
             <span
               className={`font-mono text-xs font-bold flex items-center gap-1.5 ${
-                isLight ? "text-black" : "text-zinc-100"
+                isLight ? "text-[#0A0A0A]" : "text-zinc-100"
               }`}
             >
               VENU.K
               <span
-                className={`text-[10px] font-normal ${
-                  isLight ? "text-pink-600 font-semibold" : "text-cyan-400"
+                className={`text-[10px] font-mono font-bold ${
+                  isLight ? "text-[#FF4D00]" : "text-cyan-400"
                 }`}
               >
-                {isLight ? "chaos ⚡" : "v2.5"}
+                {isLight ? "STUDIO ⚡" : "v2.5"}
               </span>
             </span>
             <span
               className={`text-[10px] font-mono ${
-                isLight ? "text-zinc-600 font-semibold" : "text-zinc-500"
+                isLight ? "text-zinc-800 font-bold" : "text-zinc-500"
               }`}
             >
               BACKEND_DEV
@@ -68,43 +68,43 @@ export function Navbar() {
         {/* Navigation Links */}
         <div
           className={`hidden md:flex items-center gap-1 text-xs font-mono ${
-            isLight ? "text-zinc-700 font-medium" : "text-zinc-400"
+            isLight ? "text-zinc-800 font-bold" : "text-zinc-400"
           }`}
         >
           <a
             href="#projects"
             className={`px-3 py-1.5 rounded-full transition-colors flex items-center gap-1.5 ${
-              isLight ? "hover:bg-[#bef264] hover:text-black" : "hover:text-white hover:bg-white/[0.06]"
+              isLight ? "hover:bg-[#C6FF00] hover:text-[#0A0A0A]" : "hover:text-white hover:bg-white/[0.06]"
             }`}
           >
-            <Briefcase className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-cyan-400"}`} />
+            <Briefcase className={`w-3.5 h-3.5 ${isLight ? "text-[#0A0A0A]" : "text-cyan-400"}`} />
             Projects
           </a>
           <a
             href="#architecture"
             className={`px-3 py-1.5 rounded-full transition-colors flex items-center gap-1.5 ${
-              isLight ? "hover:bg-[#d8b4fe] hover:text-black" : "hover:text-white hover:bg-white/[0.06]"
+              isLight ? "hover:bg-[#2563EB] hover:text-white" : "hover:text-white hover:bg-white/[0.06]"
             }`}
           >
-            <Cpu className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-emerald-400"}`} />
+            <Cpu className={`w-3.5 h-3.5 ${isLight ? "text-[#0A0A0A]" : "text-emerald-400"}`} />
             Architecture
           </a>
           <a
             href="#arsenal"
             className={`px-3 py-1.5 rounded-full transition-colors flex items-center gap-1.5 ${
-              isLight ? "hover:bg-[#fde047] hover:text-black" : "hover:text-white hover:bg-white/[0.06]"
+              isLight ? "hover:bg-[#FDE047] hover:text-[#0A0A0A]" : "hover:text-white hover:bg-white/[0.06]"
             }`}
           >
-            <Shield className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-amber-400"}`} />
+            <Shield className={`w-3.5 h-3.5 ${isLight ? "text-[#0A0A0A]" : "text-amber-400"}`} />
             Arsenal
           </a>
           <a
             href="#certifications"
             className={`px-3 py-1.5 rounded-full transition-colors flex items-center gap-1.5 ${
-              isLight ? "hover:bg-[#fda4af] hover:text-black" : "hover:text-white hover:bg-white/[0.06]"
+              isLight ? "hover:bg-[#FF4D00] hover:text-white" : "hover:text-white hover:bg-white/[0.06]"
             }`}
           >
-            <Award className={`w-3.5 h-3.5 ${isLight ? "text-black" : "text-purple-400"}`} />
+            <Award className={`w-3.5 h-3.5 ${isLight ? "text-[#0A0A0A]" : "text-purple-400"}`} />
             Credentials
           </a>
         </div>
@@ -114,18 +114,18 @@ export function Navbar() {
           {/* Dual-Theme Switcher Toggle */}
           <button
             onClick={toggleTheme}
-            className={`px-3 py-1.5 rounded-full text-[11px] font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-full text-[11px] font-mono font-black flex items-center gap-1.5 transition-all cursor-pointer ${
               isLight
-                ? "bg-[#bef264] text-black border-2 border-black shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                ? "bg-[#C6FF00] text-[#0A0A0A] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px]"
                 : "bg-white/[0.06] text-zinc-300 border border-white/10 hover:text-white hover:bg-white/10"
             }`}
-            title={isLight ? "Switch to Dark Console mode" : "Switch to Gen-Z Chaos mode"}
+            title={isLight ? "Switch to Dark Console mode" : "Switch to Streetwear Studio mode"}
             aria-label="Toggle theme"
           >
             {isLight ? (
               <>
-                <Sparkles className="w-3.5 h-3.5 text-black animate-spin" />
-                <span>CHAOS MODE ⚡</span>
+                <Sparkles className="w-3.5 h-3.5 text-[#0A0A0A] animate-spin" />
+                <span>STUDIO MODE ⚡</span>
               </>
             ) : (
               <>
@@ -137,9 +137,9 @@ export function Navbar() {
 
           <a
             href="#contact"
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold text-xs transition-all ${
+            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-black text-xs transition-all ${
               isLight
-                ? "bg-[#fda4af] text-black border-2 border-black shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                ? "bg-[#FF4D00] text-white border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] hover:translate-x-[-1px] hover:translate-y-[-1px]"
                 : "bg-cyan-500 text-black hover:bg-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.35)]"
             }`}
           >
