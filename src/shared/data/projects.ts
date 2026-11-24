@@ -26,6 +26,90 @@ export const projectsData: Project[] = [
       "Enterprise security: HttpOnly sessions, CSRF guards, RBAC, rate-limiting, and led HIPAA readiness with BAA negotiations and SOC 2 prep.",
       "Zero-downtime Cloud Run operations with proactive cold-start mitigation, cost audits, and automated rollback guards.",
     ],
+    engineeringBreakdown: {
+      contextScale: {
+        problem:
+          "Enterprise communication is fragmented across Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex. Cross-organization teams require real-time synchronization without forcing company-wide migrations or enduring loop duplication, broken thread hierarchies, or lost file cards.",
+        scaleSummary:
+          "High-throughput, low-latency messaging bridge connecting 5 enterprise ecosystems with sub-95ms bridge transit, verified marketplace listings, and zero-echo guarantees.",
+        metrics: [
+          { label: "Platforms Synced", value: "5 Ecosystems" },
+          { label: "Bridge Latency", value: "< 95ms Transit" },
+          { label: "Uptime SLA", value: "99.98% Measured" },
+          { label: "Echo Duplication", value: "0% (Echo Guard)" },
+        ],
+        scopePoints: [
+          "Official verified app listings published on Microsoft AppSource, Google Workspace Marketplace, Zoom App Marketplace, and Webex App Hub.",
+          "Bidirectional real-time sync of messages, threads, attachments, edits, deletes, and emoji reactions across all 5 networks.",
+          "Interactive in-chat .search and .support commands with native modal dialogs inside Slack and Microsoft Teams.",
+          "Single-handedly built, deployed, and operated across 4 distinct microservices with independent CI/CD pipelines.",
+        ],
+      },
+      coreDecisions: [
+        {
+          title: "Asynchronous Ingress Decoupling",
+          category: "Distributed Ingestion",
+          decision:
+            "FastAPI webhook receivers verify platform cryptographic signatures and enqueue raw events into Redis Pub/Sub within 10ms, returning HTTP 200 immediately.",
+          tradeoff:
+            "Safeguards against platform timeout constraints (e.g. Slack 3-second rule) during high-concurrency spikes while isolating downstream parsing exceptions.",
+          badges: ["FastAPI", "Redis Pub/Sub", "Python AsyncIO", "Cloud Run"],
+        },
+        {
+          title: "Distributed Loop & Echo Prevention",
+          category: "Event Processing",
+          decision:
+            "Implemented cryptographic event fingerprinting and message origin hashing with a sliding-window Redis cache to detect and drop reflected payloads.",
+          tradeoff:
+            "Eliminates cascading message echoes between cross-linked channels with negligible memory overhead (< 1KB per message key).",
+          badges: ["Redis Cache", "Distributed Locks", "Event Hash", "Idempotency"],
+        },
+        {
+          title: "Bidirectional AST Normalization Engine",
+          category: "Payload Translation",
+          decision:
+            "Engineered a universal Abstract Syntax Tree (AST) intermediate schema bridging Markdown, Slack mrkdwn, Teams HTML, Zoom styling, and Webex payloads.",
+          tradeoff:
+            "Requires maintaining parser mappings for each platform dialect, but completely avoids N×N translation complexity and preserves formatting fidelity.",
+          badges: ["AST Parser", "Slack mrkdwn", "Teams HTML", "Schema Normalization"],
+        },
+        {
+          title: "Native Sender Attribution via Delegated Tokens",
+          category: "Identity & Security",
+          decision:
+            "Leveraged platform-native identity customization (Slack chat:write.customize, Teams delegated user tokens, Google Domain-Wide Delegation, Zoom/Webex OAuth) to mirror actual sender profiles.",
+          tradeoff:
+            "Requires robust multi-tenant token refresh lifecycles, but delivers a seamless user experience where messages appear from the true sender rather than a generic bot.",
+          badges: ["OAuth 2.0", "Delegated Auth", "Google Workspace", "Microsoft Graph"],
+        },
+      ],
+      reliabilitySecurity: {
+        uptimeSla: "99.98% production uptime sustained across multi-service Cloud Run deployments.",
+        resilienceMechanisms: [
+          {
+            title: "Dead Letter Queue & Backoff Jitter",
+            detail:
+              "Failed delivery attempts to downstream chat endpoints retry with randomized exponential jitter before routing to an inspectable dead-letter queue.",
+          },
+          {
+            title: "Cold-Start Elimination",
+            detail:
+              "Configured Cloud Run min-instances and proactive synthetic warmup pings to guarantee sub-100ms response times on critical webhook ingress routes.",
+          },
+          {
+            title: "Shared Auth Library (Artifact Registry)",
+            detail:
+              "Published shared authentication and token validation modules as private Python wheels in Google Artifact Registry to ensure zero auth divergence.",
+          },
+        ],
+        securityCompliance: [
+          "HttpOnly, Secure, SameSite session cookies and CSRF double-submit protection",
+          "Granular role-based access control (RBAC) across organization, team, and channel tiers",
+          "HIPAA readiness achieved with Business Associate Agreement (BAA) structures and SOC 2 security controls",
+          "Envelope encryption for persistent integration secrets stored in MongoDB",
+        ],
+      },
+    },
     architecture: [
       {
         domain: "Backend & Event Mesh",
@@ -105,6 +189,90 @@ export const projectsData: Project[] = [
       "Enterprise security: envelope-encrypted secrets (Cloud KMS / AWS KMS), tenant isolation in data layer, OIDC / SAML 2.0 SSO, and JIT provisioning.",
       "Self-hosted deployment via Docker Compose or Helm, plus managed cloud deployments on Cloud Run and GKE.",
     ],
+    engineeringBreakdown: {
+      contextScale: {
+        problem:
+          "Traditional visual workflow automation platforms lack native autonomous AI agent fleets, fine-grained token/USD cost governance, and safe code-level delivery pipelines. Enterprises face steep learning curves when constructing multi-step automation graphs from scratch.",
+        scaleSummary:
+          "Enterprise workflow runtime coordinating 1,000+ app connectors, natural-language graph generation, and an autonomous Git worktree development runner.",
+        metrics: [
+          { label: "App Providers", value: "1,000+ Cataloged" },
+          { label: "Defects Cleared", value: "120 → 0 Bugs" },
+          { label: "Dispatch Latency", value: "Sub-10ms Engine" },
+          { label: "AI Worktree Runner", value: "Autonomous PRs" },
+        ],
+        scopePoints: [
+          "Catalog of 1,000+ app and cloud providers across GCP, AWS, Salesforce, Notion, Google Workspace, and HTTP endpoints.",
+          "'Build with AI' natural-language module translating plain-English intent into fully wired, executable workflow node graphs.",
+          "Cleared a 120-defect legacy backlog to zero by establishing rigid CI/CD verification gates (lint, TypeScript, pytest, Playwright).",
+          "Dual deployment topology: self-hosted via Docker Compose / Helm charts, and managed multi-tenant cloud on GKE / Cloud Run.",
+        ],
+      },
+      coreDecisions: [
+        {
+          title: "Topological Stateful Graph Runtime",
+          category: "Workflow Engine",
+          decision:
+            "Built a DAG execution engine supporting topological sorting, asynchronous event polling, conditional branches, sub-workflows, and state checkpoints.",
+          tradeoff:
+            "Higher runtime complexity than sequential step execution, but enables robust suspend/resume cycles for long-running workflows and human-in-the-loop approvals.",
+          badges: ["Python", "AsyncIO", "MongoDB", "State Machine", "DAG"],
+        },
+        {
+          title: "Dynamic LLM Router & Budget Circuit Breaker",
+          category: "AI Governance",
+          decision:
+            "Implemented an intelligent model selector balancing token cost and context requirements across Gemini, Claude, and GPT with hard tenant-level token and USD budget ceilings.",
+          tradeoff:
+            "Adds lightweight pre-flight budget checks to every LLM invocation, but guarantees zero unexpected billing overruns for tenant accounts.",
+          badges: ["LLM Routing", "Token Ledger", "Cost Guardrails", "Budget Alerts"],
+        },
+        {
+          title: "Isolated Git Worktree Autonomous Runner",
+          category: "Software Delivery",
+          decision:
+            "AI coding agents operate in isolated ephemeral Git worktrees, picking up backlog issues, executing test suites, and submitting PRs with test evidence.",
+          tradeoff:
+            "Requires strict branch leasing and container sandbox boundaries, but eliminates risk of polluting the primary working directory during concurrent runs.",
+          badges: ["Git Worktrees", "AI Agents", "Docker Sandbox", "GitHub Actions"],
+        },
+        {
+          title: "Interactive Canvas & Live Diff Inspector",
+          category: "Frontend Architecture",
+          decision:
+            "Next.js node-graph editor with sub-millisecond node dragging, live execution diffs, and inspectable payload timelines.",
+          tradeoff:
+            "Demands careful canvas rendering optimization, but delivers immediate visual observability during complex workflow execution.",
+          badges: ["Next.js", "React Flow", "Tailwind CSS", "Playwright"],
+        },
+      ],
+      reliabilitySecurity: {
+        uptimeSla: "99.95% availability sustained across execution worker pools.",
+        resilienceMechanisms: [
+          {
+            title: "API Circuit Breakers",
+            detail:
+              "Automatic circuit tripping when external SaaS endpoints return 5xx errors or 429 rate limits, preventing worker pool exhaustion.",
+          },
+          {
+            title: "State Checkpoint Persistence",
+            detail:
+              "Every execution step writes state checkpoints to MongoDB, allowing paused or interrupted workflows to resume without data loss.",
+          },
+          {
+            title: "Container Sandboxing",
+            detail:
+              "Autonomous agent code execution is confined to non-root container sandboxes with read-only root filesystems and restricted network egress.",
+          },
+        ],
+        securityCompliance: [
+          "Envelope-encrypted credentials via Google Cloud KMS and AWS KMS",
+          "Complete tenant isolation at the data access layer",
+          "SAML 2.0 / OIDC Single Sign-On and Just-In-Time (JIT) provisioning",
+          "Comprehensive audit trails for every workflow modification and execution run",
+        ],
+      },
+    },
     architecture: [
       {
         domain: "Workflow Runtime",

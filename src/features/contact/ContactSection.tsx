@@ -48,7 +48,7 @@ export function ContactSection() {
   };
 
   return (
-    <footer id="contact" className="py-28 relative border-t border-hairline scroll-mt-28">
+    <footer id="contact" className="py-28 relative border-t border-hairline scroll-mt-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Engineering Philosophy Banner (Open, Typographic Layout) */}
         <div className="mb-20 pb-16 border-b border-hairline space-y-6">
@@ -90,18 +90,18 @@ export function ContactSection() {
               </p>
             </div>
 
-            {/* Direct Contact Buttons */}
+            {/* Direct Contact Buttons with Visual Feedback */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+              <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
                     <Mail className="w-4 h-4" />
                   </div>
-                  <div>
-                    <div className="text-[10px] font-mono text-zinc-500">DIRECT EMAIL</div>
+                  <div className="min-w-0">
+                    <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider">DIRECT EMAIL</div>
                     <a
                       href={`mailto:${profileData.contact.email}`}
-                      className="text-xs font-mono text-zinc-200 hover:text-cyan-300 transition-colors"
+                      className="text-xs font-mono text-zinc-200 hover:text-cyan-300 transition-colors truncate block"
                     >
                       {profileData.contact.email}
                     </a>
@@ -109,27 +109,38 @@ export function ContactSection() {
                 </div>
                 <button
                   onClick={copyEmail}
-                  className="p-2 rounded-lg text-zinc-500 hover:text-white hover:bg-white/[0.06] transition-colors"
-                  title="Copy email"
+                  className={`px-3 py-1.5 rounded-lg font-mono text-[11px] font-semibold flex items-center gap-1.5 transition-all shrink-0 ${
+                    copiedEmail
+                      ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-[0_0_12px_rgba(16,185,129,0.2)]"
+                      : "text-zinc-400 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06]"
+                  }`}
+                  title="Copy email address"
+                  aria-label="Copy email address"
                 >
                   {copiedEmail ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Copied</span>
+                    </>
                   ) : (
-                    <Copy className="w-3.5 h-3.5" />
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy</span>
+                    </>
                   )}
                 </button>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <div className="p-4 rounded-2xl bg-white/[0.02] border border-hairline flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
                     <Phone className="w-4 h-4" />
                   </div>
-                  <div>
-                    <div className="text-[10px] font-mono text-zinc-500">PHONE</div>
+                  <div className="min-w-0">
+                    <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider">PHONE</div>
                     <a
                       href={`tel:${profileData.contact.phone}`}
-                      className="text-xs font-mono text-zinc-200 hover:text-emerald-300 transition-colors"
+                      className="text-xs font-mono text-zinc-200 hover:text-emerald-300 transition-colors truncate block"
                     >
                       {profileData.contact.phone}
                     </a>
@@ -137,13 +148,24 @@ export function ContactSection() {
                 </div>
                 <button
                   onClick={copyPhone}
-                  className="p-2 rounded-lg text-zinc-500 hover:text-white hover:bg-white/[0.06] transition-colors"
-                  title="Copy phone"
+                  className={`px-3 py-1.5 rounded-lg font-mono text-[11px] font-semibold flex items-center gap-1.5 transition-all shrink-0 ${
+                    copiedPhone
+                      ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-[0_0_12px_rgba(16,185,129,0.2)]"
+                      : "text-zinc-400 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06]"
+                  }`}
+                  title="Copy phone number"
+                  aria-label="Copy phone number"
                 >
                   {copiedPhone ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Copied</span>
+                    </>
                   ) : (
-                    <Copy className="w-3.5 h-3.5" />
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy</span>
+                    </>
                   )}
                 </button>
               </div>
@@ -165,7 +187,7 @@ export function ContactSection() {
 
           {/* Right: Terminal Identity Spec & Verified Socials */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-6 rounded-3xl bg-[#0d0d12] border border-hairline font-mono text-xs space-y-3">
+            <div className="p-6 rounded-3xl bg-[#0c0c11] border border-hairline font-mono text-xs space-y-3">
               <div className="flex items-center justify-between pb-3 border-b border-hairline text-zinc-500 text-[11px]">
                 <span>IDENTITY_SPEC.json</span>
                 <span className="text-emerald-400 font-bold">● ACTIVE</span>
@@ -186,39 +208,39 @@ export function ContactSection() {
               </pre>
             </div>
 
-            {/* Social Links */}
+            {/* Verified External Links */}
             <div className="flex items-center gap-3">
               <a
                 href={profileData.contact.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 rounded-2xl bg-white/[0.03] border border-hairline hover:border-white/20 transition-all flex items-center justify-center gap-2 text-xs font-mono text-zinc-300 hover:text-white"
+                className="flex-1 py-3 px-4 rounded-2xl bg-white/[0.03] border border-hairline hover:border-white/20 hover:bg-white/[0.06] transition-all flex items-center justify-center gap-2 text-xs font-mono text-zinc-300 hover:text-white group"
               >
-                <GitHubIcon className="w-4 h-4" />
+                <GitHubIcon className="w-4 h-4 text-zinc-300 group-hover:text-white transition-colors" />
                 <span>GitHub</span>
-                <ArrowUpRight className="w-3 h-3 text-zinc-500" />
+                <ArrowUpRight className="w-3 h-3 text-zinc-500 group-hover:text-white transition-colors" />
               </a>
 
               <a
                 href={profileData.contact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 rounded-2xl bg-white/[0.03] border border-hairline hover:border-white/20 transition-all flex items-center justify-center gap-2 text-xs font-mono text-zinc-300 hover:text-white"
+                className="flex-1 py-3 px-4 rounded-2xl bg-white/[0.03] border border-hairline hover:border-cyan-500/30 hover:bg-cyan-500/05 transition-all flex items-center justify-center gap-2 text-xs font-mono text-zinc-300 hover:text-cyan-300 group"
               >
                 <LinkedInIcon className="w-4 h-4 text-cyan-400" />
                 <span>LinkedIn</span>
-                <ArrowUpRight className="w-3 h-3 text-zinc-500" />
+                <ArrowUpRight className="w-3 h-3 text-zinc-500 group-hover:text-cyan-300 transition-colors" />
               </a>
 
               <a
                 href={profileData.contact.credly}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 rounded-2xl bg-white/[0.03] border border-hairline hover:border-white/20 transition-all flex items-center justify-center gap-2 text-xs font-mono text-zinc-300 hover:text-white"
+                className="flex-1 py-3 px-4 rounded-2xl bg-white/[0.03] border border-hairline hover:border-amber-500/30 hover:bg-amber-500/05 transition-all flex items-center justify-center gap-2 text-xs font-mono text-zinc-300 hover:text-amber-300 group"
               >
                 <Shield className="w-4 h-4 text-amber-400" />
                 <span>Credly</span>
-                <ArrowUpRight className="w-3 h-3 text-zinc-500" />
+                <ArrowUpRight className="w-3 h-3 text-zinc-500 group-hover:text-amber-300 transition-colors" />
               </a>
             </div>
           </div>

@@ -38,7 +38,7 @@ export const awardsData: Award[] = [
     date: "Mar 2025",
     description:
       "Awarded for exceptional operational excellence, sustaining 99.98% production uptime across distributed real-time messaging services and maintaining zero message loss.",
-    impact: "99.98% Uptime & 0% Duplication Across 4 Enterprise Platforms",
+    impact: "99.98% Uptime & 0% Duplication Across 5 Enterprise Platforms",
   },
 ];
 

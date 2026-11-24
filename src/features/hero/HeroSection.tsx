@@ -34,7 +34,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden scroll-mt-28"
+      className="relative pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden scroll-mt-32"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Overhead Metadata Hairline Bar */}

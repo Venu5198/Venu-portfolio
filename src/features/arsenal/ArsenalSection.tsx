@@ -36,7 +36,7 @@ export function ArsenalSection() {
   });
 
   return (
-    <section id="arsenal" className="py-28 relative scroll-mt-28">
+    <section id="arsenal" className="py-28 relative scroll-mt-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="space-y-4 mb-16 pb-8 border-b border-hairline">

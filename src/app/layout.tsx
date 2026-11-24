@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -14,29 +14,68 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#09090B",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: "Venu K — Founding Engineer & Cloud/AI Systems Architect",
+  metadataBase: new URL("https://venu-portfolio.vercel.app"),
+  title: {
+    default: "Venu K — Founding Engineer (Full Stack, DevOps & AI)",
+    template: "%s | Venu K",
+  },
   description:
-    "Founding engineer who single-handedly designed, built, and operates SyncRivo (real-time messaging bridge syncing Slack, Teams, Google Chat, Zoom, and Webex) and OCNORA (AI workflow automation platform competing with n8n). Specializing in Python/FastAPI, Kubernetes, AWS, GCP, GitOps, and platform engineering.",
+    "Founding Engineer & Systems Architect specializing in Python, Full Stack, Cloud/DevOps, and Autonomous AI Fleets. Sole creator of SyncRivo (5-platform enterprise messaging bridge) and OCNORA (AI workflow automation platform).",
   keywords: [
     "Venu K",
     "Founding Engineer",
+    "Systems Architect",
     "DevOps Engineer",
+    "FastAPI",
+    "Python",
     "Kubernetes CKA",
     "AWS Certified DevOps Professional",
-    "FastAPI",
+    "Terraform Associate",
     "SyncRivo",
     "OCNORA",
+    "Google Cloud Run",
+    "GKE",
     "GitOps",
-    "Cloud Run",
-    "Python",
+    "Autonomous AI Agents",
   ],
-  authors: [{ name: "Venu K" }],
+  authors: [{ name: "Venu K", url: "https://github.com/Venu5198" }],
+  creator: "Venu K",
   openGraph: {
     title: "Venu K — Founding Engineer (Full Stack, DevOps & AI)",
     description:
-      "Cross-platform messaging bridge & AI workflow automation architecture. 3.6+ years operating 20+ microservices with 99.9% availability.",
+      "Cross-platform messaging bridge & AI workflow automation architecture. 3.6+ years operating 20+ microservices with 99.98% production SLA.",
+    url: "https://venu-portfolio.vercel.app",
+    siteName: "Venu K — Systems Architect Portfolio",
+    locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/images/venu-profile.jpg",
+        width: 800,
+        height: 800,
+        alt: "Venu K — Founding Engineer Portrait",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Venu K — Founding Engineer (Full Stack, DevOps & AI)",
+    description:
+      "Founding Engineer & Systems Architect specializing in Python, Full Stack, Cloud/DevOps, and Autonomous AI Fleets. Sole creator of SyncRivo and OCNORA.",
+    creator: "@Venu5198",
+    images: ["/images/venu-profile.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
