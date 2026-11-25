@@ -16,8 +16,7 @@ import { pipelineStages } from "@/shared/data/pipeline";
 import { PipelineStageStatus } from "@/shared/types/pipeline";
 
 export function PipelineRunner() {
-  const { theme } = useTheme();
-  const isLight = theme === "light";
+  const isLight = false;
 
   const [isRunning, setIsRunning] = useState(false);
   const [currentStageIndex, setCurrentStageIndex] = useState<number>(-1);

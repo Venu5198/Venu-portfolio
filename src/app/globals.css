@@ -3,47 +3,36 @@
 :root,
 [data-theme="dark"],
 html.dark {
-  --background: #09090b;
-  --foreground: #f4f4f5;
-  --foreground-muted: #a1a1aa;
-  --muted: #71717a;
-  --hairline: rgba(255, 255, 255, 0.07);
-  --hairline-hover: rgba(255, 255, 255, 0.16);
+  --background: #000000;
+  --surface-1: #0a0a0e;
+  --surface-2: #111117;
+  --surface-3: #1a1a24;
+  --surface-glass: rgba(18, 18, 26, 0.75);
+  --surface-glass-border: rgba(255, 255, 255, 0.12);
+  --surface-glass-highlight: rgba(255, 255, 255, 0.18);
+  
+  --foreground: #f5f5f7;
+  --foreground-secondary: #8e8e93;
+  --foreground-muted: #636366;
+  
+  --hairline: rgba(255, 255, 255, 0.08);
+  --hairline-hover: rgba(255, 255, 255, 0.18);
 
-  /* Console Telemetry Accent Tokens */
-  --telemetry-cyan: #06b6d4;
-  --telemetry-emerald: #10b981;
-  --telemetry-amber: #f59e0b;
-  --telemetry-purple: #a855f7;
-}
-
-[data-theme="light"],
-html.light {
-  --background: #f4f4f0;
-  --foreground: #0a0a0a;
-  --foreground-muted: #27272a;
-  --muted: #52525b;
-  --hairline: rgba(10, 10, 10, 0.16);
-  --hairline-hover: rgba(10, 10, 10, 0.32);
-
-  /* Streetwear Studio Vibrant Accent Tokens */
-  --telemetry-cyan: #2563eb;
-  --telemetry-emerald: #16a34a;
-  --telemetry-amber: #ff4d00;
-  --telemetry-purple: #2563eb;
-
-  /* Streetwear Tech Studio Palette */
-  --vibe-lime: #c6ff00;
-  --vibe-coral: #ff4d00;
-  --vibe-cobalt: #2563eb;
-  --vibe-violet: #2563eb;
-  --vibe-yellow: #fde047;
+  /* Apple Spatial Accent Colors */
+  --apple-blue: #0a84ff;
+  --apple-indigo: #5e5ce6;
+  --apple-purple: #bf5af2;
+  --apple-cyan: #32d74b;
+  --apple-teal: #64d2ff;
+  --apple-mint: #00c7be;
+  --apple-amber: #ff9f0a;
+  --apple-green: #30d158;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
+  --color-muted: var(--foreground-secondary);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
 }
@@ -55,365 +44,88 @@ html.light {
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
-  scroll-padding-top: 7rem; /* Generous clearance for floating navbar across all viewports */
-}
-
-html[data-theme="light"],
-html.light {
-  color-scheme: light;
+  scroll-padding-top: 6.5rem; /* Generous clearance for floating Dynamic Island navbar */
+  background-color: #000000;
 }
 
 body {
-  background-color: var(--background);
+  background-color: #000000;
   color: var(--foreground);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(6, 182, 212, 0.35);
+  background: rgba(100, 210, 255, 0.3);
   color: #ffffff;
 }
 
-[data-theme="light"] ::selection {
-  background: #c6ff00;
-  color: #0a0a0a;
+/* Apple Spatial Liquid Glass Utilities */
+.liquid-glass {
+  background: rgba(18, 18, 24, 0.72);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16), 0 16px 40px -10px rgba(0, 0, 0, 0.7);
 }
 
-/* Subtle Architectural Grid Pattern */
-.bg-grid-pattern {
-  background-size: 48px 48px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+.liquid-glass-elevated {
+  background: rgba(24, 24, 34, 0.82);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.22), 0 24px 60px -12px rgba(0, 0, 0, 0.85);
 }
 
-[data-theme="light"] .bg-grid-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(24, 24, 27, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(24, 24, 27, 0.06) 1px, transparent 1px);
+.liquid-glass-subtle {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Hairline dividers & editorial lines */
+.liquid-glass-subtle:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Apple Spatial Card Border & Shimmer */
+.spatial-card {
+  position: relative;
+  background: #0e0e14;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12), 0 10px 30px -5px rgba(0, 0, 0, 0.6);
+  border-radius: 1.75rem; /* 28px */
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.spatial-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.18), 0 20px 40px -10px rgba(0, 0, 0, 0.8);
+}
+
+/* Hairline dividers */
 .border-hairline {
   border-color: var(--hairline);
 }
 
-.border-hairline-hover:hover {
-  border-color: var(--hairline-hover);
-}
-
-/* Custom subtle scrollbar */
+/* Subtle sleek scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.18);
   border-radius: 9999px;
 }
 
-[data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: rgba(24, 24, 27, 0.25);
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
-
-/* =========================================================================
-   GEN-Z "VIBE CODING" LIGHT MODE OVERRIDES
-   Tactile sticker pills, bold high-contrast borders, chunky drop shadows
-   ========================================================================= */
-
-[data-theme="light"] body {
-  background-color: #f4f4f0 !important;
-  color: #0a0a0a !important;
-}
-
-/* =========================================================================
-   SPIDER-VERSE NEO-BRUTALIST COMIC & KINETIC PRINT UTILITIES
-   Bold Ben-Day dots, cross-hatching, chromatic RGB split, dimensional glitch
-   ========================================================================= */
-
-.font-comic {
-  font-family: var(--font-anton), Impact, -apple-system, sans-serif;
-  letter-spacing: 0.04em;
-}
-
-/* High-contrast comic Ben-Day dot matrices */
-.spider-halftone {
-  background-image: radial-gradient(#09090b 24%, transparent 26%);
-  background-size: 8px 8px;
-}
-
-.spider-halftone-subtle {
-  background-image: radial-gradient(rgba(9, 9, 11, 0.22) 20%, transparent 22%);
-  background-size: 10px 10px;
-}
-
-.spider-halftone-dense {
-  background-image: radial-gradient(#09090b 32%, transparent 34%);
-  background-size: 6px 6px;
-}
-
-.spider-halftone-cyan {
-  background-image: radial-gradient(#00f0ff 28%, transparent 30%);
-  background-size: 8px 8px;
-}
-
-.spider-halftone-magenta {
-  background-image: radial-gradient(#ff0055 28%, transparent 30%);
-  background-size: 8px 8px;
-}
-
-/* Comic cross-hatching ink pattern */
-.spider-crosshatch {
-  background-image: 
-    repeating-linear-gradient(45deg, rgba(9, 9, 11, 0.15) 0px, rgba(9, 9, 11, 0.15) 1.5px, transparent 1.5px, transparent 7px),
-    repeating-linear-gradient(-45deg, rgba(9, 9, 11, 0.15) 0px, rgba(9, 9, 11, 0.15) 1.5px, transparent 1.5px, transparent 7px);
-}
-
-/* Chromatic Aberration RGB Split (Dual Cyan #00F0FF / Crimson-Magenta #FF0055) */
-.spider-rgb-headline {
-  text-shadow: -4px 0px 0px #00f0ff, 4px 0px 0px #ff0055;
-}
-
-.spider-rgb-headline-sm {
-  text-shadow: -2.5px 0px 0px #00f0ff, 2.5px 0px 0px #ff0055;
-}
-
-.spider-rgb-hover {
-  transition: transform 0.12s steps(4, end), box-shadow 0.12s steps(4, end);
-}
-
-.spider-rgb-hover:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 
-    -3px 0px 0px #00f0ff,
-    3px 0px 0px #ff0055,
-    6px 6px 0px #09090b !important;
-}
-
-.spider-rgb-hover:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px #09090b !important;
-}
-
-.spider-text-hover {
-  transition: text-shadow 0.12s steps(3, end), transform 0.12s steps(3, end);
-}
-
-.spider-text-hover:hover {
-  text-shadow: -2.5px 0px 0px #00f0ff, 2.5px 0px 0px #ff0055;
-}
-
-/* "Animating on Twos" Stepped Button Micro-Interaction */
-.spider-spring-btn {
-  transition: transform 0.14s steps(5, end), box-shadow 0.14s steps(5, end);
-}
-
-.spider-spring-btn:hover {
-  transform: translate(-3px, -3px) rotate(-0.75deg);
-  box-shadow: 
-    -2px 0px 0px #00f0ff,
-    2px 0px 0px #ff0055,
-    6px 6px 0px #09090b;
-}
-
-.spider-spring-btn:active {
-  transform: translate(2px, 2px) scale(0.97);
-  box-shadow: 2px 2px 0px #09090b;
-}
-
-/* Dimensional Glitch Transition Keyframes (250ms) */
-@keyframes spider-dimensional-glitch {
-  0% {
-    clip-path: inset(0 0 0 0);
-    transform: translate(0);
-    filter: drop-shadow(-4px 0 #00f0ff) drop-shadow(4px 0 #ff0055);
-  }
-  20% {
-    clip-path: inset(20% 0 60% 0);
-    transform: translate(-5px, 2px);
-  }
-  40% {
-    clip-path: inset(50% 0 15% 0);
-    transform: translate(5px, -3px);
-    filter: drop-shadow(4px 0 #00f0ff) drop-shadow(-4px 0 #ff0055);
-  }
-  60% {
-    clip-path: inset(70% 0 5% 0);
-    transform: translate(-3px, 1px);
-  }
-  80% {
-    clip-path: inset(10% 0 75% 0);
-    transform: translate(3px, -2px);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-    transform: translate(0);
-    filter: none;
-  }
-}
-
-.animate-spider-glitch {
-  animation: spider-dimensional-glitch 0.25s steps(6, end) forwards;
-}
-
-/* Comic Onomatopoeia Burst Keyframes */
-@keyframes comic-pop-burst {
-  0% {
-    opacity: 0;
-    transform: scale(0.3) rotate(-15deg);
-  }
-  30% {
-    opacity: 1;
-    transform: scale(1.2) rotate(6deg);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1) rotate(-4deg);
-  }
-  90% {
-    opacity: 1;
-    transform: scale(1.05) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.9) translateY(-15px) rotate(8deg);
-  }
-}
-
-.animate-comic-burst {
-  animation: comic-pop-burst 0.85s steps(6, end) forwards;
-}
-
-/* Hairlines and dark borders in Light mode */
-[data-theme="light"] .border-hairline {
-  border-color: rgba(24, 24, 27, 0.14) !important;
-}
-
-[data-theme="light"] .border-white\/10,
-[data-theme="light"] .border-white\/\[0\.04\],
-[data-theme="light"] .border-white\/\[0\.06\],
-[data-theme="light"] .border-white\/\[0\.07\],
-[data-theme="light"] .border-white\/\[0\.08\],
-[data-theme="light"] .border-white\/\[0\.12\],
-[data-theme="light"] .border-white\/\[0\.14\],
-[data-theme="light"] .border-white\/\[0\.16\] {
-  border-color: rgba(24, 24, 27, 0.16) !important;
-}
-
-/* Tactile sticker-cards & containers in Light Mode */
-[data-theme="light"] .bg-white\/\[0\.02\],
-[data-theme="light"] .bg-white\/\[0\.025\],
-[data-theme="light"] .bg-white\/\[0\.03\],
-[data-theme="light"] .bg-white\/\[0\.04\],
-[data-theme="light"] .bg-white\/\[0\.05\],
-[data-theme="light"] .bg-white\/\[0\.06\] {
-  background-color: #f7f4ee !important;
-  border-color: #18181b !important;
-}
-
-/* Navbar in Light Mode: Frosted cream dock with chunky outline */
-[data-theme="light"] nav {
-  background-color: rgba(250, 248, 245, 0.94) !important;
-  border: 1.5px solid #18181b !important;
-  box-shadow: 3px 3px 0px #18181b !important;
-}
-
-/* Spotlight cards & interactive blocks get chunky sticker drop-shadows */
-[data-theme="light"] [data-spotlight-card="true"],
-[data-theme="light"] .spotlight-card {
-  background-color: #ffffff !important;
-  border: 1.5px solid #18181b !important;
-  box-shadow: 4px 4px 0px 0px #18181b !important;
-}
-
-[data-theme="light"] [data-spotlight-card="true"]:hover,
-[data-theme="light"] .spotlight-card:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 6px 6px 0px 0px #18181b !important;
-}
-
-/* Corner ticks turn dark */
-[data-theme="light"] .border-white\/20,
-[data-theme="light"] .border-white\/30,
-[data-theme="light"] .border-white\/40 {
-  border-color: #18181b !important;
-}
-
-/* Gen-Z sticker style for skill pills and badges */
-[data-theme="light"] .bg-white\/\[0\.04\]:hover,
-[data-theme="light"] .bg-white\/\[0\.05\]:hover,
-[data-theme="light"] .bg-white\/\[0\.06\]:hover {
-  background-color: #bef264 !important;
-  color: #18181b !important;
-  border-color: #18181b !important;
-}
-
-/* Modals in Light Mode: Crisp window with bold neo-brutalist shadow */
-[data-theme="light"] .max-w-4xl.bg-\[\#0c0c11\] {
-  background-color: #ffffff !important;
-  border: 2px solid #18181b !important;
-  box-shadow: 8px 8px 0px 0px #18181b !important;
-}
-
-[data-theme="light"] .max-w-4xl .bg-\[\#111117\]\/95 {
-  background-color: #f7f4ee !important;
-  border-bottom: 2px solid #18181b !important;
-}
-
-/* Terminal spec block in Light mode */
-[data-theme="light"] pre {
-  color: #18181b !important;
-}
-
-/* Studio Mode Custom Cursor: hide system cursor when custom cursor is active in Light Mode */
-[data-theme="light"].has-custom-cursor,
-[data-theme="light"].has-custom-cursor * {
-  cursor: none !important;
-}
-
-[data-theme="light"].has-custom-cursor input,
-[data-theme="light"].has-custom-cursor textarea,
-[data-theme="light"].has-custom-cursor select,
-[data-theme="light"].has-custom-cursor [contenteditable="true"] {
-  cursor: text !important;
-}
-
-/* Fallback for fine pointer desktop devices */
-@media (pointer: fine), (any-pointer: fine) {
-  [data-theme="light"].has-custom-cursor body {
-    cursor: none !important;
-  }
-}
-
-/* Ensure Studio custom cursor layers never intercept clicks or text selection */
-[data-cursor-layer],
-[data-cursor-layer] * {
-  pointer-events: none !important;
-  user-select: none !important;
-}
-
-/* Liquid Glass Utility Classes (inspired by dashersw/liquid-glass-js) */
-.liquid-glass {
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-}
-
-.liquid-glass-light {
-  background: rgba(255, 255, 255, 0.82);
-  border: 2px solid #0a0a0a;
-  box-shadow: inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.9), 3px 3px 0px #0a0a0a;
-}
-
-.liquid-glass-dark {
-  background: rgba(18, 18, 23, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 8px 32px rgba(0, 0, 0, 0.5);
-}
-

@@ -29,8 +29,7 @@ type TabType = "context" | "architecture" | "reliability" | "stack";
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [activeTab, setActiveTab] = useState<TabType>("context");
-  const { theme } = useTheme();
-  const isLight = theme === "light";
+  const isLight = false;
 
   // Prevent scroll jump and lock background scroll smoothly
   useEffect(() => {
@@ -112,13 +111,8 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
             <button
               onClick={onClose}
-              data-cursor="CLOSE ✕"
-              className={`p-1.5 rounded-full transition-colors cursor-pointer ${
-                isLight
-                  ? "text-[#0A0A0A] hover:bg-black/10 border-2 border-[#0A0A0A] bg-white shadow-[1.5px_1.5px_0px_#0A0A0A]"
-                  : "text-zinc-400 hover:text-white hover:bg-white/[0.08]"
-              }`}
-              aria-label="Close modal (Esc)"
+              className="p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/[0.1] transition-colors cursor-pointer"
+              aria-label="Close modal"
               title="Close (Esc)"
             >
               <X className="w-5 h-5" />

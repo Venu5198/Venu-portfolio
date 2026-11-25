@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Anton } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,16 +14,9 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const anton = Anton({
-  weight: "400",
-  variable: "--font-anton",
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const viewport: Viewport = {
-  themeColor: "#09090B",
-  colorScheme: "dark light",
+  themeColor: "#000000",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -95,7 +88,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${anton.variable} dark`}
+      className={`${inter.variable} ${jetbrainsMono.variable} dark`}
       suppressHydrationWarning
     >
       <head>
@@ -104,22 +97,17 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  var theme = localStorage.getItem('portfolio-theme') || 'dark';
-                  document.documentElement.setAttribute('data-theme', theme);
-                  if (theme === 'light') {
-                    document.documentElement.classList.remove('dark');
-                    document.documentElement.classList.add('light');
-                  } else {
-                    document.documentElement.classList.remove('light');
-                    document.documentElement.classList.add('dark');
-                  }
+                  localStorage.setItem('portfolio-theme', 'dark');
+                  document.documentElement.setAttribute('data-theme', 'dark');
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.classList.remove('light');
                 } catch (e) {}
               })();
             `,
           }}
         />
       </head>
-      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased font-sans selection:bg-cyan-500/30 selection:text-white">
+      <body className="min-h-screen bg-[#000000] text-[#F5F5F7] antialiased font-sans selection:bg-cyan-500/30 selection:text-white">
         {children}
       </body>
     </html>
