@@ -9,6 +9,7 @@ import {
   Pause,
 } from "lucide-react";
 import { PipelineRunner } from "@/features/pipeline-runner/PipelineRunner";
+import { SystemsCluster3D } from "@/shared/components/webgl/SystemsCluster3D";
 
 const transitionEase = [0.22, 1, 0.36, 1] as const;
 
@@ -26,6 +27,7 @@ export function ArchitectureSection() {
   const [activeMode, setActiveMode] = useState<"syncrivo" | "ocnora">("syncrivo");
   const [selectedNodeId, setSelectedNodeId] = useState<string>("sync-dedup");
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [viewFormat, setViewFormat] = useState<"stages" | "3d">("stages");
 
   const syncrivoNodes: TopologyNode[] = [
     {
@@ -177,7 +179,33 @@ export function ArchitectureSection() {
           </div>
 
           {/* Mode Switcher Tabs with Crystal Clear Labels */}
-          <div className="flex items-center gap-3 self-start">
+          <div className="flex flex-wrap items-center gap-3 self-start">
+            {/* View Format Toggle (2D Stages vs 3D WebGL Mesh) */}
+            <div className="flex items-center p-1 rounded-full bg-white/[0.04] border border-white/10">
+              <button
+                type="button"
+                onClick={() => setViewFormat("stages")}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 cursor-pointer ${
+                  viewFormat === "stages"
+                    ? "bg-cyan-500 text-black shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                    : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                ⚡ Stages
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewFormat("3d")}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 cursor-pointer ${
+                  viewFormat === "3d"
+                    ? "bg-cyan-500 text-black shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                    : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                🌐 3D Mesh
+              </button>
+            </div>
+
             <div className="flex items-center p-1 rounded-full bg-white/[0.03] border border-hairline">
               <button
                 onClick={() => {
@@ -217,6 +245,18 @@ export function ArchitectureSection() {
             </button>
           </div>
         </div>
+
+        {/* 3D Systems Topology Cluster Mesh (pmndrs/react-three-fiber inspired) */}
+        {viewFormat === "3d" && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.25 }}
+            className="mb-12 border border-white/10 rounded-3xl bg-[#09090B]/90 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-md"
+          >
+            <SystemsCluster3D theme="dark" />
+          </motion.div>
+        )}
 
         {/* Visual Connected Pipeline Flow Diagram */}
         <div className="relative py-8">

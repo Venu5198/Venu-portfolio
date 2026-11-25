@@ -1,10 +1,14 @@
 "use client";
 
 import React from "react";
+import { ShaderGradientCanvas } from "./webgl/ShaderGradientCanvas";
 
 export function GridBackground() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      {/* Ambient WebGL Shader Depth (Subtle Obsidian & Cyan Slate) */}
+      <ShaderGradientCanvas theme="dark" opacity={0.14} speed={0.45} />
+
       {/* Subtle Architectural Grid */}
       <div className="absolute inset-0 bg-grid-pattern opacity-60 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 

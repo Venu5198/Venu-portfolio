@@ -6,6 +6,9 @@ import confetti from "canvas-confetti";
 import { Sparkles, ArrowRight, Play, Pause, Zap, Shield, Key, Layers, Send } from "lucide-react";
 import { ComicBurst, ComicBurstItem } from "./ComicBurst";
 import { PipelineRunner } from "@/features/pipeline-runner/PipelineRunner";
+import { SystemsCluster3D } from "@/shared/components/webgl/SystemsCluster3D";
+import { ShaderGradientCanvas } from "@/shared/components/webgl/ShaderGradientCanvas";
+import { LiquidGlassPill } from "@/shared/components/ui/LiquidGlassPill";
 
 type ArchitectureMode = "syncrivo" | "ocnora";
 
@@ -156,6 +159,7 @@ const packetWittyNotes = {
 export function VibeArchitectureSection() {
   const [mode, setMode] = useState<ArchitectureMode>("syncrivo");
   const [activeStage, setActiveStage] = useState(0);
+  const [viewType, setViewType] = useState<"stages" | "3d">("stages");
   const [isPaused, setIsPaused] = useState(false);
   const [isGlitching, setIsGlitching] = useState(false);
   const [bursts, setBursts] = useState<ComicBurstItem[]>([]);
@@ -235,9 +239,12 @@ export function VibeArchitectureSection() {
       {/* Onomatopoeia Comic Burst Layer */}
       <ComicBurst bursts={bursts} />
 
+      {/* Animated WebGL ShaderGradient Fluid Backdrop (ruucm/shadergradient inspired) */}
+      <ShaderGradientCanvas theme="light" opacity={0.22} speed={0.65} />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header with Mode Toggles */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-6 border-b-[2.5px] border-[#0A0A0A]/20">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-6 border-b-[2.5px] border-[#0A0A0A]/20">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C6FF00] text-[#0A0A0A] text-xs font-mono font-black border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]">
               <Sparkles className="w-3.5 h-3.5" />
@@ -252,12 +259,39 @@ export function VibeArchitectureSection() {
             </p>
           </div>
 
-          {/* Mode Switcher Sticker Pills */}
-          <div className="flex items-center gap-3">
+          {/* Mode & 3D Mesh Switcher Sticker Pills */}
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+            <div className="flex items-center p-1 rounded-2xl bg-white border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]">
+              <button
+                type="button"
+                onClick={() => setViewType("stages")}
+                data-cursor="STAGES"
+                className={`px-3 py-1.5 rounded-xl font-mono text-xs font-black transition-all cursor-pointer ${
+                  viewType === "stages"
+                    ? "bg-[#C6FF00] text-[#0A0A0A] shadow-[1.5px_1.5px_0px_#0A0A0A]"
+                    : "text-zinc-700 hover:text-black"
+                }`}
+              >
+                ⚡ 2D Stages
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewType("3d")}
+                data-cursor="3D MESH"
+                className={`px-3 py-1.5 rounded-xl font-mono text-xs font-black transition-all cursor-pointer ${
+                  viewType === "3d"
+                    ? "bg-[#00F0FF] text-[#0A0A0A] shadow-[1.5px_1.5px_0px_#0A0A0A]"
+                    : "text-zinc-700 hover:text-black"
+                }`}
+              >
+                🌐 3D Mesh
+              </button>
+            </div>
+
             <button
               onClick={(e) => switchMode("syncrivo", e)}
               data-cursor="SWITCH ⚡"
-              className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-[2.5px] border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
+              className={`px-3.5 py-2 rounded-2xl font-mono text-xs font-black border-[2.5px] border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
                 mode === "syncrivo"
                   ? "bg-[#C6FF00] text-[#0A0A0A] shadow-[3.5px_3.5px_0px_#0A0A0A] translate-x-[-1px] translate-y-[-1px]"
                   : "bg-white text-zinc-700 hover:text-black shadow-[2px_2px_0px_#0A0A0A]"
@@ -268,7 +302,7 @@ export function VibeArchitectureSection() {
             <button
               onClick={(e) => switchMode("ocnora", e)}
               data-cursor="SWITCH ⚡"
-              className={`px-4 py-2.5 rounded-2xl font-mono text-xs font-black border-[2.5px] border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
+              className={`px-3.5 py-2 rounded-2xl font-mono text-xs font-black border-[2.5px] border-[#0A0A0A] spider-spring-btn spider-rgb-hover transition-all cursor-pointer ${
                 mode === "ocnora"
                   ? "bg-[#2563EB] text-white shadow-[3.5px_3.5px_0px_#0A0A0A] translate-x-[-1px] translate-y-[-1px]"
                   : "bg-white text-zinc-700 hover:text-black shadow-[2px_2px_0px_#0A0A0A]"
@@ -278,6 +312,18 @@ export function VibeArchitectureSection() {
             </button>
           </div>
         </div>
+
+        {/* 3D Systems Topology Cluster (pmndrs/react-three-fiber inspired) */}
+        {viewType === "3d" && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", stiffness: 350, damping: 22 }}
+            className="mb-12 shadow-[8px_8px_0px_#0A0A0A] rounded-3xl bg-white/90 backdrop-blur-md"
+          >
+            <SystemsCluster3D theme="light" />
+          </motion.div>
+        )}
 
         {/* Interactive Architecture Packet Simulator Track with 250ms Dimensional Glitch */}
         <motion.div

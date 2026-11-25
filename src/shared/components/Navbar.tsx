@@ -52,9 +52,9 @@ export function Navbar() {
       <nav
         className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl px-4 py-2.5 rounded-full transition-all duration-300 ${
           isLight
-            ? "bg-[#FAF8F5]/90 backdrop-blur-xl border-2 border-black shadow-[3px_3px_0px_#000]"
+            ? "liquid-glass liquid-glass-light"
             : scrolled
-            ? "bg-[#09090B]/85 backdrop-blur-xl border border-white/[0.12] shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+            ? "liquid-glass liquid-glass-dark"
             : "bg-[#121217]/50 backdrop-blur-md border border-white/[0.06]"
         }`}
       >

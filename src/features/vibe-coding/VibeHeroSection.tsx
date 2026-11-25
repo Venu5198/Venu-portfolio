@@ -7,6 +7,9 @@ import confetti from "canvas-confetti";
 import { Terminal, Copy, Check, ArrowRight, Sparkles, Coffee, Heart, Zap } from "lucide-react";
 import { profileData } from "@/shared/data/profile";
 import { ComicBurst, ComicBurstItem } from "./ComicBurst";
+import { ShaderGradientCanvas } from "@/shared/components/webgl/ShaderGradientCanvas";
+import { LiquidLogo } from "@/shared/components/webgl/LiquidLogo";
+import { LiquidGlassPill } from "@/shared/components/ui/LiquidGlassPill";
 
 // Spider-Verse "Animating on Twos" Stepped Spring Physics
 const steppedSpring = {
@@ -85,6 +88,9 @@ export function VibeHeroSection() {
     >
       {/* Onomatopoeia Comic Burst Layer */}
       <ComicBurst bursts={bursts} />
+
+      {/* Animated WebGL ShaderGradient Fluid Backdrop (ruucm/shadergradient inspired) */}
+      <ShaderGradientCanvas theme="light" opacity={0.36} speed={0.85} />
 
       {/* Spider-Verse Parallax Halftone Print & Crosshatch Layers */}
       <motion.div
@@ -251,8 +257,22 @@ export function VibeHeroSection() {
               transition={{ ...steppedSpring, delay: 0.1 }}
               className="space-y-3"
             >
-              <div className="inline-block px-3 py-1 rounded-md bg-[#C6FF00] border-[2.5px] border-[#0A0A0A] shadow-[2.5px_2.5px_0px_#0A0A0A] text-xs font-mono font-black uppercase text-[#0A0A0A]">
-                Backend Developer — Python, DevOps &amp; AI
+              <div className="flex flex-wrap items-center gap-3">
+                <LiquidGlassPill
+                  theme="light"
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-mono font-black uppercase"
+                >
+                  Backend Developer — Python, DevOps &amp; AI
+                </LiquidGlassPill>
+                <div className="hidden sm:inline-flex items-center">
+                  <LiquidLogo
+                    text="VENU.K"
+                    subtext="SYSTEMS ⚡"
+                    theme="light"
+                    fontSize={15}
+                    className="w-28 h-8 rounded-xl border-2 border-[#0A0A0A] bg-white/70 shadow-[2px_2px_0px_#0A0A0A]"
+                  />
+                </div>
               </div>
 
               <h1 className="font-comic text-7xl sm:text-9xl lg:text-[10rem] font-black tracking-tight text-[#09090B] uppercase leading-[0.82] rotate-[-1.5deg] spider-rgb-headline select-none">
@@ -375,10 +395,13 @@ export function VibeHeroSection() {
               {/* Spider-Verse Ben-Day Halftone Texture inside Studio Pass */}
               <div className="absolute inset-0 spider-halftone opacity-35 pointer-events-none rounded-3xl" />
 
-              {/* Top Studio Lanyard Clip Pill */}
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded bg-[#09090B] text-[#C6FF00] font-mono text-[10px] font-black border-2 border-[#09090B] shadow-[2px_2px_0px_#00F0FF] spider-text-hover spider-rgb-hover rotate-[-1deg] z-20 whitespace-nowrap">
+              {/* Top Studio Lanyard Clip Pill (Liquid Glass) */}
+              <LiquidGlassPill
+                theme="light"
+                className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 text-[#0A0A0A] font-mono text-[10px] font-black rotate-[-1deg] z-20 whitespace-nowrap"
+              >
                 STUDIO PASS // PROD-ENV ⚡
-              </div>
+              </LiquidGlassPill>
 
               {/* Pass Header Row */}
               <div className="flex items-center justify-between pb-2 mb-2 pt-2.5 border-b border-[#0A0A0A]/15 font-mono text-[11px] font-bold text-zinc-800">
