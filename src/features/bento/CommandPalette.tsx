@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Command, ArrowRight, Copy, Check, ExternalLink, Zap, Terminal } from "lucide-react";
+import { Search, Check } from "lucide-react";
 import { profileData } from "@/shared/data/profile";
+import { useTheme } from "@/shared/context/ThemeContext";
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -16,6 +17,8 @@ export function CommandPalette({
   onClose,
   onOpenModal,
 }: CommandPaletteProps) {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
   const [query, setQuery] = useState("");
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
@@ -23,8 +26,7 @@ export function CommandPalette({
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        if (isOpen) onClose();
-        else onClose(); // parent handles toggle or open
+        onClose();
       }
       if (e.key === "Escape" && isOpen) {
         onClose();
@@ -63,6 +65,16 @@ export function CommandPalette({
 
   const actions = [
     {
+      id: "theme-toggle",
+      title: `Switch Appearance to iOS ${isDark ? "Light" : "Dark"}`,
+      subtitle: `Currently in iOS ${isDark ? "Dark" : "Light"} system`,
+      category: "System",
+      action: () => {
+        toggleTheme();
+        onClose();
+      },
+    },
+    {
       id: "syncrivo",
       title: "Inspect SyncRivo Architecture & Safeguards",
       subtitle: "5-Platform Messaging Bridge, Redis SETNX, sub-95ms transit",
@@ -92,7 +104,7 @@ export function CommandPalette({
     {
       id: "stack",
       title: "Filter Deployment Pipeline & Tech Matrix",
-      subtitle: "Rolling/Blue-Green switcher and categorized tech pills",
+      subtitle: "Rolling/Blue-Green switcher, 0.25x slow-mo, and tech pills",
       category: "Interactive Tools",
       action: () => scrollToTile("tile-stack"),
     },
@@ -157,7 +169,7 @@ export function CommandPalette({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/75 backdrop-blur-md"
+          className="absolute inset-0 bg-black/70 backdrop-blur-md"
         />
 
         {/* Palette Container */}
@@ -166,26 +178,38 @@ export function CommandPalette({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -16 }}
           transition={{ type: "spring", stiffness: 350, damping: 30 }}
-          className="relative w-full max-w-xl rounded-3xl bg-[#161618] border border-white/15 shadow-[0_24px_80px_rgba(0,0,0,0.95)] overflow-hidden z-10"
+          className={`relative w-full max-w-xl rounded-3xl border shadow-[0_24px_80px_rgba(0,0,0,0.95)] overflow-hidden z-10 ${
+            isDark
+              ? "bg-[#161618] border-white/15 text-[#F5F5F7]"
+              : "bg-white border-black/10 text-[#1D1D1F]"
+          }`}
         >
           {/* Search Header */}
-          <div className="p-4 border-b border-white/[0.08] flex items-center gap-3">
-            <Search className="w-5 h-5 text-[#32ADE6] shrink-0" />
+          <div
+            className={`p-4 border-b flex items-center gap-3 ${
+              isDark ? "border-white/[0.08]" : "border-black/[0.08]"
+            }`}
+          >
+            <Search className="w-5 h-5 text-[#007AFF] dark:text-[#32ADE6] shrink-0" />
             <input
               type="text"
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search projects, copy contact, or jump to tiles..."
-              className="w-full bg-transparent text-sm text-[#F5F5F7] placeholder:text-[#86868B] focus:outline-none font-mono"
+              placeholder="Search projects, toggle theme, copy contact..."
+              className="w-full bg-transparent text-sm focus:outline-none font-mono"
             />
             {copiedText && (
-              <span className="text-xs font-mono text-[#30D158] flex items-center gap-1 shrink-0">
+              <span className="text-xs font-mono text-[#34C759] dark:text-[#30D158] flex items-center gap-1 shrink-0 font-semibold">
                 <Check className="w-3.5 h-3.5" />
                 {copiedText}
               </span>
             )}
-            <kbd className="px-2 py-1 rounded bg-white/10 text-[10px] font-mono text-[#86868B] shrink-0">
+            <kbd
+              className={`px-2 py-1 rounded text-[10px] font-mono shrink-0 ${
+                isDark ? "bg-white/10 text-[#A1A1AA]" : "bg-black/10 text-[#52525B]"
+              }`}
+            >
               ESC
             </kbd>
           </div>
@@ -193,7 +217,7 @@ export function CommandPalette({
           {/* Action List */}
           <div className="max-h-[60vh] overflow-y-auto p-2 space-y-1">
             {filteredActions.length === 0 ? (
-              <div className="p-6 text-center text-xs font-mono text-[#86868B]">
+              <div className="p-6 text-center text-xs font-mono opacity-60">
                 No matching actions found for &quot;{query}&quot;.
               </div>
             ) : (
@@ -201,18 +225,24 @@ export function CommandPalette({
                 <button
                   key={item.id}
                   onClick={item.action}
-                  className="w-full p-3 rounded-2xl hover:bg-white/[0.06] transition-colors flex items-center justify-between text-left group cursor-pointer"
+                  className={`w-full p-3 rounded-2xl transition-colors flex items-center justify-between text-left group cursor-pointer ${
+                    isDark ? "hover:bg-white/[0.06]" : "hover:bg-black/[0.04]"
+                  }`}
                 >
                   <div className="space-y-0.5 min-w-0 pr-3">
-                    <div className="text-xs font-semibold text-[#F5F5F7] group-hover:text-white flex items-center gap-2 truncate">
+                    <div className="text-xs font-semibold flex items-center gap-2 truncate">
                       <span>{item.title}</span>
                     </div>
-                    <div className="text-[11px] font-mono text-[#86868B] truncate">
+                    <div className="text-[11px] font-mono opacity-70 truncate">
                       {item.subtitle}
                     </div>
                   </div>
 
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/[0.04] text-zinc-400 shrink-0">
+                  <span
+                    className={`text-[10px] font-mono px-2 py-0.5 rounded-full shrink-0 ${
+                      isDark ? "bg-white/[0.05] text-zinc-300" : "bg-black/[0.05] text-zinc-700"
+                    }`}
+                  >
                     {item.category}
                   </span>
                 </button>

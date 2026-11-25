@@ -1,13 +1,13 @@
 "use client";
 
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-export type Theme = "dark";
+export type Theme = "dark" | "light";
 
 interface ThemeContextType {
-  theme: "dark";
+  theme: Theme;
   toggleTheme: () => void;
-  setTheme: (t: "dark") => void;
+  setTheme: (t: Theme) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
@@ -17,24 +17,51 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setThemeState] = useState<Theme>("dark");
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
-    // Lock to Apple Dark Canvas and wipe any stale "light" value
     try {
-      localStorage.setItem("portfolio-theme", "dark");
-    } catch {}
-    document.documentElement.setAttribute("data-theme", "dark");
-    document.documentElement.classList.add("dark");
-    document.documentElement.classList.remove("light");
+      const savedTheme = localStorage.getItem("venu-portfolio-theme") as Theme | null;
+      if (savedTheme === "light" || savedTheme === "dark") {
+        setThemeState(savedTheme);
+        applyTheme(savedTheme);
+      } else {
+        applyTheme("dark");
+      }
+    } catch {
+      applyTheme("dark");
+    }
+    setMounted(true);
   }, []);
 
+  const applyTheme = (t: Theme) => {
+    const root = document.documentElement;
+    root.setAttribute("data-theme", t);
+    if (t === "dark") {
+      root.classList.add("dark");
+      root.classList.remove("light");
+    } else {
+      root.classList.add("light");
+      root.classList.remove("dark");
+    }
+  };
+
+  const setTheme = (t: Theme) => {
+    setThemeState(t);
+    try {
+      localStorage.setItem("venu-portfolio-theme", t);
+    } catch {}
+    applyTheme(t);
+  };
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+  };
+
   return (
-    <ThemeContext.Provider
-      value={{
-        theme: "dark",
-        toggleTheme: () => {},
-        setTheme: () => {},
-      }}
-    >
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

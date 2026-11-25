@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, ShieldCheck, CheckCircle2, Layers, Cpu } from "lucide-react";
+import { X, ExternalLink, CheckCircle2 } from "lucide-react";
 import { projectsData } from "@/shared/data/projects";
+import { useTheme } from "@/shared/context/ThemeContext";
 
 interface BentoModalProps {
   projectId: string | null;
@@ -11,6 +12,8 @@ interface BentoModalProps {
 }
 
 export function BentoModal({ projectId, onClose }: BentoModalProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const [activeTab, setActiveTab] = useState<"overview" | "decisions" | "safeguards" | "stack">("overview");
 
   const project = projectsData.find((p) => p.id === projectId) || projectsData[0];
@@ -35,40 +38,67 @@ export function BentoModal({ projectId, onClose }: BentoModalProps) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10">
+      <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 md:p-10">
         {/* Backdrop blur */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/80 backdrop-blur-xl"
+          className="absolute inset-0 bg-black/70 backdrop-blur-md"
         />
 
-        {/* Modal Window Container */}
+        {/* iOS-Style Sheet Modal */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 24 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 24 }}
-          transition={{ type: "spring", stiffness: 320, damping: 28 }}
-          className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-[2.5rem] bg-[#161618] border border-white/15 shadow-[0_24px_80px_rgba(0,0,0,0.9)] overflow-hidden z-10"
+          initial={{ opacity: 0, y: "100%" }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: "100%" }}
+          transition={{ type: "spring", stiffness: 350, damping: 32 }}
+          className={`relative w-full max-w-3xl max-h-[88vh] flex flex-col rounded-t-[2.5rem] sm:rounded-[2.5rem] border shadow-[0_24px_80px_rgba(0,0,0,0.9)] overflow-hidden z-10 ${
+            isDark
+              ? "bg-[#161618] border-white/15 text-[#F5F5F7]"
+              : "bg-white border-black/10 text-[#1D1D1F]"
+          }`}
         >
+          {/* iOS Sheet Top Grabber Handle */}
+          <div className="pt-3 pb-1 flex justify-center shrink-0">
+            <div
+              className={`w-12 h-1.5 rounded-full ${
+                isDark ? "bg-white/20" : "bg-black/20"
+              }`}
+            />
+          </div>
+
           {/* Header */}
-          <div className="p-6 sm:p-8 border-b border-white/[0.08] flex items-start justify-between gap-4">
+          <div
+            className={`p-6 sm:p-8 pt-3 border-b flex items-start justify-between gap-4 ${
+              isDark ? "border-white/[0.08]" : "border-black/[0.08]"
+            }`}
+          >
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono text-[#32ADE6] mb-2 font-medium">
+              <div
+                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono mb-2 font-medium border ${
+                  isDark
+                    ? "bg-white/[0.05] border-white/10 text-[#32ADE6]"
+                    : "bg-black/[0.04] border-black/10 text-[#007AFF]"
+                }`}
+              >
                 <span>{project.category}</span>
-                <span className="text-white/20">·</span>
+                <span className="opacity-30">·</span>
                 <span>{project.role}</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F7] tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
                 {project.title} — Blueprint &amp; Specs
               </h2>
             </div>
 
             <button
               onClick={onClose}
-              className="p-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-zinc-300 hover:text-white transition-colors cursor-pointer"
+              className={`p-2.5 rounded-full border transition-colors cursor-pointer ${
+                isDark
+                  ? "bg-white/[0.06] hover:bg-white/[0.12] border-white/10 text-zinc-300 hover:text-white"
+                  : "bg-black/[0.04] hover:bg-black/[0.08] border-black/10 text-zinc-700 hover:text-black"
+              }`}
               aria-label="Close modal"
             >
               <X className="w-4 h-4" />
@@ -76,7 +106,11 @@ export function BentoModal({ projectId, onClose }: BentoModalProps) {
           </div>
 
           {/* Segmented Tab Controls */}
-          <div className="px-6 sm:px-8 pt-4 pb-2 border-b border-white/[0.08] flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <div
+            className={`px-6 sm:px-8 pt-4 pb-2 border-b flex items-center gap-2 overflow-x-auto no-scrollbar ${
+              isDark ? "border-white/[0.08]" : "border-black/[0.08]"
+            }`}
+          >
             {(
               [
                 { id: "overview", label: "Overview" },
@@ -90,8 +124,12 @@ export function BentoModal({ projectId, onClose }: BentoModalProps) {
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer whitespace-nowrap ${
                   activeTab === tab.id
-                    ? "bg-white text-black font-semibold shadow-sm"
-                    : "text-[#86868B] hover:text-white bg-white/[0.03] hover:bg-white/[0.06]"
+                    ? isDark
+                      ? "bg-white text-black font-semibold shadow-sm"
+                      : "bg-[#007AFF] text-white font-semibold shadow-sm"
+                    : isDark
+                    ? "text-[#A1A1AA] hover:text-white bg-white/[0.03] hover:bg-white/[0.06]"
+                    : "text-[#52525B] hover:text-[#1D1D1F] bg-black/[0.03] hover:bg-black/[0.06]"
                 }`}
               >
                 {tab.label}
@@ -100,18 +138,30 @@ export function BentoModal({ projectId, onClose }: BentoModalProps) {
           </div>
 
           {/* Modal Content Body */}
-          <div className="p-6 sm:p-8 overflow-y-auto space-y-6 text-sm text-[#86868B] leading-relaxed">
+          <div className="p-6 sm:p-8 overflow-y-auto space-y-6 text-sm leading-relaxed">
             {activeTab === "overview" && (
               <div className="space-y-6">
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-2">
-                  <div className="text-xs font-mono font-bold uppercase text-[#F5F5F7]">The Problem</div>
-                  <p className="text-zinc-300 font-light">{breakdown?.contextScale?.problem}</p>
+                <div
+                  className={`p-4 rounded-2xl border space-y-2 ${
+                    isDark
+                      ? "bg-white/[0.02] border-white/[0.06]"
+                      : "bg-[#F2F2F7] border-black/[0.04]"
+                  }`}
+                >
+                  <div className="text-xs font-mono font-bold uppercase opacity-90">The Problem</div>
+                  <p className="font-light opacity-90">{breakdown?.contextScale?.problem}</p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-2">
-                  <div className="text-xs font-mono font-bold uppercase text-[#F5F5F7]">Scale &amp; Engineering Scope</div>
-                  <p className="text-zinc-300 font-light">{breakdown?.contextScale?.scaleSummary}</p>
-                  <ul className="list-disc pl-5 space-y-1 text-xs text-zinc-400 font-light pt-2">
+                <div
+                  className={`p-4 rounded-2xl border space-y-2 ${
+                    isDark
+                      ? "bg-white/[0.02] border-white/[0.06]"
+                      : "bg-[#F2F2F7] border-black/[0.04]"
+                  }`}
+                >
+                  <div className="text-xs font-mono font-bold uppercase opacity-90">Scale &amp; Engineering Scope</div>
+                  <p className="font-light opacity-90">{breakdown?.contextScale?.scaleSummary}</p>
+                  <ul className="list-disc pl-5 space-y-1 text-xs opacity-80 font-light pt-2">
                     {breakdown?.contextScale?.scopePoints?.map((pt, idx) => (
                       <li key={idx}>{pt}</li>
                     ))}
@@ -124,7 +174,11 @@ export function BentoModal({ projectId, onClose }: BentoModalProps) {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-semibold text-xs hover:bg-zinc-200 transition-colors shadow-sm"
+                      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-xs transition-colors shadow-sm ${
+                        isDark
+                          ? "bg-white text-black hover:bg-zinc-200"
+                          : "bg-[#007AFF] text-white hover:bg-blue-600"
+                      }`}
                     >
                       <span>Visit Live Application</span>
                       <ExternalLink className="w-3.5 h-3.5" />
@@ -137,15 +191,28 @@ export function BentoModal({ projectId, onClose }: BentoModalProps) {
             {activeTab === "decisions" && (
               <div className="space-y-4">
                 {breakdown?.coreDecisions?.map((dec, idx) => (
-                  <div key={idx} className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-2">
+                  <div
+                    key={idx}
+                    className={`p-4 rounded-2xl border space-y-2 ${
+                      isDark
+                        ? "bg-white/[0.02] border-white/[0.06]"
+                        : "bg-[#F2F2F7] border-black/[0.04]"
+                    }`}
+                  >
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-white text-sm">{dec.title}</span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/[0.05] text-[#32ADE6]">
+                      <span className="font-semibold text-sm">{dec.title}</span>
+                      <span
+                        className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
+                          isDark
+                            ? "bg-white/[0.05] text-[#32ADE6]"
+                            : "bg-black/[0.05] text-[#007AFF]"
+                        }`}
+                      >
                         {dec.category}
                       </span>
                     </div>
-                    <p className="text-zinc-300 text-xs font-light">{dec.decision}</p>
-                    <div className="text-[11px] text-[#86868B] font-mono pt-1">
+                    <p className="text-xs font-light opacity-90">{dec.decision}</p>
+                    <div className="text-[11px] font-mono opacity-70 pt-1">
                       <strong>Trade-off:</strong> {dec.tradeoff}
                     </div>
                   </div>
@@ -155,13 +222,20 @@ export function BentoModal({ projectId, onClose }: BentoModalProps) {
 
             {activeTab === "safeguards" && (
               <div className="space-y-4">
-                <div className="p-4 rounded-2xl bg-emerald-500/[0.05] border border-emerald-500/20 text-xs font-mono text-emerald-300">
+                <div className="p-4 rounded-2xl bg-emerald-500/[0.08] border border-emerald-500/25 text-xs font-mono text-emerald-600 dark:text-emerald-300 font-semibold">
                   <strong>Production SLA:</strong> {breakdown?.reliabilitySecurity?.uptimeSla}
                 </div>
                 {breakdown?.reliabilitySecurity?.resilienceMechanisms?.map((mech, idx) => (
-                  <div key={idx} className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-1.5">
-                    <div className="font-semibold text-white text-xs">{mech.title}</div>
-                    <div className="text-zinc-400 text-xs font-light">{mech.detail}</div>
+                  <div
+                    key={idx}
+                    className={`p-4 rounded-2xl border space-y-1.5 ${
+                      isDark
+                        ? "bg-white/[0.02] border-white/[0.06]"
+                        : "bg-[#F2F2F7] border-black/[0.04]"
+                    }`}
+                  >
+                    <div className="font-semibold text-xs">{mech.title}</div>
+                    <div className="text-xs font-light opacity-80">{mech.detail}</div>
                   </div>
                 ))}
               </div>
@@ -169,16 +243,20 @@ export function BentoModal({ projectId, onClose }: BentoModalProps) {
 
             {activeTab === "stack" && (
               <div className="space-y-4">
-                <div className="text-xs font-mono text-[#86868B]">
+                <div className="text-xs font-mono opacity-70">
                   Production verified modules leveraged across this service:
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {project.highlights.map((h, idx) => (
                     <div
                       key={idx}
-                      className="p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-xs font-mono text-zinc-300 flex items-start gap-2.5 w-full"
+                      className={`p-3 rounded-2xl border text-xs font-mono flex items-start gap-2.5 w-full ${
+                        isDark
+                          ? "bg-white/[0.02] border-white/[0.06]"
+                          : "bg-[#F2F2F7] border-black/[0.04]"
+                      }`}
                     >
-                      <CheckCircle2 className="w-4 h-4 text-[#30D158] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-[#34C759] dark:text-[#30D158] shrink-0 mt-0.5" />
                       <span>{h}</span>
                     </div>
                   ))}

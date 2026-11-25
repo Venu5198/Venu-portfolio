@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, Copy, Check, Send, ArrowUpRight, Shield } from "lucide-react";
 import { BentoSpotlightTile } from "./BentoSpotlightTile";
 import { profileData } from "@/shared/data/profile";
+import { useTheme } from "@/shared/context/ThemeContext";
 
 function GitHubIcon({ className }: { className?: string }) {
   return (
@@ -23,6 +24,8 @@ function LinkedInIcon({ className }: { className?: string }) {
 }
 
 export function Tile8Outreach() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
 
@@ -59,40 +62,54 @@ export function Tile8Outreach() {
     >
       <div>
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/[0.08]">
+        <div
+          className={`flex items-center justify-between pb-3 mb-4 border-b ${
+            isDark ? "border-white/[0.08]" : "border-black/[0.08]"
+          }`}
+        >
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#30D158] animate-pulse" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#F5F5F7]">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#1D1D1F] dark:text-[#F5F5F7]">
               Direct Outreach
             </span>
           </div>
-          <span className="text-[10px] font-mono text-emerald-400">Available</span>
+          <span className="text-[10px] font-mono text-[#30D158] font-semibold">Available</span>
         </div>
 
-        <p className="text-xs text-[#86868B] font-light leading-relaxed mb-4">
+        <p className="text-xs text-[#52525B] dark:text-[#A1A1AA] font-light leading-relaxed mb-4">
           Open to full-time Backend Developer and DevOps roles architecting microservices, Kubernetes platforms, and AI engines.
         </p>
 
-        {/* Contact Action Pills */}
+        {/* Contact Action Pills (iOS Grouped Inset) */}
         <div className="space-y-2.5 mb-5">
           {/* Email Copy Card */}
-          <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between gap-2">
+          <div
+            className={`p-3 rounded-2xl border flex items-center justify-between gap-2 ${
+              isDark
+                ? "bg-white/[0.03] border-white/[0.08]"
+                : "bg-[#F2F2F7] border-black/[0.06] shadow-sm"
+            }`}
+          >
             <div className="flex items-center gap-2.5 min-w-0">
-              <Mail className="w-4 h-4 text-[#32ADE6] shrink-0" />
+              <Mail className="w-4 h-4 text-[#007AFF] dark:text-[#32ADE6] shrink-0" />
               <div className="min-w-0">
-                <div className="text-[9px] font-mono text-[#86868B] uppercase">EMAIL</div>
-                <div className="text-xs font-mono text-zinc-200 truncate">
+                <div className="text-[9px] font-mono uppercase opacity-60">EMAIL</div>
+                <div className="text-xs font-mono truncate font-medium">
                   {profileData.contact.email}
                 </div>
               </div>
             </div>
             <button
               onClick={copyEmail}
-              className="px-2.5 py-1 rounded-lg bg-white/[0.06] hover:bg-white/10 text-xs font-mono text-zinc-300 transition-colors shrink-0 cursor-pointer"
+              className={`px-2.5 py-1 rounded-lg text-xs font-mono transition-colors shrink-0 cursor-pointer ${
+                isDark
+                  ? "bg-white/[0.06] hover:bg-white/10 text-zinc-300"
+                  : "bg-white hover:bg-zinc-100 text-zinc-700 shadow-xs border border-black/5"
+              }`}
               title="Copy email address"
             >
               {copiedEmail ? (
-                <span className="text-[#30D158] flex items-center gap-1">
+                <span className="text-[#30D158] flex items-center gap-1 font-semibold">
                   <Check className="w-3 h-3" /> Copied
                 </span>
               ) : (
@@ -104,23 +121,33 @@ export function Tile8Outreach() {
           </div>
 
           {/* Phone Copy Card */}
-          <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between gap-2">
+          <div
+            className={`p-3 rounded-2xl border flex items-center justify-between gap-2 ${
+              isDark
+                ? "bg-white/[0.03] border-white/[0.08]"
+                : "bg-[#F2F2F7] border-black/[0.06] shadow-sm"
+            }`}
+          >
             <div className="flex items-center gap-2.5 min-w-0">
-              <Phone className="w-4 h-4 text-[#30D158] shrink-0" />
+              <Phone className="w-4 h-4 text-[#34C759] dark:text-[#30D158] shrink-0" />
               <div className="min-w-0">
-                <div className="text-[9px] font-mono text-[#86868B] uppercase">PHONE</div>
-                <div className="text-xs font-mono text-zinc-200 truncate">
+                <div className="text-[9px] font-mono uppercase opacity-60">PHONE</div>
+                <div className="text-xs font-mono truncate font-medium">
                   {profileData.contact.phone}
                 </div>
               </div>
             </div>
             <button
               onClick={copyPhone}
-              className="px-2.5 py-1 rounded-lg bg-white/[0.06] hover:bg-white/10 text-xs font-mono text-zinc-300 transition-colors shrink-0 cursor-pointer"
+              className={`px-2.5 py-1 rounded-lg text-xs font-mono transition-colors shrink-0 cursor-pointer ${
+                isDark
+                  ? "bg-white/[0.06] hover:bg-white/10 text-zinc-300"
+                  : "bg-white hover:bg-zinc-100 text-zinc-700 shadow-xs border border-black/5"
+              }`}
               title="Copy phone number"
             >
               {copiedPhone ? (
-                <span className="text-[#30D158] flex items-center gap-1">
+                <span className="text-[#30D158] flex items-center gap-1 font-semibold">
                   <Check className="w-3 h-3" /> Copied
                 </span>
               ) : (
@@ -138,11 +165,15 @@ export function Tile8Outreach() {
             href={profileData.contact.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-zinc-300 hover:text-white transition-all flex flex-col items-center justify-center gap-1 text-[11px] font-mono group"
+            className={`p-2.5 rounded-xl border transition-all flex flex-col items-center justify-center gap-1 text-[11px] font-mono group ${
+              isDark
+                ? "bg-white/[0.04] hover:bg-white/[0.08] border-white/10 text-zinc-300 hover:text-white"
+                : "bg-[#F2F2F7] hover:bg-zinc-200 border-black/[0.06] text-zinc-700 hover:text-black shadow-xs"
+            }`}
           >
-            <GitHubIcon className="w-4 h-4 text-white" />
+            <GitHubIcon className="w-4 h-4" />
             <span className="flex items-center gap-0.5">
-              GitHub <ArrowUpRight className="w-2.5 h-2.5 text-zinc-500 group-hover:text-white" />
+              GitHub <ArrowUpRight className="w-2.5 h-2.5 opacity-60 group-hover:opacity-100" />
             </span>
           </a>
 
@@ -150,11 +181,15 @@ export function Tile8Outreach() {
             href={profileData.contact.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-xl bg-white/[0.04] hover:bg-blue-500/10 border border-white/10 hover:border-blue-500/30 text-zinc-300 hover:text-blue-300 transition-all flex flex-col items-center justify-center gap-1 text-[11px] font-mono group"
+            className={`p-2.5 rounded-xl border transition-all flex flex-col items-center justify-center gap-1 text-[11px] font-mono group ${
+              isDark
+                ? "bg-white/[0.04] hover:bg-blue-500/10 border-white/10 hover:border-blue-500/30 text-zinc-300 hover:text-blue-300"
+                : "bg-[#F2F2F7] hover:bg-blue-50 border-black/[0.06] hover:border-blue-200 text-zinc-700 hover:text-blue-600 shadow-xs"
+            }`}
           >
-            <LinkedInIcon className="w-4 h-4 text-blue-400" />
+            <LinkedInIcon className="w-4 h-4 text-blue-500" />
             <span className="flex items-center gap-0.5">
-              LinkedIn <ArrowUpRight className="w-2.5 h-2.5 text-zinc-500 group-hover:text-blue-300" />
+              LinkedIn <ArrowUpRight className="w-2.5 h-2.5 opacity-60 group-hover:opacity-100" />
             </span>
           </a>
 
@@ -162,23 +197,35 @@ export function Tile8Outreach() {
             href={profileData.contact.credly}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-xl bg-white/[0.04] hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/30 text-zinc-300 hover:text-amber-300 transition-all flex flex-col items-center justify-center gap-1 text-[11px] font-mono group"
+            className={`p-2.5 rounded-xl border transition-all flex flex-col items-center justify-center gap-1 text-[11px] font-mono group ${
+              isDark
+                ? "bg-white/[0.04] hover:bg-amber-500/10 border-white/10 hover:border-amber-500/30 text-zinc-300 hover:text-amber-300"
+                : "bg-[#F2F2F7] hover:bg-amber-50 border-black/[0.06] hover:border-amber-200 text-zinc-700 hover:text-amber-600 shadow-xs"
+            }`}
           >
-            <Shield className="w-4 h-4 text-amber-400" />
+            <Shield className="w-4 h-4 text-amber-500" />
             <span className="flex items-center gap-0.5">
-              Credly <ArrowUpRight className="w-2.5 h-2.5 text-zinc-500 group-hover:text-amber-300" />
+              Credly <ArrowUpRight className="w-2.5 h-2.5 opacity-60 group-hover:opacity-100" />
             </span>
           </a>
         </div>
       </div>
 
       {/* Primary Mailto Action */}
-      <div className="pt-3 border-t border-white/[0.08]">
+      <div
+        className={`pt-3 border-t ${
+          isDark ? "border-white/[0.08]" : "border-black/[0.08]"
+        }`}
+      >
         <motion.a
           href={`mailto:${profileData.contact.email}?subject=Backend%20Developer%20Opportunity%20-%20Venu%20K`}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="w-full py-2.5 px-4 rounded-full bg-white text-black font-semibold text-xs hover:bg-zinc-200 transition-colors shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+          className={`w-full py-2.5 px-4 rounded-full font-semibold text-xs transition-colors shadow-md flex items-center justify-center gap-1.5 cursor-pointer ${
+            isDark
+              ? "bg-white text-black hover:bg-zinc-200"
+              : "bg-[#007AFF] text-white hover:bg-blue-600"
+          }`}
         >
           <span>Send Direct Email</span>
           <Send className="w-3.5 h-3.5" />
