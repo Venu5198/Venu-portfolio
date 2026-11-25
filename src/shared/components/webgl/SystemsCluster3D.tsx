@@ -104,19 +104,23 @@ export function SystemsCluster3D({
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // 2. Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, theme === "light" ? 1.6 : 1.1);
+    // 2. Apple Studio Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0xffffff, 2.5, 30);
-    pointLight.position.set(4, 5, 6);
-    scene.add(pointLight);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.8);
+    keyLight.position.set(5, 6, 5);
+    scene.add(keyLight);
 
-    const pointLight2 = new THREE.PointLight(theme === "light" ? 0x00f0ff : 0x06b6d4, 2.0, 20);
-    pointLight2.position.set(-5, -4, 4);
-    scene.add(pointLight2);
+    const rimLight = new THREE.DirectionalLight(0x0a84ff, 2.5);
+    rimLight.position.set(-6, 3, -4);
+    scene.add(rimLight);
 
-    // 3. Node Mesh Generation
+    const fillLight = new THREE.PointLight(0x64d2ff, 1.8, 25);
+    fillLight.position.set(0, -5, 3);
+    scene.add(fillLight);
+
+    // 3. Node Mesh Generation (Tactile Apple Spatial Physical Materials)
     const clusterGroup = new THREE.Group();
     scene.add(clusterGroup);
 
@@ -124,33 +128,49 @@ export function SystemsCluster3D({
 
     NODES.forEach((node) => {
       const isCore = node.id === "redis-core";
-      const geom = isCore
-        ? new THREE.IcosahedronGeometry(0.7, 1)
-        : new THREE.DodecahedronGeometry(0.42, 0);
+      const radius = isCore ? 0.72 : 0.44;
+      const geom = new THREE.SphereGeometry(radius, 64, 64);
 
-      const mat = new THREE.MeshStandardMaterial({
-        color: node.color,
-        roughness: 0.25,
-        metalness: 0.75,
-        wireframe: false,
+      // Tactile Apple Vision Spatial Material
+      const mat = new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color(node.color),
+        roughness: 0.12,
+        metalness: 0.28,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.08,
+        reflectivity: 0.95,
+        transmission: 0.25,
+        thickness: 0.45,
+        transparent: true,
+        opacity: 0.95,
+        emissive: new THREE.Color(node.color),
+        emissiveIntensity: isCore ? 0.22 : 0.14,
       });
 
       const mesh = new THREE.Mesh(geom, mat);
       mesh.position.set(...node.position);
       mesh.userData = { nodeData: node };
 
-      // Wireframe aura shell
-      const wireframeGeom = isCore
-        ? new THREE.IcosahedronGeometry(0.85, 1)
-        : new THREE.DodecahedronGeometry(0.55, 0);
-      const wireframeMat = new THREE.MeshBasicMaterial({
-        color: node.color,
-        wireframe: true,
-        transparent: true,
-        opacity: theme === "light" ? 0.35 : 0.55,
+      // Luminous inner core orb
+      const innerGeom = new THREE.SphereGeometry(radius * 0.52, 32, 32);
+      const innerMat = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(node.color),
+        emissive: new THREE.Color(node.color),
+        emissiveIntensity: 0.85,
+        roughness: 0.2,
       });
-      const wireframeMesh = new THREE.Mesh(wireframeGeom, wireframeMat);
-      mesh.add(wireframeMesh);
+      const innerMesh = new THREE.Mesh(innerGeom, innerMat);
+      mesh.add(innerMesh);
+
+      // Soft spatial halo rim
+      const haloGeom = new THREE.SphereGeometry(radius * 1.14, 32, 32);
+      const haloMat = new THREE.MeshBasicMaterial({
+        color: new THREE.Color(node.color),
+        transparent: true,
+        opacity: 0.1,
+      });
+      const haloMesh = new THREE.Mesh(haloGeom, haloMat);
+      mesh.add(haloMesh);
 
       clusterGroup.add(mesh);
       interactiveMeshes.push(mesh);
@@ -174,9 +194,9 @@ export function SystemsCluster3D({
 
       const lineGeom = new THREE.BufferGeometry().setFromPoints(points);
       const lineMat = new THREE.LineBasicMaterial({
-        color: theme === "light" ? 0x0a0a0a : 0x00f0ff,
+        color: 0x64d2ff,
         transparent: true,
-        opacity: theme === "light" ? 0.22 : 0.45,
+        opacity: 0.55,
       });
       const line = new THREE.Line(lineGeom, lineMat);
       clusterGroup.add(line);

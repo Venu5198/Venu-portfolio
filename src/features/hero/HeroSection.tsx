@@ -41,9 +41,9 @@ export function HeroSection() {
           {/* Left Column: Headlines, Narrative, Action Pills */}
           <div className="lg:col-span-8 space-y-8">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0.95, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={springTransition}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-5"
             >
               {/* Role Badge (Apple Subtle Frosted Pill) */}
@@ -65,9 +65,9 @@ export function HeroSection() {
 
             {/* Apple Tactile Action Pills */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0.95, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ ...springTransition, delay: 0.15 }}
+              transition={{ duration: 0.45, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-wrap items-center gap-3.5 pt-2"
             >
               <motion.a
@@ -101,9 +101,9 @@ export function HeroSection() {
           {/* Right Column: Framed Apple Portrait with Quiet Specular Rim */}
           <div className="lg:col-span-4 flex justify-center lg:justify-end">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0.95, scale: 0.99 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ ...springTransition, delay: 0.1 }}
+              transition={{ duration: 0.45, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="relative w-full max-w-[280px] aspect-[4/5]"
             >
               {/* Subtle Ambient Glow */}
@@ -116,6 +116,7 @@ export function HeroSection() {
                     src={profileData.photoUrl}
                     alt={profileData.name}
                     fill
+                    priority
                     sizes="(max-width: 768px) 100vw, 280px"
                     className="object-cover transition-transform duration-700 ease-out hover:scale-105"
                     onError={() => setImageError(true)}

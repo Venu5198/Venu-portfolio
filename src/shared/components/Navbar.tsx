@@ -81,8 +81,8 @@ export function Navbar() {
       }`}
     >
       <nav
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-4xl px-3 sm:px-4 py-2 rounded-full transition-all duration-300 liquid-glass ${
-          scrolled ? "shadow-[0_20px_50px_rgba(0,0,0,0.85)] border-white/[0.16]" : "border-white/[0.12]"
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-4xl px-3 sm:px-4 py-2 rounded-full transition-all duration-300 bg-[#0B0B0F]/90 backdrop-blur-2xl border border-white/15 shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.18),0_12px_40px_rgba(0,0,0,0.85)] ${
+          scrolled ? "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.22),0_20px_50px_rgba(0,0,0,0.95)] border-white/20" : ""
         }`}
       >
         {/* Brand Hardware Emblem */}
