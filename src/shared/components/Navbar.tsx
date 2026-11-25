@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 const navItems = [
   { id: "projects", label: "Projects" },
   { id: "architecture", label: "Architecture" },
   { id: "arsenal", label: "Arsenal" },
-  { id: "certifications", label: "Credentials" },
+  { id: "credentials", label: "Credentials" },
 ];
 
 export function Navbar() {
@@ -28,9 +28,11 @@ export function Navbar() {
 
           if (currentScrollY < 60) {
             setVisible(true);
-          } else if (currentScrollY > lastScrollY && currentScrollY - lastScrollY > 10) {
+          } else if (currentScrollY > lastScrollY && currentScrollY - lastScrollY > 8) {
+            // Auto-retreat smoothly when scrolling down
             setVisible(false);
-          } else if (lastScrollY - currentScrollY > 8) {
+          } else if (lastScrollY - currentScrollY > 6) {
+            // Instantly reveal cleanly when scrolling up
             setVisible(true);
           }
 
@@ -45,9 +47,9 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Track active section for fluid nav pill indicator
+  // Section Tracking for fluid active pill indicator
   useEffect(() => {
-    const sectionIds = ["hero", "projects", "architecture", "arsenal", "certifications", "contact"];
+    const sectionIds = ["hero", "projects", "architecture", "arsenal", "credentials", "contact"];
     const observers: IntersectionObserver[] = [];
 
     sectionIds.forEach((id) => {
@@ -62,7 +64,7 @@ export function Navbar() {
             }
           });
         },
-        { rootMargin: "-30% 0px -50% 0px" }
+        { rootMargin: "-25% 0px -55% 0px" }
       );
 
       observer.observe(el);
@@ -75,16 +77,21 @@ export function Navbar() {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-3 sm:pt-4 pointer-events-none transition-all duration-300 ${
-        visible ? "translate-y-0 opacity-100" : "-translate-y-20 opacity-0"
-      }`}
+    <motion.header
+      initial={{ y: 0, opacity: 1 }}
+      animate={{
+        y: visible ? 0 : -90,
+        opacity: visible ? 1 : 0,
+      }}
+      transition={{
+        type: "spring",
+        mass: 0.8,
+        stiffness: 260,
+        damping: 26,
+      }}
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 pointer-events-none"
     >
-      <nav
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-4xl px-3 sm:px-4 py-2 rounded-full transition-all duration-300 bg-[#0B0B0F]/90 backdrop-blur-2xl border border-white/15 shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.18),0_12px_40px_rgba(0,0,0,0.85)] ${
-          scrolled ? "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.22),0_20px_50px_rgba(0,0,0,0.95)] border-white/20" : ""
-        }`}
-      >
+      <nav className="pointer-events-auto flex items-center justify-between w-full max-w-4xl px-3 sm:px-4 py-2 rounded-full apple-glass-nav">
         {/* Brand Hardware Emblem */}
         <a
           href="#hero"
@@ -94,16 +101,16 @@ export function Navbar() {
             <span className="font-mono text-[11px] font-black tracking-tighter text-cyan-400">VK</span>
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-xs sm:text-sm font-bold tracking-tight text-white flex items-center gap-1.5">
+            <span className="text-xs sm:text-sm font-bold tracking-tight text-white leading-none">
               VENU K
             </span>
-            <span className="text-[9px] sm:text-[10px] font-mono tracking-wider text-zinc-400 uppercase leading-none">
+            <span className="text-[9px] sm:text-[10px] font-mono tracking-wider text-[#8E8E93] uppercase leading-none mt-1">
               Backend Developer
             </span>
           </div>
         </a>
 
-        {/* Apple Segmented Nav Pill Links with Fluid Spring Slider */}
+        {/* Apple Segmented Nav Pill Links */}
         <div className="hidden md:flex items-center gap-1 text-xs font-medium text-zinc-300 relative">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
@@ -112,14 +119,14 @@ export function Navbar() {
                 key={item.id}
                 href={`#${item.id}`}
                 className={`relative px-3.5 py-1.5 rounded-full transition-colors ${
-                  isActive ? "text-white font-semibold" : "text-zinc-400 hover:text-white"
+                  isActive ? "text-white font-semibold" : "text-[#8E8E93] hover:text-white"
                 }`}
               >
                 {isActive && (
                   <motion.div
-                    layoutId="activeNavPill"
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                    className="absolute inset-0 rounded-full bg-white/[0.1] border border-white/[0.15] -z-10"
+                    layoutId="appleNavPill"
+                    transition={{ type: "spring", mass: 0.8, stiffness: 350, damping: 30 }}
+                    className="absolute inset-0 rounded-full bg-white/[0.12] border border-white/[0.16] -z-10 shadow-sm"
                   />
                 )}
                 <span>{item.label}</span>
@@ -135,13 +142,13 @@ export function Navbar() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold bg-white text-black hover:bg-zinc-200 transition-colors shadow-[0_4px_16px_rgba(255,255,255,0.2)]"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 sm:px-4.5 sm:py-2 rounded-full text-xs font-semibold bg-white text-black hover:bg-zinc-200 transition-colors shadow-[0_4px_16px_rgba(255,255,255,0.22)]"
           >
             <span>Get in Touch</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </motion.a>
         </div>
       </nav>
-    </header>
+    </motion.header>
   );
 }

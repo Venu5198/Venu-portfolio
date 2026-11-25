@@ -72,10 +72,10 @@ export function ContactSection() {
   };
 
   return (
-    <footer className="py-28 relative border-t border-hairline bg-[#000000]">
+    <footer className="py-28 sm:py-36 relative border-t border-white/[0.08] bg-[#000000]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Contact Container */}
-        <div id="contact" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start scroll-mt-24">
+        <div id="contact" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start scroll-mt-32">
           {/* Left: Direct Outreach */}
           <div className="lg:col-span-7 space-y-8">
             <div className="space-y-4">
@@ -93,7 +93,7 @@ export function ContactSection() {
 
             {/* Direct Contact Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-5 rounded-[1.75rem] bg-[#0B0B0F] border border-white/[0.08] flex items-center justify-between gap-3">
+              <div className="p-6 rounded-[2rem] bg-[#0B0B0F]/80 backdrop-blur-xl border border-white/[0.10] flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3.5 min-w-0">
                   <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
                     <Mail className="w-4 h-4" />
@@ -134,7 +134,7 @@ export function ContactSection() {
                 </motion.button>
               </div>
 
-              <div className="p-5 rounded-[1.75rem] bg-[#0B0B0F] border border-white/[0.08] flex items-center justify-between gap-3">
+              <div className="p-6 rounded-[2rem] bg-[#0B0B0F]/80 backdrop-blur-xl border border-white/[0.10] flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3.5 min-w-0">
                   <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
                     <Phone className="w-4 h-4" />
@@ -182,7 +182,7 @@ export function ContactSection() {
                 href={`mailto:${profileData.contact.email}?subject=Backend%20Developer%20Opportunity%20-%20Venu%20K`}
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                transition={{ type: "spring" as const, stiffness: 400, damping: 25 }}
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-black font-semibold text-xs hover:bg-zinc-200 transition-shadow shadow-[0_4px_24px_rgba(255,255,255,0.25)]"
               >
                 <span>Get In Touch Directly</span>
@@ -193,8 +193,8 @@ export function ContactSection() {
 
           {/* Right: Restrained Apple Engineering Profile Card & Verified Socials */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-7 rounded-[2rem] bg-[#0B0B0F] border border-white/[0.08] space-y-4">
-              <div className="flex items-center justify-between pb-3.5 border-b border-hairline">
+            <div className="p-8 rounded-[2.25rem] bg-[#0B0B0F]/80 backdrop-blur-xl border border-white/[0.10] space-y-4">
+              <div className="flex items-center justify-between pb-3.5 border-b border-white/[0.08]">
                 <span className="text-xs font-mono uppercase tracking-wider text-zinc-400">Engineering Profile</span>
                 <span className="text-emerald-400 text-xs font-mono font-semibold flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
@@ -230,7 +230,7 @@ export function ContactSection() {
                 rel="noopener noreferrer"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="py-3 px-3 rounded-2xl bg-[#0B0B0F] border border-white/10 hover:border-white/25 hover:bg-white/[0.05] transition-all flex items-center justify-center gap-2 text-xs font-mono text-white group"
+                className="py-3 px-3 rounded-2xl bg-[#0B0B0F]/80 backdrop-blur-xl border border-white/10 hover:border-white/25 hover:bg-white/[0.05] transition-all flex items-center justify-center gap-2 text-xs font-mono text-white group"
               >
                 <GitHubIcon className="w-4 h-4 text-white shrink-0" />
                 <span>GitHub</span>
@@ -243,7 +243,7 @@ export function ContactSection() {
                 rel="noopener noreferrer"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="py-3 px-3 rounded-2xl bg-[#0B0B0F] border border-white/10 hover:border-blue-500/30 hover:bg-blue-500/10 transition-all flex items-center justify-center gap-2 text-xs font-mono text-white group"
+                className="py-3 px-3 rounded-2xl bg-[#0B0B0F]/80 backdrop-blur-xl border border-white/10 hover:border-blue-500/30 hover:bg-blue-500/10 transition-all flex items-center justify-center gap-2 text-xs font-mono text-white group"
               >
                 <LinkedInIcon className="w-4 h-4 text-blue-400 shrink-0" />
                 <span>LinkedIn</span>
@@ -256,7 +256,7 @@ export function ContactSection() {
                 rel="noopener noreferrer"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="py-3 px-3 rounded-2xl bg-[#0B0B0F] border border-white/10 hover:border-amber-500/30 hover:bg-amber-500/10 transition-all flex items-center justify-center gap-2 text-xs font-mono text-white group"
+                className="py-3 px-3 rounded-2xl bg-[#0B0B0F]/80 backdrop-blur-xl border border-white/10 hover:border-amber-500/30 hover:bg-amber-500/10 transition-all flex items-center justify-center gap-2 text-xs font-mono text-white group"
               >
                 <Shield className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>Credly</span>
@@ -267,7 +267,7 @@ export function ContactSection() {
         </div>
 
         {/* Footer Bottom Line */}
-        <div className="mt-20 pt-8 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-zinc-500">
+        <div className="mt-20 pt-8 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-zinc-500">
           <div>
             © 2026 Venu K. Backend Developer — Python, DevOps &amp; AI.
           </div>

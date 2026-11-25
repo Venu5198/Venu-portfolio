@@ -4,29 +4,27 @@
 [data-theme="dark"],
 html.dark {
   --background: #000000;
-  --surface-1: #0a0a0e;
-  --surface-2: #111117;
-  --surface-3: #1a1a24;
-  --surface-glass: rgba(18, 18, 26, 0.75);
+  --surface-elevated: #0B0B0F;
+  --surface-card: #0E0E14;
+  --surface-card-hover: #14141C;
+  --surface-glass: rgba(11, 11, 15, 0.92);
   --surface-glass-border: rgba(255, 255, 255, 0.12);
-  --surface-glass-highlight: rgba(255, 255, 255, 0.18);
-  
-  --foreground: #f5f5f7;
-  --foreground-secondary: #8e8e93;
+  --surface-glass-highlight: rgba(255, 255, 255, 0.16);
+
+  --foreground: #FFFFFF;
+  --foreground-body: #E5E5EA;
+  --foreground-secondary: #8E8E93;
   --foreground-muted: #636366;
-  
+
   --hairline: rgba(255, 255, 255, 0.08);
   --hairline-hover: rgba(255, 255, 255, 0.18);
 
-  /* Apple Spatial Accent Colors */
-  --apple-blue: #0a84ff;
-  --apple-indigo: #5e5ce6;
-  --apple-purple: #bf5af2;
-  --apple-cyan: #32d74b;
-  --apple-teal: #64d2ff;
-  --apple-mint: #00c7be;
-  --apple-amber: #ff9f0a;
-  --apple-green: #30d158;
+  /* Apple Accent Tones */
+  --apple-blue: #0A84FF;
+  --apple-cyan: #32D74B;
+  --apple-teal: #64D2FF;
+  --apple-amber: #FF9F0A;
+  --apple-purple: #BF5AF2;
 }
 
 @theme inline {
@@ -44,66 +42,44 @@ html.dark {
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
-  scroll-padding-top: 6.5rem; /* Generous clearance for floating Dynamic Island navbar */
+  scroll-padding-top: 8rem; /* Guaranteed clearance for auto-retreating Dynamic Island navbar */
   background-color: #000000;
 }
 
 body {
   background-color: #000000;
-  color: var(--foreground);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  color: var(--foreground-body);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", var(--font-inter), sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(100, 210, 255, 0.3);
-  color: #ffffff;
+  background: rgba(100, 210, 255, 0.28);
+  color: #FFFFFF;
 }
 
 /* Apple Spatial Liquid Glass Utilities */
-.liquid-glass {
-  background: rgba(18, 18, 24, 0.72);
+.apple-glass-nav {
+  background: rgba(11, 11, 15, 0.92);
   backdrop-filter: blur(28px) saturate(190%);
   -webkit-backdrop-filter: blur(28px) saturate(190%);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16), 0 16px 40px -10px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16), 0 16px 40px -10px rgba(0, 0, 0, 0.85);
 }
 
-.liquid-glass-elevated {
-  background: rgba(24, 24, 34, 0.82);
-  backdrop-filter: blur(32px) saturate(200%);
-  -webkit-backdrop-filter: blur(32px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.22), 0 24px 60px -12px rgba(0, 0, 0, 0.85);
-}
-
-.liquid-glass-subtle {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+.apple-card {
+  background: #0B0B0F;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.10), 0 12px 36px -8px rgba(0, 0, 0, 0.7);
+  border-radius: 2rem; /* 32px */
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.liquid-glass-subtle:hover {
-  background: rgba(255, 255, 255, 0.06);
+.apple-card:hover {
   border-color: rgba(255, 255, 255, 0.18);
-}
-
-/* Apple Spatial Card Border & Shimmer */
-.spatial-card {
-  position: relative;
-  background: #0e0e14;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12), 0 10px 30px -5px rgba(0, 0, 0, 0.6);
-  border-radius: 1.75rem; /* 28px */
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.spatial-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.18), 0 20px 40px -10px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.16), 0 20px 48px -10px rgba(0, 0, 0, 0.9);
 }
 
 /* Hairline dividers */
@@ -111,7 +87,7 @@ body {
   border-color: var(--hairline);
 }
 
-/* Subtle sleek scrollbar */
+/* Sleek subtle scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -122,10 +98,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.16);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.28);
 }

@@ -31,15 +31,15 @@ export function ArsenalSection() {
     });
 
   return (
-    <section id="arsenal" className="py-24 relative scroll-mt-24">
+    <section id="arsenal" className="py-28 sm:py-36 relative scroll-mt-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="space-y-3 mb-14 pb-8 border-b border-hairline">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-cyan-400 font-semibold uppercase tracking-wider">
+        <div className="space-y-4 mb-14 pb-8 border-b border-white/[0.08]">
+          <div className="apple-badge inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono text-cyan-400 font-semibold uppercase tracking-wider">
             <Terminal className="w-3.5 h-3.5" />
             <span>Technical Capabilities</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-black text-white tracking-[-0.03em]">
+          <h2 className="text-4xl sm:text-6xl font-black text-white tracking-[-0.035em]">
             Backend &amp; Platform Arsenal
           </h2>
           <p className="text-zinc-400 max-w-2xl text-base sm:text-lg font-light leading-relaxed">
@@ -59,7 +59,7 @@ export function ArsenalSection() {
               {selectedDomain === "all" && (
                 <motion.div
                   layoutId="activeDomainFilter"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  transition={{ type: "spring" as const, stiffness: 380, damping: 30 }}
                   className="absolute inset-0 rounded-full bg-white -z-10 shadow-md"
                 />
               )}
@@ -76,7 +76,7 @@ export function ArsenalSection() {
                 {selectedDomain === d.id && (
                   <motion.div
                     layoutId="activeDomainFilter"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    transition={{ type: "spring" as const, stiffness: 380, damping: 30 }}
                     className="absolute inset-0 rounded-full bg-white -z-10 shadow-md"
                   />
                 )}
@@ -102,10 +102,10 @@ export function ArsenalSection() {
           {filteredDomains.map((domain) => (
             <div
               key={domain.id}
-              className="p-8 rounded-[2rem] bg-[#0c0c12] border border-white/[0.08] hover:border-white/20 transition-all space-y-6"
+              className="apple-card p-8 rounded-[2.25rem] bg-[#0B0B0F]/80 backdrop-blur-xl border border-white/[0.10] hover:border-white/20 transition-all space-y-6"
             >
               {/* Category Header */}
-              <div className="flex items-center gap-3.5 pb-4 border-b border-hairline">
+              <div className="flex items-center gap-3.5 pb-4 border-b border-white/[0.08]">
                 <div className="w-10 h-10 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center shrink-0">
                   {iconMap[domain.icon]}
                 </div>
