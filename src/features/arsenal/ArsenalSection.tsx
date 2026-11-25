@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Server, Cloud, Cpu, ShieldCheck, Search, Terminal } from "lucide-react";
 import { skillDomainsData } from "@/shared/data/skills";
 
@@ -48,28 +49,38 @@ export function ArsenalSection() {
 
         {/* Filter Pills & Search */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-12">
-          <div className="flex flex-wrap items-center gap-2 p-1 rounded-full bg-white/[0.04] border border-white/10">
+          <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-full bg-white/[0.04] border border-white/10 relative">
             <button
               onClick={() => setSelectedDomain("all")}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                selectedDomain === "all"
-                  ? "bg-white text-black font-semibold shadow-md"
-                  : "text-zinc-400 hover:text-white"
+              className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer ${
+                selectedDomain === "all" ? "text-black font-semibold" : "text-zinc-400 hover:text-white"
               }`}
             >
-              All Domains
+              {selectedDomain === "all" && (
+                <motion.div
+                  layoutId="activeDomainFilter"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  className="absolute inset-0 rounded-full bg-white -z-10 shadow-md"
+                />
+              )}
+              <span>All Domains</span>
             </button>
             {skillDomainsData.map((d) => (
               <button
                 key={d.id}
                 onClick={() => setSelectedDomain(d.id)}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                  selectedDomain === d.id
-                    ? "bg-white text-black font-semibold shadow-md"
-                    : "text-zinc-400 hover:text-white"
+                className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer ${
+                  selectedDomain === d.id ? "text-black font-semibold" : "text-zinc-400 hover:text-white"
                 }`}
               >
-                {d.title.split(" ")[0]}
+                {selectedDomain === d.id && (
+                  <motion.div
+                    layoutId="activeDomainFilter"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 rounded-full bg-white -z-10 shadow-md"
+                  />
+                )}
+                <span>{d.title.split(" ")[0]}</span>
               </button>
             ))}
           </div>

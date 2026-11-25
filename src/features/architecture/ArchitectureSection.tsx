@@ -3,10 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu, ShieldCheck, Play, Pause } from "lucide-react";
-import { PipelineRunner } from "@/features/pipeline-runner/PipelineRunner";
 import { SystemsCluster3D } from "@/shared/components/webgl/SystemsCluster3D";
-
-const transitionEase = [0.16, 1, 0.3, 1] as const;
 
 interface TopologyNode {
   id: string;
@@ -169,61 +166,81 @@ export function ArchitectureSection() {
             </p>
           </div>
 
-          {/* Segmented Controls */}
+          {/* Segmented Controls with Fluid Springs */}
           <div className="flex flex-wrap items-center gap-3">
             {/* View Format: 3D Topology vs Stages */}
-            <div className="flex items-center p-1 rounded-full bg-white/[0.05] border border-white/10">
+            <div className="flex items-center p-1 rounded-full bg-white/[0.05] border border-white/10 relative">
               <button
                 type="button"
                 onClick={() => setViewFormat("3d")}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                  viewFormat === "3d"
-                    ? "bg-white text-black font-semibold shadow-md"
-                    : "text-zinc-400 hover:text-white"
+                className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer ${
+                  viewFormat === "3d" ? "text-black font-semibold" : "text-zinc-400 hover:text-white"
                 }`}
               >
-                🌐 3D Topology
+                {viewFormat === "3d" && (
+                  <motion.div
+                    layoutId="activeArchFormat"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 rounded-full bg-white -z-10 shadow-md"
+                  />
+                )}
+                <span>🌐 3D Topology</span>
               </button>
               <button
                 type="button"
                 onClick={() => setViewFormat("stages")}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                  viewFormat === "stages"
-                    ? "bg-white text-black font-semibold shadow-md"
-                    : "text-zinc-400 hover:text-white"
+                className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer ${
+                  viewFormat === "stages" ? "text-black font-semibold" : "text-zinc-400 hover:text-white"
                 }`}
               >
-                ⚡ Pipeline Stages
+                {viewFormat === "stages" && (
+                  <motion.div
+                    layoutId="activeArchFormat"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 rounded-full bg-white -z-10 shadow-md"
+                  />
+                )}
+                <span>⚡ Pipeline Stages</span>
               </button>
             </div>
 
             {/* Platform Selection */}
-            <div className="flex items-center p-1 rounded-full bg-white/[0.05] border border-white/10">
+            <div className="flex items-center p-1 rounded-full bg-white/[0.05] border border-white/10 relative">
               <button
                 onClick={() => {
                   setActiveMode("syncrivo");
                   setSelectedNodeId("sync-dedup");
                 }}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                  activeMode === "syncrivo"
-                    ? "bg-cyan-400 text-black font-bold shadow-md"
-                    : "text-zinc-400 hover:text-white"
+                className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer ${
+                  activeMode === "syncrivo" ? "text-black font-semibold" : "text-zinc-400 hover:text-white"
                 }`}
               >
-                SyncRivo Bridge
+                {activeMode === "syncrivo" && (
+                  <motion.div
+                    layoutId="activeArchMode"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 rounded-full bg-cyan-400 -z-10 shadow-md"
+                  />
+                )}
+                <span>SyncRivo Bridge</span>
               </button>
               <button
                 onClick={() => {
                   setActiveMode("ocnora");
                   setSelectedNodeId("ocn-validate");
                 }}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                  activeMode === "ocnora"
-                    ? "bg-amber-400 text-black font-bold shadow-md"
-                    : "text-zinc-400 hover:text-white"
+                className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer ${
+                  activeMode === "ocnora" ? "text-black font-semibold" : "text-zinc-400 hover:text-white"
                 }`}
               >
-                OCNORA Engine
+                {activeMode === "ocnora" && (
+                  <motion.div
+                    layoutId="activeArchMode"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 rounded-full bg-amber-400 -z-10 shadow-md"
+                  />
+                )}
+                <span>OCNORA Engine</span>
               </button>
             </div>
 
@@ -306,7 +323,7 @@ export function ArchitectureSection() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.4, ease: transitionEase }}
+            transition={{ duration: 0.3 }}
             className="mt-8 p-8 sm:p-10 rounded-[2rem] bg-[#0c0c12] border border-white/[0.1] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
           >
             <div className="lg:col-span-8 space-y-3">
@@ -428,11 +445,6 @@ export function ArchitectureSection() {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Client-Side Pipeline Runner */}
-        <div className="mt-14">
-          <PipelineRunner />
         </div>
       </div>
     </section>

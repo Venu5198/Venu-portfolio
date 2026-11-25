@@ -117,24 +117,30 @@ export function ProjectsSection() {
 
               {/* Actions */}
               <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
+                <motion.button
                   onClick={() => setSelectedProject(syncrivo)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold text-xs hover:bg-zinc-200 transition-all cursor-pointer"
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold text-xs hover:bg-zinc-200 transition-shadow shadow-[0_4px_20px_rgba(255,255,255,0.2)] cursor-pointer"
                 >
                   <span>Inspect Blueprint &amp; Specs</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </motion.button>
 
                 {syncrivo.liveUrl && (
-                  <a
+                  <motion.a
                     href={syncrivo.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] text-zinc-300 hover:text-white text-xs font-mono transition-all"
+                    whileHover={{ y: -2, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] hover:border-white/20 text-zinc-300 hover:text-white text-xs font-mono transition-colors"
                   >
                     <span>syncrivo.ai</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-zinc-500" />
-                  </a>
+                    <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
+                  </motion.a>
                 )}
               </div>
             </div>
@@ -257,24 +263,30 @@ export function ProjectsSection() {
 
               {/* Actions */}
               <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
+                <motion.button
                   onClick={() => setSelectedProject(ocnora)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold text-xs hover:bg-zinc-200 transition-all cursor-pointer"
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold text-xs hover:bg-zinc-200 transition-shadow shadow-[0_4px_20px_rgba(255,255,255,0.2)] cursor-pointer"
                 >
                   <span>Inspect Engine Specs</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </motion.button>
 
                 {ocnora.liveUrl && (
-                  <a
+                  <motion.a
                     href={ocnora.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] text-zinc-300 hover:text-white text-xs font-mono transition-all"
+                    whileHover={{ y: -2, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] hover:border-white/20 text-zinc-300 hover:text-white text-xs font-mono transition-colors"
                   >
                     <span>ocnora.ai</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-zinc-500" />
-                  </a>
+                    <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
+                  </motion.a>
                 )}
               </div>
             </div>
