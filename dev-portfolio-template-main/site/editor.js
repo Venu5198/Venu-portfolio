@@ -316,17 +316,25 @@ function projectSpec(project) {
     ...Object.entries(project.counts || {}).map(([name, value]) => fact(name, value)),
     fact("files", project.files),
     { segments: [[pad("lang"), "t-key"], [project.language || "—", "md-code"], ...(project.license ? [["  " + project.license, "t-dim"]] : [])] },
-    { segments: [[pad("since"), "t-key"], project.created || "—", ["  pushed ", "t-dim"], project.pushed] },
+    { segments: [[pad("since"), "t-key"], project.created || "—", ...(project.pushed ? [["  pushed ", "t-dim"], project.pushed] : [])] },
   ];
   const url = project.url;
+  const readmeLines = (project.lines || [])
+    .filter((line) => !line.startsWith("\u0001IMG") && !line.startsWith("# ") && !line.startsWith("### "))
+    .filter(Boolean);
+  const readmeOut = readmeLines.map((line) => ({
+    segments: [line],
+    className: line.startsWith("Built with") ? "t-key" : "t-dim",
+  }));
   return {
     cwd: `~/P/${project.repo}`,
     branch: project.branch || "main",
     shots: project.images.map((image, index) => ({ ...image, repo: project.repo, file: image.file, name: image.label || fileLabel(image, index) })),
     blocks: [
       { cmd: `fetch ${project.repo}`, out },
+      ...(readmeOut.length ? [{ cmd: "cat README.md", out: readmeOut }] : []),
       { cmd: "ls shots/", viewer: true },
-      { cmd: `open ${url.replace(/^https:\/\//, "")}`, link: { text: url.replace(/^https:\/\//, ""), href: url } },
+      ...(url ? [{ cmd: `open ${url.replace(/^https:\/\//, "")}`, link: { text: url.replace(/^https:\/\//, ""), href: url } }] : []),
     ],
   };
 }

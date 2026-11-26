@@ -1,6 +1,6 @@
 {
  "owner": "Venu5198",
- "fetchedAt": "2026-11-26T13:58:57.946Z",
+ "fetchedAt": "2026-11-26T15:47:54.126Z",
  "about": {
   "repo": "Venu5198",
   "lines": [
@@ -20,7 +20,7 @@
    "repo": "syncrivo",
    "label": "syncrivo",
    "url": "https://syncrivo.ai/en/",
-   "description": "Real-time enterprise messaging bridge connecting Slack, Microsoft Teams, Google Chat, Zoom, and Cisco Webex.",
+   "description": "Real-time enterprise messaging bridge connecting Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex.",
    "tag": "Distributed Systems · FastAPI · Redis",
    "stars": null,
    "language": "Python",
@@ -42,7 +42,8 @@
     "MongoDB",
     "Google Cloud Run",
     "OAuth 2.0",
-    "Docker"
+    "Docker",
+    "HMAC"
    ],
    "images": [
     {
@@ -57,14 +58,19 @@
     "",
     "\u0001IMG0\u0001",
     "",
-    "### Real-time enterprise messaging bridge connecting Slack, Microsoft Teams, Google Chat, Zoom, and Cisco Webex.",
+    "### Real-time enterprise messaging bridge connecting Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex.",
     "",
-    "Contributed as a backend developer to a real-time enterprise messaging",
-    "bridge syncing across Slack, Microsoft Teams, Google Chat, Zoom, and Cisco",
-    "Webex, built around FastAPI services, Redis deduplication/event handling,",
-    "sub-95ms transit, and 99.98% uptime.",
+    "Team backend contribution building the real-time enterprise messaging bridge",
+    "syncing Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex",
+    "with <95ms bridge transit and 99.98% production uptime SLA. Engineered",
+    "FastAPI asynchronous webhook ingress & HMAC signature verification, Redis",
+    "SETNX distributed locks and cryptographic payload fingerprinting to",
+    "eliminate loop/echo duplication (0% echo duplication), bidirectional AST",
+    "payload formatting across platform dialects, multi-tenant OAuth delegation,",
+    "and 4 verified enterprise marketplace listings (recognized with the",
+    "Reliability Champion Award, Mar 2025).",
     "",
-    "Built with Python · FastAPI · Redis · MongoDB · Google Cloud Run · OAuth 2.0 · Docker",
+    "Built with Python · FastAPI · Redis · MongoDB · Google Cloud Run · OAuth 2.0 · Docker · HMAC",
     "",
     "[Visit](https://syncrivo.ai/en/)"
    ]
@@ -91,11 +97,13 @@
    "stack": [
     "Python",
     "FastAPI",
-    "GKE",
+    "Kubernetes (GKE)",
+    "Google Cloud Run",
     "Argo CD",
     "OpenAPI AST",
     "Token Circuit Breakers",
-    "Docker"
+    "Docker",
+    "Helm"
    ],
    "images": [
     {
@@ -112,12 +120,15 @@
     "",
     "### Autonomous workflow automation platform coordinating AI agents, 1,000+ app integrations, and software delivery.",
     "",
-    "Contributed as a backend developer to a stateful AI workflow and DAG",
-    "execution runtime across 1,000+ app integrations, including automated budget",
-    "circuit breakers and autonomous Git worktree delivery that helped clear a",
-    "120-defect backlog.",
+    "Team backend & DevOps contribution building the multi-tenant AI workflow",
+    "automation and agent runtime supporting 1,000+ app/cloud integrations.",
+    "Implemented stateful topological DAG workflow orchestration, dynamic",
+    "USD/token budget circuit breakers, autonomous Git worktree execution",
+    "runners, automated CI/CD quality gates, and containerized deployments across",
+    "GKE, Google Cloud Run, Docker, and Helm—helping clear 120 legacy backlog",
+    "defects down to 0 bugs.",
     "",
-    "Built with Python · FastAPI · GKE · Argo CD · OpenAPI AST · Token Circuit Breakers · Docker",
+    "Built with Python · FastAPI · Kubernetes (GKE) · Google Cloud Run · Argo CD · OpenAPI AST · Token Circuit Breakers · Docker · Helm",
     "",
     "[Visit](https://ocnora.ai/)"
    ]
@@ -588,7 +599,7 @@
    "title": "Backend Developer & DevOps Engineer",
    "org": "SyncRivo & OCNORA",
    "where": "Hybrid / Remote",
-   "desc": "Backend development and cloud infrastructure contributions across real-time messaging bridges (SyncRivo: sub-95ms transit, 99.98% SLA, Redis SETNX deduplication) and stateful AI workflow DAG engines (OCNORA: 1,000+ app connectors, budget circuit breakers, clearing 120 legacy defects) using Python, FastAPI, Redis, Docker, and Kubernetes/GCP workloads.",
+   "desc": "Team backend and cloud infrastructure contributions across real-time messaging bridges (SyncRivo: sub-95ms transit, 99.98% SLA, Redis SETNX distributed locks, 0% echo duplication, 4 marketplace listings) and stateful AI workflow DAG engines (OCNORA: 1,000+ app connectors, USD/token circuit breakers, Git worktree runners, GKE/Cloud Run, clearing 120 defects down to 0 bugs) using Python, FastAPI, Redis, Docker, and Kubernetes/GCP workloads.",
    "url": "https://syncrivo.ai/en/"
   },
   {
