@@ -780,7 +780,35 @@ function run(text) {
   const [name, ...rest] = text.trim().split(/\s+/);
   const arg = rest.join(" ");
   if (!name) return say("");
-  if (name === "bento" || name === "ios" || name === "exit" || name === "quit" || /^q(a|all)?!?$/.test(name) || name === "wq" || name === "x") {
+  if (name === "bento" || name === "ios" || name === "exit") {
+    location.href = "/";
+    return;
+  }
+  if (/^q(a|all)!?$/.test(name)) {
+    location.href = "/";
+    return;
+  }
+  if (/^q!?$/.test(name) || name === "close") {
+    if (editor.classList.contains("is-tree-open")) {
+      closeDrawer();
+      return say("");
+    }
+    const lbClose = document.querySelector(".lb-close, .lightbox-close");
+    if (lbClose) {
+      lbClose.click();
+      return say("");
+    }
+    if (openEntry?.parent) {
+      const parent = entries.find((candidate) => candidate.id === openEntry.parent);
+      if (parent) {
+        goTo(parent);
+        return say("");
+      }
+    }
+    location.href = "/";
+    return;
+  }
+  if (name === "wq" || name === "x") {
     location.href = "/";
     return;
   }
