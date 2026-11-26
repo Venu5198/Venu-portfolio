@@ -1,111 +1,399 @@
-from fastapi import APIRouter, Request, HTTPException, BackgroundTasks
-import hmac, hashlib, time
-from redis.asyncio import Redis
+// ── syncrivo/gateway/services/ingress/dispatcher.py ──
+import hmac
+import hashlib
+import asyncio
+from typing import Optional, Dict, Any
+from fastapi import APIRouter, Header, HTTPException, Request, Depends
+import redis.asyncio as aioredis
+from pydantic import BaseModel, Field
 
-router = APIRouter(prefix="/v1/webhooks", tags=["Ingress"])
+router = APIRouter(prefix="/v1/webhooks", tags=["ingress"])
 
-@router.post("/{platform}/events")
-async def handle_platform_event(
+class IngressPayload(BaseModel):
+    platform: str = Field(..., description="slack, teams, gchat, zoom, or webex")
+    event_id: str
+    timestamp: float
+    channel_id: str
+    sender_id: str
+    body: Dict[str, Any]
+    signature: Optional[str] = None
+
+class WebhookDispatcher:
+    def __init__(self, redis_pool: aioredis.ConnectionPool, signing_secret: str):
+        self.redis = aioredis.Redis(connection_pool=redis_pool)
+        self.secret = signing_secret.encode("utf-8")
+        self.stream_key = "syncrivo:events:stream"
+
+    def verify_signature(self, raw_body: bytes, header_sig: str) -> bool:
+        computed = hmac.new(self.secret, raw_body, hashlib.sha256).hexdigest()
+        return hmac.compare_digest(f"sha256={computed}", header_sig)
+
+    async def dispatch(self, payload: IngressPayload) -> str:
+        dedup_key = f"dedup:{payload.platform}:{payload.event_id}"
+        acquired = await self.redis.set(dedup_key, "1", nx=True, ex=120)
+        if not acquired:
+            return "echo_filtered"
+
+        event_id = await self.redis.xadd(
+            self.stream_key,
+            {
+                "platform": payload.platform,
+                "event_id": payload.event_id,
+                "channel_id": payload.channel_id,
+                "sender_id": payload.sender_id,
+                "payload": json.dumps(payload.body),
+            },
+            maxlen=100000,
+        )
+        return event_id.decode("utf-8")
+
+@router.post("/{platform}/inbound")
+async def receive_inbound(
     platform: str,
     request: Request,
-    background_tasks: BackgroundTasks,
-    redis: Redis = Depends(get_redis_pool)
-) -> dict:
-    raw_body = await request.body()
-    signature = request.headers.get("X-Hub-Signature-256", "")
-    if not verify_hmac(raw_body, signature, get_secret(platform)):
-        raise HTTPException(status_code=401, detail="Invalid signature")
+    x_signature: Optional[str] = Header(None, alias="X-SyncRivo-Signature"),
+):
+    raw_bytes = await request.body()
+    dispatcher: WebhookDispatcher = request.app.state.dispatcher
+    if x_signature and not dispatcher.verify_signature(raw_bytes, x_signature):
+        raise HTTPException(status_code=401, detail="Invalid webhook signature")
 
-    event_id = hashlib.sha256(raw_body).hexdigest()
-    # Sub-10ms ingress: enqueue raw payload to Redis and acknowledge immediately
-    await redis.xadd(
-        name=f"events:{platform}",
-        fields={"payload": raw_body, "event_id": event_id, "ts": time.time_ns()}
-    )
-    return {"status": "enqueued", "event_id": event_id}
+    data = await request.json()
+    payload = IngressPayload(platform=platform, **data)
+    result = await dispatcher.dispatch(payload)
+    return {"status": "accepted", "dispatch_id": result}
+
+// ── syncrivo/dedup/pkg/dedup/echo_guard.py ──
+import time
 import hashlib
-from redis.asyncio import Redis
+from typing import Tuple
+import redis.asyncio as aioredis
 
 class EchoGuard:
-    """Sliding-window Redis filter preventing loop duplication across cross-linked channels."""
-    def __init__(self, redis: Redis, window_ttl_sec: int = 120):
-        self.redis = redis
-        self.ttl = window_ttl_sec
+    """Multi-platform bidirectional loop breaker with sliding window TTL."""
+    def __init__(self, redis_client: aioredis.Redis, ttl_seconds: int = 180):
+        self.redis = redis_client
+        self.ttl = ttl_seconds
 
-    def compute_fingerprint(self, origin_platform: str, channel_id: str, sender_id: str, body: str) -> str:
-        normalized = f"{origin_platform}:{channel_id}:{sender_id}:{body.strip()}"
-        return hashlib.blake2b(normalized.encode(), digest_size=16).hexdigest()
+    def compute_fingerprint(self, text: str, attachments: list) -> str:
+        h = hashlib.blake2b(digest_size=16)
+        h.update(text.strip().encode("utf-8"))
+        for att in attachments:
+            h.update(str(att.get("size", 0)).encode("utf-8"))
+            h.update(att.get("name", "").encode("utf-8"))
+        return h.hexdigest()
 
-    async def should_drop(self, fingerprint: str) -> bool:
-        key = f"echo:{fingerprint}"
-        # Atomic SETNX with sliding expiration ensures zero duplicate bridge delivery
-        acquired = await self.redis.set(key, "1", ex=self.ttl, nx=True)
-        return acquired is None
+    async def register_outbound(self, channel_id: str, fingerprint: str) -> None:
+        key = f"egress:fp:{channel_id}:{fingerprint}"
+        await self.redis.set(key, str(time.time()), ex=self.ttl)
+
+    async def is_reflected_echo(self, channel_id: str, fingerprint: str) -> Tuple[bool, float]:
+        key = f"egress:fp:{channel_id}:{fingerprint}"
+        val = await self.redis.get(key)
+        if val is not None:
+            delta = time.time() - float(val.decode("utf-8"))
+            return True, delta
+        return False, 0.0
+
+// ── ocnora/dag/engine/dag/topological_runner.py ──
 import asyncio
+from collections import defaultdict, deque
 from typing import Dict, List, Set, Any
-from motor.motor_asyncio import AsyncIOMotorDatabase
 
-class AsyncDAGRunner:
-    def __init__(self, db: AsyncIOMotorDatabase):
-        self.db = db
+class DAGNode:
+    def __init__(self, node_id: str, action: str, params: Dict[str, Any]):
+        self.id = node_id
+        self.action = action
+        self.params = params
+        self.dependencies: Set[str] = set()
+        self.output: Any = None
+        self.status: str = "PENDING"
 
-    async def execute_graph(self, execution_id: str, nodes: Dict[str, Any], edges: List[Dict[str, str]]):
-        in_degree = {k: 0 for k in nodes}
-        adj = {k: [] for k in nodes}
-        for edge in edges:
-            adj[edge["source"]].append(edge["target"])
-            in_degree[edge["target"]] += 1
+class DAGExecutor:
+    def __init__(self, nodes: Dict[str, DAGNode]):
+        self.nodes = nodes
+        self.adj = defaultdict(list)
+        self.in_degree = defaultdict(int)
+        self._build_graph()
 
-        ready_queue = [k for k, v in in_degree.items() if v == 0]
-        while ready_queue:
-            batch = [self._run_step(execution_id, node_id, nodes[node_id]) for node_id in ready_queue]
-            results = await asyncio.gather(*batch)
-            # Checkpoint step state to MongoDB before dispatching dependent steps
-            await self._persist_checkpoint(execution_id, results)
-            ready_queue = self._resolve_next_nodes(adj, in_degree, results)
+    def _build_graph(self):
+        for node_id, node in self.nodes.items():
+            for dep in node.dependencies:
+                self.adj[dep].append(node_id)
+                self.in_degree[node_id] += 1
+
+    async def execute(self, action_registry: Dict[str, Any]) -> Dict[str, Any]:
+        ready_queue = deque([nid for nid in self.nodes if self.in_degree[nid] == 0])
+        results = {}
+        active_tasks = {}
+
+        while ready_queue or active_tasks:
+            while ready_queue:
+                nid = ready_queue.popleft()
+                node = self.nodes[nid]
+                handler = action_registry.get(node.action)
+                task = asyncio.create_task(handler(node.params, results))
+                active_tasks[task] = nid
+
+            done, _ = await asyncio.wait(active_tasks.keys(), return_when=asyncio.FIRST_COMPLETED)
+            for task in done:
+                nid = active_tasks.pop(task)
+                res = await task
+                results[nid] = res
+                self.nodes[nid].status = "COMPLETED"
+                for downstream in self.adj[nid]:
+                    self.in_degree[downstream] -= 1
+                    if self.in_degree[downstream] == 0:
+                        ready_queue.append(downstream)
+
+        return results
+
+// ── ocnora/circuit_breaker/engine/circuit_breaker/token_guard.py ──
+import time
+from dataclasses import dataclass
+
+@dataclass
+class ModelBudget:
+    max_tokens_per_hour: int = 500000
+    cost_threshold_usd: float = 25.0
+    consumed_tokens: int = 0
+    consumed_cost: float = 0.0
+    circuit_open: bool = False
+    last_reset: float = time.time()
+
+class TokenCircuitBreaker:
+    def __init__(self, budget: ModelBudget):
+        self.budget = budget
+
+    def check_allowance(self, estimated_prompt_tokens: int) -> bool:
+        now = time.time()
+        if now - self.budget.last_reset > 3600:
+            self.budget.consumed_tokens = 0
+            self.budget.consumed_cost = 0.0
+            self.budget.circuit_open = False
+            self.budget.last_reset = now
+
+        if self.budget.circuit_open:
+            return False
+
+        if (self.budget.consumed_tokens + estimated_prompt_tokens) > self.budget.max_tokens_per_hour:
+            self.budget.circuit_open = True
+            return False
+        return True
+
+    def record_usage(self, prompt_tokens: int, completion_tokens: int, unit_cost: float):
+        total = prompt_tokens + completion_tokens
+        self.budget.consumed_tokens += total
+        self.budget.consumed_cost += (total / 1000.0) * unit_cost
+        if self.budget.consumed_cost >= self.budget.cost_threshold_usd:
+            self.budget.circuit_open = True
+
+// ── infrastructure/terraform/modules/aws_eks/cluster.tf ──
+terraform {
+  required_version = ">= 1.6.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.30"
+    }
+  }
+}
+
 module "eks" {
-  source          = "terraform-aws-modules/eks/aws"
-  version         = "~> 20.0"
-  cluster_name    = "venu-prod-cluster"
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~> 20.0"
+
+  cluster_name    = var.cluster_name
   cluster_version = "1.30"
 
-  vpc_id          = module.vpc.vpc_id
-  subnet_ids      = module.vpc.private_subnets
-  enable_irsa     = true
+  cluster_endpoint_public_access  = true
+  cluster_endpoint_private_access = true
+
+  vpc_id                   = var.vpc_id
+  subnet_ids               = var.private_subnets
+  control_plane_subnet_ids = var.intra_subnets
+
+  enable_cluster_creator_admin_permissions = true
 
   eks_managed_node_groups = {
-    core = {
-      min_size       = 3
-      max_size       = 10
-      desired_size   = 3
-      instance_types = ["m6i.xlarge"]
+    primary = {
+      min_size     = 3
+      max_size     = 10
+      desired_size = 3
+
+      instance_types = ["c6i.xlarge", "c6a.xlarge"]
       capacity_type  = "ON_DEMAND"
-      tags = {
-        Environment = "production"
-        ManagedBy   = "terraform"
+
+      labels = {
+        role = "backend-workloads"
+      }
+
+      block_device_mappings = {
+        xvda = {
+          device_name = "/dev/xvda"
+          ebs = {
+            volume_size           = 80
+            volume_type           = "gp3"
+            iops                  = 3000
+            throughput            = 125
+            encrypted             = true
+            delete_on_termination = true
+          }
+        }
       }
     }
   }
 }
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
-metadata:
-  name: syncrivo-chat-service
-  namespace: production
-spec:
-  replicas: 12
-  strategy:
-    canary:
-      analysis:
-        templates:
-          - templateName: prometheus-error-rate
-        args:
-          - name: service-name
-            value: chat-service
-      steps:
-        - setWeight: 10
-        - pause: { duration: 5m }
-        - setWeight: 25
-        - pause: { duration: 10m }
-        - setWeight: 50
-        - pause: { duration: 10m }
+
+// ── infrastructure/k8s/helm/values/production.yaml ──
+replicaCount: 6
+
+image:
+  repository: 123456789012.dkr.ecr.us-east-1.amazonaws.com/syncrivo-gateway
+  tag: "v2.8.4"
+  pullPolicy: IfNotPresent
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 4Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
+
+autoscaling:
+  enabled: true
+  minReplicas: 4
+  maxReplicas: 24
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: syncrivo-gateway
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values: ["syncrivo-gateway"]
+          topologyKey: kubernetes.io/hostname
+
+// ── syncrivo/adapters/adapters/slack/block_kit.py ──
+from typing import List, Dict, Any
+import aiohttp
+
+class SlackBlockKitAdapter:
+    """Converts standard markdown and RichText payloads to Slack Block Kit blocks."""
+    def __init__(self, bot_token: str):
+        self.token = bot_token
+        self.headers = {"Authorization": f"Bearer {bot_token}", "Content-Type": "application/json"}
+
+    def format_blocks(self, text: str, attachments: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        blocks = [
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": text[:3000]}
+            }
+        ]
+        for att in attachments:
+            if att.get("type") == "image":
+                blocks.append({
+                    "type": "image",
+                    "image_url": att["url"],
+                    "alt_text": att.get("name", "attachment")
+                })
+        return blocks
+
+    async def post_message(self, channel: str, blocks: list, thread_ts: str = None) -> Dict[str, Any]:
+        payload = {"channel": channel, "blocks": blocks}
+        if thread_ts:
+            payload["thread_ts"] = thread_ts
+        async with aiohttp.ClientSession(headers=self.headers) as session:
+            async with session.post("https://slack.com/api/chat.postMessage", json=payload) as resp:
+                return await resp.json()
+
+// ── syncrivo/adapters/adapters/teams/graph_client.py ──
+import aiohttp
+from typing import Optional, Dict, Any
+
+class TeamsGraphClient:
+    """Microsoft Graph API v1.0 message dispatcher with delegated attribution."""
+    def __init__(self, tenant_id: str, client_id: str, client_secret: str):
+        self.tenant_id = tenant_id
+        self.client_id = client_id
+        self.secret = client_secret
+        self._token: Optional[str] = None
+
+    async def get_token(self) -> str:
+        url = f"https://login.microsoftonline.com/{self.tenant_id}/oauth2/v2.0/token"
+        data = {
+            "client_id": self.client_id,
+            "client_secret": self.secret,
+            "scope": "https://graph.microsoft.com/.default",
+            "grant_type": "client_credentials"
+        }
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, data=data) as resp:
+                res = await resp.json()
+                return res["access_token"]
+
+    async def send_chat_message(self, team_id: str, channel_id: str, html_body: str) -> str:
+        token = await self.get_token()
+        url = f"https://graph.microsoft.com/v1.0/teams/{team_id}/channels/{channel_id}/messages"
+        headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+        payload = {"body": {"contentType": "html", "content": html_body}}
+        async with aiohttp.ClientSession(headers=headers) as session:
+            async with session.post(url, json=payload) as resp:
+                msg = await resp.json()
+                return msg.get("id", "")
+
+// ── telemetry/metrics/internal/metrics/collector.py ──
+from prometheus_client import Counter, Histogram, Gauge
+
+EVENTS_INGESTED = Counter(
+    "syncrivo_events_ingested_total",
+    "Total incoming platform events",
+    ["platform", "status"]
+)
+
+PROCESSING_LATENCY = Histogram(
+    "syncrivo_event_processing_seconds",
+    "End-to-end sync latency across adapters",
+    ["source_platform", "dest_platform"],
+    buckets=(0.01, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0)
+)
+
+QUEUE_DEPTH = Gauge(
+    "syncrivo_redis_stream_pending_events",
+    "Number of pending unprocessed messages in redis stream",
+    ["consumer_group"]
+)
+
+// ── tests/suites/tests/test_concurrency.py ──
+import pytest
+import asyncio
+
+@pytest.mark.asyncio
+async def test_high_concurrency_sliding_window(echo_guard):
+    """Ensure 1,000 identical events dispatched concurrently produce exactly 1 forward."""
+    fp = "fingerprint-sample-12345"
+    channel = "test-channel-99"
+    await echo_guard.register_outbound(channel, fp)
+
+    async def attempt_check():
+        is_echo, _ = await echo_guard.is_reflected_echo(channel, fp)
+        return is_echo
+
+    tasks = [attempt_check() for _ in range(1000)]
+    results = await asyncio.gather(*tasks)
+    assert all(results) is True

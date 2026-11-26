@@ -529,14 +529,16 @@ export function createWatch({ layer, deskHost, eyeHost, buffer, status, onState,
       g.fillStyle = pressing ? `rgba(${colors.accent}, ${vis.toFixed(3)})` : `rgba(${colors.ink}, ${(0.8 * vis).toFixed(3)})`;
       g.fillRect(Math.round(x - size / 2), Math.round(y - size / 2), size, size);
     });
-    const box = frameBox(points);
-    g.strokeStyle = `rgba(${colors.ink}, ${(0.28 * vis).toFixed(3)})`;
-    g.strokeRect(Math.round(box[0]) + 0.5, Math.round(box[1]) + 0.5, Math.round(box[2] - box[0]), Math.round(box[3] - box[1]));
-    g.font = `8px "Plex Mono", monospace`;
-    const widthOf = g.measureText(label).width;
-    const lx = side === 0 ? box[0] : box[2] - widthOf;
-    g.fillStyle = `rgba(${colors.ink}, ${(0.7 * vis).toFixed(3)})`;
-    g.fillText(label, Math.round(lx), Math.round(box[1] - 5));
+    if (label) {
+      const box = frameBox(points);
+      g.strokeStyle = `rgba(${colors.ink}, ${(0.28 * vis).toFixed(3)})`;
+      g.strokeRect(Math.round(box[0]) + 0.5, Math.round(box[1]) + 0.5, Math.round(box[2] - box[0]), Math.round(box[3] - box[1]));
+      g.font = `8px "Plex Mono", monospace`;
+      const widthOf = g.measureText(label).width;
+      const lx = side === 0 ? box[0] : box[2] - widthOf;
+      g.fillStyle = `rgba(${colors.ink}, ${(0.7 * vis).toFixed(3)})`;
+      g.fillText(label, Math.round(lx), Math.round(box[1] - 5));
+    }
   }
 
   function drawMouse(vis, now) {
@@ -595,14 +597,14 @@ export function createWatch({ layer, deskHost, eyeHost, buffer, status, onState,
     let mouseAt = null;
     if (kb.mouse) mouseAt = drawMouse(vis, now);
     const left = hands[0];
-    drawHandShape(left.points, vis, now, left.tips, `['hand0:u'] ${(left.points[0][0] / width).toFixed(7)}`, 0);
+    drawHandShape(left.points, vis, now, left.tips, "", 0);
     const right = hands[1];
     let points = right.points;
     if (mouseAt && desk.mouse.value > 0.001) {
       const pose = mousePose(mouseAt[0], mouseAt[1]);
       points = points.map((point, k) => lerp(point, pose[k], desk.mouse.value));
     }
-    drawHandShape(points, vis, now, desk.mouse.value > 0.5 ? null : right.tips, `['hand1:u'] ${(points[0][0] / width).toFixed(7)}`, 1);
+    drawHandShape(points, vis, now, desk.mouse.value > 0.5 ? null : right.tips, "", 1);
     return moving || active;
   }
 
@@ -719,7 +721,7 @@ export function createWatch({ layer, deskHost, eyeHost, buffer, status, onState,
     const labelWidth = Math.max(...label.map((line) => g.measureText(line).width));
     const lx = clamp(box.cx - labelWidth / 2, 8, width - labelWidth - 8);
     const ly = box.cy + box.h / 2 + 10;
-    if (!narrow.matches && ly + label.length * 9 < height - 8) {
+    if (false && !narrow.matches && ly + label.length * 9 < height - 8) {
       g.fillStyle = `rgba(${colors.ink}, ${(0.86 * alpha).toFixed(3)})`;
       label.forEach((line, k) => g.fillText(line, Math.round(lx), Math.round(ly) + k * 9 + 8 * EM_TOP));
       g.strokeStyle = `rgba(${colors.ink}, ${(0.22 * alpha).toFixed(3)})`;

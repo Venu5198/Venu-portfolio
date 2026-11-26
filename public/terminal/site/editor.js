@@ -145,7 +145,7 @@ const about = (() => {
 
 const MORE = new Set(content.more || []);
 const OMARCHY = new Set();
-const projectEntries = content.projects.map((project) => ({ id: project.repo, label: project.repo, kind: "project", data: project, parent: MORE.has(project.repo) ? "more" : OMARCHY.has(project.repo) ? "omarchy" : null }));
+const projectEntries = content.projects.map((project) => ({ id: project.repo, label: project.label || project.repo, kind: "project", data: project, parent: MORE.has(project.repo) ? "more" : OMARCHY.has(project.repo) ? "omarchy" : null }));
 const children = projectEntries.filter((entry) => entry.parent);
 const childrenOf = (id) => children.filter((entry) => entry.parent === id);
 const shipped = themes.filter((theme) => theme.included);
@@ -666,11 +666,87 @@ window.addEventListener("resize", queueFit);
 
 tabline.addEventListener("click", () => (editor.classList.contains("is-tree-open") ? closeDrawer() : openDrawer()));
 
+const ALIAS_MAP = {
+  about: "about",
+  whoami: "about",
+  home: "about",
+  bio: "about",
+  profile: "about",
+  readme: "about",
+  readmemd: "about",
+  projects: "syncrivo-messaging-bridge",
+  project: "syncrivo-messaging-bridge",
+  work: "work",
+  career: "work",
+  experience: "work",
+  jobs: "work",
+  talks: "talks",
+  talk: "talks",
+  certs: "talks",
+  cert: "talks",
+  certifications: "talks",
+  awards: "talks",
+  credentials: "talks",
+  stack: "stack",
+  skills: "stack",
+  tech: "stack",
+  git: "stack",
+  gitlog: "stack",
+  log: "stack",
+  themes: "themes",
+  theme: "themes",
+  colorscheme: "themes",
+  colors: "themes",
+  syncrivo: "syncrivo-messaging-bridge",
+  sync: "syncrivo-messaging-bridge",
+  bridge: "syncrivo-messaging-bridge",
+  messaging: "syncrivo-messaging-bridge",
+  ocnora: "ocnora-ai-workflow-dag",
+  dag: "ocnora-ai-workflow-dag",
+  workflow: "ocnora-ai-workflow-dag",
+  ai: "ocnora-ai-workflow-dag",
+  cluster: "systems-cluster-3d",
+  cluster3d: "systems-cluster-3d",
+  systems: "systems-cluster-3d",
+  systemscluster: "systems-cluster-3d",
+  finops: "cloud-finops-ledger",
+  cloudfinops: "cloud-finops-ledger",
+  ledger: "cloud-finops-ledger",
+  gitops: "kubernetes-gitops-pipeline",
+  k8s: "kubernetes-gitops-pipeline",
+  kubernetes: "kubernetes-gitops-pipeline",
+  pipeline: "kubernetes-gitops-pipeline",
+};
+
 function findEntry(name) {
-  const wanted = key(name.replace(/\/README\.md$/i, "").replace(/^~\/Projects\/?/, ""));
-  if (!wanted || ["readmemd", "about", "whoami", "home"].includes(wanted)) return entries.find((entry) => entry.kind === "about");
-  if (["git", "gitlog", "log"].includes(wanted)) return entries.find((entry) => entry.kind === "stack") || entries.find((entry) => entry.kind === "about");
-  return entries.find((entry) => key(entry.id) === wanted || key(entry.label) === wanted);
+  if (!name) return entries.find((entry) => entry.kind === "about");
+  const raw = String(name).trim()
+    .replace(/^:e\s+/i, "")
+    .replace(/^:edit\s+/i, "")
+    .replace(/^cd\s+/i, "")
+    .replace(/\/README\.md$/i, "")
+    .replace(/^~\/Projects\/?/i, "")
+    .replace(/^~\/?/i, "")
+    .replace(/^\//, "")
+    .replace(/\/$/, "");
+  const wanted = key(raw);
+  if (!wanted || ["readmemd", "about", "whoami", "home"].includes(wanted)) {
+    return entries.find((entry) => entry.kind === "about");
+  }
+  if (ALIAS_MAP[wanted]) {
+    const targetId = ALIAS_MAP[wanted];
+    const match = entries.find((entry) => entry.id === targetId || entry.kind === targetId);
+    if (match) return match;
+  }
+  let found = entries.find((entry) => key(entry.id) === wanted || key(entry.label) === wanted);
+  if (found) return found;
+
+  found = entries.find((entry) => {
+    const kId = key(entry.id);
+    const kLabel = key(entry.label);
+    return kId.includes(wanted) || wanted.includes(kId) || kLabel.includes(wanted);
+  });
+  return found || null;
 }
 
 let child = null;
@@ -704,9 +780,12 @@ function run(text) {
   const [name, ...rest] = text.trim().split(/\s+/);
   const arg = rest.join(" ");
   if (!name) return say("");
-  if (/^q(a|all)?!?$/.test(name) || name === "wq" || name === "x") {
+  if (name === "bento" || name === "ios" || name === "exit" || name === "quit" || /^q(a|all)?!?$/.test(name) || name === "wq" || name === "x") {
     location.href = "/";
     return;
+  }
+  if (name === "help" || name === "h") {
+    return say(":e [syncrivo|ocnora|cluster|finops|gitops|stack|work|talks|themes] · :colo <name> · :bento");
   }
   if (name === "colorscheme" || name === "colo" || name === "theme") {
     if (!arg) {
@@ -715,7 +794,8 @@ function run(text) {
     }
     return scheme(arg);
   }
-  if (name === "e" || name === "edit" || name === "cd") {
+  if (name === "e" || name === "edit" || name === "cd" || name === "open") {
+    if (!arg || arg === "." || arg === "~" || arg === "~/Projects") return goTo(entries.find((entry) => entry.kind === "about"));
     if (arg === ".." && openEntry?.parent) return goTo(entries.find((entry) => entry.id === openEntry.parent));
     const entry = findEntry(arg);
     if (entry) {

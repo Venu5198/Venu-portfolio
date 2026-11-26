@@ -54,7 +54,7 @@ const TYPE_FOCUS_MS = 1400;
 const POINTER_LOCK_MS = 2500;
 const DIVE = { count: 6000, phone: 3000, buckets: 10, ms: 1700 };
 const VIEW = { cols: 112, top: 0.12, min: 18, ramp: 2 };
-const BOOT = { command: "nvim ~/Projects", blinks: 3, reveal: 700 };
+const BOOT = { command: "nvim ~/Projects", blinks: 1, reveal: 350 };
 const EDIT = { scrolloff: 3, wipe: [4, 12] };
 const VISITOR_IDLE_MS = 5000;
 const OBJECT_DWELL = 900;
@@ -641,7 +641,7 @@ async function bootView() {
     return;
   }
   boot.active = true;
-  wall.revealed = -1;
+  wall.revealed = wall.rows;
   const pane = wall.panes[0];
   pane.scroll.value = pane.scroll.target = -wall.band[0];
   renderPane(pane);
