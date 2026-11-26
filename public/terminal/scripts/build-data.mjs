@@ -183,7 +183,7 @@ function repoFacts(full) {
 // ---------- 4. Projects ----------
 const MORE = [];
 const projects = CONFIG.projects.map((p) => {
-  const id = slug(p.name);
+  const id = p.repo || p.slug || slug(p.name);
   if (p.more) MORE.push(id);
   const full = p.githubRepo || (p.url?.startsWith("https://github.com/") ? p.url.replace("https://github.com/", "").replace(/\/$/, "") : null);
   const facts = repoFacts(full);
@@ -209,6 +209,7 @@ const projects = CONFIG.projects.map((p) => {
   ];
   return {
     repo: id,
+    label: p.label || id,
     url: p.url || null,
     description: p.desc,
     tag: p.tag || null,

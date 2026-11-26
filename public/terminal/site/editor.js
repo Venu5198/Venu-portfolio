@@ -83,8 +83,8 @@ const chroma = (value) => Math.hypot(lab(value)[1], lab(value)[2]);
 const mix = (a, b, t) => `#${hex(a).map((v, n) => Math.round(v * (1 - t) + hex(b)[n] * t).toString(16).padStart(2, "0")).join("")}`;
 
 const DEFAULT_THEME = "blackmoney";
-const THEME_KEY = "venu.scheme";
-const WORM_KEY = "venu.worm";
+const THEME_KEY = "venuk_term_.scheme";
+const WORM_KEY = "venuk_term_.worm";
 let currentTheme = DEFAULT_THEME;
 let openEntry = null;
 let booted = false;
@@ -351,6 +351,7 @@ function aboutSpec() {
       {
         cmd: "whoami",
         out: [
+          { segments: [["Venu K", "t-hi"]] },
           ...about.bio.map((line) => ({ segments: [line], className: "t-dim" })),
         ],
       },
@@ -674,8 +675,8 @@ const ALIAS_MAP = {
   profile: "about",
   readme: "about",
   readmemd: "about",
-  projects: "syncrivo-messaging-bridge",
-  project: "syncrivo-messaging-bridge",
+  projects: "syncrivo",
+  project: "syncrivo",
   work: "work",
   career: "work",
   experience: "work",
@@ -697,25 +698,25 @@ const ALIAS_MAP = {
   theme: "themes",
   colorscheme: "themes",
   colors: "themes",
-  syncrivo: "syncrivo-messaging-bridge",
-  sync: "syncrivo-messaging-bridge",
-  bridge: "syncrivo-messaging-bridge",
-  messaging: "syncrivo-messaging-bridge",
-  ocnora: "ocnora-ai-workflow-dag",
-  dag: "ocnora-ai-workflow-dag",
-  workflow: "ocnora-ai-workflow-dag",
-  ai: "ocnora-ai-workflow-dag",
-  cluster: "systems-cluster-3d",
-  cluster3d: "systems-cluster-3d",
-  systems: "systems-cluster-3d",
-  systemscluster: "systems-cluster-3d",
-  finops: "cloud-finops-ledger",
-  cloudfinops: "cloud-finops-ledger",
-  ledger: "cloud-finops-ledger",
-  gitops: "kubernetes-gitops-pipeline",
-  k8s: "kubernetes-gitops-pipeline",
-  kubernetes: "kubernetes-gitops-pipeline",
-  pipeline: "kubernetes-gitops-pipeline",
+  syncrivo: "syncrivo",
+  sync: "syncrivo",
+  bridge: "syncrivo",
+  messaging: "syncrivo",
+  ocnora: "ocnora",
+  dag: "ocnora",
+  workflow: "ocnora",
+  ai: "ocnora",
+  cluster: "systems-cluster",
+  cluster3d: "systems-cluster",
+  systems: "systems-cluster",
+  systemscluster: "systems-cluster",
+  finops: "finops-ledger",
+  cloudfinops: "finops-ledger",
+  ledger: "finops-ledger",
+  gitops: "gitops-pipeline",
+  k8s: "gitops-pipeline",
+  kubernetes: "gitops-pipeline",
+  pipeline: "gitops-pipeline",
 };
 
 function findEntry(name) {
