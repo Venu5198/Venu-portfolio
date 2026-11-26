@@ -1,16 +1,16 @@
 {
   "identity": {
-    "name": "K Venu",
-    "barTitle": "K VENU // DEVOPS · CLOUD · SRE",
-    "terminalUser": "kvenu",
+    "name": "Venu K",
+    "barTitle": "VENU K // BACKEND · DEVOPS · AI",
+    "terminalUser": "venuk",
     "domain": "venu-k.vercel.app",
-    "tagline": "DevOps Engineer — Cloud, Kubernetes & SRE",
+    "tagline": "Backend Developer — Python, DevOps & AI",
     "github": "Venu5198",
-    "storagePrefix": "kvenu_term_"
+    "storagePrefix": "venuk_term_"
   },
   "about": {
-    "bio": "DevOps Engineer & Backend Developer with 3.6+ years of production experience specializing in cloud infrastructure, Kubernetes, CI/CD automation, and reliability engineering. Key contributor across engineering teams at SyncRivo (real-time enterprise messaging bridge sustaining 99.98% uptime and <95ms transit) and OCNORA (stateful AI workflow DAG engine across 1,000+ integrations). Experienced in operating cloud-native platforms on AWS and Google Cloud supporting 20+ microservices, reducing cloud spend by 20–25%, cutting deployment times from 30m to under 5m via GitOps (Argo CD), and setting up end-to-end observability (Prometheus/Grafana/Splunk) reducing MTTR by 30–35%.",
-    "extra": "Tirupati, AP, India · Google Cloud Associate Cloud Engineer · AWS Certified DevOps Engineer – Professional · CKA · HashiCorp Terraform Associate"
+    "bio": "Backend Developer with 3.6+ years of production experience architecting high-throughput Python/FastAPI microservices, low-latency event pipelines, and autonomous AI agent workflows. Key backend contributor at SyncRivo (5-platform enterprise messaging bridge sustaining 99.98% uptime and <95ms transit) and OCNORA (stateful AI workflow DAG platform across 1,000+ integrations, clearing a 120-defect backlog). Experienced in operating cloud-native platforms on AWS and Google Cloud supporting 20+ microservices, reducing cloud spend by 20–25%, cutting deployment times from 30m to under 5m via GitOps (Argo CD), and setting up end-to-end observability (Prometheus/Grafana/Splunk) reducing MTTR by 30–35%.",
+    "extra": "Tirupati, AP, India · AWS Certified DevOps Engineer – Professional · CKA · HashiCorp Terraform Associate · GCP ACE"
   },
   "links": [
     {
@@ -48,10 +48,10 @@
     },
     {
       "when": "06/2024 – 08/2024",
-      "title": "Full Stack Java Intern",
+      "title": "Software & Backend Engineering Intern",
       "org": "ExcelR & APSCHE",
       "where": "Remote",
-      "desc": "Full stack development internship covering Java, Spring Boot microservices, database design, REST APIs, and modern frontend fundamentals."
+      "desc": "Software and backend engineering internship focusing on Java microservices, database design, REST APIs, and backend service integration."
     },
     {
       "when": "2023 – 2024",
@@ -175,16 +175,6 @@
       "photos": []
     },
     {
-      "name": "Google Cloud Associate Cloud Engineer (GCP ACE)",
-      "place": "Google Cloud",
-      "when": "2024",
-      "lat": 37.42,
-      "lon": -122.08,
-      "desc": "Demonstrated competency in deploying applications, monitoring operations, managing enterprise cloud solutions, and securing GCP infrastructure.",
-      "url": "https://cloud.google.com/certification",
-      "photos": []
-    },
-    {
       "name": "AWS Certified DevOps Engineer – Professional",
       "place": "Amazon Web Services (AWS)",
       "when": "Jan 2025",
@@ -212,6 +202,16 @@
       "lon": -122.08,
       "desc": "Certified expertise in declarative Infrastructure as Code (IaC), state management, Terraform Cloud, modules, and multi-provider orchestration.",
       "url": "https://www.credly.com/users/venu-krishnaya",
+      "photos": []
+    },
+    {
+      "name": "Google Cloud Associate Cloud Engineer (GCP ACE)",
+      "place": "Google Cloud",
+      "when": "2024",
+      "lat": 37.42,
+      "lon": -122.08,
+      "desc": "Demonstrated competency in deploying applications, monitoring operations, managing enterprise cloud solutions, and securing GCP infrastructure.",
+      "url": "https://cloud.google.com/certification",
       "photos": []
     }
   ],
