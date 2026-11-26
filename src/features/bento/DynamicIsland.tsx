@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Command, Moon, Sun, ChevronDown, Check, Sparkles, Layers, Cpu, TrendingDown, Mail } from "lucide-react";
+import { Command, Moon, Sun, ChevronDown, Check, Sparkles, Layers, Cpu, TrendingDown, Mail, Terminal } from "lucide-react";
 import { useTheme } from "@/shared/context/ThemeContext";
 
 interface DynamicIslandProps {
@@ -59,6 +60,15 @@ export function DynamicIsland({
 
             {/* Actions: Search, Theme, Expand */}
             <div className="flex items-center gap-1.5">
+              <Link
+                href="/terminal"
+                className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#0A84FF]/10 hover:bg-[#0A84FF]/20 text-[#0A84FF] dark:text-[#32ADE6] border border-[#0A84FF]/20 text-[10px] font-mono font-semibold transition-all hover:scale-105 cursor-pointer"
+                title="Switch to Terminal Mode (Neovim & Code Wall)"
+              >
+                <Terminal className="w-3 h-3" />
+                <span className="hidden sm:inline">Terminal</span>
+              </Link>
+
               <button
                 onClick={onOpenCommandPalette}
                 className="p-1.5 rounded-full hover:bg-current hover:bg-opacity-10 transition-colors cursor-pointer"
@@ -160,6 +170,30 @@ export function DynamicIsland({
                 <span className="truncate">Direct Contact</span>
               </button>
             </div>
+
+            {/* Terminal Mode Alternate Experience */}
+            <Link
+              href="/terminal"
+              className={`p-3 rounded-2xl flex items-center justify-between text-xs font-mono transition-all cursor-pointer border ${
+                theme === "dark"
+                  ? "bg-gradient-to-r from-cyan-950/40 to-blue-950/30 border-cyan-500/30 hover:border-cyan-400 text-white"
+                  : "bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200 hover:border-blue-300 text-blue-950"
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="w-7 h-7 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400">
+                  <Terminal className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="font-bold flex items-center gap-1.5">
+                    Terminal Mode
+                    <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">Neovim</span>
+                  </div>
+                  <div className="text-[10px] opacity-70">Code wall, buffer tabs, :theme &amp; wheel nav</div>
+                </div>
+              </div>
+              <span className="text-[11px] font-bold text-cyan-400">Open ↗</span>
+            </Link>
 
             {/* Appearance Switcher Row */}
             <div className="flex items-center justify-between pt-2 border-t border-current border-opacity-10 text-xs font-mono">

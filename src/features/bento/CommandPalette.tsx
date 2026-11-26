@@ -65,6 +65,16 @@ export function CommandPalette({
 
   const actions = [
     {
+      id: "terminal-mode",
+      title: "Switch to Terminal Mode (Neovim & Code Wall)",
+      subtitle: "Interactive developer buffer tabs, wheel navigation, :theme engine",
+      category: "Modes",
+      action: () => {
+        onClose();
+        window.location.href = "/terminal";
+      },
+    },
+    {
       id: "theme-toggle",
       title: `Switch Appearance to iOS ${isDark ? "Light" : "Dark"}`,
       subtitle: `Currently in iOS ${isDark ? "Dark" : "Light"} system`,

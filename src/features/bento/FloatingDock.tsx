@@ -13,6 +13,7 @@ import {
   Command,
   Sun,
   Moon,
+  Terminal,
 } from "lucide-react";
 import { useTheme } from "@/shared/context/ThemeContext";
 
@@ -112,6 +113,23 @@ export function FloatingDock({
         })}
 
         <div className="w-[1px] h-4 bg-current opacity-20 mx-0.5" />
+
+        {/* Terminal Mode Trigger */}
+        <motion.button
+          onClick={() => { window.location.href = "/terminal"; }}
+          whileHover={{ scale: 1.15, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          className={`p-2 sm:p-2.5 rounded-full transition-colors cursor-pointer group relative ${
+            isDark
+              ? "text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10"
+              : "text-blue-600 hover:text-blue-700 hover:bg-blue-500/10"
+          }`}
+          aria-label="Terminal Mode"
+          title="Switch to Terminal Mode (Neovim & Code Wall)"
+        >
+          <Terminal className="w-4 h-4" />
+          <span className="sr-only">Terminal Mode</span>
+        </motion.button>
 
         {/* ⌘K Trigger inside dock */}
         <motion.button

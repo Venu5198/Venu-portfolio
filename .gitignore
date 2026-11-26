@@ -44,3 +44,8 @@ next-env.d.ts
 
 # local agent configs
 /.agents/
+
+# large template assets (video / GIF)
+dev-portfolio-template-main/**/assets/demo.*
+**/assets/demo.*
+public/terminal/**/assets/demo.*

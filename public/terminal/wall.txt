@@ -1,0 +1,111 @@
+from fastapi import APIRouter, Request, HTTPException, BackgroundTasks
+import hmac, hashlib, time
+from redis.asyncio import Redis
+
+router = APIRouter(prefix="/v1/webhooks", tags=["Ingress"])
+
+@router.post("/{platform}/events")
+async def handle_platform_event(
+    platform: str,
+    request: Request,
+    background_tasks: BackgroundTasks,
+    redis: Redis = Depends(get_redis_pool)
+) -> dict:
+    raw_body = await request.body()
+    signature = request.headers.get("X-Hub-Signature-256", "")
+    if not verify_hmac(raw_body, signature, get_secret(platform)):
+        raise HTTPException(status_code=401, detail="Invalid signature")
+
+    event_id = hashlib.sha256(raw_body).hexdigest()
+    # Sub-10ms ingress: enqueue raw payload to Redis and acknowledge immediately
+    await redis.xadd(
+        name=f"events:{platform}",
+        fields={"payload": raw_body, "event_id": event_id, "ts": time.time_ns()}
+    )
+    return {"status": "enqueued", "event_id": event_id}
+import hashlib
+from redis.asyncio import Redis
+
+class EchoGuard:
+    """Sliding-window Redis filter preventing loop duplication across cross-linked channels."""
+    def __init__(self, redis: Redis, window_ttl_sec: int = 120):
+        self.redis = redis
+        self.ttl = window_ttl_sec
+
+    def compute_fingerprint(self, origin_platform: str, channel_id: str, sender_id: str, body: str) -> str:
+        normalized = f"{origin_platform}:{channel_id}:{sender_id}:{body.strip()}"
+        return hashlib.blake2b(normalized.encode(), digest_size=16).hexdigest()
+
+    async def should_drop(self, fingerprint: str) -> bool:
+        key = f"echo:{fingerprint}"
+        # Atomic SETNX with sliding expiration ensures zero duplicate bridge delivery
+        acquired = await self.redis.set(key, "1", ex=self.ttl, nx=True)
+        return acquired is None
+import asyncio
+from typing import Dict, List, Set, Any
+from motor.motor_asyncio import AsyncIOMotorDatabase
+
+class AsyncDAGRunner:
+    def __init__(self, db: AsyncIOMotorDatabase):
+        self.db = db
+
+    async def execute_graph(self, execution_id: str, nodes: Dict[str, Any], edges: List[Dict[str, str]]):
+        in_degree = {k: 0 for k in nodes}
+        adj = {k: [] for k in nodes}
+        for edge in edges:
+            adj[edge["source"]].append(edge["target"])
+            in_degree[edge["target"]] += 1
+
+        ready_queue = [k for k, v in in_degree.items() if v == 0]
+        while ready_queue:
+            batch = [self._run_step(execution_id, node_id, nodes[node_id]) for node_id in ready_queue]
+            results = await asyncio.gather(*batch)
+            # Checkpoint step state to MongoDB before dispatching dependent steps
+            await self._persist_checkpoint(execution_id, results)
+            ready_queue = self._resolve_next_nodes(adj, in_degree, results)
+module "eks" {
+  source          = "terraform-aws-modules/eks/aws"
+  version         = "~> 20.0"
+  cluster_name    = "venu-prod-cluster"
+  cluster_version = "1.30"
+
+  vpc_id          = module.vpc.vpc_id
+  subnet_ids      = module.vpc.private_subnets
+  enable_irsa     = true
+
+  eks_managed_node_groups = {
+    core = {
+      min_size       = 3
+      max_size       = 10
+      desired_size   = 3
+      instance_types = ["m6i.xlarge"]
+      capacity_type  = "ON_DEMAND"
+      tags = {
+        Environment = "production"
+        ManagedBy   = "terraform"
+      }
+    }
+  }
+}
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: syncrivo-chat-service
+  namespace: production
+spec:
+  replicas: 12
+  strategy:
+    canary:
+      analysis:
+        templates:
+          - templateName: prometheus-error-rate
+        args:
+          - name: service-name
+            value: chat-service
+      steps:
+        - setWeight: 10
+        - pause: { duration: 5m }
+        - setWeight: 25
+        - pause: { duration: 10m }
+        - setWeight: 50
+        - pause: { duration: 10m }

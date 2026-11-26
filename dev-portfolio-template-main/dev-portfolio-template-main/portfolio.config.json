@@ -1,0 +1,211 @@
+{
+  "identity": {
+    "name": "Venu K",
+    "barTitle": "VENU K // BACKEND · DEVOPS · AI",
+    "terminalUser": "venu",
+    "domain": "venu-k.vercel.app",
+    "tagline": "Backend Developer — Python, DevOps & AI. Distributed systems, event pipelines, cloud platforms.",
+    "github": "Venu5198",
+    "storagePrefix": "venu"
+  },
+  "about": {
+    "bio": "Backend Developer specializing in Python, distributed event systems, DevOps, and AI workflow automation. Key contributor across engineering teams at SyncRivo (real-time messaging bridge syncing Slack, Microsoft Teams, Google Chat, Zoom, and Webex) and OCNORA (AI workflow automation platform)—building high-throughput FastAPI microservices, Redis event queues, Kubernetes/GCP infrastructure, CI/CD pipelines, and autonomous agent runners.",
+    "extra": "Tirupati, India · AWS DevOps Pro · CKA · Terraform Associate"
+  },
+  "links": [
+    {
+      "label": "Email",
+      "url": "mailto:venukrishnaya@gmail.com"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/Venu5198"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/venu-k-2a4460383"
+    },
+    {
+      "label": "Credly",
+      "url": "https://www.credly.com/users/venu-krishnaya"
+    }
+  ],
+  "work": [
+    {
+      "when": "01/2024 – present",
+      "title": "Backend Developer",
+      "org": "SyncRivo",
+      "where": "Hybrid",
+      "desc": "Contributed as Backend Developer to the multi-service distributed architecture syncing messages, threads, attachments, edits, deletes, and reactions across 5 enterprise platforms (Slack, Teams, Google Chat, Zoom, Webex) with zero loop duplication.",
+      "url": "https://syncrivo.ai/en/"
+    },
+    {
+      "when": "06/2023 – 12/2023",
+      "title": "Backend Developer",
+      "org": "OCNORA",
+      "where": "Remote",
+      "desc": "Contributed backend and platform engineering to the autonomous workflow automation engine: state-machine execution DAG, 1,000+ app connectors, LLM routing with budget circuit breakers, and autonomous Git worktree test runners.",
+      "url": "https://ocnora.ai/"
+    },
+    {
+      "when": "2021 – 2023",
+      "title": "Backend & Cloud Engineer",
+      "org": "Enterprise Cloud Systems",
+      "where": "India",
+      "desc": "Engineered high-availability REST APIs, automated CI/CD deployment pipelines, containerized services with Docker/Kubernetes, and provisioned multi-cloud IaC via Terraform."
+    }
+  ],
+  "projects": [
+    {
+      "name": "SyncRivo Messaging Bridge",
+      "tag": "Distributed Systems · FastAPI · Redis",
+      "desc": "Real-time enterprise messaging bridge connecting Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex.",
+      "long": "Contributed as Backend Developer to the multi-service distributed architecture syncing messages, threads, attachments, edits, deletes, and reactions across 5 enterprise platforms with zero loop duplication. Engineered FastAPI webhook receivers, Redis Pub/Sub event decoupling, sliding-window echo prevention, and native delegated sender attribution.",
+      "githubRepo": "",
+      "shots": [
+        "shots/project-1.svg"
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Redis",
+        "MongoDB",
+        "Cloud Run",
+        "Docker"
+      ],
+      "url": "https://syncrivo.ai/en/"
+    },
+    {
+      "name": "OCNORA AI Workflow DAG",
+      "tag": "AI Platform · Workflow Engine",
+      "desc": "Autonomous workflow automation platform coordinating AI agents, 1,000+ app integrations, and software delivery.",
+      "long": "Contributed backend and platform engineering to the autonomous workflow automation engine: state-machine execution DAG, 1,000+ app connectors, dynamic LLM routing with token/USD budget circuit breakers, and isolated Git worktree autonomous test runners.",
+      "githubRepo": "",
+      "shots": [
+        "shots/project-2.svg"
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "MongoDB",
+        "Docker",
+        "Kubernetes",
+        "Git Worktrees"
+      ],
+      "url": "https://ocnora.ai/"
+    },
+    {
+      "name": "Systems Cluster 3D",
+      "tag": "Distributed Architecture · WebGL",
+      "desc": "Interactive 3D visualization of distributed event queues, broker clusters, and worker nodes.",
+      "long": "Interactive 3D distributed systems topology visualizing ingress gateways, Redis event streams, worker pools, and database replication health with real-time throughput metrics.",
+      "githubRepo": "",
+      "shots": [],
+      "stack": [
+        "Three.js",
+        "React Three Fiber",
+        "TypeScript",
+        "WebGL"
+      ],
+      "url": "https://github.com/Venu5198"
+    },
+    {
+      "name": "Cloud FinOps Ledger",
+      "tag": "DevOps · Cloud Governance",
+      "desc": "Cloud infrastructure cost optimization engine and dynamic token usage governor.",
+      "long": "Real-time infrastructure cost ledger analyzing multi-cloud resources across GCP and AWS, driving 20–25% cost reduction through intelligent auto-scaling, cold-start mitigation, and rightsizing.",
+      "githubRepo": "",
+      "shots": [],
+      "stack": [
+        "Terraform",
+        "AWS",
+        "GCP",
+        "Python",
+        "Prometheus"
+      ],
+      "url": "https://github.com/Venu5198"
+    },
+    {
+      "name": "Kubernetes GitOps Pipeline",
+      "tag": "Cloud Native · Kubernetes · GitOps",
+      "desc": "Automated GitOps continuous delivery pipeline with Argo CD, Helm, and Canary rollouts.",
+      "long": "Zero-downtime progressive delivery pipeline utilizing Argo CD, Argo Rollouts, and Prometheus metrics analysis to automate safe canaries, rollbacks, and multi-cluster configurations.",
+      "githubRepo": "",
+      "more": true,
+      "shots": [],
+      "stack": [
+        "Kubernetes",
+        "Argo CD",
+        "Helm",
+        "Prometheus",
+        "GitHub Actions"
+      ],
+      "url": "https://github.com/Venu5198"
+    }
+  ],
+  "talks": [
+    {
+      "name": "AWS Certified DevOps Engineer – Professional",
+      "place": "Amazon Web Services (AWS)",
+      "when": "Jan 2025",
+      "lat": 37.77,
+      "lon": -122.41,
+      "desc": "Demonstrated mastery of continuous delivery, multi-account automation, monitoring, logging, and security controls across AWS cloud environments.",
+      "url": "https://www.credly.com/users/venu-krishnaya",
+      "photos": []
+    },
+    {
+      "name": "Certified Kubernetes Administrator (CKA)",
+      "place": "Cloud Native Computing Foundation (CNCF)",
+      "when": "Jun 2023",
+      "lat": 47.60,
+      "lon": -122.33,
+      "desc": "Hands-on competency in Kubernetes cluster architecture, workload scheduling, networking, storage, troubleshooting, and security hardening.",
+      "url": "https://www.credly.com/users/venu-krishnaya",
+      "photos": []
+    },
+    {
+      "name": "HashiCorp Certified: Terraform Associate",
+      "place": "HashiCorp",
+      "when": "Nov 2022",
+      "lat": 37.38,
+      "lon": -122.08,
+      "desc": "Certified expertise in declarative Infrastructure as Code (IaC), state management, Terraform Cloud, modules, and multi-provider orchestration.",
+      "url": "https://www.credly.com/users/venu-krishnaya",
+      "photos": []
+    },
+    {
+      "name": "Reliability Champion Award",
+      "place": "SyncRivo",
+      "when": "Mar 2025",
+      "lat": 13.62,
+      "lon": 79.41,
+      "desc": "Awarded for sustaining 99.98% production uptime across distributed real-time messaging services and maintaining zero message loss.",
+      "url": "https://syncrivo.ai/en/",
+      "photos": []
+    }
+  ],
+  "wallRepos": [],
+  "siteStack": [
+    {
+      "name": "Python",
+      "via": "FastAPI & AsyncIO backend engine"
+    },
+    {
+      "name": "Docker",
+      "via": "containerized runtime"
+    },
+    {
+      "name": "Kubernetes",
+      "via": "CKA certified orchestration"
+    },
+    {
+      "name": "Terraform",
+      "via": "certified IaC provisioning"
+    },
+    {
+      "name": "Redis",
+      "via": "sub-millisecond pub/sub & deduplication"
+    }
+  ]
+}
