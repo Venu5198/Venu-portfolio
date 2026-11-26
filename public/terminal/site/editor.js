@@ -36,11 +36,11 @@ const load = (url) =>
     return response.json();
   });
 const [content, themeData, snapshot, stack, months] = await Promise.all([
-  load("/terminal/site/content.json").catch(() => load("content.json")),
-  load("/terminal/themes.json").catch(() => load("../themes.json")).catch(() => load("themes.json")),
-  load("/terminal/github-snapshot.json").catch(() => load("../github-snapshot.json")).catch(() => load("github-snapshot.json")),
-  load("/terminal/site/stack.json").catch(() => load("stack.json")).catch(() => null),
-  load("/terminal/site/months.json").catch(() => load("months.json")).catch(() => null)
+  load("content.json").catch(() => load("/terminal/site/content.json")),
+  load("../themes.json").catch(() => load("/terminal/themes.json")).catch(() => load("themes.json")),
+  load("../github-snapshot.json").catch(() => load("/terminal/github-snapshot.json")).catch(() => load("github-snapshot.json")),
+  load("stack.json").catch(() => load("/terminal/site/stack.json")).catch(() => null),
+  load("months.json").catch(() => load("/terminal/site/months.json")).catch(() => null)
 ]);
 const themes = themeData.themes;
 const palettes = new Map(content.palettes.map((theme) => [key(theme.name), theme]));
@@ -83,8 +83,8 @@ const chroma = (value) => Math.hypot(lab(value)[1], lab(value)[2]);
 const mix = (a, b, t) => `#${hex(a).map((v, n) => Math.round(v * (1 - t) + hex(b)[n] * t).toString(16).padStart(2, "0")).join("")}`;
 
 const DEFAULT_THEME = "blackmoney";
-const THEME_KEY = "venuk_term_.scheme";
-const WORM_KEY = "venuk_term_.worm";
+const THEME_KEY = "kvenu_term_.scheme";
+const WORM_KEY = "kvenu_term_.worm";
 let currentTheme = DEFAULT_THEME;
 let openEntry = null;
 let booted = false;

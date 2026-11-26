@@ -1,16 +1,16 @@
 {
   "identity": {
-    "name": "Venu K",
-    "barTitle": "VENU K // BACKEND · DEVOPS · AI",
-    "terminalUser": "venuk",
+    "name": "K Venu",
+    "barTitle": "K VENU // DEVOPS · CLOUD · SRE",
+    "terminalUser": "kvenu",
     "domain": "venu-k.vercel.app",
-    "tagline": "Backend Developer — Python, DevOps & AI",
+    "tagline": "DevOps Engineer — Cloud, Kubernetes & SRE",
     "github": "Venu5198",
-    "storagePrefix": "venuk_term_"
+    "storagePrefix": "kvenu_term_"
   },
   "about": {
-    "bio": "Backend Developer with 3.6+ years of production experience architecting high-throughput Python/FastAPI microservices, low-latency event pipelines, and autonomous AI agent workflows. Key backend contributor at SyncRivo (5-platform enterprise messaging bridge sustaining 99.98% uptime and <95ms transit) and OCNORA (stateful AI workflow DAG platform across 1,000+ integrations).",
-    "extra": "Tirupati, AP, India · AWS Certified DevOps Engineer – Professional · CKA · HashiCorp Terraform Associate"
+    "bio": "DevOps Engineer & Backend Developer with 3.6+ years of production experience specializing in cloud infrastructure, Kubernetes, CI/CD automation, and reliability engineering. Key contributor across engineering teams at SyncRivo (real-time enterprise messaging bridge sustaining 99.98% uptime and <95ms transit) and OCNORA (stateful AI workflow DAG engine across 1,000+ integrations). Experienced in operating cloud-native platforms on AWS and Google Cloud supporting 20+ microservices, reducing cloud spend by 20–25%, cutting deployment times from 30m to under 5m via GitOps (Argo CD), and setting up end-to-end observability (Prometheus/Grafana/Splunk) reducing MTTR by 30–35%.",
+    "extra": "Tirupati, AP, India · Google Cloud Associate Cloud Engineer · AWS Certified DevOps Engineer – Professional · CKA · HashiCorp Terraform Associate"
   },
   "links": [
     {
@@ -18,49 +18,47 @@
       "url": "mailto:venukrishnaya@gmail.com"
     },
     {
-      "label": "Phone / WhatsApp",
-      "url": "https://wa.me/916281369468"
-    },
-    {
       "label": "GitHub",
       "url": "https://github.com/Venu5198"
-    },
-    {
-      "label": "Live Portfolio",
-      "url": "https://venu-k.vercel.app"
     },
     {
       "label": "LinkedIn",
       "url": "https://www.linkedin.com/in/venu-k-2a4460383"
     },
     {
-      "label": "Credly",
-      "url": "https://www.credly.com/users/venu-krishnaya"
+      "label": "Live Portfolio",
+      "url": "https://venu-k.vercel.app"
     }
   ],
   "work": [
     {
       "when": "01/2024 – present",
-      "title": "Backend Developer (Python, DevOps & Real-Time Sync)",
-      "org": "SyncRivo",
-      "where": "Hybrid",
-      "desc": "Contributed as part of the engineering team building the real-time enterprise messaging bridge syncing Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex (<95ms bridge transit, 99.98% uptime SLA, FastAPI HMAC webhook ingress, Redis SETNX loop/echo prevention, universal AST payload normalization, multi-tenant OAuth delegation, and 4 verified enterprise marketplace listings; awarded Reliability Champion in Mar 2025).",
+      "title": "Backend Developer & DevOps Engineer",
+      "org": "SyncRivo & OCNORA",
+      "where": "Hybrid / Remote",
+      "desc": "Backend development and cloud infrastructure contributions across real-time messaging bridges (SyncRivo: sub-95ms transit, 99.98% SLA, Redis SETNX deduplication) and stateful AI workflow DAG engines (OCNORA: 1,000+ app connectors, budget circuit breakers, clearing 120 legacy defects) using Python, FastAPI, Redis, Docker, and Kubernetes/GCP workloads.",
       "url": "https://syncrivo.ai/en/"
     },
     {
-      "when": "06/2023 – 12/2023",
-      "title": "Backend Developer (AI Workflow Automation & Infrastructure)",
-      "org": "OCNORA",
+      "when": "05/2024 – 07/2024",
+      "title": "Artificial Intelligence Intern",
+      "org": "Slash Mark IT Startup",
       "where": "Remote",
-      "desc": "Contributed as part of the engineering team building the AI workflow automation and multi-tenant agent runtime across 1,000+ app connectors, stateful topological DAG execution, USD/token budget circuit breakers, Git worktree runner, and CI/CD quality gates (eliminated 120 legacy defects to 0 bugs across GKE / Cloud Run & Docker/Helm deployments).",
-      "url": "https://ocnora.ai/"
+      "desc": "Project-based Artificial Intelligence internship focusing on machine learning workflows, model evaluation, and backend service integration."
     },
     {
-      "when": "2021 – 2023",
-      "title": "Backend & Cloud Engineer",
-      "org": "Enterprise Cloud Systems",
-      "where": "India",
-      "desc": "Engineered high-availability REST APIs, automated CI/CD deployment pipelines, containerized microservices with Docker/Kubernetes, and provisioned multi-cloud IaC via Terraform."
+      "when": "06/2024 – 08/2024",
+      "title": "Full Stack Java Intern",
+      "org": "ExcelR & APSCHE",
+      "where": "Remote",
+      "desc": "Full stack development internship covering Java, Spring Boot microservices, database design, REST APIs, and modern frontend fundamentals."
+    },
+    {
+      "when": "2023 – 2024",
+      "title": "Cloud & Engineering Fellow",
+      "org": "Datavalley.ai, Infosys Springboard & Forage",
+      "where": "Virtual",
+      "desc": "Completed technical training and simulated client engagements across Datavalley.ai, Infosys Springboard Virtual Internship 7.0, HMI Foundation, Forage (Accenture and Red Bull), and Bharat Intern."
     }
   ],
   "projects": [
@@ -69,8 +67,8 @@
       "repo": "syncrivo",
       "label": "syncrivo",
       "tag": "Distributed Systems · FastAPI · Redis",
-      "desc": "Real-time enterprise messaging bridge connecting Slack, Microsoft Teams, Google Chat, Zoom Team Chat, and Cisco Webex.",
-      "long": "Contributed as Backend Developer to the multi-service distributed architecture syncing messages, threads, attachments, edits, deletes, and reactions across 5 enterprise platforms with zero loop duplication. Engineered FastAPI HMAC webhook receivers, Redis SETNX loop/echo prevention, universal AST payload normalization, multi-tenant OAuth delegation, and 4 verified enterprise marketplace listings (<95ms transit, 99.98% SLA, 0% echo duplication).",
+      "desc": "Real-time enterprise messaging bridge connecting Slack, Microsoft Teams, Google Chat, Zoom, and Cisco Webex.",
+      "long": "Contributed as a backend developer to a real-time enterprise messaging bridge syncing across Slack, Microsoft Teams, Google Chat, Zoom, and Cisco Webex, built around FastAPI services, Redis deduplication/event handling, sub-95ms transit, and 99.98% uptime.",
       "githubRepo": "",
       "shots": [
         "shots/project-1.svg"
@@ -92,7 +90,7 @@
       "label": "ocnora",
       "tag": "AI Platform · Workflow Engine",
       "desc": "Autonomous workflow automation platform coordinating AI agents, 1,000+ app integrations, and software delivery.",
-      "long": "Contributed as Backend Developer to the AI workflow automation and multi-tenant agent runtime across 1,000+ app connectors, stateful topological DAG execution, USD/token budget circuit breakers, Git worktree runner, and CI/CD quality gates (eliminated 120 legacy defects to 0 bugs across GKE / Cloud Run & Docker/Helm deployments).",
+      "long": "Contributed as a backend developer to a stateful AI workflow and DAG execution runtime across 1,000+ app integrations, including automated budget circuit breakers and autonomous Git worktree delivery that helped clear a 120-defect backlog.",
       "githubRepo": "",
       "shots": [
         "shots/project-2.svg"
@@ -109,12 +107,12 @@
       "url": "https://ocnora.ai/"
     },
     {
-      "name": "GCP Cloud FinOps Rightsizing Automation",
+      "name": "Cloud FinOps Rightsizing Automation",
       "repo": "finops-ledger",
       "label": "finops-ledger",
       "tag": "DevOps · Cloud Governance",
       "desc": "Cloud infrastructure cost optimization engine and dynamic resource governor.",
-      "long": "Real-time infrastructure cost optimization engine analyzing compute and memory utilization across GCP and AWS, driving 20–25% sustained monthly cloud spend reduction through automated rightsizing, cold-start mitigation, and Kubernetes HPA tuning.",
+      "long": "Cloud infrastructure cost optimization engine analyzing compute and memory utilization across GCP and AWS, helping maintain 99.9%+ availability while reducing cloud spend by roughly 20 to 25 percent.",
       "githubRepo": "",
       "shots": [],
       "stack": [
@@ -151,7 +149,7 @@
       "label": "gitops-pipeline",
       "tag": "Cloud Native · Kubernetes · GitOps",
       "desc": "Automated GitOps continuous delivery pipeline with Argo CD, Helm, and Canary rollouts.",
-      "long": "Zero-downtime progressive delivery pipeline utilizing Argo CD, Argo Rollouts, and Prometheus metrics analysis to automate safe canaries, rollbacks, and multi-cluster configurations.",
+      "long": "Zero-downtime progressive delivery pipeline with GitHub Actions, Jenkins, and Argo CD bringing deployment times from 30m down to under 5m with automated canary rollbacks.",
       "githubRepo": "",
       "more": true,
       "shots": [],
@@ -177,6 +175,16 @@
       "photos": []
     },
     {
+      "name": "Google Cloud Associate Cloud Engineer (GCP ACE)",
+      "place": "Google Cloud",
+      "when": "2024",
+      "lat": 37.42,
+      "lon": -122.08,
+      "desc": "Demonstrated competency in deploying applications, monitoring operations, managing enterprise cloud solutions, and securing GCP infrastructure.",
+      "url": "https://cloud.google.com/certification",
+      "photos": []
+    },
+    {
       "name": "AWS Certified DevOps Engineer – Professional",
       "place": "Amazon Web Services (AWS)",
       "when": "Jan 2025",
@@ -197,7 +205,7 @@
       "photos": []
     },
     {
-      "name": "HashiCorp Certified: Terraform Associate (003)",
+      "name": "HashiCorp Certified: Terraform Associate",
       "place": "HashiCorp",
       "when": "Nov 2022",
       "lat": 37.38,
@@ -212,18 +220,6 @@
     {
       "name": "Python",
       "via": "FastAPI & AsyncIO backend engine"
-    },
-    {
-      "name": "FastAPI",
-      "via": "high-throughput microservice APIs"
-    },
-    {
-      "name": "Redis",
-      "via": "sub-millisecond Pub/Sub & SETNX deduplication"
-    },
-    {
-      "name": "Docker",
-      "via": "containerized microservices runtime"
     },
     {
       "name": "Kubernetes",
@@ -242,20 +238,32 @@
       "via": "Cloud Run & GKE enterprise workloads"
     },
     {
+      "name": "Docker",
+      "via": "containerized microservices runtime"
+    },
+    {
       "name": "Argo CD",
       "via": "declarative GitOps progressive delivery"
     },
     {
-      "name": "Celery",
-      "via": "distributed async task queuing"
+      "name": "Prometheus & Grafana",
+      "via": "observability & incident MTTR reduction"
+    },
+    {
+      "name": "Redis",
+      "via": "sub-millisecond Pub/Sub & SETNX deduplication"
+    },
+    {
+      "name": "GitHub Actions",
+      "via": "CI/CD automated testing & deployment"
+    },
+    {
+      "name": "Jenkins",
+      "via": "standardized build & test automation"
     },
     {
       "name": "PostgreSQL",
       "via": "relational persistence & schema design"
-    },
-    {
-      "name": "MongoDB",
-      "via": "event document repository"
     }
   ]
 }

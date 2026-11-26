@@ -1,0 +1,124 @@
+{
+ "from": "2026-01-01",
+ "to": "2026-11-26",
+ "fetchedAt": "2026-11-26T13:32:08.852Z",
+ "scope": "GitHub-attributed public commit contributions per repository and month",
+ "months": [
+  {
+   "month": "2026-01",
+   "top": [
+    {
+     "repo": "student-enrollment-",
+     "owner": "Venu5198",
+     "commits": 2
+    }
+   ]
+  },
+  {
+   "month": "2026-02",
+   "top": [
+    {
+     "repo": "devops-simulation",
+     "owner": "Venu5198",
+     "commits": 8
+    },
+    {
+     "repo": "Venu5198",
+     "owner": "Venu5198",
+     "commits": 4
+    },
+    {
+     "repo": "service-frontend",
+     "owner": "Venu5198",
+     "commits": 2
+    },
+    {
+     "repo": "zero-trust",
+     "owner": "Venu5198",
+     "commits": 2
+    },
+    {
+     "repo": "disk-monitoring-devops",
+     "owner": "Venu5198",
+     "commits": 1
+    }
+   ]
+  },
+  {
+   "month": "2026-03",
+   "top": []
+  },
+  {
+   "month": "2026-04",
+   "top": []
+  },
+  {
+   "month": "2026-05",
+   "top": [
+    {
+     "repo": "Email-services",
+     "owner": "Venu5198",
+     "commits": 3
+    }
+   ]
+  },
+  {
+   "month": "2026-06",
+   "top": []
+  },
+  {
+   "month": "2026-07",
+   "top": [
+    {
+     "repo": "fastapi-github-actions",
+     "owner": "Venu5198",
+     "commits": 1
+    }
+   ]
+  },
+  {
+   "month": "2026-08",
+   "top": [
+    {
+     "repo": "3-Tier-Architecture-",
+     "owner": "VenuKXN-95",
+     "commits": 1
+    }
+   ]
+  },
+  {
+   "month": "2026-09",
+   "top": [
+    {
+     "repo": "Venu5198",
+     "owner": "Venu5198",
+     "commits": 3
+    }
+   ]
+  },
+  {
+   "month": "2026-10",
+   "top": []
+  },
+  {
+   "month": "2026-11",
+   "top": [
+    {
+     "repo": "SentinelOps-AI",
+     "owner": "Venu5198",
+     "commits": 3
+    },
+    {
+     "repo": "Microserives",
+     "owner": "Venu5198",
+     "commits": 2
+    },
+    {
+     "repo": "PRD-Framework",
+     "owner": "Venu5198",
+     "commits": 1
+    }
+   ]
+  }
+ ]
+}

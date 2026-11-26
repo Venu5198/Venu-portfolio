@@ -44,16 +44,16 @@ export function createBar(host) {
   }
 
   function paintGhost() {
-    values.ghost.textContent = typing ? "typing" : repairing ? "repairing" : "idle";
-    values.ghost.classList.toggle("is-hot", typing || repairing);
+    if (values.ghost) {
+      values.ghost.textContent = typing ? "active" : "ready";
+      values.ghost.classList.toggle("is-hot", typing);
+    }
   }
 
   function setState({ worm, eye, ghost }) {
-    values.worm.textContent = worm.text;
-    values.worm.classList.toggle("is-hot", worm.hot);
-    values.eye.textContent = eye.text;
-    values.eye.classList.toggle("is-hot", eye.hot);
-    hunt.textContent = worm.label || "";
+    if (values.worm) values.worm.textContent = "3.12 (asyncio)";
+    if (values.eye) values.eye.textContent = "aws · k8s";
+    if (hunt) hunt.textContent = "";
     repairing = ghost === "repairing";
     paintGhost();
   }

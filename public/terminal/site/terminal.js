@@ -112,7 +112,7 @@ function row(segments, className = "") {
 }
 
 export function prompt(cwd, branch) {
-  return [["venuk", "t-user"], ["@dev", "t-host"], " ", [cwd, "t-path"], ...(branch ? [" ", [`(${branch})`, "t-git"]] : [])];
+  return [["kvenu", "t-user"], ["@dev", "t-host"], " ", [cwd, "t-path"], ...(branch ? [" ", [`(${branch})`, "t-git"]] : [])];
 }
 
 function buildCalendar({ days, months = [], done = "" }) {

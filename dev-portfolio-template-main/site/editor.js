@@ -36,11 +36,11 @@ const load = (url) =>
     return response.json();
   });
 const [content, themeData, snapshot, stack, months] = await Promise.all([
-  load("/terminal/site/content.json").catch(() => load("content.json")),
-  load("/terminal/themes.json").catch(() => load("../themes.json")).catch(() => load("themes.json")),
-  load("/terminal/github-snapshot.json").catch(() => load("../github-snapshot.json")).catch(() => load("github-snapshot.json")),
-  load("/terminal/site/stack.json").catch(() => load("stack.json")).catch(() => null),
-  load("/terminal/site/months.json").catch(() => load("months.json")).catch(() => null)
+  load("content.json").catch(() => load("/terminal/site/content.json")),
+  load("../themes.json").catch(() => load("/terminal/themes.json")).catch(() => load("themes.json")),
+  load("../github-snapshot.json").catch(() => load("/terminal/github-snapshot.json")).catch(() => load("github-snapshot.json")),
+  load("stack.json").catch(() => load("/terminal/site/stack.json")).catch(() => null),
+  load("months.json").catch(() => load("/terminal/site/months.json")).catch(() => null)
 ]);
 const themes = themeData.themes;
 const palettes = new Map(content.palettes.map((theme) => [key(theme.name), theme]));
@@ -83,8 +83,8 @@ const chroma = (value) => Math.hypot(lab(value)[1], lab(value)[2]);
 const mix = (a, b, t) => `#${hex(a).map((v, n) => Math.round(v * (1 - t) + hex(b)[n] * t).toString(16).padStart(2, "0")).join("")}`;
 
 const DEFAULT_THEME = "blackmoney";
-const THEME_KEY = "venu.scheme";
-const WORM_KEY = "venu.worm";
+const THEME_KEY = "kvenu_term_.scheme";
+const WORM_KEY = "kvenu_term_.worm";
 let currentTheme = DEFAULT_THEME;
 let openEntry = null;
 let booted = false;
@@ -145,7 +145,7 @@ const about = (() => {
 
 const MORE = new Set(content.more || []);
 const OMARCHY = new Set();
-const projectEntries = content.projects.map((project) => ({ id: project.repo, label: project.repo, kind: "project", data: project, parent: MORE.has(project.repo) ? "more" : OMARCHY.has(project.repo) ? "omarchy" : null }));
+const projectEntries = content.projects.map((project) => ({ id: project.repo, label: project.label || project.repo, kind: "project", data: project, parent: MORE.has(project.repo) ? "more" : OMARCHY.has(project.repo) ? "omarchy" : null }));
 const children = projectEntries.filter((entry) => entry.parent);
 const childrenOf = (id) => children.filter((entry) => entry.parent === id);
 const shipped = themes.filter((theme) => theme.included);
@@ -351,6 +351,7 @@ function aboutSpec() {
       {
         cmd: "whoami",
         out: [
+          { segments: [["Venu K", "t-hi"]] },
           ...about.bio.map((line) => ({ segments: [line], className: "t-dim" })),
         ],
       },
@@ -666,11 +667,87 @@ window.addEventListener("resize", queueFit);
 
 tabline.addEventListener("click", () => (editor.classList.contains("is-tree-open") ? closeDrawer() : openDrawer()));
 
+const ALIAS_MAP = {
+  about: "about",
+  whoami: "about",
+  home: "about",
+  bio: "about",
+  profile: "about",
+  readme: "about",
+  readmemd: "about",
+  projects: "syncrivo",
+  project: "syncrivo",
+  work: "work",
+  career: "work",
+  experience: "work",
+  jobs: "work",
+  talks: "talks",
+  talk: "talks",
+  certs: "talks",
+  cert: "talks",
+  certifications: "talks",
+  awards: "talks",
+  credentials: "talks",
+  stack: "stack",
+  skills: "stack",
+  tech: "stack",
+  git: "stack",
+  gitlog: "stack",
+  log: "stack",
+  themes: "themes",
+  theme: "themes",
+  colorscheme: "themes",
+  colors: "themes",
+  syncrivo: "syncrivo",
+  sync: "syncrivo",
+  bridge: "syncrivo",
+  messaging: "syncrivo",
+  ocnora: "ocnora",
+  dag: "ocnora",
+  workflow: "ocnora",
+  ai: "ocnora",
+  cluster: "systems-cluster",
+  cluster3d: "systems-cluster",
+  systems: "systems-cluster",
+  systemscluster: "systems-cluster",
+  finops: "finops-ledger",
+  cloudfinops: "finops-ledger",
+  ledger: "finops-ledger",
+  gitops: "gitops-pipeline",
+  k8s: "gitops-pipeline",
+  kubernetes: "gitops-pipeline",
+  pipeline: "gitops-pipeline",
+};
+
 function findEntry(name) {
-  const wanted = key(name.replace(/\/README\.md$/i, "").replace(/^~\/Projects\/?/, ""));
-  if (!wanted || ["readmemd", "about", "whoami", "home"].includes(wanted)) return entries.find((entry) => entry.kind === "about");
-  if (["git", "gitlog", "log"].includes(wanted)) return entries.find((entry) => entry.kind === "stack") || entries.find((entry) => entry.kind === "about");
-  return entries.find((entry) => key(entry.id) === wanted || key(entry.label) === wanted);
+  if (!name) return entries.find((entry) => entry.kind === "about");
+  const raw = String(name).trim()
+    .replace(/^:e\s+/i, "")
+    .replace(/^:edit\s+/i, "")
+    .replace(/^cd\s+/i, "")
+    .replace(/\/README\.md$/i, "")
+    .replace(/^~\/Projects\/?/i, "")
+    .replace(/^~\/?/i, "")
+    .replace(/^\//, "")
+    .replace(/\/$/, "");
+  const wanted = key(raw);
+  if (!wanted || ["readmemd", "about", "whoami", "home"].includes(wanted)) {
+    return entries.find((entry) => entry.kind === "about");
+  }
+  if (ALIAS_MAP[wanted]) {
+    const targetId = ALIAS_MAP[wanted];
+    const match = entries.find((entry) => entry.id === targetId || entry.kind === targetId);
+    if (match) return match;
+  }
+  let found = entries.find((entry) => key(entry.id) === wanted || key(entry.label) === wanted);
+  if (found) return found;
+
+  found = entries.find((entry) => {
+    const kId = key(entry.id);
+    const kLabel = key(entry.label);
+    return kId.includes(wanted) || wanted.includes(kId) || kLabel.includes(wanted);
+  });
+  return found || null;
 }
 
 let child = null;
@@ -704,9 +781,40 @@ function run(text) {
   const [name, ...rest] = text.trim().split(/\s+/);
   const arg = rest.join(" ");
   if (!name) return say("");
-  if (/^q(a|all)?!?$/.test(name) || name === "wq" || name === "x") {
+  if (name === "bento" || name === "ios" || name === "exit") {
     location.href = "/";
     return;
+  }
+  if (/^q(a|all)!?$/.test(name)) {
+    location.href = "/";
+    return;
+  }
+  if (/^q!?$/.test(name) || name === "close") {
+    if (editor.classList.contains("is-tree-open")) {
+      closeDrawer();
+      return say("");
+    }
+    const lbClose = document.querySelector(".lb-close, .lightbox-close");
+    if (lbClose) {
+      lbClose.click();
+      return say("");
+    }
+    if (openEntry?.parent) {
+      const parent = entries.find((candidate) => candidate.id === openEntry.parent);
+      if (parent) {
+        goTo(parent);
+        return say("");
+      }
+    }
+    location.href = "/";
+    return;
+  }
+  if (name === "wq" || name === "x") {
+    location.href = "/";
+    return;
+  }
+  if (name === "help" || name === "h") {
+    return say(":e [syncrivo|ocnora|cluster|finops|gitops|stack|work|talks|themes] · :colo <name> · :bento");
   }
   if (name === "colorscheme" || name === "colo" || name === "theme") {
     if (!arg) {
@@ -715,7 +823,8 @@ function run(text) {
     }
     return scheme(arg);
   }
-  if (name === "e" || name === "edit" || name === "cd") {
+  if (name === "e" || name === "edit" || name === "cd" || name === "open") {
+    if (!arg || arg === "." || arg === "~" || arg === "~/Projects") return goTo(entries.find((entry) => entry.kind === "about"));
     if (arg === ".." && openEntry?.parent) return goTo(entries.find((entry) => entry.id === openEntry.parent));
     const entry = findEntry(arg);
     if (entry) {
