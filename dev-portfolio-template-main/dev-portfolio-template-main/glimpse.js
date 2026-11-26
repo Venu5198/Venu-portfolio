@@ -4053,8 +4053,9 @@ function zoomInto() {
 async function leave(href) {
   if (leaving) return;
   leaving = true;
+  const targetHref = href || "/terminal/site/index.html";
   if (prefersStill() || !wall) {
-    window.location.href = href;
+    window.location.href = targetHref;
     return;
   }
   clearTimeout(director.timer);
@@ -4080,7 +4081,7 @@ async function leave(href) {
   tile.closeAt = Infinity;
   for (let k = 0; k < 50 && tile && (tile.state !== "open" || tile.lid.value < 0.99); k++) await sleep(40);
   if (!tile) {
-    window.location.href = href;
+    window.location.href = targetHref;
     return;
   }
   const reach = Math.hypot(wall.width, wall.height);
@@ -4095,7 +4096,7 @@ async function leave(href) {
   flushDirty();
   await sleep(700);
   if (tile) await zoomInto();
-  window.location.href = href;
+  window.location.href = targetHref;
 }
 
 themeKey?.addEventListener("click", (event) => {
@@ -4107,7 +4108,7 @@ themeKey?.addEventListener("click", (event) => {
 enterLink?.addEventListener("click", (event) => {
   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   event.preventDefault();
-  leave(enterLink.href);
+  leave("/terminal/site/index.html");
 });
 
 document.addEventListener("keydown", (event) => {
@@ -4128,7 +4129,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     if (!enterLink || (!free && active !== enterLink)) return;
     event.preventDefault();
-    leave(enterLink.href);
+    leave("/terminal/site/index.html");
     return;
   }
   if (!free || !wall || leaving || event.ctrlKey || event.metaKey || event.altKey) return;

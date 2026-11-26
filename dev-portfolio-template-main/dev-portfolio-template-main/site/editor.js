@@ -36,11 +36,11 @@ const load = (url) =>
     return response.json();
   });
 const [content, themeData, snapshot, stack, months] = await Promise.all([
-  load("content.json"),
-  load("../themes.json").catch(() => load("themes.json")).catch(() => load("/terminal/themes.json")),
-  load("../github-snapshot.json").catch(() => load("github-snapshot.json")).catch(() => load("/terminal/github-snapshot.json")),
-  load("stack.json").catch(() => null),
-  load("months.json").catch(() => null)
+  load("/terminal/site/content.json").catch(() => load("content.json")),
+  load("/terminal/themes.json").catch(() => load("../themes.json")).catch(() => load("themes.json")),
+  load("/terminal/github-snapshot.json").catch(() => load("../github-snapshot.json")).catch(() => load("github-snapshot.json")),
+  load("/terminal/site/stack.json").catch(() => load("stack.json")).catch(() => null),
+  load("/terminal/site/months.json").catch(() => load("months.json")).catch(() => null)
 ]);
 const themes = themeData.themes;
 const palettes = new Map(content.palettes.map((theme) => [key(theme.name), theme]));
